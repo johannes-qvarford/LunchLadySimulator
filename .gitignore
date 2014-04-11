@@ -1,3 +1,10 @@
+# ======================= #
+# Don't track heavy files #
+# ======================= #
+
+Assets/Graphics/
+Assets/Audio/
+
 # =================== #
 # For builds and such #
 # =================== #
