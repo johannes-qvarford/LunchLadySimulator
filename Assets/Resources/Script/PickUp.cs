@@ -41,7 +41,9 @@ public class PickUp : MonoBehaviour {
 			Vector3 temp = new Vector3(testRay.origin.x, testRay.origin.y - testInfo.distance, testRay.origin.z);
 			Debug.DrawLine(testRay.origin, temp, Color.green);
 			if(testInfo.collider.tag == "FoodPlate")
+			{
 				foodPlateContact = true;
+			}
 		}
 	}
 
@@ -56,7 +58,7 @@ public class PickUp : MonoBehaviour {
 				if(hitInfo.collider.tag == "FoodPlate")
 				{
 					gameObject = Instantiate(create, this.transform.position, Quaternion.Euler(90f, 0f, 0f)) as GameObject;
-					gameObject.GetComponent<FoodBehaviour>().id = 1;
+					gameObject.GetComponent<FoodBehaviour>().id = hitInfo.collider.GetComponent<FoodID>().foodID;
 				}
 
 				else if(hitInfo.collider.tag == "Food")

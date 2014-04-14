@@ -13,7 +13,7 @@ public class FoodBehaviour : MonoBehaviour {
 	public Vector3 parentPosition;
 	public Vector3 adjustPosition;
 
-	public int id = 0;
+	public string id;
 
 	// Use this for initialization
 	void Awake()
@@ -22,6 +22,18 @@ public class FoodBehaviour : MonoBehaviour {
 		pickUpScript = parent.GetComponent<PickUp>();
 		capsuleCollider = this.GetComponent<CapsuleCollider>();
 		rigidBody = this.GetComponent<Rigidbody>();
+	}
+
+	void Start()
+	{
+		if(id == "Yellow")
+		{
+			renderer.material.color = Color.yellow;
+		}
+		else if(id == "Green")
+		{
+			renderer.material.color = Color.green;
+		}
 	}
 
 	// Update is called once per frame
