@@ -46,7 +46,7 @@ public class FoodBehaviour : MonoBehaviour {
 			rigidBody.useGravity = true;
 		}
 	}
-/*
+
 	void OnCollisionEnter(Collision collision)
 	{
 		if(!pickUp)
@@ -58,5 +58,4 @@ public class FoodBehaviour : MonoBehaviour {
 		}
 
 	}
-*/
 }

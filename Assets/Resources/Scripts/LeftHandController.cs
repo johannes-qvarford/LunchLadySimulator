@@ -41,6 +41,7 @@ public class LeftHandController : MonoBehaviour {
 		if(Input.GetKey(KeyCode.F))
 		{
 			transform.position -= transform.up * speed;
-		}	
+		}
+	
 	}
 }

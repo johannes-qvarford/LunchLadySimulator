@@ -56,16 +56,7 @@ public class PickUp : MonoBehaviour {
 				if(hitInfo.collider.tag == "FoodPlate")
 				{
 					gameObject = Instantiate(create, this.transform.position, Quaternion.Euler(90f, 0f, 0f)) as GameObject;
-					string tempFoodID = hitInfo.collider.GetComponent<FoodID>().foodID;
-					gameObject.GetComponent<FoodID>().foodID = tempFoodID;
-					if(tempFoodID == "Yellow")
-					{
-						gameObject.renderer.material.color = Color.yellow;
-					}
-					if(tempFoodID == "Green")
-					{
-						gameObject.renderer.material.color = Color.green;
-					}
+					gameObject.GetComponent<FoodBehaviour>().id = 1;
 				}
 
 				else if(hitInfo.collider.tag == "Food")

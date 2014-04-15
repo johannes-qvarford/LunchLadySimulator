@@ -3,6 +3,7 @@ using System.Collections;
 
 public class InstantiateCapsule : MonoBehaviour {
 
+	public GameObject gameObject = null;
 	public GameObject create;
 
 
@@ -18,7 +19,7 @@ public class InstantiateCapsule : MonoBehaviour {
 	{
 		if(Input.GetKeyDown(KeyCode.I))
 		{
-			GameObject gameObject = Instantiate(create, transform.position, transform.rotation) as GameObject;
+			gameObject = Instantiate(create, transform.position, transform.rotation) as GameObject;
 		}
 	}
 }
