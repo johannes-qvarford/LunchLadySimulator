@@ -8,7 +8,14 @@ public class NpcMove : MonoBehaviour {
 
 	public bool move = true;
 	public bool queMove = true;
-	
+
+	private GameObject CharControl;
+
+	void Awake()
+	{
+		CharControl = GameObject.Find("GeneralCharController");
+	}
+
 	// Update is called once per frame
 	void Update ()
 	{
@@ -24,6 +31,12 @@ public class NpcMove : MonoBehaviour {
 	void OnTriggerEnter(Collider collision)
 	{
 		Debug.Log("STOP!");
+		CharControl.GetComponent<GeneralCharController>().stopped = this.gameObject;
 		move = false;
+	}
+
+	void OnTriggerStay(Collider collision)
+	{
+		CharControl.GetComponent<GeneralCharController>().stopped = this.gameObject;
 	}
 }

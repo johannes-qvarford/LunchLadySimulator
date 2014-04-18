@@ -13,7 +13,7 @@ public class FoodBehaviour : MonoBehaviour {
 	public Vector3 parentPosition;
 	public Vector3 adjustPosition;
 
-	public string id;
+	public int id = 0;
 
 	// Use this for initialization
 	void Awake()
@@ -22,18 +22,6 @@ public class FoodBehaviour : MonoBehaviour {
 		pickUpScript = parent.GetComponent<PickUp>();
 		capsuleCollider = this.GetComponent<CapsuleCollider>();
 		rigidBody = this.GetComponent<Rigidbody>();
-	}
-
-	void Start()
-	{
-		if(id == "Yellow")
-		{
-			renderer.material.color = Color.yellow;
-		}
-		else if(id == "Green")
-		{
-			renderer.material.color = Color.green;
-		}
 	}
 
 	// Update is called once per frame
@@ -58,17 +46,17 @@ public class FoodBehaviour : MonoBehaviour {
 			rigidBody.useGravity = true;
 		}
 	}
-
+/*
 	void OnCollisionEnter(Collision collision)
 	{
 		if(!pickUp)
 		{
 			if(collision.collider.tag == "NPC")
 			{
-				collision.collider.transform.parent.GetComponent<NpcMove>().move = true;
-				//collision.collider.GetComponent<NpcMove>().move = true;
+				collision.collider.GetComponent<NpcMove>().move = true;
 			}
 		}
 
 	}
+*/
 }
