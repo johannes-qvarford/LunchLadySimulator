@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class Recipe : MonoBehaviour {
+public class MainDishRecipe : MonoBehaviour {
 
 	public float yellow = 0;
 	public float green = 0;

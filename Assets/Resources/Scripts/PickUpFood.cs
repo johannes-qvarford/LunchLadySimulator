@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PickUp : MonoBehaviour {
-
-	private GameObject gameObject;
+public class PickUpFood : MonoBehaviour {
 	public GameObject create;
 
 	public Vector3 createPosition;
@@ -17,7 +15,7 @@ public class PickUp : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
 	{
-	
+
 	}
 	
 	// Update is called once per frame
@@ -26,12 +24,12 @@ public class PickUp : MonoBehaviour {
 		foodPlateContact = false;
 		if(Input.GetKeyDown(KeyCode.J))
 		{
-			PickUpFood(false);
+			PickUp(false);
 		}
 
 		if(Input.GetKeyDown(KeyCode.K))
 		{
-			PickUpFood(true);
+			PickUp(true);
 		}
 
 		Ray testRay = new Ray(this.transform.position, -this.transform.up);
@@ -45,17 +43,19 @@ public class PickUp : MonoBehaviour {
 		}
 	}
 
-	private void PickUpFood(bool drop)
+	private void PickUp(bool drop)
 	{
 		Ray pickUpRay = new Ray(this.transform.position, -this.transform.up);
 		RaycastHit hitInfo;
-		if(Physics.Raycast(pickUpRay, out hitInfo, foodRayDistance))
+		int layerTest = 1 << 9;
+		if(Physics.Raycast(pickUpRay, out hitInfo, foodRayDistance, layerTest))
 		{
+			Debug.Log(hitInfo.collider.tag);
 			if(!drop)
 			{
 				if(hitInfo.collider.tag == "FoodPlate")
 				{
-					gameObject = Instantiate(create, this.transform.position, Quaternion.Euler(90f, 0f, 0f)) as GameObject;
+					GameObject gameObject = Instantiate(create, this.transform.position, Quaternion.Euler(90f, 0f, 0f)) as GameObject;
 					string tempFoodID = hitInfo.collider.GetComponent<FoodID>().foodID;
 					gameObject.GetComponent<FoodID>().foodID = tempFoodID;
 					if(tempFoodID == "Yellow")

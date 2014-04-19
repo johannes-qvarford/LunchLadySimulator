@@ -4,8 +4,9 @@ using System.Collections;
 public class FoodBehaviour : MonoBehaviour {
 
 	private GameObject parent;
-	private PickUp pickUpScript;
+	private PickUpFood pickUpFoodScript;
 	private CapsuleCollider capsuleCollider;
+	//private MeshCollider msCollider;
 	private Rigidbody rigidBody;
 
 	public bool pickUp = true;
@@ -13,14 +14,13 @@ public class FoodBehaviour : MonoBehaviour {
 	public Vector3 parentPosition;
 	public Vector3 adjustPosition;
 
-	public int id = 0;
-
 	// Use this for initialization
 	void Awake()
 	{
 		parent = GameObject.Find("LeftHand");
-		pickUpScript = parent.GetComponent<PickUp>();
+		pickUpFoodScript = parent.GetComponent<PickUpFood>();
 		capsuleCollider = this.GetComponent<CapsuleCollider>();
+		//msCollider = this.GetComponent<MeshCollider>();
 		rigidBody = this.GetComponent<Rigidbody>();
 	}
 
@@ -35,9 +35,10 @@ public class FoodBehaviour : MonoBehaviour {
 			rigidbody.transform.position = parentPosition;
 		}
 
-		if(!pickUpScript.foodPlateContact)
+		if(!pickUpFoodScript.foodPlateContact)
 		{
 			capsuleCollider.enabled = true;
+			//msCollider.enabled = true;
 			rigidBody.isKinematic = false;
 		}
 

@@ -30,13 +30,17 @@ public class NpcMove : MonoBehaviour {
 
 	void OnTriggerEnter(Collider collision)
 	{
-		Debug.Log("STOP!");
-		CharControl.GetComponent<GeneralCharController>().stopped = this.gameObject;
-		move = false;
+		if(collision.tag == "Stop")
+		{
+			Debug.Log("STOP!");
+			CharControl.GetComponent<GeneralCharController>().stopped = this.gameObject;
+			move = false;
+		}
 	}
 
 	void OnTriggerStay(Collider collision)
 	{
-		CharControl.GetComponent<GeneralCharController>().stopped = this.gameObject;
+		if(collision.tag == "Stop")
+			CharControl.GetComponent<GeneralCharController>().stopped = this.gameObject;
 	}
 }
