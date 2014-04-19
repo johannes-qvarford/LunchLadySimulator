@@ -112,7 +112,7 @@ public class ArmLogic : MonoBehaviour
 			return;
 		}
 	
-		if(collision.collider.tag == Tags.SPAWN_AREA)
+		if(collision.collider.tag == "SpawnArea")
 		{
 			handle.BroadcastMessage("OnSpawnStatusChanged", true);
 			return;
@@ -127,7 +127,7 @@ public class ArmLogic : MonoBehaviour
 	
 	void OnCollisionExit(Collision collision)
 	{
-		if(collision.collider.tag == Tags.SPAWN_AREA)
+		if(collision.collider.tag == "SpawnArea")
 		{
 			handle.BroadcastMessage("OnSpawnStatusChanged", false);
 			return;
