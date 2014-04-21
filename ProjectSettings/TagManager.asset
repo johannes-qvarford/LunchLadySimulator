@@ -5,14 +5,23 @@ TagManager:
   tags:
   - LeftHandTarget
   - RightHandTarget
-  - Grabable
+  - Tool
   - LeftArm
   - RightArm
   - Food
-  - SpawnArea
+  - SpawnZone
   - Spawner
-  - 
+  - PlateStack
   - NPC
+  - 
+  - Plate
+  - FoodPlate
+  - Destroy
+  - Stop
+  - 
+  - Grabable
+  - 
+  - SpawnArea
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -23,13 +32,13 @@ TagManager:
   Builtin Layer 6: 
   Builtin Layer 7: 
   User Layer 8: Interact
-  User Layer 9: Control
+  User Layer 9: FoodPlate
   User Layer 10: TriggerZone
-  User Layer 11: Cover
-  User Layer 12: CoverFood
-  User Layer 13: 
-  User Layer 14: 
-  User Layer 15: 
+  User Layer 11: Control
+  User Layer 12: Grabable
+  User Layer 13: Human
+  User Layer 14: Soup
+  User Layer 15: SoupPlane
   User Layer 16: 
   User Layer 17: 
   User Layer 18: 
