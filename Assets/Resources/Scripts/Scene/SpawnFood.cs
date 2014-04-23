@@ -17,7 +17,7 @@ public class SpawnFood : MonoBehaviour
 		curFrame++;
 		if(curFrame % framesBetweenSpawns == 0 && on && spawnObject != null)
 		{
-			GameObject g = (GameObject)GameObject.Instantiate(spawnObject);
+			GameObject g = SpawnedJunk.Instantiate(spawnObject);
 			g.transform.position = transform.position;
 			g.transform.parent = transform;
 		}
