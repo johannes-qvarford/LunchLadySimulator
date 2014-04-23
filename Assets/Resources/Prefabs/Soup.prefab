@@ -14,8 +14,9 @@ GameObject:
   - 54: {fileID: 5400000}
   - 65: {fileID: 6500000}
   - 122: {fileID: 12200000}
+  - 114: {fileID: 11400000}
   m_Layer: 14
-  m_Name: FoodSphere
+  m_Name: Soup
   m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,6 +88,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.00000012, y: 1, z: 1.00000024}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3440134b4612bb429349ac0e0dccc5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  foodID: Soup
 --- !u!122 &12200000
 Halo:
   m_ObjectHideFlags: 1

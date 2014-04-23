@@ -76,18 +76,7 @@ public class ArmPhysics : MonoBehaviour
 	void OnCollisionEnter(Collision collision)
 	{
 		GameObject OTHER = collision.collider.gameObject;
-		if(OTHER.tag == Tags.SPAWN_ZONE)
-		{
-			SpawnZone ZONE = OTHER.GetComponent<SpawnZone>();
-			if(ZONE == null || ZONE.spawnObject == null)
-			{
-				Debug.LogError("no object to spawn");
-			}
-			handle.BroadcastMessage("OnSpawnObjectChanged", ZONE.spawnObject);
-			handle.BroadcastMessage("OnSpawnStatusChanged", true);
-			return;
-		}
-		else if(OTHER.tag == Tags.FOOD)
+		if(OTHER.tag == Tags.FOOD)
 		{
 			handle.BroadcastMessage("OnCollisionEnter", collision, SendMessageOptions.DontRequireReceiver);
 		}
@@ -101,12 +90,7 @@ public class ArmPhysics : MonoBehaviour
 	void OnCollisionExit(Collision collision)
 	{
 		GameObject OTHER = collision.collider.gameObject;
-		if(OTHER.tag == Tags.SPAWN_ZONE)
-		{
-			handle.BroadcastMessage("OnSpawnStatusChanged", false);
-			return;
-		}
-		else if(OTHER.tag == Tags.FOOD)
+		if(OTHER.tag == Tags.FOOD)
 		{
 			handle.BroadcastMessage("OnCollisionExit", collision, SendMessageOptions.DontRequireReceiver);
 		}

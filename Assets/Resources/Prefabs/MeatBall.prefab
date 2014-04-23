@@ -11,9 +11,8 @@ GameObject:
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
   - 64: {fileID: 6400000}
-  - 114: {fileID: 11400002}
-  - 114: {fileID: 11400004}
   - 54: {fileID: 5400000}
+  - 114: {fileID: 11400004}
   m_Layer: 9
   m_Name: MeatBall
   m_TagString: Food
@@ -140,20 +139,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 741a6bf5c25a85c42b7c42e0a6d72108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11400002
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d872970abd7cfa34faf113d4a27ecb32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickUp: 1
-  parentPosition: {x: 0, y: 0, z: 0}
-  adjustPosition: {x: 0, y: -.349999994, z: 0}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -165,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3440134b4612bb429349ac0e0dccc5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodID: 
+  foodID: MeatBall
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
