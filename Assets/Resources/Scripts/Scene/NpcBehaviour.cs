@@ -15,7 +15,6 @@ public class NpcBehaviour : MonoBehaviour
 		{
 			other.transform.parent = transform;
 			GameObject.Destroy(other.rigidbody);
-			queueControl.SendMessage("NpcGotFood", SendMessageOptions.RequireReceiver);
 		}
 	}
 	
@@ -38,6 +37,10 @@ public class NpcBehaviour : MonoBehaviour
 	void Update()
 	{
 		transform.position += move ? moveVector : Vector3.zero;
+		if(Input.GetKeyDown(KeyCode.U))
+		{
+			queueControl.SendMessage("NpcGotFood", SendMessageOptions.RequireReceiver);
+		}
 	}
 
 	private void MoveChanged(bool on)
