@@ -12,12 +12,17 @@ public class SpawnFood : MonoBehaviour
 	private Random random = new Random();
 	private bool prevOn = false;
 	
+	void Start()
+	{
+	}
+	
 	void Update()
 	{
+		//Debug.Log(placeToSpawn.position);
 		curFrame++;
 		if(curFrame % framesBetweenSpawns == 0 && on && spawnObject != null)
 		{
-			GameObject g = (GameObject)GameObject.Instantiate(spawnObject);
+			GameObject g = SpawnedJunk.Instantiate(spawnObject);
 			g.transform.position = transform.position;
 			g.transform.parent = transform;
 		}
@@ -26,7 +31,7 @@ public class SpawnFood : MonoBehaviour
 			for(int i = 0; i < transform.childCount; ++i)
 			{
 				Transform t = transform.GetChild(i);
-				t.parent = null;
+				SpawnedJunk.BecomeParentToGameObject(t);
 			}
 		}
 		prevOn = on;

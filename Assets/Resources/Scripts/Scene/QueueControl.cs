@@ -7,20 +7,22 @@ public class QueueControl : MonoBehaviour
 	public float repeatTime = 10.0f;
 	public float startTime = 0.0f;
 	public float maxNpcDistance = 0.2f;
+	public int maxPhysicalNpcsInQueue = 5;
 	
 	private List<GameObject> npcs = new List<GameObject>();
 	private const float INFINITE = 10000;
-	private bool npcIsWaiting = false;
+	private bool npcIsWaitingForFood = false;
+	private int actualNpcsInQueue = 0;
 	
 	void Start()
 	{
-		InvokeRepeating("CreateNewNPC", startTime, repeatTime);
+		InvokeRepeating("NewNpcCreated", startTime, repeatTime);
 	}
 	
 	void Update()
 	{
 		Vector3 lastPosition = new Vector3(INFINITE, INFINITE, INFINITE);
-		if(npcIsWaiting)
+		if(npcIsWaitingForFood)
 		{
 			foreach(GameObject npc in npcs)
 			{
@@ -33,7 +35,7 @@ public class QueueControl : MonoBehaviour
 		}
 	}
 	
-	private void CreateNewNPC()
+	private void AddNpcInPhysicalQueue()
 	{
 		GameObject npc = SpawnedJunk.Instantiate(instantiateObject, transform.position, transform.rotation);
 		npc.transform.position = transform.position;
@@ -42,15 +44,29 @@ public class QueueControl : MonoBehaviour
 		npcs.Add(npc);
 	}
 	
+	private void NewNpcCreated()
+	{
+		if(npcs.Count < maxPhysicalNpcsInQueue)
+		{
+			AddNpcInPhysicalQueue();
+		}
+		actualNpcsInQueue++;
+	}
+	
 	private void NpcDestroyed(GameObject npc)
 	{
 		npcs.Remove(npc);
+		actualNpcsInQueue--;
+		if(actualNpcsInQueue > 0)
+		{
+			AddNpcInPhysicalQueue();
+		}
 		GameObject.Destroy(npc);
 	}
 	
 	private void NpcGotFood()
 	{
-		npcIsWaiting = false;
+		npcIsWaitingForFood = false;
 		foreach(GameObject g in npcs)
 		{
 			g.SendMessage("MoveChanged", true, SendMessageOptions.RequireReceiver);
@@ -59,7 +75,7 @@ public class QueueControl : MonoBehaviour
 	
 	private void NpcStopped(GameObject npc)
 	{
-		npcIsWaiting = true;
+		npcIsWaitingForFood = true;
 		npc.SendMessage("MoveChanged", false, SendMessageOptions.RequireReceiver);
 	}
 }
