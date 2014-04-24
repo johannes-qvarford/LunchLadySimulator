@@ -7,17 +7,8 @@ public class NpcBehaviour : MonoBehaviour
 
 	private bool move = false;
 	private GameObject queueControl = null;
-	
-	void OnCollisionEnter(Collision collision)
-	{
-		GameObject other = collision.collider.gameObject;
-		if(other.tag == Tags.PLATE)
-		{
-			other.transform.parent = transform;
-			GameObject.Destroy(other.rigidbody);
-		}
-	}
-	
+	private bool firstInLine = false;
+
 	void OnTriggerEnter(Collider col)
 	{
 		GameObject OTHER = col.gameObject;
@@ -27,6 +18,7 @@ public class NpcBehaviour : MonoBehaviour
 				queueControl.SendMessage("NpcDestroyed", gameObject, SendMessageOptions.RequireReceiver);
 				break;
 			case Tags.STOP:
+				firstInLine = true;
 				queueControl.SendMessage("NpcStopped", gameObject, SendMessageOptions.RequireReceiver);
 				break;
 			default:
@@ -37,9 +29,13 @@ public class NpcBehaviour : MonoBehaviour
 	void Update()
 	{
 		transform.position += move ? moveVector : Vector3.zero;
-		if(Input.GetKeyDown(KeyCode.U))
+	}
+	
+	private void NpcGotFood()
+	{
+		if(firstInLine)
 		{
-			queueControl.SendMessage("NpcGotFood", SendMessageOptions.RequireReceiver);
+			BroadcastMessage("GotFood", SendMessageOptions.RequireReceiver);
 		}
 	}
 

@@ -31,14 +31,15 @@ public class ArmLogic : MonoBehaviour
 
 	void Update()
 	{
+		Debug.DrawLine(handle.position, handle.position + Vector3.up * -1);
 		grabables.RemoveAll((g) => g == null);
-	
-		debugSphere.transform.localScale = new Vector3(armsState.maxToolGrabDistance, armsState.maxToolGrabDistance, armsState.maxToolGrabDistance);
+
 		bool GRAB_ON = ArmInputManager.IsOn(ArmInputManager.GRIP, arm);
 		bool GRAB_TOGGLED = ArmInputManager.OnToggled(ArmInputManager.GRIP, arm);
 		
 		if(armsState.debug)
 		{
+			debugSphere.transform.localScale = new Vector3(armsState.maxToolGrabDistance, armsState.maxToolGrabDistance, armsState.maxToolGrabDistance);
 			debugSphere.transform.localPosition = Vector3.zero;
 			Collider[] overlaps = GrabableSphereCast();
 			foreach(Collider overlap in overlaps)
@@ -66,17 +67,7 @@ public class ArmLogic : MonoBehaviour
 
 		if(GRAB_RELEASED && heldGrabable != null) 
 		{
-			switch(heldGrabable.tag)
-			{
-				case Tags.TOOL:
-				case Tags.PLATE:
-					ReleaseHeldGrabable();
-					break;
-				default:
-					Debug.LogError("object in Grabbable layer with unexpected tag " + heldGrabable.tag);
-					Debug.DebugBreak();
-					break;
-			}
+			ReleaseHeldGrabable();
 		}
 		
 		if(GRAB_ON)
@@ -89,11 +80,12 @@ public class ArmLogic : MonoBehaviour
 					switch(g.tag)
 					{
 						case Tags.TOOL:
+						case Tags.FOOD:
 						case Tags.PLATE:
 							GrabObject(g);
 							break;
-						case Tags.PLATE_STACK:
-							GrabPlateFromPlateStack(g);
+						case Tags.SPAWN_STACK:
+							GrabFromSpawnStack(g);
 							break;
 						default:
 							Debug.LogError("held object with unexpected tag " + g.tag);
@@ -136,40 +128,37 @@ public class ArmLogic : MonoBehaviour
 	
 	private void GrabObject(GameObject g)
 	{
+		GrabableBehaviour BEHAVIOUR = g.GetComponent<GrabableBehaviour>();
 		heldGrabable = g.transform;
 		heldGrabable.forward = handle.forward;
 		GameObject.Destroy(heldGrabable.rigidbody);
 		heldGrabable.parent = handle;
-		if(g.tag == Tags.PLATE)
-		{
-			heldGrabable.position += armsState.moveOffsetOnGrabPlate;
-		}
-		else
-		{
-			heldGrabable.position += armsState.moveOffsetOnGrabTool;
-		}
+		heldGrabable.position += BEHAVIOUR.moveOffsetOnGrab;
 		Layers.SetLayerRecursive(heldGrabable, LayerMask.NameToLayer(Layers.CONTROL));
 	}
 	
-	private void GrabPlateFromPlateStack(GameObject stack)
+	private void GrabFromSpawnStack(GameObject stack)
 	{
-		GameObject PLATE_PREFAB = (stack.GetComponent(typeof(PlateStackBehaviour)) as PlateStackBehaviour).platePrefab;
-		heldGrabable = ((GameObject)GameObject.Instantiate(PLATE_PREFAB)).transform;
+		SpawnStackBehaviour FSB = stack.GetComponent<SpawnStackBehaviour>();
+		GameObject PREFAB = FSB.spawnPrefab;
+		Vector3 OFFSET = FSB.spawnOffsetFromHand;
+		Debug.Log(OFFSET);
+		heldGrabable = ((GameObject)GameObject.Instantiate(PREFAB)).transform;
 		heldGrabable.transform.position = handle.position;
 		GameObject.Destroy(heldGrabable.rigidbody);
 		heldGrabable.transform.parent = handle;
-		heldGrabable.transform.position += armsState.moveOffsetOnGrabPlate;
+		heldGrabable.transform.position += OFFSET;
 		heldGrabable.gameObject.layer = LayerMask.NameToLayer(Layers.CONTROL);
 	}
 	
 	private Collider[] GrabableSphereCast()
 	{
 		return Physics.OverlapSphere(
-			//position: 
+			//position:
 			handle.position, 
-			//radius: 
+			//radius:
 			armsState.maxToolGrabDistance,
-		    //layerMask: 
+		    //layerMask:
 		    Layers.CombineLayerNames(Layers.GRABABLE)
 		    );
 	}

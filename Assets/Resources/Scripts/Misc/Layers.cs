@@ -10,6 +10,8 @@ public static class Layers
 	public const string CONTROL = "Control";
 	public const string GRABABLE = "Grabable";
 	public const string HUMAN = "Human";
+	public const string SOUP = "Soup";
+	public const string SOUP_PLANE = "SoupPlane";
 	
 	public static int CombineLayerNames(params string[] names)
 	{

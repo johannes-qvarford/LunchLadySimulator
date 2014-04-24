@@ -5,12 +5,12 @@ PhysicMaterial:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: SphereFood
+  m_Name: Soup
   dynamicFriction: 1
-  staticFriction: 1
+  staticFriction: 100000
   bounciness: 0
   frictionCombine: 2
-  bounceCombine: 0
+  bounceCombine: 1
   frictionDirection2: {x: 1, y: 0, z: 0}
   dynamicFriction2: 1
   staticFriction2: 1

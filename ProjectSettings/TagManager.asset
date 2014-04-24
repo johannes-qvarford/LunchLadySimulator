@@ -11,17 +11,19 @@ TagManager:
   - Food
   - SpawnZone
   - Spawner
-  - PlateStack
+  - SpawnStack
   - NPC
-  - 
+  - Tray
   - Plate
-  - FoodPlate
+  - 
   - Destroy
   - Stop
   - 
   - Grabable
   - 
   - SpawnArea
+  - 
+  - 
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

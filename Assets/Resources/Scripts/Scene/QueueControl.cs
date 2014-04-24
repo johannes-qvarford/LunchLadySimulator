@@ -13,6 +13,7 @@ public class QueueControl : MonoBehaviour
 	private const float INFINITE = 10000;
 	private bool npcIsWaitingForFood = false;
 	private int actualNpcsInQueue = 0;
+	private GameObject firstInLine;
 	
 	void Start()
 	{
@@ -31,6 +32,16 @@ public class QueueControl : MonoBehaviour
 					npc.SendMessage("MoveChanged", false, SendMessageOptions.RequireReceiver);
 				}
 				lastPosition = npc.transform.position;
+			}
+			
+			if(Input.GetKeyDown(KeyCode.U))
+			{
+				firstInLine.BroadcastMessage("NpcGotFood", SendMessageOptions.RequireReceiver);
+				foreach(GameObject g in npcs)
+				{
+					g.SendMessage("MoveChanged", true, SendMessageOptions.RequireReceiver);
+				}
+				npcIsWaitingForFood = false;
 			}
 		}
 	}
@@ -64,18 +75,10 @@ public class QueueControl : MonoBehaviour
 		GameObject.Destroy(npc);
 	}
 	
-	private void NpcGotFood()
-	{
-		npcIsWaitingForFood = false;
-		foreach(GameObject g in npcs)
-		{
-			g.SendMessage("MoveChanged", true, SendMessageOptions.RequireReceiver);
-		}
-	}
-	
 	private void NpcStopped(GameObject npc)
 	{
 		npcIsWaitingForFood = true;
+		firstInLine = npc;
 		npc.SendMessage("MoveChanged", false, SendMessageOptions.RequireReceiver);
 	}
 }
