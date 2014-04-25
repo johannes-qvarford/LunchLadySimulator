@@ -3,7 +3,8 @@ using System.Collections;
 
 public class NpcBehaviour : MonoBehaviour
 {
-	public Vector3 moveVector;
+	public float maxSpeed;
+	public float moveSpeed;
 
 	private bool move = false;
 	private GameObject queueControl = null;
@@ -28,7 +29,14 @@ public class NpcBehaviour : MonoBehaviour
 	
 	void Update()
 	{
-		transform.position += move ? moveVector : Vector3.zero;
+		if(move && rigidbody.velocity.magnitude <= maxSpeed)
+		{
+			rigidbody.AddForce(Vector3.right * moveSpeed, ForceMode.VelocityChange);
+		} 
+		else if(move == false)
+		{
+			rigidbody.velocity = Vector3.zero;
+		}
 	}
 	
 	private void NpcGotFood()
