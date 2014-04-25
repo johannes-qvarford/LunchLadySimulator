@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 public class ArmPhysics : MonoBehaviour
 {
-	
 	private bool insideSolid = false;
 	private ArmInputManager.Arm arm;
 	private int framesInsideSolid = 0;
@@ -10,8 +9,7 @@ public class ArmPhysics : MonoBehaviour
 	private ArmsState armsState;
 	private Transform handle;
 	public Vector3 lastPush = Vector3.zero;
-	
-	
+	private Transform otherHandle;
 	
 	void FixedUpdate()
 	{
@@ -44,7 +42,12 @@ public class ArmPhysics : MonoBehaviour
 				int MOVING_INSIDE_Y = 1;//Convert.ToInt32(Mathf.Abs(OFFSET.y) <= LIMIT.y);
 				int MOVING_INSIDE_Z = 1;//Convert.ToInt32(Mathf.Abs(OFFSET.z) <= LIMIT.z);
 				
-				if(rigidbody.velocity.magnitude < armsState.maxVelocity) 
+				float HAND_MUL = arm == ArmInputManager.Arm.LEFT ? -1 : 1;
+				bool MOVING_TOWARDS_OTHER_ARM = HAND_MUL * MOVEMENT.x < 0;
+				bool TO_CLOSE_TO_OTHER_ARM = Mathf.Abs((handle.position - otherHandle.position).x) < armsState.minDistanceBetweenArms;
+				
+				if(rigidbody.velocity.magnitude < armsState.maxVelocity && 
+					((MOVING_TOWARDS_OTHER_ARM && TO_CLOSE_TO_OTHER_ARM) == false) || armsState.checkIfAtonamyCorrect == false) 
 				{
 					lastPush = new Vector3(MOVING_INSIDE_X * MOVEMENT.x, MOVING_INSIDE_Y * MOVEMENT.y, MOVING_INSIDE_Z * MOVEMENT.z);
 					rigidbody.AddForce(lastPush, ForceMode.VelocityChange);
@@ -124,6 +127,7 @@ public class ArmPhysics : MonoBehaviour
 	private void ArmChanged(ArmInputManager.Arm a)
 	{
 		arm = a;
+		otherHandle = transform.parent.Find((arm == ArmInputManager.LEFT ? "RightArm" : "LeftArm")+ "/" + armsState.handleName);
 	}
 }
 

@@ -13,11 +13,13 @@ public class ArmLogic : MonoBehaviour
 	private Transform heldGrabable = null;
 	private ArmsState armsState;
 	private GameObject debugSphere;
+	private Transform otherHandle;
 	
 	void Start()
 	{
 		armsState = transform.parent.GetComponent(typeof(ArmsState)) as ArmsState;
 		handle = transform.Find(armsState.handleName);
+		
 		bounds = transform.Find(armsState.boundsName);
 		grabables = new List<GameObject>(Layers.FindGameObjectsInLayer(LayerMask.NameToLayer(Layers.GRABABLE)));
 		if(armsState.debug)
@@ -146,7 +148,6 @@ public class ArmLogic : MonoBehaviour
 	{
 		GrabableBehaviour BEHAVIOUR = g.GetComponent<GrabableBehaviour>();
 		heldGrabable = g.transform;
-		//heldGrabable.forward = handle.forward;
 		GameObject.Destroy(heldGrabable.rigidbody);
 		heldGrabable.parent = handle;
 		heldGrabable.position += BEHAVIOUR.moveOffsetOnGrab;

@@ -17,7 +17,9 @@ public sealed class ArmsState : MonoBehaviour
 	public float framesUntilGiveUpSolidSolve = 60;
 	public float solidRecoilMul = 1;
 	public float maxRotRestrictionAngles = 30;
+	public float minDistanceBetweenArms = 0.2f;
 	public GameObject debugSphere;
+	public bool checkIfAtonamyCorrect = false;
 
 	public string handleName = "Handle";
 	public string boundsName = "Bounds";
