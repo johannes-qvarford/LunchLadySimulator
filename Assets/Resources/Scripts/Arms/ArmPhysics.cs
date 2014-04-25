@@ -25,14 +25,13 @@ public class ArmPhysics : MonoBehaviour
 		else
 		{
 			{
-				//x and z axis is backwards on the model
-				float Z_ROTATION = -1 * armsState.rotationSpeed * 		
+				float Z_ROTATION = armsState.rotationSpeed * 		
 					ArmInputManager.GetMovement(arm, ArmInputManager.HORIZONTAL) * 	Convert.ToInt32(ArmInputManager.IsOn(ArmInputManager.Z_ROTATION, arm)); 
-				float X_MOVEMENT = -1 * armsState.movementSpeed * 
+				float X_MOVEMENT = armsState.movementSpeed * 
 					ArmInputManager.GetMovement(arm, ArmInputManager.HORIZONTAL) * 	Convert.ToInt32(ArmInputManager.IsOn(ArmInputManager.Z_ROTATION, arm) == false);
 				float Y_MOVEMENT = armsState.movementSpeed * 		
 					ArmInputManager.GetMovement(arm, ArmInputManager.VERTICAL) * 	Convert.ToInt32(ArmInputManager.IsOn(ArmInputManager.Y_MOVEMENT, arm));
-				float Z_MOVEMENT = -1 * armsState.movementSpeed * 
+				float Z_MOVEMENT = armsState.movementSpeed * 
 					ArmInputManager.GetMovement(arm, ArmInputManager.VERTICAL) * 	Convert.ToInt32(ArmInputManager.IsOn(ArmInputManager.Y_MOVEMENT, arm) == false);
 				
 				{

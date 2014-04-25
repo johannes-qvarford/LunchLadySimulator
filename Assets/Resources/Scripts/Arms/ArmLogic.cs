@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 public class ArmLogic : MonoBehaviour 
 {
@@ -73,25 +74,39 @@ public class ArmLogic : MonoBehaviour
 		if(GRAB_ON)
 		{
 			Collider[] overlaps = GrabableSphereCast();
+			List<GameObject> inReach = new List<GameObject>();
 			foreach(var g in grabables) 
 			{
 				if(CanBeGrabbed(g, overlaps))
 				{
-					switch(g.tag)
-					{
-						case Tags.TOOL:
-						case Tags.FOOD:
-						case Tags.PLATE:
-							GrabObject(g);
-							break;
-						case Tags.SPAWN_STACK:
-							GrabFromSpawnStack(g);
-							break;
-						default:
-							Debug.LogError("held object with unexpected tag " + g.tag);
-							Debug.DebugBreak();
-							break;
-					}
+					inReach.Add(g);
+					
+				}
+			}
+			
+			if(inReach.Count > 0)
+			{
+				GameObject closest = null;
+				foreach(GameObject g in inReach)
+				{
+					closest = 
+						closest == null || (closest.transform.position - handle.position).magnitude > (g.transform.position - handle.position).magnitude 
+						? g : closest;
+				}
+				switch(closest.tag)
+				{
+					case Tags.TOOL:
+					case Tags.FOOD:
+					case Tags.PLATE:
+						GrabObject(closest);
+						break;
+					case Tags.SPAWN_STACK:
+						GrabFromSpawnStack(closest);
+						break;
+					default:
+						Debug.LogError("held object with unexpected tag " + closest.tag);
+						Debug.DebugBreak();
+						break;
 				}
 			}
 
@@ -118,19 +133,20 @@ public class ArmLogic : MonoBehaviour
 			}
 		}
 		
+		
 		bool CLOSE_ANGLE = (Vector3.Angle(g.transform.right, handle.right)) < armsState.lowestArmHandleDegrees;
 		bool OTHER_HAND_HOLDS = g.transform.parent != null && g.transform.parent.parent != null &&
 			((arm == ArmInputManager.LEFT && g.transform.parent.parent.tag == "RightArm") || 
 			 (arm == ArmInputManager.RIGHT && g.transform.parent.parent.tag == "LeftArm"));
 		
-		return CLOSE_ANGLE && inProximity && heldGrabable == null && OTHER_HAND_HOLDS == false;
+		return /*CLOSE_ANGLE &&*/ inProximity && heldGrabable == null && OTHER_HAND_HOLDS == false;
 	}
 	
 	private void GrabObject(GameObject g)
 	{
 		GrabableBehaviour BEHAVIOUR = g.GetComponent<GrabableBehaviour>();
 		heldGrabable = g.transform;
-		heldGrabable.forward = handle.forward;
+		//heldGrabable.forward = handle.forward;
 		GameObject.Destroy(heldGrabable.rigidbody);
 		heldGrabable.parent = handle;
 		heldGrabable.position += BEHAVIOUR.moveOffsetOnGrab;
