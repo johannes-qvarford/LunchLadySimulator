@@ -12,7 +12,7 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 	static public Switch Y_MOVEMENT = Switch.Y_MOVEMENT;
 	static public Switch Z_ROTATION = Switch.Z_ROTATION;
 
-	public bool useJoystick = true;
+	public bool useJoystick = false;
 
 	private bool[,] switches = new bool[(int)Switch.SIZE, (int)Arm.SIZE];
 	private bool[,] prevSwitches = new bool[(int)Switch.SIZE, (int)Arm.SIZE];
@@ -40,11 +40,6 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 
 	public static float GetMovement(Arm arm, Movement movement)
 	{
-		if(Input.GetKeyDown(KeyCode.Joystick1Button11))
-		{
-			Debug.Log("is down");
-		}
-		//Debug.Log(string.Format("{0} {1} is {2}", arm, movement, GetInstance().GetMovementInternal(arm, movement)));
 		return GetInstance().GetMovementInternal(arm, movement);
 	}
 
@@ -108,7 +103,6 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 
 	private float GetMovementInternal(Arm arm, Movement movement)
 	{
-		//Debug.Log(string.Format("movement name {0}", BuildName(arm, movement)));
 		return Input.GetAxis(BuildName(arm, movement));
 	}
 

@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 993d978b95b798749bfe39cc854eb0f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPrefab: {fileID: 100000, guid: a93547bf457f9714fb6c136d29548250, type: 2}
+  spawnPrefab: {fileID: 100000, guid: 491c3a1d3e2c60e47b110ddf3784551e, type: 2}
   spawnOffsetFromHand: {x: 0, y: -.0399999991, z: .200000003}
 --- !u!1001 &100100000
 Prefab:

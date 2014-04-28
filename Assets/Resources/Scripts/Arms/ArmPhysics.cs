@@ -126,7 +126,9 @@ public class ArmPhysics : MonoBehaviour
 	
 	private void ArmChanged(ArmInputManager.Arm a)
 	{
+		armsState = transform.parent.GetComponent(typeof(ArmsState)) as ArmsState;
 		arm = a;
+		Debug.Log((arm == ArmInputManager.LEFT ? "RightArm" : "LeftArm")+ "/" + armsState.handleName);
 		otherHandle = transform.parent.Find((arm == ArmInputManager.LEFT ? "RightArm" : "LeftArm")+ "/" + armsState.handleName);
 	}
 }
