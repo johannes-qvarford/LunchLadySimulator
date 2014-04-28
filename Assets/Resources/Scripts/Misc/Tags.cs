@@ -5,7 +5,7 @@ public static class Tags
 	public const string LEFT_HAND_TARGET = "LeftHandTarget";
 	public const string RIGHT_HAND_TARGET = "RightHandTarget";
 	public const string TOOL = "Tool";
-	public const string PLATE_STACK = "PlateStack";
+	public const string SPAWN_STACK = "SpawnStack";
 	public const string LEFT_ARM = "LeftArm";
 	public const string RIGHT_ARM = "RightArm";
 	public const string SPAWN_ZONE = "SpawnZone";

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class PlateBehaviour : MonoBehaviour
 {
@@ -8,13 +9,16 @@ public class PlateBehaviour : MonoBehaviour
 
 	void OnCollisionEnter(Collision col)
 	{
+		/*
 		if(col.gameObject.tag == Tags.FOOD && 
 			col.transform.position.y > gameObject.transform.position.y &&
-			(transform.position - col.transform.position).magnitude < maxFoodPlateDistanceForSticky)
+			(XZ(transform.position - col.transform.position)).magnitude < maxFoodPlateDistanceForSticky)
 		{
+			Debug.Log("food on plate");
 			col.transform.parent = transform;
 			GameObject.Destroy(col.rigidbody);
 		}
+		*/
 	}
 	
 	void Update()
@@ -23,5 +27,10 @@ public class PlateBehaviour : MonoBehaviour
 		{
 			Debug.DrawLine(transform.position, transform.position + (Vector3.forward * maxFoodPlateDistanceForSticky), Color.green);
 		}
+	}
+	
+	Vector2 XZ(Vector3 v)
+	{
+		return new Vector2(v.x, v.z);
 	}
 }

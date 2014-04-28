@@ -102,7 +102,7 @@ GameObject:
   - 54: {fileID: 5400000}
   - 114: {fileID: 11400000}
   m_Layer: 13
-  m_Name: NPC
+  m_Name: NPC_old
   m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,8 +151,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: -.707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 1.61316681, z: 0}
-  m_LocalScale: {x: 3.40953541, y: 4.05514097, z: 3.34817672}
+  m_LocalPosition: {x: 0, y: 1.25380898, z: 0}
+  m_LocalScale: {x: 3.40953565, y: 1.63002181, z: 3.34817672}
   m_Children:
   - {fileID: 400014}
   - {fileID: 400002}
@@ -213,7 +213,7 @@ Transform:
   m_GameObject: {fileID: 100010}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: -.707106829}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .493201107, y: .246600538, z: .493201107}
+  m_LocalScale: {x: .493201107, y: .613488734, z: .493201107}
   m_Children:
   - {fileID: 400000}
   m_Father: {fileID: 0}
@@ -371,7 +371,7 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100014}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
@@ -442,7 +442,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 0
