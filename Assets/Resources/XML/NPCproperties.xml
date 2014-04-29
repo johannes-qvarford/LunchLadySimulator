@@ -1,0 +1,35 @@
+<categories>
+<category name="Jock">
+<sex>Female Male</sex>
+<skincolors>Brown White Yellow</skincolors>
+<head>kid1</head>
+<shirts>Red Blue</shirts>
+<pants>Red Blue</pants>
+<accessories>Clock</accessories>
+<hair>pigtails backwardscap dorky</hair>
+<haircolors>Red Blonde</haircolors>
+<face>Fuckface</face>
+<preferenceType>protein</preferenceType>
+<preferenceAmount>2</preferenceAmount>
+<perfection>0.5</perfection>
+<patience>1.0</patience> 
+</category>
+
+
+<category name="Geek">
+<sex>Female Male</sex>
+<skincolors>Brown White Yellow</skincolors>
+<head>kid2</head>
+<shirts>Green Yellow</shirts>
+<pants>Green Yellow</pants>
+<accessories>Räls</accessories>
+<hair>pigtails backwardscap dorky</hair>
+<haircolors>Black Brown</haircolors>
+<face>Fugly</face>
+<preferenceType>IQfood</preferenceType>
+<preferenceAmount>0.5</preferenceAmount>
+<perfection>1</perfection>
+<patience>2.0</patience> 
+</category>
+
+</categories>

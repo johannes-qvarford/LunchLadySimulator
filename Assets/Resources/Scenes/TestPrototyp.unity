@@ -243,7 +243,9 @@ MonoBehaviour:
   framesUntilGiveUpSolidSolve: 60
   solidRecoilMul: 1
   maxRotRestrictionAngles: 30
+  minDistanceBetweenArms: .200000003
   debugSphere: {fileID: 100000, guid: 6570e180f4c1e2749b411fd9269ea726, type: 2}
+  checkIfAtonamyCorrect: 0
   handleName: Handle
   boundsName: Bounds
 --- !u!1 &115922719
@@ -1424,6 +1426,10 @@ Prefab:
       propertyPath: m_LocalRotation.w
       value: -.707106829
       objectReference: {fileID: 0}
+    - target: {fileID: 100060, guid: 69997b30e6480cf468e3433801909660, type: 2}
+      propertyPath: m_Layer
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 69997b30e6480cf468e3433801909660, type: 2}
   m_RootGameObject: {fileID: 1539443135}
@@ -1521,6 +1527,34 @@ Prefab:
     - target: {fileID: 400010, guid: acb27fbd08694ba4bbd84edad2d48881, type: 2}
       propertyPath: m_LocalRotation.w
       value: -.707106829
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: acb27fbd08694ba4bbd84edad2d48881, type: 2}
+      propertyPath: instantiateObject
+      value: 
+      objectReference: {fileID: 100128, guid: 3abfe466ac98f9242b9e103bc61d0d87, type: 2}
+    - target: {fileID: 400008, guid: acb27fbd08694ba4bbd84edad2d48881, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 2.32388997
+      objectReference: {fileID: 0}
+    - target: {fileID: 400008, guid: acb27fbd08694ba4bbd84edad2d48881, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: .426186979
+      objectReference: {fileID: 0}
+    - target: {fileID: 400008, guid: acb27fbd08694ba4bbd84edad2d48881, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 10.3810339
+      objectReference: {fileID: 0}
+    - target: {fileID: 400008, guid: acb27fbd08694ba4bbd84edad2d48881, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: .707106829
+      objectReference: {fileID: 0}
+    - target: {fileID: 400008, guid: acb27fbd08694ba4bbd84edad2d48881, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: .707106829
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: acb27fbd08694ba4bbd84edad2d48881, type: 2}
+      propertyPath: maxPhysicalNpcsInQueue
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: acb27fbd08694ba4bbd84edad2d48881, type: 2}
@@ -2680,7 +2714,7 @@ GameObject:
   - 65: {fileID: 1003072622}
   - 23: {fileID: 1003072621}
   - 114: {fileID: 1003072620}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: FoodKiller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5698,8 +5732,8 @@ Transform:
   m_PrefabParentObject: {fileID: 400008, guid: acb27fbd08694ba4bbd84edad2d48881, type: 2}
   m_PrefabInternal: {fileID: 790518267}
   m_GameObject: {fileID: 1841346195}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.95629144, y: .885652363, z: 10.3810272}
+  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
+  m_LocalPosition: {x: 2.32388997, y: .426186979, z: 10.3810339}
   m_LocalScale: {x: 1.81383073, y: 1.81383109, z: 1.81383073}
   m_Children: []
   m_Father: {fileID: 2099616782}
@@ -5715,11 +5749,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad8900f0c8817b545b2e225a0213ced3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  instantiateObject: {fileID: 100010, guid: 7ecf7bb04be10db49bba36e365d91f2f, type: 2}
+  instantiateObject: {fileID: 100128, guid: 3abfe466ac98f9242b9e103bc61d0d87, type: 2}
   repeatTime: 10
   startTime: 0
   maxNpcDistance: 1
-  maxPhysicalNpcsInQueue: 5
+  maxPhysicalNpcsInQueue: 1
 --- !u!1 &1920850755
 GameObject:
   m_ObjectHideFlags: 0
