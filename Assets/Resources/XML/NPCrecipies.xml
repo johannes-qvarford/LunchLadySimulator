@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- xml template for customer #1 --> 
+<main>
+<type name="Jock">
+<maindish>meat something</maindish>
+<maindish>fish something</maindish>
+<sideorder>candybar</sideorder>
+<sideorder>cookie</sideorder>
+<drink>soda</drink>
+<drink>milk</drink>
+</type>
+
+<type name="Geek">
+<maindish>korv pommes</maindish>
+<maindish>hamburgare pommes</maindish>
+<sideorder>vitaminc</sideorder>
+<sideorder>vitaminb</sideorder>
+<drink>powerking</drink>
+<drink>aktivtkolrenatvatten</drink>
+</type>
+</main>
