@@ -31,6 +31,8 @@ public class NpcBehaviour : MonoBehaviour
 	{
 		if(move && rigidbody.velocity.magnitude <= maxSpeed)
 		{
+			//transform.position += Vector3.right * moveSpeed;
+			//rigidbody.velocity += Vector3.right * moveSpeed;
 			rigidbody.AddForce(Vector3.right * moveSpeed, ForceMode.VelocityChange);
 		} 
 		else if(move == false)

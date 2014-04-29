@@ -18,7 +18,7 @@ TagManager:
   - ScoreHandeler
   - Destroy
   - Stop
-  - 
+  - CustomerCounter
   - Grabable
   - 
   - SpawnArea
