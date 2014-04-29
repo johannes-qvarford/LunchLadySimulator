@@ -21,15 +21,21 @@ public class TrayBehaviour : MonoBehaviour
 			}
 			dict[id]++;
 		}
+
 		DetermineFoodPoints(dict);
 	}
-	
 	private void DetermineFoodPoints(Dictionary<string, int> foodCount)
 	{
 		//TODO: use dictionary of foodID -> count to determine point based on recipie.
+		int score = 0;
 		foreach(string key in foodCount.Keys)
 		{
-			Debug.Log(key + " " + foodCount[key]);
+			score += foodCount[key];
+			//Debug.Log(key + " " + foodCount[key]);
 		}
+
+		ScoreHandeling scoreHandeling = GameObject.FindWithTag("ScoreCHandeler").GetComponent<ScoreHandeling>();
+		scoreHandeling.addScore(score, 0);
 	}
+
 }

@@ -15,7 +15,7 @@ TagManager:
   - NPC
   - Tray
   - Plate
-  - 
+  - ScoreHandeler
   - Destroy
   - Stop
   - 
@@ -41,7 +41,7 @@ TagManager:
   User Layer 13: Human
   User Layer 14: Soup
   User Layer 15: SoupPlane
-  User Layer 16: 
+  User Layer 16: GUI
   User Layer 17: 
   User Layer 18: 
   User Layer 19: 
