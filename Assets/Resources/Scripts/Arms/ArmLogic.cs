@@ -31,9 +31,15 @@ public class ArmLogic : MonoBehaviour
 		}
 		SendMessage("ArmChanged", arm, SendMessageOptions.RequireReceiver);
 	}
+	
 
 	void Update()
 	{
+		if(Input.GetKeyDown(KeyCode.Y))
+		{
+			Application.LoadLevel(Application.loadedLevelName);
+		}
+	
 		Debug.DrawLine(handle.position, handle.position + Vector3.up * -1);
 		grabables.RemoveAll((g) => g == null);
 

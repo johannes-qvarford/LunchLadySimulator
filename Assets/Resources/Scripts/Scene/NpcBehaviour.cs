@@ -16,11 +16,17 @@ public class NpcBehaviour : MonoBehaviour
 		switch(OTHER.tag)
 		{
 			case Tags.DESTROY:
-				queueControl.SendMessage("NpcDestroyed", gameObject, SendMessageOptions.RequireReceiver);
+				if(queueControl != null)
+				{
+					queueControl.SendMessage("NpcDestroyed", gameObject, SendMessageOptions.RequireReceiver);
+				}
 				break;
 			case Tags.STOP:
 				firstInLine = true;
-				queueControl.SendMessage("NpcStopped", gameObject, SendMessageOptions.RequireReceiver);
+				if(queueControl != null)
+				{
+					queueControl.SendMessage("NpcStopped", gameObject, SendMessageOptions.RequireReceiver);
+				}
 				break;
 			default:
 				break;
