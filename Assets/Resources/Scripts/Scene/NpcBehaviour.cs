@@ -9,8 +9,7 @@ public class NpcBehaviour : MonoBehaviour
 	private bool move = false;
 	private GameObject queueControl = null;
 	private bool firstInLine = false;
-	private GameObject speechBubble = null;
-
+	public SpeechBubble speechBubble;
 	void OnTriggerEnter(Collider col)
 	{
 		GameObject OTHER = col.gameObject;
@@ -27,6 +26,7 @@ public class NpcBehaviour : MonoBehaviour
 				if(queueControl != null)
 				{
 					queueControl.SendMessage("NpcStopped", gameObject, SendMessageOptions.RequireReceiver);
+					speechBubble.display();
 				}
 				break;
 			default:
@@ -50,7 +50,7 @@ public class NpcBehaviour : MonoBehaviour
 	
 	void Start()
 	{
-		speechBubble = transform.FindChild("SpeechBubble").gameObject;
+		speechBubble = transform.FindChild("SpeechBubble").GetComponent<SpeechBubble>();
 	}
 	
 	private void NpcGotFood()
@@ -58,6 +58,7 @@ public class NpcBehaviour : MonoBehaviour
 		if(firstInLine)
 		{
 			BroadcastMessage("GotFood", SendMessageOptions.RequireReceiver);
+			speechBubble.hide();
 		}
 	}
 
@@ -73,6 +74,6 @@ public class NpcBehaviour : MonoBehaviour
 	
 	private void ShowSpeechBubble(bool on)
 	{
-		speechBubble.SetActive(on);
+		speechBubble.gameObject.SetActive(on);
 	}
 }

@@ -63,6 +63,7 @@ GameObject:
   - 54: {fileID: 5400000}
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400006}
+  - 114: {fileID: 11400008}
   m_Layer: 12
   m_Name: Ladle
   m_TagString: Tool
@@ -251,6 +252,18 @@ MonoBehaviour:
   mood: 0
   volume: 0
   path: {fileID: 11400000, guid: 3af646689da8f66409bae56016863d67, type: 2}
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3fcad8825e72d04fae2d57e12fc872e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  returnKey: b
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

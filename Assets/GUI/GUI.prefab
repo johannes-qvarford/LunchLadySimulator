@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 131: {fileID: 13100000}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: ScoreCloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24,7 +24,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400002}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Cloud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - 4: {fileID: 400004}
   - 132: {fileID: 13200000}
   - 114: {fileID: 11400000}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: ScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400006}
   - 131: {fileID: 13100002}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: HappyBarFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - 4: {fileID: 400008}
   - 132: {fileID: 13200002}
   - 114: {fileID: 11400002}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: ScoreCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,9 +91,9 @@ GameObject:
   - 4: {fileID: 400010}
   - 132: {fileID: 13200004}
   - 114: {fileID: 11400004}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: CustomerCounter
-  m_TagString: Untagged
+  m_TagString: CustomerCounter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,7 +106,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400012}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: GUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +122,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400014}
   - 131: {fileID: 13100004}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: HappyBarTip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 400016}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: HappyBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   - 4: {fileID: 400018}
   - 131: {fileID: 13100006}
   - 114: {fileID: 11400006}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: BarGlow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   - 4: {fileID: 400020}
   - 131: {fileID: 13100008}
   - 114: {fileID: 11400008}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: HappyBarInner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,8 +187,57 @@ GameObject:
   m_Component:
   - 4: {fileID: 400022}
   - 131: {fileID: 13100010}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: CustomerSymbol
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100024
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400024}
+  - 132: {fileID: 13200006}
+  - 114: {fileID: 11400010}
+  m_Layer: 16
+  m_Name: Restart in
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100026
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400026}
+  - 114: {fileID: 11400012}
+  m_Layer: 0
+  m_Name: ScoreHandeler
+  m_TagString: ScoreHandeler
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100028
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400028}
+  - 132: {fileID: 13200008}
+  m_Layer: 16
+  m_Name: GameOver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -271,12 +320,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100012}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.96046448e-08, y: 0, z: -1.1920929e-07}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: -.707106829, z: 0, w: .707106829}
+  m_LocalPosition: {x: -1.10733283, y: -1.84869576, z: -21.3090611}
+  m_LocalScale: {x: 1.81383073, y: 1.81383109, z: 1.81383073}
   m_Children:
   - {fileID: 400002}
   - {fileID: 400016}
+  - {fileID: 400028}
+  - {fileID: 400026}
   m_Father: {fileID: 0}
 --- !u!4 &400014
 Transform:
@@ -337,6 +388,40 @@ Transform:
   m_LocalScale: {x: 0, y: 0, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
+--- !u!4 &400024
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100024}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400028}
+--- !u!4 &400026
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100026}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.53183699, y: .555562556, z: -.774820149}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400012}
+--- !u!4 &400028
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100028}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .5, y: .5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 400024}
+  m_Father: {fileID: 400012}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -423,8 +508,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f111d1a9221975147bc3510df8b871cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lowColor: {r: 0, g: 0, b: 0, a: 0}
-  highColor: {r: 1, g: 0, b: 0, a: 1}
+  lowColor: {r: .551470578, g: .135686427, b: .0405493118, a: 0}
+  highColor: {r: .0177484583, g: .514705896, b: 0, a: 1}
   frequens: 1
   centerAlfa: 1
   varyingAlfa: 1
@@ -439,7 +524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b62f2950636ba2746943964b849d0d78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  percentage: 178
+  percentage: 1
   edges: 205
   gradient:
     key0:
@@ -484,13 +569,44 @@ MonoBehaviour:
     atime7: 0
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
-  maxPoints: 500
-  glow: {fileID: 0}
+  maxPoints: 3
+  gameOverScript: {fileID: 11400010}
+  glow: {fileID: 11400006}
   tip: {fileID: 13100004}
   tipX: -11
   tipY: -8
   tipW: 22
   tipH: 22
+  score: 0
+--- !u!114 &11400010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2b1d9a2e419d6a4ba371fe470eae682, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countDownTime: 5
+  gameOverText: {fileID: 13200008}
+  countDownText: {fileID: 13200006}
+  countDownPreText: 'Restart in '
+  countDownPostString: .
+--- !u!114 &11400012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4271c3dbb96495f4e9e1979d7180e311, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  counter: {fileID: 11400002}
+  bar: {fileID: 11400008}
 --- !u!131 &13100000
 GUITexture:
   m_ObjectHideFlags: 1
@@ -672,6 +788,52 @@ GUIText:
   m_Color:
     serializedVersion: 2
     rgba: 4278190080
+  m_PixelCorrect: 1
+  m_RichText: 1
+--- !u!132 &13200006
+GUIText:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100024}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Text: Restart in n.
+  m_Anchor: 4
+  m_Alignment: 0
+  m_PixelOffset: {x: 0, y: -31.3999996}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Material: {fileID: 0}
+  m_FontSize: 20
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_PixelCorrect: 1
+  m_RichText: 1
+--- !u!132 &13200008
+GUIText:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100028}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Text: Game over!
+  m_Anchor: 4
+  m_Alignment: 0
+  m_PixelOffset: {x: 0, y: 0}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Material: {fileID: 0}
+  m_FontSize: 40
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
   m_PixelCorrect: 1
   m_RichText: 1
 --- !u!1001 &100100000
