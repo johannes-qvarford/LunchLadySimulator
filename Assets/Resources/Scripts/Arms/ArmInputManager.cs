@@ -12,7 +12,7 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 	static public Switch Y_MOVEMENT = Switch.Y_MOVEMENT;
 	static public Switch Z_ROTATION = Switch.Z_ROTATION;
 
-	public bool useJoystick = false;
+	public bool useJoystick = true;
 
 	private bool[,] switches = new bool[(int)Switch.SIZE, (int)Arm.SIZE];
 	private bool[,] prevSwitches = new bool[(int)Switch.SIZE, (int)Arm.SIZE];

@@ -54,7 +54,10 @@ public class SoundCheck : MonoBehaviour {
 	}
 	void OnDisable()
 	{
-		eSound.release();
+		if(eSound != null)
+		{
+			eSound.release();
+		}
 	}
 	
 	private void ChangeParameter()

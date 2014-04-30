@@ -35,7 +35,7 @@ public class ArmLogic : MonoBehaviour
 
 	void Update()
 	{
-		if(Input.GetKeyDown(KeyCode.Y))
+		if(Input.GetKeyDown(KeyCode.Y) || Input.GetKeyDown(KeyCode.Joystick1Button9))
 		{
 			Application.LoadLevel(Application.loadedLevelName);
 		}
