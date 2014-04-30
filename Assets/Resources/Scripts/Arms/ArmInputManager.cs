@@ -43,26 +43,31 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 		return GetInstance().GetMovementInternal(arm, movement);
 	}
 
-	public static bool IsOn(Switch sw, Arm arm)
+	public static bool IsHeld(Switch sw, Arm arm)
 	{
-		return GetInstance().IsSwitchOnInternal(sw, arm);
+		return GetInstance().IsHeldInternal(sw, arm);
 	}
 	
-	public static bool OnToggled(Switch sw, Arm arm)
+	public static bool HeldChanged(Switch sw, Arm arm)
 	{
-		return GetInstance().OnToggledInternal(sw, arm);
+		return GetInstance().HeldChangedInternal(sw, arm);
 	}
 
 	public void Update()
 	{
+		if(Input.GetKeyDown(KeyCode.T))
+		{
+			useJoystick = !useJoystick;
+		}
+		
 		for(int i = 0; i < (int)Switch.SIZE; ++i)
 		{
 			for(int j = 0; j < (int)Arm.SIZE; ++j)
 			{
-				prevSwitches[i,j] = switches[i, j];
 				Switch SWITCH = (Switch)i;
 				Arm ARM = (Arm)j;
-				ToggleIfButtonDown(SWITCH, ARM);
+				prevSwitches[i, j] = switches[i, j];
+				switches[i, j] = Input.GetButton(BuildName(ARM, SWITCH));
 			}
 		}
 	}
@@ -105,19 +110,24 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 	{
 		return Input.GetAxis(BuildName(arm, movement));
 	}
+	
+	private bool IsHeldInternal(Switch sw, Arm arm)
+	{
+		return Input.GetButton(BuildName(arm, sw));
+	}
 
 	private bool IsSwitchOnInternal(Switch sw, Arm arm)
 	{
 		return switches[(int)sw, (int)arm];
 	}
 
-	private void ToggleIfButtonDown(Switch sw, Arm arm)
+	private void SetButtonState(Switch sw, Arm arm)
 	{
 		bool ON = switches[(int)sw, (int)arm];
-		switches[(int)sw, (int)arm] = Input.GetButtonDown(BuildName(arm, sw)) ? !ON : ON;
+		
 	}
 	
-	private bool OnToggledInternal(Switch sw, Arm arm)
+	private bool HeldChangedInternal(Switch sw, Arm arm)
 	{
 		return prevSwitches[(int)sw, (int)arm] != switches[(int)sw, (int)arm];
 	}

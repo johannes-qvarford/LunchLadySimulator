@@ -29,7 +29,7 @@ GameObject:
   - 64: {fileID: 6400000}
   - 114: {fileID: 11400000}
   m_Layer: 8
-  m_Name: Hitbox
+  m_Name: Colliders
   m_TagString: Tool
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,7 +99,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .042717699, y: 1.34602487e-06, z: 8.50851166e-07}
+  m_LocalPosition: {x: .0427188873, y: -.0718764514, z: .0212236177}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400006}
@@ -109,8 +109,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
-  m_LocalRotation: {x: -.547145128, y: .182557493, z: .455040485, w: .678412259}
-  m_LocalPosition: {x: -9.44291687, y: 37.3127785, z: -72.0897217}
+  m_LocalRotation: {x: -.446148098, y: -.363535732, z: -.501761079, w: .645778239}
+  m_LocalPosition: {x: -9.38211823, y: 37.3823509, z: -71.8792572}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400002}
@@ -249,6 +249,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   mood: 0
+  volume: 0
   path: {fileID: 11400000, guid: 3af646689da8f66409bae56016863d67, type: 2}
 --- !u!1001 &100100000
 Prefab:

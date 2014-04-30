@@ -13,9 +13,18 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T:Component, new()
 			Destroy(gameObject);
 			Debug.LogError("impossible unless a MonoSingleton is placed in a level, which it shouldn't be.");
 		}
-		DontDestroyOnLoad(gameObject);
+		if(ShouldBeDestroyedOnLoad())
+		{
+			Debug.Log("hello should destroy " + typeof(T).Name);
+			DontDestroyOnLoad(gameObject);
+		}
 		instance = gameObject.GetComponent<T>();
 		VirtualStart();
+	}
+	
+	public virtual bool ShouldBeDestroyedOnLoad()
+	{
+		return true;
 	}
 	
 	protected static T GetInstance()

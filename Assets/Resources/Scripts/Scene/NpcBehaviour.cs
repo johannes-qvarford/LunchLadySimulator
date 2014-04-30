@@ -9,6 +9,7 @@ public class NpcBehaviour : MonoBehaviour
 	private bool move = false;
 	private GameObject queueControl = null;
 	private bool firstInLine = false;
+	private GameObject speechBubble = null;
 
 	void OnTriggerEnter(Collider col)
 	{
@@ -16,11 +17,17 @@ public class NpcBehaviour : MonoBehaviour
 		switch(OTHER.tag)
 		{
 			case Tags.DESTROY:
-				queueControl.SendMessage("NpcDestroyed", gameObject, SendMessageOptions.RequireReceiver);
+				if(queueControl != null)
+				{
+					queueControl.SendMessage("NpcDestroyed", gameObject, SendMessageOptions.RequireReceiver);
+				}
 				break;
 			case Tags.STOP:
 				firstInLine = true;
-				queueControl.SendMessage("NpcStopped", gameObject, SendMessageOptions.RequireReceiver);
+				if(queueControl != null)
+				{
+					queueControl.SendMessage("NpcStopped", gameObject, SendMessageOptions.RequireReceiver);
+				}
 				break;
 			default:
 				break;
@@ -31,12 +38,19 @@ public class NpcBehaviour : MonoBehaviour
 	{
 		if(move && rigidbody.velocity.magnitude <= maxSpeed)
 		{
+			//transform.position += Vector3.right * moveSpeed;
+			//rigidbody.velocity += Vector3.right * moveSpeed;
 			rigidbody.AddForce(Vector3.right * moveSpeed, ForceMode.VelocityChange);
 		} 
 		else if(move == false)
 		{
 			rigidbody.velocity = Vector3.zero;
 		}
+	}
+	
+	void Start()
+	{
+		speechBubble = transform.FindChild("SpeechBubble").gameObject;
 	}
 	
 	private void NpcGotFood()
@@ -55,5 +69,10 @@ public class NpcBehaviour : MonoBehaviour
 	private void QueueControlChanged(GameObject g)
 	{
 		queueControl = g;
+	}
+	
+	private void ShowSpeechBubble(bool on)
+	{
+		speechBubble.SetActive(on);
 	}
 }

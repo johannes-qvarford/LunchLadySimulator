@@ -3,6 +3,21 @@ using UnityEngine;
 
 public class SpawnedJunk : MonoSingleton<SpawnedJunk>
 {
+	public override bool ShouldBeDestroyedOnLoad()
+	{
+		Debug.Log("hello dont destroy");
+		return false;
+	}
+	
+	void OnLevelWasLoaded()
+	{
+		for(int i = 0; i < transform.childCount; ++i)
+		{
+			Transform child = transform.GetChild(i);
+			GameObject.Destroy(child.gameObject);
+		}
+	}
+
 	public static void BecomeParentToGameObject(Transform t)
 	{
 		GetInstance().BecomeParentToGameObjectInternal(t);

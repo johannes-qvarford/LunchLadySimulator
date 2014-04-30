@@ -3,20 +3,20 @@
 <!-- xml template for customer #1 --> 
 <main>
 <type name="Jock">
-<maindish>meat something</maindish>
-<maindish>fish something</maindish>
-<sideorder>candybar</sideorder>
-<sideorder>cookie</sideorder>
-<drink>soda</drink>
-<drink>milk</drink>
+<maindish>Soup Something</maindish>
+<maindish>Soup Something</maindish>
+<sideorder>Bread</sideorder>
+<sideorder>Bread</sideorder>
+<drink>Milk</drink>
+<drink>Milk</drink>
 </type>
 
 <type name="Geek">
-<maindish>korv pommes</maindish>
-<maindish>hamburgare pommes</maindish>
-<sideorder>vitaminc</sideorder>
-<sideorder>vitaminb</sideorder>
-<drink>powerking</drink>
-<drink>aktivtkolrenatvatten</drink>
+<maindish>Soup Something</maindish>
+<maindish>Soup Something</maindish>
+<sideorder>Bread</sideorder>
+<sideorder>Bread</sideorder>
+<drink>Milk</drink>
+<drink>Milk</drink>
 </type>
 </main>
