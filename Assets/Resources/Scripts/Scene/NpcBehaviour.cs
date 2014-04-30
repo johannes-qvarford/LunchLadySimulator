@@ -9,6 +9,7 @@ public class NpcBehaviour : MonoBehaviour
 	private bool move = false;
 	private GameObject queueControl = null;
 	private bool firstInLine = false;
+	private GameObject speechBubble = null;
 
 	void OnTriggerEnter(Collider col)
 	{
@@ -47,6 +48,11 @@ public class NpcBehaviour : MonoBehaviour
 		}
 	}
 	
+	void Start()
+	{
+		speechBubble = transform.FindChild("SpeechBubble").gameObject;
+	}
+	
 	private void NpcGotFood()
 	{
 		if(firstInLine)
@@ -63,5 +69,10 @@ public class NpcBehaviour : MonoBehaviour
 	private void QueueControlChanged(GameObject g)
 	{
 		queueControl = g;
+	}
+	
+	private void ShowSpeechBubble(bool on)
+	{
+		speechBubble.SetActive(on);
 	}
 }
