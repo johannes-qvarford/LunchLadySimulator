@@ -13,11 +13,11 @@ public class SoupCameraLight : MonoBehaviour
 		}
 	}
 	
-	void OnPostRender()
+	/*void OnPostRender()
 	{
 		foreach(Light light in lights)
 		{
 			//light.enabled = true;
 		}
-	}
+	}*/
 }

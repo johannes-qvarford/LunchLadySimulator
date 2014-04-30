@@ -6,6 +6,7 @@ public class HappyBarController : MonoBehaviour {
 	public int edges = 205;
 	public Gradient gradient;
 	public int maxPoints;
+	public GameOverScript gameOverScript;
 
 	public HappyBarGlow glow;
 	public GUITexture tip;
@@ -14,7 +15,7 @@ public class HappyBarController : MonoBehaviour {
 	public int tipW = 22;
 	public int tipH = 22;
 
-	private int score;
+	public int score;
 	private int lastValue = 101;
 	// Use this for initialization
 	void Start () {
@@ -32,9 +33,8 @@ public class HappyBarController : MonoBehaviour {
 	}
 	public void addScore(int addedScore, int normal)
 	{
-		score += addedScore;
-		percentage = (int)(((float)score / (float)maxPoints) * 50.0f);
-		percentage += 50;
+		score += addedScore - normal;
+		percentage = (int)(((float)score / (float)maxPoints)*100);
 		updateBar ();
 	}
 	private void updateBar()
@@ -61,6 +61,10 @@ public class HappyBarController : MonoBehaviour {
 		else if(percentage <= -80)
 		{
 			glow.activateLow();
+			if(percentage <= -99)
+			{
+				gameOverScript.triggerGameOver();
+			}
 		}
 		else
 		{

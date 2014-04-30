@@ -10,6 +10,7 @@ public class NpcBehaviour : MonoBehaviour
 	private GameObject queueControl = null;
 	private bool firstInLine = false;
 
+	public SpeechBubble speechBubble;
 	void OnTriggerEnter(Collider col)
 	{
 		GameObject OTHER = col.gameObject;
@@ -21,6 +22,7 @@ public class NpcBehaviour : MonoBehaviour
 			case Tags.STOP:
 				firstInLine = true;
 				queueControl.SendMessage("NpcStopped", gameObject, SendMessageOptions.RequireReceiver);
+				speechBubble.display();
 				break;
 			default:
 				break;
@@ -46,6 +48,7 @@ public class NpcBehaviour : MonoBehaviour
 		if(firstInLine)
 		{
 			BroadcastMessage("GotFood", SendMessageOptions.RequireReceiver);
+			speechBubble.hide();
 		}
 	}
 
