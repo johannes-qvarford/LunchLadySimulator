@@ -62,6 +62,7 @@ GameObject:
   - 65: {fileID: 6500000}
   - 54: {fileID: 5400000}
   - 114: {fileID: 11400004}
+  - 114: {fileID: 11400006}
   m_Layer: 12
   m_Name: Ladle
   m_TagString: Tool
@@ -235,6 +236,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveOffsetOnGrab: {x: 0, y: .00499999989, z: 0}
+--- !u!114 &11400006
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b98489363152d8469bfe4d1e94404c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  mood: 0
+  path: {fileID: 11400000, guid: 3af646689da8f66409bae56016863d67, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

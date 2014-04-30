@@ -1,14 +1,14 @@
 #Don't track heavy files
 
-**/*.wav
-**/*.mp3
-**/*.mpg
-**/*.ogg
+#**/*.wav
+#**/*.mp3
+#**/*.mpg
+#**/*.ogg
 
-**/*.png
-**/*.tif
-**/*.jpg
-**/*.gif
+#**/*.png
+#**/*.tif
+#**/*.jpg
+#**/*.gif
 
 #For builds and such
 Build/
