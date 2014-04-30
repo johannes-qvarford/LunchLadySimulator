@@ -23,14 +23,14 @@ public class ArmPhysics : MonoBehaviour
 		else
 		{
 			{
-				float Z_ROTATION = armsState.rotationSpeed * 		
-					ArmInputManager.GetMovement(arm, ArmInputManager.HORIZONTAL) * 	Convert.ToInt32(ArmInputManager.IsOn(ArmInputManager.Z_ROTATION, arm)); 
+				float Z_ROTATION = armsState.rotationSpeed * 
+					ArmInputManager.GetMovement(arm, ArmInputManager.HORIZONTAL) * 	Convert.ToInt32(ArmInputManager.IsHeld(ArmInputManager.Z_ROTATION, arm)); 
 				float X_MOVEMENT = armsState.movementSpeed * 
-					ArmInputManager.GetMovement(arm, ArmInputManager.HORIZONTAL) * 	Convert.ToInt32(ArmInputManager.IsOn(ArmInputManager.Z_ROTATION, arm) == false);
-				float Y_MOVEMENT = armsState.movementSpeed * 		
-					ArmInputManager.GetMovement(arm, ArmInputManager.VERTICAL) * 	Convert.ToInt32(ArmInputManager.IsOn(ArmInputManager.Y_MOVEMENT, arm));
+					ArmInputManager.GetMovement(arm, ArmInputManager.HORIZONTAL) * 	Convert.ToInt32(ArmInputManager.IsHeld(ArmInputManager.Z_ROTATION, arm) == false);
+				float Y_MOVEMENT = armsState.movementSpeed * 
+					ArmInputManager.GetMovement(arm, ArmInputManager.VERTICAL) * 	Convert.ToInt32(ArmInputManager.IsHeld(ArmInputManager.Y_MOVEMENT, arm));
 				float Z_MOVEMENT = armsState.movementSpeed * 
-					ArmInputManager.GetMovement(arm, ArmInputManager.VERTICAL) * 	Convert.ToInt32(ArmInputManager.IsOn(ArmInputManager.Y_MOVEMENT, arm) == false);
+					ArmInputManager.GetMovement(arm, ArmInputManager.VERTICAL) * 	Convert.ToInt32(ArmInputManager.IsHeld(ArmInputManager.Y_MOVEMENT, arm) == false);
 				
 				{
 					rigidbody.AddTorque(Vector3.forward * Z_ROTATION * armsState.rotationSpeed);
@@ -111,7 +111,7 @@ public class ArmPhysics : MonoBehaviour
 		{
 			framesInsideSolid++;
 			rigidbody.AddForce(new Vector3(armsState.solidRecoilMul * -lastPush.x, armsState.solidRecoilMul * -lastPush.y, armsState.solidRecoilMul * -lastPush.z), ForceMode.VelocityChange);
-		} 
+		}
 		else if(OTHER.tag == Tags.FOOD)
 		{
 			handle.BroadcastMessage("OnCollisionStay", collision, SendMessageOptions.DontRequireReceiver);

@@ -37,8 +37,8 @@ public class ArmLogic : MonoBehaviour
 		Debug.DrawLine(handle.position, handle.position + Vector3.up * -1);
 		grabables.RemoveAll((g) => g == null);
 
-		bool GRAB_ON = ArmInputManager.IsOn(ArmInputManager.GRIP, arm);
-		bool GRAB_TOGGLED = ArmInputManager.OnToggled(ArmInputManager.GRIP, arm);
+		bool GRAB_HELD = ArmInputManager.IsHeld(ArmInputManager.GRIP, arm);
+		bool GRAB_CHANGED = ArmInputManager.HeldChanged(ArmInputManager.GRIP, arm);
 		
 		if(armsState.debug)
 		{
@@ -66,14 +66,14 @@ public class ArmLogic : MonoBehaviour
 			}
 		}
 		
-		bool GRAB_RELEASED = GRAB_TOGGLED && GRAB_ON == false;
+		bool GRAB_RELEASED = GRAB_CHANGED && GRAB_HELD == true && heldGrabable != null;
+		bool GRAB_GRABBED = GRAB_CHANGED && GRAB_HELD == true && heldGrabable == null;
 
-		if(GRAB_RELEASED && heldGrabable != null) 
+		if(GRAB_RELEASED)
 		{
 			ReleaseHeldGrabable();
 		}
-		
-		if(GRAB_ON)
+		else if(GRAB_GRABBED)
 		{
 			Collider[] overlaps = GrabableSphereCast();
 			List<GameObject> inReach = new List<GameObject>();
@@ -82,7 +82,6 @@ public class ArmLogic : MonoBehaviour
 				if(CanBeGrabbed(g, overlaps))
 				{
 					inReach.Add(g);
-					
 				}
 			}
 			
