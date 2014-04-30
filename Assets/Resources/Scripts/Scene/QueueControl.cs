@@ -36,6 +36,7 @@ public class QueueControl : MonoBehaviour
 			
 			if(Input.GetKeyDown(KeyCode.U))
 			{
+				firstInLine.BroadcastMessage("ShowSpeechBubble", false, SendMessageOptions.RequireReceiver);
 				firstInLine.BroadcastMessage("NpcGotFood", SendMessageOptions.RequireReceiver);
 				foreach(GameObject g in npcs)
 				{
@@ -80,5 +81,6 @@ public class QueueControl : MonoBehaviour
 		npcIsWaitingForFood = true;
 		firstInLine = npc;
 		npc.SendMessage("MoveChanged", false, SendMessageOptions.RequireReceiver);
+		npc.SendMessage("ShowSpeechBubble", true, SendMessageOptions.RequireReceiver);
 	}
 }

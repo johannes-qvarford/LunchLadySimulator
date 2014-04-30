@@ -23,20 +23,27 @@ public class ArmPhysics : MonoBehaviour
 		else
 		{
 			{
-				float Z_ROTATION = armsState.rotationSpeed * 		
-					ArmInputManager.GetMovement(arm, ArmInputManager.HORIZONTAL) * 	Convert.ToInt32(ArmInputManager.IsOn(ArmInputManager.Z_ROTATION, arm)); 
+				
+				float Z_ROTATION = armsState.rotationSpeed * 
+					ArmInputManager.GetMovement(arm, ArmInputManager.HORIZONTAL) *  Convert.ToInt32(ArmInputManager.IsHeld(ArmInputManager.Z_ROTATION, arm)); 
 				float X_MOVEMENT = armsState.movementSpeed * 
-					ArmInputManager.GetMovement(arm, ArmInputManager.HORIZONTAL) * 	Convert.ToInt32(ArmInputManager.IsOn(ArmInputManager.Z_ROTATION, arm) == false);
-				float Y_MOVEMENT = armsState.movementSpeed * 		
-					ArmInputManager.GetMovement(arm, ArmInputManager.VERTICAL) * 	Convert.ToInt32(ArmInputManager.IsOn(ArmInputManager.Y_MOVEMENT, arm));
+					ArmInputManager.GetMovement(arm, ArmInputManager.HORIZONTAL) * 	Convert.ToInt32(ArmInputManager.IsHeld(ArmInputManager.Z_ROTATION, arm) == false);
+				float Y_MOVEMENT = armsState.movementSpeed * 
+					ArmInputManager.GetMovement(arm, ArmInputManager.VERTICAL) * 	Convert.ToInt32(ArmInputManager.IsHeld(ArmInputManager.Y_MOVEMENT, arm));
 				float Z_MOVEMENT = armsState.movementSpeed * 
-					ArmInputManager.GetMovement(arm, ArmInputManager.VERTICAL) * 	Convert.ToInt32(ArmInputManager.IsOn(ArmInputManager.Y_MOVEMENT, arm) == false);
+					ArmInputManager.GetMovement(arm, ArmInputManager.VERTICAL) * 	Convert.ToInt32(ArmInputManager.IsHeld(ArmInputManager.Y_MOVEMENT, arm) == false);
+
+				int IUSE_Z_ROTATION = Convert.ToInt32(isAbsGreater(Z_ROTATION, Y_MOVEMENT) && isAbsGreater(Z_ROTATION, Z_MOVEMENT));
+				int IUSE_Y_MOVEMENT = Convert.ToInt32(isAbsGreater(Y_MOVEMENT, Z_ROTATION));
+				int IUSE_Z_MOVEMENT = Convert.ToInt32(isAbsGreater(Z_MOVEMENT, Z_ROTATION));
+				
+				//Debug.Log(String.Format("use zrot {0}, use y {1}, use zmov {2}", IUSE_Z_ROTATION, IUSE_Y_MOVEMENT, IUSE_Z_MOVEMENT));
 				
 				{
-					rigidbody.AddTorque(Vector3.forward * Z_ROTATION * armsState.rotationSpeed);
+					rigidbody.AddTorque(Vector3.forward * Z_ROTATION * IUSE_Z_ROTATION * armsState.rotationSpeed);
 				}
 				
-				Vector3 MOVEMENT = new Vector3(X_MOVEMENT, Y_MOVEMENT, Z_MOVEMENT);
+				Vector3 MOVEMENT = new Vector3(X_MOVEMENT, IUSE_Y_MOVEMENT * Y_MOVEMENT, IUSE_Z_MOVEMENT * Z_MOVEMENT);
 				
 				int MOVING_INSIDE_X = 1;//Convert.ToInt32(Mathf.Abs(OFFSET.x) <= LIMIT.x);
 				int MOVING_INSIDE_Y = 1;//Convert.ToInt32(Mathf.Abs(OFFSET.y) <= LIMIT.y);
@@ -111,7 +118,7 @@ public class ArmPhysics : MonoBehaviour
 		{
 			framesInsideSolid++;
 			rigidbody.AddForce(new Vector3(armsState.solidRecoilMul * -lastPush.x, armsState.solidRecoilMul * -lastPush.y, armsState.solidRecoilMul * -lastPush.z), ForceMode.VelocityChange);
-		} 
+		}
 		else if(OTHER.tag == Tags.FOOD)
 		{
 			handle.BroadcastMessage("OnCollisionStay", collision, SendMessageOptions.DontRequireReceiver);
@@ -130,6 +137,11 @@ public class ArmPhysics : MonoBehaviour
 		arm = a;
 		Debug.Log((arm == ArmInputManager.LEFT ? "RightArm" : "LeftArm")+ "/" + armsState.handleName);
 		otherHandle = transform.parent.Find((arm == ArmInputManager.LEFT ? "RightArm" : "LeftArm")+ "/" + armsState.handleName);
+	}
+	
+	private bool isAbsGreater(float a, float b)
+	{
+		return Mathf.Abs(a) > Mathf.Abs(b);
 	}
 }
 
