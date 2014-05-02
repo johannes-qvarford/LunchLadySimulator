@@ -85,6 +85,7 @@ public class ArmLogic : MonoBehaviour
 			List<GameObject> inReach = new List<GameObject>();
 			foreach(var g in grabables) 
 			{
+				Debug.Log("" + g + " can be grabbed");
 				if(CanBeGrabbed(g, overlaps))
 				{
 					inReach.Add(g);
@@ -105,6 +106,7 @@ public class ArmLogic : MonoBehaviour
 					case Tags.TOOL:
 					case Tags.FOOD:
 					case Tags.PLATE:
+						Debug.Log("about to grab " + closest.tag);
 						GrabObject(closest);
 						break;
 					case Tags.SPAWN_STACK:
@@ -134,7 +136,7 @@ public class ArmLogic : MonoBehaviour
 		bool inProximity = false;
 		foreach(Collider overlap in overlaps)
 		{
-			if(overlap.gameObject == g)
+			if(ClosestGrabableParent(overlap.transform).gameObject == g)
 			{
 				inProximity = true;
 			}
@@ -147,6 +149,13 @@ public class ArmLogic : MonoBehaviour
 			 (arm == ArmInputManager.RIGHT && g.transform.parent.parent.tag == "LeftArm"));
 		
 		return /*CLOSE_ANGLE &&*/ inProximity && heldGrabable == null && OTHER_HAND_HOLDS == false;
+	}
+	
+	private Transform ClosestGrabableParent(Transform t)
+	{
+		return 	t.gameObject.layer == LayerMask.NameToLayer(Layers.GRABABLE) ? t :
+				t.parent != null ? ClosestGrabableParent(t.parent) : null;
+			
 	}
 	
 	private void GrabObject(GameObject g)
@@ -181,7 +190,7 @@ public class ArmLogic : MonoBehaviour
 			//radius:
 			armsState.maxToolGrabDistance,
 		    //layerMask:
-		    Layers.CombineLayerNames(Layers.GRABABLE)
+		    Layers.CombineLayerNames(Layers.GRABABLE, Layers.INTERACT)
 		    );
 	}
 	

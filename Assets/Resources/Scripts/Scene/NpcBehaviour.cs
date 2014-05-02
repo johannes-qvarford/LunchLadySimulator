@@ -40,7 +40,8 @@ public class NpcBehaviour : MonoBehaviour
 		{
 			//transform.position += Vector3.right * moveSpeed;
 			//rigidbody.velocity += Vector3.right * moveSpeed;
-			rigidbody.AddForce(Vector3.right * moveSpeed, ForceMode.VelocityChange);
+			rigidbody.AddForce(transform.right * -moveSpeed, ForceMode.VelocityChange);
+			Debug.DrawLine(transform.position, transform.position + transform.right, Color.red);
 		} 
 		else if(move == false)
 		{
