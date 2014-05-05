@@ -5,7 +5,7 @@ public class SpawnFood : MonoBehaviour
 {
 	public bool on = false;
 	public int framesBetweenSpawns = 4;
-	public Vector3 speed = new Vector3(2, 2, 2);
+	public float speed = 0.2f;
 	
 	private GameObject spawnObject;
 	private int curFrame = 0;
@@ -23,6 +23,7 @@ public class SpawnFood : MonoBehaviour
 		if(curFrame % framesBetweenSpawns == 0 && on && spawnObject != null)
 		{
 			GameObject g = SpawnedJunk.Instantiate(spawnObject);
+			g.rigidbody.AddForce(Vector3.up * speed, ForceMode.Impulse);
 			g.transform.position = transform.position;
 			g.transform.parent = transform;
 		}
