@@ -40,11 +40,15 @@ public class SoundCheck : MonoBehaviour {
 	{ 
 		ChangeParameter();
 		if(valid[1])
-		{
-			pVolume.setValue(Mathf.Clamp (collision.relativeVelocity.sqrMagnitude,0,1));
-			Debug.Log (Mathf.Clamp (collision.relativeVelocity.sqrMagnitude,0,1));
+		{	
+		
+				pVolume.setValue(Mathf.Clamp (collision.relativeVelocity.sqrMagnitude,0,1));
+				//Debug.Log (Mathf.Clamp (collision.relativeVelocity.sqrMagnitude,0,1)+collision.gameObject.name);
 		}
-		eSound.start ();
+		if(collision.gameObject.tag != "Food")
+		{
+			eSound.start ();
+		}
 	}
 	void TriggerSound()
 	{
