@@ -42,7 +42,7 @@ public class SoundCheck : MonoBehaviour {
 		if(valid[1])
 		{
 			pVolume.setValue(Mathf.Clamp (collision.relativeVelocity.sqrMagnitude,0,1));
-			Debug.Log (Mathf.Clamp (collision.relativeVelocity.sqrMagnitude,0,1));
+//			Debug.Log (Mathf.Clamp (collision.relativeVelocity.sqrMagnitude,0,1));
 		}
 		eSound.start ();
 	}

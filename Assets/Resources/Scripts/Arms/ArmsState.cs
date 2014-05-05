@@ -20,6 +20,7 @@ public sealed class ArmsState : MonoBehaviour
 	public float minDistanceBetweenArms = 0.2f;
 	public GameObject debugSphere;
 	public bool checkIfAtonamyCorrect = false;
+	public float maxDistanceUntilSpring = 1.0f;
 
 	public string handleName = "Handle";
 	public string boundsName = "Bounds";
