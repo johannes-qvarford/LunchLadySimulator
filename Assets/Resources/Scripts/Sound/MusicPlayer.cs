@@ -5,7 +5,7 @@ using FMOD.Studio;
 public class MusicPlayer : MonoBehaviour {
 
 	FMOD.Studio.EventInstance eMusic;
-	FMOD.Studio.ParameterInstance pVolume,pStresslevel,pState;
+	FMOD.Studio.ParameterInstance pVolume,pStresslevel,pState,pTrack;
 	public FMODAsset path;
 	public float vol;
 	private FMOD.Studio.PLAYBACK_STATE status;
@@ -15,11 +15,15 @@ public class MusicPlayer : MonoBehaviour {
 		eMusic = FMOD_StudioSystem.instance.GetEvent(path);
 		if(eMusic.getParameter("track",out pStresslevel) != FMOD.RESULT.OK)
 		{
-			Debug.Log ("Error loading mood in Music");
+			Debug.Log ("Error loading mood in "+gameObject.name);
 		}
 		if(eMusic.getParameter("state",out pState) != FMOD.RESULT.OK)
 		{
-			Debug.Log ("Error loading state in Music");
+			Debug.Log ("Error loading state in "+gameObject.name);
+		}
+		if(eMusic.getParameter("track",out pTrack) != FMOD.RESULT.OK)
+		{
+			Debug.Log ("Error Loading track in "+gameObject.name);
 		}
 			
 	}
@@ -46,5 +50,9 @@ public class MusicPlayer : MonoBehaviour {
 	void SetState(int state)
 	{
 		pState.setValue(state);
+	}
+	void setTrack(float inputTrack)
+	{
+		pTrack.setValue(inputTrack);
 	}
 }

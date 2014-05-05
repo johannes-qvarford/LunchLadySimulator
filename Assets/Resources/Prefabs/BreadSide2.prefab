@@ -16,7 +16,7 @@ GameObject:
   - 65: {fileID: 6500000}
   - 114: {fileID: 11400000}
   m_Layer: 12
-  m_Name: Bread
+  m_Name: BreadSide2
   m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: -1.85524129e-07, z: 0, w: 1}
-  m_LocalPosition: {x: .092982538, y: .0812988281, z: .00469590398}
+  m_LocalPosition: {x: -.125273392, y: .0812988281, z: .00469454238}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -60,7 +60,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Mesh: {fileID: 4300008, guid: 3e023f879f9f77043a723b1e2c29a5d0, type: 3}
+  m_Mesh: {fileID: 4300016, guid: 3e023f879f9f77043a723b1e2c29a5d0, type: 3}
 --- !u!54 &5400000
 Rigidbody:
   m_ObjectHideFlags: 1
