@@ -42,13 +42,22 @@ public class TrayBehaviour : MonoBehaviour
 		ScoreHandeling scoreHandeling = GameObject.FindWithTag("ScoreHandeler").GetComponent<ScoreHandeling>();
 		ScoreCounter customerCounter = GameObject.FindWithTag("CustomerCounter").GetComponent<ScoreCounter>();
 		NPCRandomizer randomizer = findNPCRecursive (transform).GetComponent<NPCRandomizer>();
-		string[] mainOrder = randomizer.GetMainOrder();
-		string sideOrder = randomizer.GetSideOrder();
-		string drink = randomizer.GetDrink();
+		DishStruct[] mainOrder = randomizer.GetMainOrder();
+		DishStruct sideOrder = randomizer.GetSideOrder();
+		DishStruct drink = randomizer.GetDrink();
 
 		int score = 0;
 		int temp;
-		if(foodCount.TryGetValue(mainOrder[0], out temp))
+		int maxScore = 0;
+		for (int i = 0; i < mainOrder.Length; i++)
+		{
+			if(foodCount.TryGetValue(mainOrder[i].dish, out temp))
+			{
+				score += (int)((float)mainOrder[i].baseValue * Mathf.Clamp(0, 1, (float)temp / (float)mainOrder[i].number));
+				maxScore += mainOrder[i].number;
+			}
+		}
+		/*if(foodCount.TryGetValue(mainOrder[0], out temp))
 		{
 			Debug.Log("main0");
 			score++;
@@ -57,20 +66,20 @@ public class TrayBehaviour : MonoBehaviour
 		{
 			Debug.Log("main1");
 			score++;
-		}
-		if(foodCount.TryGetValue(sideOrder, out temp))
+		}*/
+		if(foodCount.TryGetValue(sideOrder.dish, out temp))
 		{
-			Debug.Log("side");
-			score++;
+			score += (int)((float)sideOrder.baseValue * Mathf.Clamp(0, 1, (float)temp / (float)sideOrder.number));
+			maxScore += sideOrder.number;
 		}
-		if(foodCount.TryGetValue(drink, out temp))
+		if(foodCount.TryGetValue(drink.dish, out temp))
 		{
-			Debug.Log("drink");
-			score++;
+			score += (int)((float)drink.baseValue * Mathf.Clamp(0, 1, (float)temp / (float)drink.number));
+			maxScore += drink.number;
 		}
 
-		customerCounter.spawnScore(1);
-		scoreHandeling.addScore(score, 1);
+		customerCounter.spawnScore(score);
+		scoreHandeling.addScore(score, maxScore / 2);
 	}
 
 	private Transform findNPCRecursive(Transform t)

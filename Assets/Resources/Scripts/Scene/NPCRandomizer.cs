@@ -19,9 +19,9 @@ public class NPCRandomizer : MonoBehaviour {
 
 
 
-	private string currentDrink;
-	private string currentSideOrder;
-	private string[] currentMainOrder;
+	private DishStruct currentDrink;
+	private DishStruct currentSideOrder;
+	private DishStruct[] currentMainOrder;
 
 	// Use this for initialization
 	void Start () {
@@ -201,40 +201,72 @@ public class NPCRandomizer : MonoBehaviour {
 				
 				while(reader.Name == "maindish")
 				{
-					
-					reader.Read();
-					spliter = reader.Value;
-					
-					
-					s = spliter.Split(' ');
-					categoryList[offset].AddMainOrder(s);
-					
-					reader.Read();
-					reader.Read();
-					reader.Read();
+					List<DishStruct> dishList = new List<DishStruct>();
+					reader.Read();	//<name>
+					while(reader.Name == "name")
+					{
+						DishStruct dish = new DishStruct();
+						reader.Read();	//Soup
+						dish.dish = reader.Value;
+						reader.Read();	//</name>
+						reader.Read();	//<number>
+						reader.Read();	//20
+						dish.number =  int.Parse(reader.Value);
+						reader.Read();	//</number>
+						reader.Read();	//<value>
+						dish.baseValue = int.Parse(reader.Value);
+						reader.Read();	//</value>
+						reader.Read();	//<name> OR </maindish>
+						dishList.Add (dish);
+					}
+					//Old code
+					//s = spliter.Split(' ');	
+					categoryList[offset].AddMainOrder(dishList.ToArray());
+					reader.Read();	//<maindish> OR <sideorder>
 				}
 				
 				
 				while(reader.Name == "sideorder")
 				{
-					
-					reader.Read();
-					spliter = reader.Value;
-					categoryList[offset].AddSideOrder(spliter);
-					reader.Read();
-					reader.Read();
-					reader.Read();
+					DishStruct dish = new DishStruct();
+					reader.Read();	//<name>
+					reader.Read();	//Bread
+					dish.dish = reader.Value;
+					reader.Read();	//</name>
+					reader.Read();	//<number>
+					reader.Read();	//1
+					dish.number = int.Parse(reader.Value);
+					reader.Read();	//</number>
+					reader.Read();	//<value>
+					reader.Read();	//50
+					dish.baseValue = int.Parse(reader.Value);
+					reader.Read();	//</value>
+
+					//spliter = reader.Value;
+					categoryList[offset].AddSideOrder(dish);
+					//reader.Read();
+					reader.Read();	//</sideorder>
+					reader.Read();	//<sideorder> OR <drink>
 				}
 				while(reader.Name == "drink")
 				{
-					
-					reader.Read();
-					spliter = reader.Value;
-					categoryList[offset].AddDrink(spliter);
-					reader.Read();
-					reader.Read();
-					reader.Read();
-					
+					DishStruct dish = new DishStruct();
+					reader.Read();	//<name>
+					reader.Read();	//Milk
+					dish.dish = reader.Value;
+					reader.Read();	//</name>
+					reader.Read();	//<number>
+					reader.Read();	//1
+					dish.number = int.Parse(reader.Value);
+					reader.Read();	//</number>
+					reader.Read();	//<value>
+					reader.Read();	//50
+					dish.baseValue = int.Parse(reader.Value);
+					reader.Read();	//</value>
+					reader.Read();	//</drink>
+					reader.Read();	//<drink> OR </type>
+
+					categoryList[offset].AddDrink(dish);
 					
 				}
 				
@@ -325,7 +357,7 @@ public class NPCRandomizer : MonoBehaviour {
 
 			
 			//DEBUG
-			
+			/*
 			Debug.Log("type: "+categoryList[type].getName());
 			Debug.Log("sex: "+categoryList[type].GetRandomSex());
 			Debug.Log("skinColor: "+categoryList[type].GetRandomSkinColor());
@@ -339,12 +371,13 @@ public class NPCRandomizer : MonoBehaviour {
 		//	Debug.Log("preferenceAmount: "+categoryList[type].GetPreferenceAmount());
 	//		Debug.Log("perfection: "+categoryList[type].GetPerfection());
 	//		Debug.Log("patience: "+categoryList[type].GetPatience());
+			*/
 			currentMainOrder = categoryList[type].GetRandomMainOrder();
-			Debug.Log ("mainorder: " + currentMainOrder[0] + " " + currentMainOrder[1]);
+			//Debug.Log ("mainorder: " + currentMainOrder[0] + " " + currentMainOrder[1]);
 			currentSideOrder = categoryList[type].GetRandomSideOrder();
-			Debug.Log("sideorder: " + currentSideOrder);
+			//Debug.Log("sideorder: " + currentSideOrder);
 			currentDrink = categoryList[type].GetRandomDrink();
-			Debug.Log("drinks: " + currentDrink);
+			//Debug.Log("drinks: " + currentDrink);
 			Debug.Log ("--------------------------------");
 			//-DEBUG
 			
@@ -358,14 +391,14 @@ public class NPCRandomizer : MonoBehaviour {
 	}
 
 
-	public string[] GetMainOrder(){
+	public DishStruct[] GetMainOrder(){
 		return currentMainOrder;
 	}
 	
-	public string GetSideOrder(){
+	public DishStruct GetSideOrder(){
 		return currentSideOrder;
 	}
-	public string GetDrink(){
+	public DishStruct GetDrink(){
 		return currentDrink;
 	}
 
@@ -391,9 +424,18 @@ class Category{
 	
 	//food Lists
 	
-	List<string[]> mainOrders = new List<string[]>();
+	List<DishStruct[]> mainOrders = new List<DishStruct[]>();
+	List<DishStruct> sideOrders = new List<DishStruct>();
+	List<DishStruct> drinks = new List<DishStruct>();
+	/*List<string[]> mainOrders = new List<string[]>();
+	List<int[]> mainNumbers = new List<int[]> ();
+	List<int[]> mainScore = new List<int[]> ();
 	List<string> sideOrders = new List<string>();
+	List<int> siteNumbers = new List<int> ();
+	List<int> siteScore = new List<int> ();
 	List<string> drinks = new List<string>();
+	List<int> drinkNumbers = new List<int> ();
+	List<int> drinkScore = new List<int> ();*/
 	
 	
 	string preferenceType;
@@ -479,18 +521,18 @@ class Category{
 		return patience;
 	}
 	
-	public string[] GetRandomMainOrder()
+	public DishStruct[] GetRandomMainOrder()
 	{
 		int value = mainOrders.Count;
 		return mainOrders[Random.Range(0,value)];
 	}
 	
-	public string GetRandomSideOrder()
+	public DishStruct GetRandomSideOrder()
 	{
 		int value = sideOrders.Count;
 		return sideOrders[Random.Range(0,value)];
 	}
-	public string GetRandomDrink()
+	public DishStruct GetRandomDrink()
 	{
 		int value = drinks.Count;
 		return drinks[Random.Range(0,value)];
@@ -529,7 +571,7 @@ class Category{
 	public void WriteRecipies()
 	{
 		
-		Debug.Log ("Start of: " + name);
+		/*Debug.Log ("Start of: " + name);
 		
 		for (int i = 0; i < mainOrders.Count; i++) 
 		{
@@ -541,7 +583,7 @@ class Category{
 		foreach (string p in drinks) {
 			Debug.Log ("drink: "+p);
 		}
-		Debug.Log ("End of: " + name);
+		Debug.Log ("End of: " + name);*/
 	}
 	
 	
@@ -585,17 +627,17 @@ class Category{
 		this.face.Add(face);
 	}
 	
-	public void AddMainOrder(string[] dish)
+	public void AddMainOrder(DishStruct[] dish)
 	{
 		mainOrders.Add(dish);
 	}
 	
-	public void AddSideOrder(string side)
+	public void AddSideOrder(DishStruct side)
 	{
 		sideOrders.Add(side);
 	}
 	
-	public void AddDrink(string drink){
+	public void AddDrink(DishStruct drink){
 		drinks.Add(drink);
 		
 	}
@@ -621,10 +663,5 @@ class Category{
 		
 	}
 }
-
-
-
-
-
 
 

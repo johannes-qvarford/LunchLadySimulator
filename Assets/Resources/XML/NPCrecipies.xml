@@ -3,20 +3,80 @@
 <!-- xml template for customer #1 --> 
 <main>
 <type name="Jock">
-<maindish>Soup Something</maindish>
-<maindish>Soup Something</maindish>
-<sideorder>Bread</sideorder>
-<sideorder>Bread</sideorder>
-<drink>Milk</drink>
-<drink>Milk</drink>
+<maindish>
+	<name>Soup</name>
+		<number>20</number>
+		<value>100</value>
+	<name>Something</name>
+		<number>1</number>
+		<value>42</value>
+</maindish>
+<maindish>
+	<name>Soup</name>
+		<number>20</number>
+		<value>100</value>
+	<name>Something</name>
+		<number>1</number>
+		<value>42</value>
+</maindish>
+<sideorder>
+	<name>Bread</name>
+		<number>1</number>
+		<value>50</value>
+</sideorder>
+<sideorder>
+	<name>Bread</name>
+		<number>1</number>
+		<value>50</value>
+</sideorder>
+<drink>
+	<name>Milk</name>
+		<number>1</number>
+		<value>50</value>
+</drink>
+<drink>
+	<name>Milk</name>
+		<number>1</number>
+		<value>50</value>
+</drink>
 </type>
 
 <type name="Geek">
-<maindish>Soup Something</maindish>
-<maindish>Soup Something</maindish>
-<sideorder>Bread</sideorder>
-<sideorder>Bread</sideorder>
-<drink>Milk</drink>
-<drink>Milk</drink>
+<maindish>
+	<name>Soup</name>
+		<number>20</number>
+		<value>100</value>
+	<name>Something</name>
+		<number>1</number>
+		<value>42</value>
+</maindish>
+<maindish>
+	<name>Soup</name>
+		<number>20</number>
+		<value>100</value>
+	<name>Something</name>
+		<number>1</number>
+		<value>42</value>
+</maindish>
+<sideorder>
+	<name>Bread</name>
+		<number>1</number>
+		<value>50</value>
+</sideorder>
+<sideorder>
+	<name>Bread</name>
+		<number>1</number>
+		<value>50</value>
+</sideorder>
+<drink>
+	<name>Milk</name>
+		<number>1</number>
+		<value>50</value>
+</drink>
+<drink>
+	<name>Milk</name>
+		<number>1</number>
+		<value>50</value>
+</drink>
 </type>
 </main>
