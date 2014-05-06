@@ -43,7 +43,7 @@ public class ArmPhysics : MonoBehaviour
 				//Debug.Log(String.Format("use zrot {0}, use y {1}, use zmov {2}", IUSE_Z_ROTATION, IUSE_Y_MOVEMENT, IUSE_Z_MOVEMENT));
 				//Debug.Log(IUSE_Z_ROTATION + " <- use, real -> " + Z_ROTATION);
 				{
-//					otherJoint.spring = IUSE_Z_ROTATION == 1 ? 0 : oldSpring;
+					otherJoint.spring = IUSE_Z_ROTATION == 1 ? 0 : oldSpring;
 					rigidbody.AddTorque(Vector3.forward * Z_ROTATION * IUSE_Z_ROTATION * armsState.rotationSpeed);
 				}
 				
@@ -144,8 +144,8 @@ public class ArmPhysics : MonoBehaviour
 		arm = a;
 		Debug.Log((arm == ArmInputManager.LEFT ? "RightArm" : "LeftArm")+ "/" + armsState.handleName);
 		otherHandle = transform.parent.Find((arm == ArmInputManager.LEFT ? "RightArm" : "LeftArm")+ "/" + armsState.handleName);
-//		otherJoint = otherHandle.parent.GetComponent<SpringJoint>();
-//		oldSpring = GetComponent<SpringJoint>().spring;
+		otherJoint = otherHandle.parent.GetComponent<SpringJoint>();
+		oldSpring = GetComponent<SpringJoint>().spring;
 	}
 	
 	private bool isAbsGreater(float a, float b)
