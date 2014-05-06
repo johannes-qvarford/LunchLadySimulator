@@ -142,7 +142,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   mood: 0
-  path: {fileID: 11400000, guid: 5987d869a51499f499235fe755bbc8c3, type: 2}
+  volume: 0
+  path: {fileID: 11400000, guid: 48bd0c827c77b4048b4a8be0c09a349b, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

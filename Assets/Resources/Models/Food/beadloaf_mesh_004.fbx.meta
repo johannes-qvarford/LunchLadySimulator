@@ -1,0 +1,106 @@
+fileFormatVersion: 2
+guid: 3e023f879f9f77043a723b1e2c29a5d0
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: beadloaf_slice1_mesh_004
+    100004: beadloaf_slice2_mesh_004
+    100006: beadloaf_slice3_mesh_004
+    100008: beadloaf_slice4_mesh_004
+    100010: beadloaf_slice5_mesh_004
+    100012: beadloaf_slice6_mesh_004
+    100014: beadloaf_slice7_mesh_004
+    100016: beadloaf_slice8_mesh_004
+    100018: beadloaf_slice9_mesh_004
+    400000: //RootNode
+    400002: beadloaf_slice1_mesh_004
+    400004: beadloaf_slice2_mesh_004
+    400006: beadloaf_slice3_mesh_004
+    400008: beadloaf_slice4_mesh_004
+    400010: beadloaf_slice5_mesh_004
+    400012: beadloaf_slice6_mesh_004
+    400014: beadloaf_slice7_mesh_004
+    400016: beadloaf_slice8_mesh_004
+    400018: beadloaf_slice9_mesh_004
+    2300000: beadloaf_slice1_mesh_004
+    2300002: beadloaf_slice2_mesh_004
+    2300004: beadloaf_slice3_mesh_004
+    2300006: beadloaf_slice4_mesh_004
+    2300008: beadloaf_slice5_mesh_004
+    2300010: beadloaf_slice6_mesh_004
+    2300012: beadloaf_slice7_mesh_004
+    2300014: beadloaf_slice8_mesh_004
+    2300016: beadloaf_slice9_mesh_004
+    3300000: beadloaf_slice1_mesh_004
+    3300002: beadloaf_slice2_mesh_004
+    3300004: beadloaf_slice3_mesh_004
+    3300006: beadloaf_slice4_mesh_004
+    3300008: beadloaf_slice5_mesh_004
+    3300010: beadloaf_slice6_mesh_004
+    3300012: beadloaf_slice7_mesh_004
+    3300014: beadloaf_slice8_mesh_004
+    3300016: beadloaf_slice9_mesh_004
+    4300000: beadloaf_slice1_mesh_004
+    4300002: beadloaf_slice2_mesh_004
+    4300004: beadloaf_slice3_mesh_004
+    4300006: beadloaf_slice4_mesh_004
+    4300008: beadloaf_slice5_mesh_004
+    4300010: beadloaf_slice6_mesh_004
+    4300012: beadloaf_slice7_mesh_004
+    4300014: beadloaf_slice8_mesh_004
+    4300016: beadloaf_slice9_mesh_004
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

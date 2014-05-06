@@ -8,8 +8,10 @@ public class ArmPhysics : MonoBehaviour
 	
 	private ArmsState armsState;
 	private Transform handle;
-	public Vector3 lastPush = Vector3.zero;
+	private Vector3 lastPush = Vector3.zero;
 	private Transform otherHandle;
+	private SpringJoint otherJoint;
+	private float oldSpring = 0;
 	
 	void FixedUpdate()
 	{
@@ -37,9 +39,11 @@ public class ArmPhysics : MonoBehaviour
 				int IUSE_Y_MOVEMENT = Convert.ToInt32(isAbsGreater(Y_MOVEMENT, Z_ROTATION));
 				int IUSE_Z_MOVEMENT = Convert.ToInt32(isAbsGreater(Z_MOVEMENT, Z_ROTATION));
 				
-				//Debug.Log(String.Format("use zrot {0}, use y {1}, use zmov {2}", IUSE_Z_ROTATION, IUSE_Y_MOVEMENT, IUSE_Z_MOVEMENT));
 				
+				//Debug.Log(String.Format("use zrot {0}, use y {1}, use zmov {2}", IUSE_Z_ROTATION, IUSE_Y_MOVEMENT, IUSE_Z_MOVEMENT));
+				//Debug.Log(IUSE_Z_ROTATION + " <- use, real -> " + Z_ROTATION);
 				{
+					otherJoint.spring = IUSE_Z_ROTATION == 1 ? 0 : oldSpring;
 					rigidbody.AddTorque(Vector3.forward * Z_ROTATION * IUSE_Z_ROTATION * armsState.rotationSpeed);
 				}
 				
@@ -53,8 +57,9 @@ public class ArmPhysics : MonoBehaviour
 				bool MOVING_TOWARDS_OTHER_ARM = HAND_MUL * MOVEMENT.x < 0;
 				bool TO_CLOSE_TO_OTHER_ARM = Mathf.Abs((handle.position - otherHandle.position).x) < armsState.minDistanceBetweenArms;
 				
-				if(rigidbody.velocity.magnitude < armsState.maxVelocity && 
-					((MOVING_TOWARDS_OTHER_ARM && TO_CLOSE_TO_OTHER_ARM) == false) || armsState.checkIfAtonamyCorrect == false) 
+				
+				/*if(rigidbody.velocity.magnitude < armsState.maxVelocity && 
+					((MOVING_TOWARDS_OTHER_ARM && TO_CLOSE_TO_OTHER_ARM) == false) || armsState.checkIfAtonamyCorrect == false)*/
 				{
 					lastPush = new Vector3(MOVING_INSIDE_X * MOVEMENT.x, MOVING_INSIDE_Y * MOVEMENT.y, MOVING_INSIDE_Z * MOVEMENT.z);
 					rigidbody.AddForce(lastPush, ForceMode.VelocityChange);
@@ -79,6 +84,7 @@ public class ArmPhysics : MonoBehaviour
 			{
 				rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 			}
+			
 		}
 	}
 	
@@ -129,6 +135,7 @@ public class ArmPhysics : MonoBehaviour
 	{
 		armsState = transform.parent.GetComponent(typeof(ArmsState)) as ArmsState;
 		handle = transform.Find(armsState.handleName);
+		
 	}
 	
 	private void ArmChanged(ArmInputManager.Arm a)
@@ -137,6 +144,8 @@ public class ArmPhysics : MonoBehaviour
 		arm = a;
 		Debug.Log((arm == ArmInputManager.LEFT ? "RightArm" : "LeftArm")+ "/" + armsState.handleName);
 		otherHandle = transform.parent.Find((arm == ArmInputManager.LEFT ? "RightArm" : "LeftArm")+ "/" + armsState.handleName);
+		otherJoint = otherHandle.parent.GetComponent<SpringJoint>();
+		oldSpring = GetComponent<SpringJoint>().spring;
 	}
 	
 	private bool isAbsGreater(float a, float b)
