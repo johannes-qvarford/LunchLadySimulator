@@ -203,6 +203,7 @@ public class ArmLogic : MonoBehaviour
 		heldGrabable.gameObject.layer = LayerMask.NameToLayer(Layers.GRABABLE);
 		heldGrabable.parent = null;
 		heldGrabable.gameObject.AddComponent(typeof(Rigidbody));
+		heldGrabable.rigidbody.velocity = rigidbody.velocity * armsState.throwVelocityMul;
 		heldGrabable = null;
 	}
 	
