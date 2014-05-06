@@ -26,7 +26,7 @@ public class ArmLogic : MonoBehaviour
 		{
 			debugSphere = GameObject.Instantiate(armsState.debugSphere) as GameObject;
 			
-			debugSphere.transform.localScale = new Vector3(armsState.maxToolGrabDistance, armsState.maxToolGrabDistance, armsState.maxToolGrabDistance);
+			debugSphere.transform.localScale = new Vector3(armsState.maxGrabDistance, armsState.maxGrabDistance, armsState.maxGrabDistance);
 			debugSphere.transform.parent = handle;
 		}
 		SendMessage("ArmChanged", arm, SendMessageOptions.RequireReceiver);
@@ -48,7 +48,7 @@ public class ArmLogic : MonoBehaviour
 		
 		if(armsState.debug)
 		{
-			debugSphere.transform.localScale = new Vector3(armsState.maxToolGrabDistance, armsState.maxToolGrabDistance, armsState.maxToolGrabDistance);
+			debugSphere.transform.localScale = new Vector3(armsState.maxGrabDistance, armsState.maxGrabDistance, armsState.maxGrabDistance);
 			debugSphere.transform.localPosition = Vector3.zero;
 			Collider[] overlaps = GrabableSphereCast();
 			foreach(Collider overlap in overlaps)
@@ -141,14 +141,11 @@ public class ArmLogic : MonoBehaviour
 				inProximity = true;
 			}
 		}
-		
-		
-		bool CLOSE_ANGLE = (Vector3.Angle(g.transform.right, handle.right)) < armsState.lowestArmHandleDegrees;
 		bool OTHER_HAND_HOLDS = g.transform.parent != null && g.transform.parent.parent != null &&
 			((arm == ArmInputManager.LEFT && g.transform.parent.parent.tag == "RightArm") || 
 			 (arm == ArmInputManager.RIGHT && g.transform.parent.parent.tag == "LeftArm"));
 		
-		return /*CLOSE_ANGLE &&*/ inProximity && heldGrabable == null && OTHER_HAND_HOLDS == false;
+		return inProximity && heldGrabable == null && OTHER_HAND_HOLDS == false;
 	}
 	
 	private Transform ClosestGrabableParent(Transform t)
@@ -188,7 +185,7 @@ public class ArmLogic : MonoBehaviour
 			//position:
 			handle.position, 
 			//radius:
-			armsState.maxToolGrabDistance,
+			armsState.maxGrabDistance,
 		    //layerMask:
 		    Layers.CombineLayerNames(Layers.GRABABLE, Layers.INTERACT)
 		    );
