@@ -1134,6 +1134,14 @@ Prefab:
       propertyPath: m_CullingMask.m_Bits
       value: 4294868989
       objectReference: {fileID: 0}
+    - target: {fileID: 11400008, guid: f6158c7ef5ae6f54a9dc8472a5bcc75b, type: 2}
+      propertyPath: playerArmLeft
+      value: 
+      objectReference: {fileID: 151548086}
+    - target: {fileID: 11400008, guid: f6158c7ef5ae6f54a9dc8472a5bcc75b, type: 2}
+      propertyPath: playerArmRight
+      value: 
+      objectReference: {fileID: 812206852}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f6158c7ef5ae6f54a9dc8472a5bcc75b, type: 2}
   m_RootGameObject: {fileID: 1434639740}
@@ -16847,8 +16855,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cae623667ba91d45876097bad688cde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerArmLeft: {fileID: 0}
-  playerArmRight: {fileID: 0}
+  playerArmLeft: {fileID: 151548086}
+  playerArmRight: {fileID: 812206852}
   adjustX: 0
   adjustY: .0500000007
   adjustZ: .5
