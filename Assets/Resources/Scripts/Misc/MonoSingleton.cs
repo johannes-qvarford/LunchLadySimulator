@@ -15,7 +15,7 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T:Component, new()
 		}
 		if(ShouldBeDestroyedOnLoad())
 		{
-			Debug.Log("hello should destroy " + typeof(T).Name);
+		//	Debug.Log("hello should destroy " + typeof(T).Name);
 			DontDestroyOnLoad(gameObject);
 		}
 		instance = gameObject.GetComponent<T>();

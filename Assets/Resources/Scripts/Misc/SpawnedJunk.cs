@@ -5,7 +5,7 @@ public class SpawnedJunk : MonoSingleton<SpawnedJunk>
 {
 	public override bool ShouldBeDestroyedOnLoad()
 	{
-		Debug.Log("hello dont destroy");
+		//Debug.Log("hello dont destroy");
 		return false;
 	}
 	

@@ -195,7 +195,7 @@ public class NPCRandomizer : MonoBehaviour {
 					}
 				}
 				
-				
+
 				reader.ReadToFollowing("maindish");
 				
 				
@@ -208,23 +208,23 @@ public class NPCRandomizer : MonoBehaviour {
 						DishStruct dish = new DishStruct();
 						reader.Read();	//Soup
 						dish.dish = reader.Value;
-						reader.Read();	//</name>
-						reader.Read();	//<number>
+						reader.ReadToFollowing("number");
 						reader.Read();	//20
 						dish.number =  int.Parse(reader.Value);
-						reader.Read();	//</number>
-						reader.Read();	//<value>
+						reader.ReadToFollowing("value");
+						reader.Read();	//100
 						dish.baseValue = int.Parse(reader.Value);
 						reader.Read();	//</value>
+						reader.Read();	//NewLine
 						reader.Read();	//<name> OR </maindish>
 						dishList.Add (dish);
 					}
+					reader.Read();	//New line
+					reader.Read();	//<maindish> OR <SideOrder>
 					//Old code
 					//s = spliter.Split(' ');	
 					categoryList[offset].AddMainOrder(dishList.ToArray());
-					reader.Read();	//<maindish> OR <sideorder>
 				}
-				
 				
 				while(reader.Name == "sideorder")
 				{
@@ -232,21 +232,21 @@ public class NPCRandomizer : MonoBehaviour {
 					reader.Read();	//<name>
 					reader.Read();	//Bread
 					dish.dish = reader.Value;
-					reader.Read();	//</name>
-					reader.Read();	//<number>
+					reader.ReadToFollowing("number");
 					reader.Read();	//1
 					dish.number = int.Parse(reader.Value);
-					reader.Read();	//</number>
-					reader.Read();	//<value>
+					reader.ReadToFollowing("value");
 					reader.Read();	//50
 					dish.baseValue = int.Parse(reader.Value);
-					reader.Read();	//</value>
 
 					//spliter = reader.Value;
 					categoryList[offset].AddSideOrder(dish);
-					//reader.Read();
+					reader.Read();	//</value>
+					reader.Read();	//New line
 					reader.Read();	//</sideorder>
+					reader.Read();	//New line
 					reader.Read();	//<sideorder> OR <drink>
+
 				}
 				while(reader.Name == "drink")
 				{
@@ -254,16 +254,16 @@ public class NPCRandomizer : MonoBehaviour {
 					reader.Read();	//<name>
 					reader.Read();	//Milk
 					dish.dish = reader.Value;
-					reader.Read();	//</name>
-					reader.Read();	//<number>
+					reader.ReadToFollowing("number");
 					reader.Read();	//1
 					dish.number = int.Parse(reader.Value);
-					reader.Read();	//</number>
-					reader.Read();	//<value>
+					reader.ReadToFollowing("value");
 					reader.Read();	//50
 					dish.baseValue = int.Parse(reader.Value);
 					reader.Read();	//</value>
+					reader.Read();	//New line
 					reader.Read();	//</drink>
+					reader.Read();	//New line
 					reader.Read();	//<drink> OR </type>
 
 					categoryList[offset].AddDrink(dish);
@@ -378,7 +378,7 @@ public class NPCRandomizer : MonoBehaviour {
 			//Debug.Log("sideorder: " + currentSideOrder);
 			currentDrink = categoryList[type].GetRandomDrink();
 			//Debug.Log("drinks: " + currentDrink);
-			Debug.Log ("--------------------------------");
+			//Debug.Log ("--------------------------------");
 			//-DEBUG
 			
 			

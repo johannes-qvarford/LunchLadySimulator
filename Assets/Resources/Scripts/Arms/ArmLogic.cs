@@ -85,7 +85,7 @@ public class ArmLogic : MonoBehaviour
 			List<GameObject> inReach = new List<GameObject>();
 			foreach(var g in grabables) 
 			{
-				Debug.Log("" + g + " can be grabbed");
+				//Debug.Log("" + g + " can be grabbed");
 				if(CanBeGrabbed(g, overlaps))
 				{
 					inReach.Add(g);
@@ -170,7 +170,7 @@ public class ArmLogic : MonoBehaviour
 		SpawnStackBehaviour FSB = stack.GetComponent<SpawnStackBehaviour>();
 		GameObject PREFAB = FSB.spawnPrefab;
 		Vector3 OFFSET = FSB.spawnOffsetFromHand;
-		Debug.Log(OFFSET);
+		//Debug.Log(OFFSET);
 		heldGrabable = ((GameObject)GameObject.Instantiate(PREFAB)).transform;
 		heldGrabable.transform.position = handle.position;
 		GameObject.Destroy(heldGrabable.rigidbody);

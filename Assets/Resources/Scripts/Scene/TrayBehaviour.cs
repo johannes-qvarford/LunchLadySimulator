@@ -5,7 +5,8 @@ using System.Linq;
 public class TrayBehaviour : MonoBehaviour
 {
 	public bool doIt = false;
-	public float maxDistance = 0.4f; 
+	public float maxDistance = 0.4f;
+	public float dificulty = 0.5f;
 
 	void Update()
 	{
@@ -53,33 +54,27 @@ public class TrayBehaviour : MonoBehaviour
 		{
 			if(foodCount.TryGetValue(mainOrder[i].dish, out temp))
 			{
+
 				score += (int)((float)mainOrder[i].baseValue * Mathf.Clamp(0, 1, (float)temp / (float)mainOrder[i].number));
-				maxScore += mainOrder[i].number;
+
 			}
+			maxScore += mainOrder[i].baseValue;
 		}
-		/*if(foodCount.TryGetValue(mainOrder[0], out temp))
-		{
-			Debug.Log("main0");
-			score++;
-		}
-		if(foodCount.TryGetValue(mainOrder[1], out temp))
-		{
-			Debug.Log("main1");
-			score++;
-		}*/
 		if(foodCount.TryGetValue(sideOrder.dish, out temp))
 		{
 			score += (int)((float)sideOrder.baseValue * Mathf.Clamp(0, 1, (float)temp / (float)sideOrder.number));
-			maxScore += sideOrder.number;
+
 		}
+		Debug.Log(sideOrder.baseValue);
+		maxScore += sideOrder.baseValue;
 		if(foodCount.TryGetValue(drink.dish, out temp))
 		{
 			score += (int)((float)drink.baseValue * Mathf.Clamp(0, 1, (float)temp / (float)drink.number));
 			maxScore += drink.number;
 		}
-
-		customerCounter.spawnScore(score);
-		scoreHandeling.addScore(score, maxScore / 2);
+		maxScore += drink.baseValue;
+		customerCounter.spawnScore(1);
+		scoreHandeling.addScore(score+1, (int)Mathf.Floor(maxScore * dificulty));
 	}
 
 	private Transform findNPCRecursive(Transform t)

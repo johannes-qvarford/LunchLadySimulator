@@ -7,7 +7,7 @@ public class SpawnZone : MonoBehaviour
 	
 	void OnTriggerEnter(Collider col)
 	{
-		Debug.Log("col " + col);
+		//Debug.Log("col " + col);
 		GameObject OTHER = col.gameObject;
 		if(OTHER.tag == Tags.TOOL && OTHER.GetComponent(typeof(ToolHitbox)) != null)
 		{

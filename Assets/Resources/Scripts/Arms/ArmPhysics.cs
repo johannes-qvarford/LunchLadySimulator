@@ -126,7 +126,7 @@ public class ArmPhysics : MonoBehaviour
 	{
 		armsState = transform.parent.GetComponent(typeof(ArmsState)) as ArmsState;
 		arm = a;
-		Debug.Log((arm == ArmInputManager.LEFT ? "RightArm" : "LeftArm")+ "/" + armsState.handleName);
+		//Debug.Log((arm == ArmInputManager.LEFT ? "RightArm" : "LeftArm")+ "/" + armsState.handleName);
 		otherHandle = transform.parent.Find((arm == ArmInputManager.LEFT ? "RightArm" : "LeftArm")+ "/" + armsState.handleName);
 		otherJoint = otherHandle.parent.GetComponent<SpringJoint>();
 		oldSpring = GetComponent<SpringJoint>().spring;
