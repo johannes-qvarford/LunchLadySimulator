@@ -26,7 +26,7 @@ public class ArmPhysics : MonoBehaviour
 		{
 			{
 				
-				float Z_ROTATION = armsState.rotationAcceleration * 
+				float Z_ROTATION = armsState.rotationAcceleration * -1 * //reverse z direction 
 					ArmInputManager.GetMovement(arm, ArmInputManager.HORIZONTAL) *  Convert.ToInt32(ArmInputManager.IsHeld(ArmInputManager.Z_ROTATION, arm)); 
 				float X_MOVEMENT = armsState.movementAcceleration * 
 					ArmInputManager.GetMovement(arm, ArmInputManager.HORIZONTAL) * 	Convert.ToInt32(ArmInputManager.IsHeld(ArmInputManager.Z_ROTATION, arm) == false);
