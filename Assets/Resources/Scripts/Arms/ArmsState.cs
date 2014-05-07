@@ -12,6 +12,7 @@ public sealed class ArmsState : MonoBehaviour
 	public float recoilMulOnSolidCollision = 1;
 	public float maxGrabDistance = 0.2f;
 	public float framesUntilGiveUpSolidSolve = 60;
+	public float throwVelocityMul = 5.0f;
 	
 	public float minZRotWithoutFreeze = 0.01f;
 	public float minMovementWithoutFreeze = 0.0025f;

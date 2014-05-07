@@ -26,7 +26,7 @@ public class ArmPhysics : MonoBehaviour
 		{
 			{
 				
-				float Z_ROTATION = armsState.rotationAcceleration * 
+				float Z_ROTATION = armsState.rotationAcceleration * -1 * //reverse z direction 
 					ArmInputManager.GetMovement(arm, ArmInputManager.HORIZONTAL) *  Convert.ToInt32(ArmInputManager.IsHeld(ArmInputManager.Z_ROTATION, arm)); 
 				float X_MOVEMENT = armsState.movementAcceleration * 
 					ArmInputManager.GetMovement(arm, ArmInputManager.HORIZONTAL) * 	Convert.ToInt32(ArmInputManager.IsHeld(ArmInputManager.Z_ROTATION, arm) == false);
@@ -50,16 +50,30 @@ public class ArmPhysics : MonoBehaviour
 				}
 				
 				{
+					/*
 					bool NO_X = Mathf.Abs(X_MOVEMENT) < armsState.minMovementWithoutFreeze;
 					bool NO_Y = Mathf.Abs(Y_MOVEMENT) < armsState.minMovementWithoutFreeze;
 					bool NO_Z = Mathf.Abs(Z_MOVEMENT) < armsState.minMovementWithoutFreeze;
 					bool NO_R = Mathf.Abs(Z_ROTATION) < armsState.minZRotWithoutFreeze;
+					*/
+					
+					float HX = Mathf.Max(Mathf.Abs(rigidbody.velocity.x), Mathf.Abs(X_MOVEMENT));
+					float HY = Mathf.Max(Mathf.Abs(rigidbody.velocity.y), Mathf.Abs(Y_MOVEMENT));
+					float HZ = Mathf.Max(Mathf.Abs(rigidbody.velocity.z), Mathf.Abs(Z_MOVEMENT));
+					float HRZ = Mathf.Max(Mathf.Abs(rigidbody.angularVelocity.z), Mathf.Abs(Z_ROTATION));
+					
+					
+					bool NO_X = HX < armsState.minMovementWithoutFreeze;
+					bool NO_Y = HY < armsState.minMovementWithoutFreeze;
+					bool NO_Z = HZ < armsState.minMovementWithoutFreeze;
+					bool NO_R = HRZ < armsState.minZRotWithoutFreeze;
 					
 					rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY 
 						| (NO_X ? RigidbodyConstraints.FreezePositionX : 0)
 							| (NO_Y ? RigidbodyConstraints.FreezePositionY : 0)
 							| (NO_Z ? RigidbodyConstraints.FreezePositionZ : 0)
 							| (NO_R ? RigidbodyConstraints.FreezeRotationZ : 0);
+					
 				}
 			}
 			
