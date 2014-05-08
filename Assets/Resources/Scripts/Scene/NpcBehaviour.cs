@@ -106,6 +106,10 @@ public class NpcBehaviour : MonoBehaviour
 	void Start()
 	{
 		speechBubble = transform.FindChild("SpeechBubble").GetComponent<SpeechBubble>();
+		if(speechBubble == null)
+		{
+			Debug.LogError("no speechbubble found");
+		}
 	}
 	
 	private void NpcGotFood()
@@ -141,6 +145,10 @@ public class NpcBehaviour : MonoBehaviour
 	
 	private void ShowSpeechBubble(bool on)
 	{
+		if(speechBubble == null)
+		{
+			Debug.LogError("no speechbubble found");
+		}
 		speechBubble.gameObject.SetActive(on);
 	}
 }
