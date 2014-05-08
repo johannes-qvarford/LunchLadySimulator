@@ -172,7 +172,11 @@ public class ArmLogic : MonoBehaviour
 		Vector3 OFFSET = FSB.spawnOffsetFromHand;
 		//Debug.Log(OFFSET);
 		heldGrabable = ((GameObject)GameObject.Instantiate(PREFAB)).transform;
+		var shadow = ((GameObject)GameObject.Instantiate(FSB.spawnShadow));
 		heldGrabable.transform.position = handle.position;
+		shadow.transform.position = heldGrabable.position;
+		ShadowPlaneFollowing followScript = shadow.GetComponent<ShadowPlaneFollowing> ();
+		followScript.m_parent = heldGrabable;
 		GameObject.Destroy(heldGrabable.rigidbody);
 		heldGrabable.transform.parent = handle;
 		heldGrabable.transform.position += OFFSET;

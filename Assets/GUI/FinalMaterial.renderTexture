@@ -6,8 +6,8 @@ RenderTexture:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: FinalMaterial
-  m_Width: 2048
-  m_Height: 2048
+  m_Width: 32
+  m_Height: 32
   m_AntiAliasing: 1
   m_DepthFormat: 2
   m_ColorFormat: 0
