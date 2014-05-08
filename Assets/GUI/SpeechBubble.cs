@@ -25,7 +25,7 @@ public class SpeechBubble : MonoBehaviour {
 	void Update () {
 		if (isFirst == false)
 			return;
-		Debug.Log("showing bubble");
+		//Debug.Log("showing bubble");
 		Vector3 newScale = Vector3.Lerp (gameObject.transform.localScale, scale, Time.deltaTime * speed);
 		gameObject.transform.localScale = newScale;
 	}
