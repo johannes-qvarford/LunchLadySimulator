@@ -47,31 +47,22 @@ public class NPCRandomizer : MonoBehaviour {
 			
 			if(value != "")
 			{	
-				
 				categories[counter] = value;
 				categoryList.Add(new Category(value));
 				
 				
-				reader.ReadToFollowing("sex"); //add sex
-				reader.Read ();
-				spliter = reader.Value;
-				string[] s = spliter.Split(' ');
-				for(int i = 0;i < s.Length;i++)
-				{
-					categoryList[counter].AddSex(s[i]);
-				}
 				
 				reader.ReadToFollowing("skincolors");
 				reader.Read ();
 				spliter = reader.Value;
 				
-				s = spliter.Split(' ');
+				string[] s = spliter.Split(' ');
 				for(int i = 0;i < s.Length;i++)
 				{
 					categoryList[counter].AddSkinColor(s[i]);
 				}
-
-
+				
+				
 				reader.ReadToFollowing("head");
 				reader.Read ();
 				spliter = reader.Value;
@@ -81,28 +72,30 @@ public class NPCRandomizer : MonoBehaviour {
 				{
 					categoryList[counter].AddHead(s[i]);
 				}
-
+				
 				
 				reader.ReadToFollowing("shirts");
-				reader.Read ();
-				spliter = reader.Value;
-				s = spliter.Split(' ');
-				
-				for(int i = 0;i < s.Length;i++)
+				do
 				{
-					categoryList[counter].AddShirt(s[i]);
-				}
+					reader.MoveToFirstAttribute ();
+					categoryList[counter].AddShirt(reader.Value);
+					reader.Read();
+					
+					spliter = reader.Value;
+					s = spliter.Split(' ');
+					foreach(string p in s){
+						categoryList[counter].AddShirtColor(p);
+					}
+					reader.Read();
+					reader.Read();
+					reader.Read();
+					
+					
+				}while(reader.Name == "shirts");
 				
-				reader.ReadToFollowing("pants");
-				reader.Read ();
-				spliter = reader.Value;
-				s = spliter.Split(' ');
-				for(int i = 0;i < s.Length;i++)
-				{
-					categoryList[counter].AddPants(s[i]);
-				}
 				
-				reader.ReadToFollowing("accessories");
+				
+				
 				reader.Read ();
 				spliter = reader.Value;
 				s = spliter.Split(' ');
@@ -111,35 +104,33 @@ public class NPCRandomizer : MonoBehaviour {
 					categoryList[counter].AddAccessorie(s[i]);
 				}
 				
+				//HAIR START
 				reader.ReadToFollowing("hair");
-				reader.Read ();
-				spliter = reader.Value;
-				s = spliter.Split(' ');
-				for(int i = 0;i < s.Length;i++)
+				
+				do
 				{
-					categoryList[counter].AddHair(s[i]);
-				}
+					reader.MoveToFirstAttribute ();
+					categoryList[counter].AddHair (reader.Value);
+					
+					reader.Read();
+					
+					spliter = reader.Value;
+					
+					s = spliter.Split(' ');
+					foreach(string p in s){
+						categoryList[counter].AddHairColor(p);
+					}
+					reader.Read();
+					reader.Read();
+					reader.Read();
+					
+					
+				}while(reader.Name == "hair");
 				
-				reader.ReadToFollowing("haircolors");
-				reader.Read ();
-				spliter = reader.Value;
-				s = spliter.Split(' ');
-				for(int i = 0;i < s.Length;i++)
-				{
-					categoryList[counter].AddHairColor(s[i]);
-				}
+				//--HAIR END
 				
 				
-				reader.ReadToFollowing("face");
-				reader.Read ();
-				spliter = reader.Value;
-				s = spliter.Split(' ');
-				for(int i = 0;i < s.Length;i++)
-				{
-					categoryList[counter].AddFace(s[i]);
-				}
-				
-				reader.ReadToFollowing("preferenceType");
+				//reader.ReadToFollowing("preferenceType");
 				reader.Read ();
 				spliter = reader.Value;
 				categoryList[counter].setPreferenceType(spliter);
@@ -188,7 +179,7 @@ public class NPCRandomizer : MonoBehaviour {
 				string[] s;
 				for(int i = 0;i < categoryList.Count;i++)
 				{
-					if(categoryList[i].getName() == value)
+					if(categoryList[i].GetName() == value)
 					{
 						offset = i;
 						i = categoryList.Count;
@@ -298,63 +289,12 @@ public class NPCRandomizer : MonoBehaviour {
 			//debug grejer
 			newType = false;
 			int type = Random.Range(0,categoryList.Count);
+			ChangeClothes(type);
+			ChangeHair(type);
+			ChangeSkinColor(type);
+			ChangeHead(type);
 			
 			
-			//face operations-
-			//head
-			GameObject obj = transform.Find("Customer_Kid/Hips/Spine/Spine1/Spine2/Neck/Head/Headmesh/CHead").gameObject;
-			GameObject obj1 = (GameObject)Resources.Load("Prefabs/NPCParts/"+categoryList[type].GetRandomHead());
-			obj.GetComponent<MeshFilter>().sharedMesh = obj1.GetComponent<MeshFilter>().sharedMesh;
-
-
-			Material newMaterialPrefab = Resources.Load("Materials/"+categoryList[type].GetRandomSkinColor(), typeof(Material)) as Material;
-			Material randomSkinColor = new Material(newMaterialPrefab);
-			obj.renderer.material  = randomSkinColor;
-			//-head
-
-
-			//Eyes
-			newMaterialPrefab = Resources.Load("Materials/Eye_color", typeof(Material)) as Material;
-			Material EyeColor = new Material(newMaterialPrefab);
-
-			obj = transform.Find("Customer_Kid/Hips/Spine/Spine1/Spine2/Neck/Head/Headmesh/eye_left_mesh_003").gameObject;
-			obj.renderer.material  = EyeColor;
-			obj = transform.Find("Customer_Kid/Hips/Spine/Spine1/Spine2/Neck/Head/Headmesh/eye_right_mesh_003").gameObject;
-			obj.renderer.material  = EyeColor;
-			//-Eyes
-
-		//	transform.renderer.material = randomSkinColor;
-
-			//-face operations
-
-			/*
-			//legs operation-
-			obj = transform.Find("legs_mesh_001").gameObject;
-			newMaterialPrefab = Resources.Load("Material/"+categoryList[type].GetRandomPants(), typeof(Material)) as Material;
-			Material newMaterial2 = new Material(newMaterialPrefab);
-			obj.renderer.material  = newMaterial2;
-			//-legs operation
-
-
-			*/
-			obj = transform.Find("Body").gameObject;
-
-
-			obj.renderer.material  = randomSkinColor;
-			//-body operations
-			
-			//	obj.renderer.material;
-
-			obj = transform.Find("Customer_Kid/Hips/Spine/Spine1/Spine2/Neck/Head/Headmesh/Hair").gameObject;
-			obj1 = (GameObject)Resources.Load("Prefabs/NPCParts/"+categoryList[type].GetRandomHair());
-		
-			obj.GetComponent<MeshFilter>().sharedMesh = obj1.GetComponent<MeshFilter>().sharedMesh;
-
-
-			newMaterialPrefab = Resources.Load("Materials/"+categoryList[type].GetRandomHairColor(), typeof(Material)) as Material;
-			Material newMaterial2 = new Material(newMaterialPrefab);
-			obj.renderer.material = newMaterial2;
-
 			
 			//DEBUG
 			/*
@@ -389,6 +329,77 @@ public class NPCRandomizer : MonoBehaviour {
 
 		
 	}
+	
+
+	private void ChangeHair(int type)
+	{
+		string hairType = categoryList[type].GetRandomHair();
+		GameObject obj = transform.Find("Customer_Kid/Hips/Spine/Spine1/Spine2/Neck/Head/Headmesh/Hair").gameObject;
+		
+		GameObject obj1 = (GameObject)Resources.Load("Prefabs/NPCParts/"+hairType);
+		
+		obj.GetComponent<MeshFilter>().mesh = obj1.GetComponent<MeshFilter>().sharedMesh;
+		
+		Material newMaterialPrefab = Resources.Load("Materials/NPCMaterials/"+categoryList[type].GetRandomHairColor(hairType), typeof(Material)) as Material;
+		Material newMaterial = new Material(newMaterialPrefab);
+		obj.renderer.material = newMaterial;
+		
+	}
+	
+	
+	
+	
+	
+	private void ChangeSkinColor(int type)
+	{
+		
+		GameObject obj = transform.Find("Customer_Kid/Hips/Spine/Spine1/Spine2/Neck/Head/Headmesh/CHead").gameObject;		
+		Material newMaterialPrefab = Resources.Load("Materials/NPCMaterials/"+categoryList[type].GetRandomSkinColor(), typeof(Material)) as Material;
+		Material skinColor = new Material(newMaterialPrefab);
+		obj.renderer.material  = skinColor;
+		obj = transform.Find("Customer_Kid/Hips/Spine/Spine1/Spine2/Neck/Head/Headmesh/eye_left_mesh_003").gameObject;
+		obj.renderer.material  = skinColor;
+		obj = transform.Find("Customer_Kid/Hips/Spine/Spine1/Spine2/Neck/Head/Headmesh/eye_right_mesh_003").gameObject;
+		obj.renderer.material  = skinColor;
+		//-Eyes
+		
+		
+		obj = transform.Find("Body").gameObject;
+		obj.renderer.material  = skinColor;
+	}
+	
+	
+	
+	
+	
+	
+	private void ChangeHead(int type)
+	{
+		GameObject obj = transform.Find("Customer_Kid/Hips/Spine/Spine1/Spine2/Neck/Head/Headmesh/CHead").gameObject;
+		GameObject obj1 = (GameObject)Resources.Load("Prefabs/NPCParts/"+categoryList[type].GetRandomHead());
+		obj.GetComponent<MeshFilter>().sharedMesh = obj1.GetComponent<MeshFilter>().sharedMesh;
+		
+	}
+	
+	
+	
+	
+	
+	private void ChangeClothes(int type)
+	{
+		string clothesType = categoryList[type].GetRandomShirt();
+		GameObject obj1 = (GameObject)Resources.Load("Prefabs/NPCParts/"+clothesType);
+		obj1 = obj1.transform.Find("clothes_mesh").gameObject;
+		GameObject obj = transform.Find("Clothes/Clothes_Mesh").gameObject;
+		
+		
+		obj.GetComponent<SkinnedMeshRenderer>().sharedMesh = obj1.GetComponent<SkinnedMeshRenderer>().sharedMesh;
+		
+		Material newMaterialPrefab = Resources.Load("Materials/NPCMaterials/"+categoryList[type].GetRandomShirtColor(clothesType), typeof(Material)) as Material;
+		Material clothesMaterial = new Material(newMaterialPrefab);
+		obj.renderer.material = clothesMaterial;
+		
+	}
 
 
 	public DishStruct[] GetMainOrder(){
@@ -411,16 +422,16 @@ public class NPCRandomizer : MonoBehaviour {
 class Category{
 	string name;
 	//apperance Lists
-	List<string> sex = new List<string>();
 	List<string> skinColor = new List<string>();
 	List<string> head = new List<string>();
 	List<string> shirt = new List<string>();
-	List<string> pants = new List<string>();
 	List<string> accessories = new List<string>();
 	List<string> hair = new List<string>();
 	List<string> hairColor = new List<string>();
-	List<string> face = new List<string>();
 	
+	List<textureLinker> hairList = new List<textureLinker>();
+	List<textureLinker> shirtList = new List<textureLinker>();	
+
 	
 	//food Lists
 	
@@ -451,15 +462,11 @@ class Category{
 		
 	}
 	
-	public string getName(){
+	public string GetName(){
 		return name;
 	}
 	
-	public string GetRandomSex()
-	{
-		int value = sex.Count;
-		return sex[Random.Range(0,value)];
-	}
+	
 	public string GetRandomSkinColor()
 	{
 		int value = skinColor.Count;
@@ -472,14 +479,22 @@ class Category{
 	}
 	public string GetRandomShirt()
 	{
-		int value = shirt.Count;
-		return shirt[Random.Range(0,value)];
+		int value = shirtList.Count;
+		return shirtList[Random.Range(0,value)].GetType();
 	}
-	public string GetRandomPants()
+
+	public string GetRandomShirtColor(string type)
 	{
-		int value = pants.Count;
-		return pants[Random.Range(0,value)];
+		int value = 0;
+		for (int i = 0; i < shirtList.Count; i++) {
+			if(shirtList[i].GetType() == type){
+				return shirtList[i].getRandomTexture();
+			}
+		}
+		
+		return "";
 	}
+
 	public string GetRandomAccessories()
 	{
 		int value = accessories.Count;
@@ -487,18 +502,19 @@ class Category{
 	}
 	public string GetRandomHair()
 	{
-		int value = hair.Count;
-		return hair[Random.Range(0,value)];
+		int value = hairList.Count;
+		return hairList[Random.Range(0,value)].GetType();
 	}
-	public string GetRandomHairColor()
+	public string GetRandomHairColor(string type)
 	{
-		int value = hairColor.Count;
-		return hairColor[Random.Range(0,value)];
-	}
-	public string GetRandomFace()
-	{
-		int value = face.Count;
-		return face[Random.Range(0,value)];
+		int value = 0;
+		for (int i = 0; i < hairList.Count; i++) {
+			if(hairList[i].GetType() == type){
+				return hairList[i].getRandomTexture();
+			}
+		}
+		
+		return "";
 	}
 	
 	
@@ -541,29 +557,14 @@ class Category{
 	
 	public void writeProperties()
 	{
-		foreach (string p in sex) {
-			Debug.Log ("sex: "+p);
-		}
 		foreach (string p in skinColor) {
 			Debug.Log ("skinColor: "+p);
 		}
 		foreach (string p in shirt) {
 			Debug.Log ("shirt: "+p);
 		}
-		foreach (string p in pants) {
-			Debug.Log ("pants: "+p);
-		}
 		foreach (string p in accessories) {
 			Debug.Log ("accesorie: "+p);
-		}
-		foreach (string p in hair) {
-			Debug.Log ("hair: "+p);
-		}
-		foreach (string p in hairColor) {
-			Debug.Log ("hairColor: "+p);
-		}
-		foreach (string p in face) {
-			Debug.Log ("face: "+p);
 		}
 		
 	}
@@ -586,46 +587,39 @@ class Category{
 		Debug.Log ("End of: " + name);*/
 	}
 	
-	
-	public void AddSex(string sex)
-	{
-		this.sex.Add (sex);
-	}
+
 	public void AddSkinColor(string skinColor)
 	{
 		this.skinColor.Add (skinColor);
 	}
-
 	public void AddHead(string head)
 	{
 		this.head.Add (head);
 	}
-
-
 	public void AddShirt(string shirt)
 	{
-		this.shirt.Add (shirt);
+		shirtList.Add (new textureLinker (shirt));
 	}
-	public void AddPants(string pants)
+	public void AddShirtColor(string shirtColor)
 	{
-		this.pants.Add (pants);
+		shirtList[shirtList.Count-1].AddTexture (shirtColor);
 	}
 	public void AddAccessorie(string accessorie)
 	{
 		this.accessories.Add (accessorie);
 	}
+
 	public void AddHair(string hair)
 	{
-		this.hair.Add (hair);	
+		hairList.Add (new textureLinker (hair));
 	}
 	public void AddHairColor(string hairColor)
 	{
-		this.hairColor.Add (hairColor);
+		hairList[hairList.Count-1].AddTexture (hairColor);
 	}
-	public void AddFace(string face)
-	{
-		this.face.Add(face);
-	}
+
+
+
 	
 	public void AddMainOrder(DishStruct[] dish)
 	{
@@ -664,4 +658,45 @@ class Category{
 	}
 }
 
-
+class textureLinker
+{
+	string type;
+	
+	List<string> textures = new List<string>();
+	
+	public textureLinker(string type)
+	{
+		this.type = type;
+		
+	}
+	
+	
+	public void AddTexture(string texture)
+	{
+		textures.Add (texture);
+	}
+	
+	
+	public string getRandomTexture()
+	{
+		int value = textures.Count;
+		return textures[Random.Range(0,value)];
+	}
+	
+	public string GetType()
+	{
+		
+		return type;
+	}
+	
+	
+	public void print(){
+		Debug.Log (type);
+		foreach (string p in textures) {
+			Debug.Log(p);
+		}
+		Debug.Log("-------");
+	}
+	
+	
+}
