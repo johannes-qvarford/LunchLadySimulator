@@ -175,6 +175,7 @@ public class ArmLogic : MonoBehaviour
 		heldGrabable.transform.position = handle.position;
 		GameObject.Destroy(heldGrabable.rigidbody);
 		heldGrabable.transform.parent = handle;
+		Debug.Log("offset " + OFFSET);
 		heldGrabable.transform.position += OFFSET;
 		heldGrabable.gameObject.layer = LayerMask.NameToLayer(Layers.CONTROL);
 	}
