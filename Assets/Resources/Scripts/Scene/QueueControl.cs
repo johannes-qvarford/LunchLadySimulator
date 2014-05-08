@@ -14,6 +14,10 @@ public class QueueControl : MonoBehaviour
 	private bool npcIsWaitingForFood = false;
 	private int actualNpcsInQueue = 0;
 	private GameObject firstInLine;
+
+
+	private bool npcIsTurning = false;
+	private bool moveTurnQue = false;
 	
 	void Start()
 	{
@@ -23,6 +27,27 @@ public class QueueControl : MonoBehaviour
 	void Update()
 	{
 		Vector3 lastPosition = new Vector3(INFINITE, INFINITE, INFINITE);
+
+
+		
+		foreach(GameObject g in npcs)
+		{
+			g.SendMessage("TurnMoveChanged", true, SendMessageOptions.RequireReceiver);
+			
+		}
+		
+		foreach(GameObject npc in npcs)
+		{
+			if((npc.transform.position - lastPosition).magnitude < maxNpcDistance)
+			{
+				npc.SendMessage("TurnMoveChanged", false, SendMessageOptions.RequireReceiver);
+			}
+			lastPosition = npc.transform.position;
+		}
+
+
+
+
 		if(npcIsWaitingForFood)
 		{
 			foreach(GameObject npc in npcs)
@@ -76,6 +101,22 @@ public class QueueControl : MonoBehaviour
 		GameObject.Destroy(npc);
 	}
 	
+
+	private void NpcTurning()
+	{
+		npcIsTurning = true;
+		//	npc.SendMessage("MoveChanged", false, SendMessageOptions.RequireReceiver);
+	}
+	
+	private void NpcStoppedTurning()
+	{
+		npcIsTurning = false;
+		moveTurnQue = true;
+			
+		//	npc.SendMessage("MoveChanged", true, SendMessageOptions.RequireReceiver);
+	}
+
+
 	private void NpcStopped(GameObject npc)
 	{
 		npcIsWaitingForFood = true;

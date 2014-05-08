@@ -1,35 +1,41 @@
 <categories>
-<category name="Jock">
-<sex>Female Male</sex>
-<skincolors>Brown White Yellow</skincolors>
-<head>kid1</head>
-<shirts>Red Blue</shirts>
-<pants>Red Blue</pants>
-<accessories>Clock</accessories>
-<hair>pigtails backwardscap dorky</hair>
-<haircolors>Red Blonde</haircolors>
-<face>Fuckface</face>
-<preferenceType>protein</preferenceType>
-<preferenceAmount>2</preferenceAmount>
-<perfection>0.5</perfection>
-<patience>1.0</patience> 
+<category name="Nerd">
+<skincolors>kid_skin_white</skincolors>
+<head>head_kid_1 head_kid_2</head>
+<shirts name="kid_clothes_1">yellow_shirt green_shirt</shirts>
+<accessories>LEAVE_THIS_BLANK_FOR_NOW</accessories>
+<hair name="dorky">dorky_blonde</hair> 
+<preferenceType>PREFERENCETYPE</preferenceType>
+<preferenceAmount>0</preferenceAmount>
+<perfection>0</perfection>
+<patience>0</patience> 
 </category>
 
-
-<category name="Geek">
-<sex>Female Male</sex>
-<skincolors>Brown White Yellow</skincolors>
-<head>kid2</head>
-<shirts>Green Yellow</shirts>
-<pants>Green Yellow</pants>
-<accessories>Räls</accessories>
-<hair>pigtails backwardscap dorky</hair>
-<haircolors>Black Brown</haircolors>
-<face>Fugly</face>
-<preferenceType>IQfood</preferenceType>
-<preferenceAmount>0.5</preferenceAmount>
+<category name="Girl">
+<skincolors>kid_skin_white</skincolors>
+<head>head_kid_1 head_kid_2</head>
+<shirts name="kid_clothes_1">blue_shirt red_shirt</shirts>
+<accessories>LEAVE_THIS_BLANK_FOR_NOW</accessories>
+<hair name="pigtails">pigtails_blonde</hair> 
+<hair name="ponytail">ponytail_blonde</hair> 
+<preferenceType>PREFERENCETYPE</preferenceType>
+<preferenceAmount>1</preferenceAmount>
 <perfection>1</perfection>
-<patience>2.0</patience> 
+<patience>1</patience> 
 </category>
+
+<category name="Jock">
+<skincolors>kid_skin_white</skincolors>
+<head>head_kid_1 head_kid_2</head>
+<shirts name="kid_clothes_2">blue_shirt red_shirt</shirts>
+<accessories>LEAVE_THIS_BLANK_FOR_NOW</accessories>
+<hair name="jockhair">jockhair_blonde</hair>
+<hair name="backwardscap">backwardscap_blonde</hair> 
+<preferenceType>PREFERENCETYPE</preferenceType>
+<preferenceAmount>2</preferenceAmount>
+<perfection>2</perfection>
+<patience>2</patience> 
+</category>
+
 
 </categories>
