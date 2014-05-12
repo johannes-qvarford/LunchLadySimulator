@@ -1036,6 +1036,14 @@ Prefab:
       propertyPath: playerArmRight
       value: 
       objectReference: {fileID: 812206852}
+    - target: {fileID: 2000002, guid: f6158c7ef5ae6f54a9dc8472a5bcc75b, type: 2}
+      propertyPath: field of view
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2000000, guid: f6158c7ef5ae6f54a9dc8472a5bcc75b, type: 2}
+      propertyPath: field of view
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f6158c7ef5ae6f54a9dc8472a5bcc75b, type: 2}
   m_RootGameObject: {fileID: 1434639740}
@@ -4002,7 +4010,7 @@ Camera:
     height: 1
   near clip plane: .300000012
   far clip plane: 1000
-  field of view: 100
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: .159999996
@@ -17433,7 +17441,7 @@ Camera:
     height: 1
   near clip plane: .300000012
   far clip plane: 1000
-  field of view: 100
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
