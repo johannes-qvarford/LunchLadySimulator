@@ -59,48 +59,20 @@ public class ArmLogic : MonoBehaviour
 		bool GRAB_HELD = ArmInputManager.IsHeld(ArmInputManager.GRIP, arm);
 		bool GRAB_CHANGED = ArmInputManager.HeldChanged(ArmInputManager.GRIP, arm);
 		
-		if(armsState.debug)
-		{
-			debugSphere.transform.localScale = new Vector3(armsState.maxGrabDistance, armsState.maxGrabDistance, armsState.maxGrabDistance);
-			debugSphere.transform.localPosition = Vector3.zero;
-			Collider[] overlaps = GrabableSphereCast();
-			foreach(Collider overlap in overlaps)
-			{
-				Debug.DrawLine(handle.position, overlap.transform.position, Color.cyan);
-			}
-			
-			bool canBeGrabbedByAny = false;
-			foreach (var g in armsState.grabables) 
-			{
-				if(CanBeGrabbed(g, overlaps))
-				{
-					debugSphere.renderer.material = Resources.Load("Materials/DebugCloseToGrabable", typeof(Material)) as Material;
-					canBeGrabbedByAny = true;
-					break;
-				}
-			}
-			if(canBeGrabbedByAny == false)
-			{
-				debugSphere.renderer.material = Resources.Load("Materials/DebugFarFromGrabable", typeof(Material)) as Material;
-			}
-		}
-		
 		bool GRAB_RELEASED = GRAB_CHANGED && GRAB_HELD == true && heldGrabable != null;
 		bool GRAB_GRABBED = GRAB_CHANGED && GRAB_HELD == true && heldGrabable == null;
 
-		GameObject closest = getClosestGrabable();
+		GameObject closest = GetClosestGrabable();
 		handleOutlines(closest);
 		if(GRAB_RELEASED)
 		{
 			ReleaseHeldGrabable();
 		}
 
-
 		else if(GRAB_GRABBED)
 		{
 			if(closest != null)
 			{
-
 				switch(closest.tag)
 				{
 					case Tags.TOOL:
@@ -146,53 +118,15 @@ public class ArmLogic : MonoBehaviour
 		}
 		lastOutline = newOutline;
 	}
-	private GameObject getClosestGrabable()
-	{
-		GameObject closest = null;
-		Collider[] overlaps = GrabableSphereCast();
-		List<GameObject> inReach = new List<GameObject>();
-		foreach(var g in armsState.grabables) 
-		{
-			//Debug.Log("" + g + " can be grabbed");
-			if(CanBeGrabbed(g, overlaps))
-			{
-				inReach.Add(g);
-			}
-		}
-		if(inReach.Count > 0)
-		{
-			closest = null;
-			foreach(GameObject g in inReach)
-			{
-				closest = 
-					closest == null || (closest.transform.position - handle.position).magnitude > (g.transform.position - handle.position).magnitude 
-						? g : closest;
-			}
-		}
-		return closest;
-	}
 
 	private bool AreClose(Vector3 p, Vector3 v)
 	{
 		return Mathf.Abs(p.magnitude - v.magnitude) < armsState.epsilon;
 	}
 	
-	private bool CanBeGrabbed(GameObject g, Collider[] overlaps)
+	private bool CanBeGrabbed(GameObject g, IEnumerable<Transform> overlaps)
 	{
-		bool inProximity = false;
-		foreach(Collider overlap in overlaps)
-		{
-			Transform closestGrabableParent = ClosestGrabableParent(overlap.transform);
-			if(closestGrabableParent != null  && closestGrabableParent.gameObject == g)
-			{
-				inProximity = true;
-			}
-		}
-		bool OTHER_HAND_HOLDS = g.transform.parent != null && g.transform.parent.parent != null &&
-			((arm == ArmInputManager.LEFT && g.transform.parent.parent.tag == "RightArm") || 
-			 (arm == ArmInputManager.RIGHT && g.transform.parent.parent.tag == "LeftArm"));
-		
-		return inProximity && heldGrabable == null && OTHER_HAND_HOLDS == false;
+		return true;
 	}
 	
 	private Transform ClosestGrabableParent(Transform t)
@@ -231,9 +165,9 @@ public class ArmLogic : MonoBehaviour
 		heldGrabable.gameObject.layer = LayerMask.NameToLayer(Layers.CONTROL);
 	}
 	
-	private Collider[] GrabableSphereCast()
+	private GameObject GetClosestGrabable()
 	{
-		return Physics.OverlapSphere(
+		var overlaps = Physics.OverlapSphere(
 			//position:
 			handle.position, 
 			//radius:
@@ -241,6 +175,44 @@ public class ArmLogic : MonoBehaviour
 		    //layerMask:
 		    Layers.CombineLayerNames(Layers.GRABABLE, Layers.INTERACT)
 		    );
+		if(overlaps == null)
+		{
+			return null;
+		}
+		
+		var realOverlaps = overlaps.Select(o => o.transform).Where((t) => {
+			
+			bool OTHER_HAND_HOLDS = t.parent != null && t.parent.parent != null &&
+				((arm == ArmInputManager.LEFT && t.parent.parent.tag == "RightArm") || 
+				 (arm == ArmInputManager.RIGHT && t.parent.parent.tag == "LeftArm"));
+			if(OTHER_HAND_HOLDS || heldGrabable != null)
+			{
+				return false;
+			}
+			var p = ClosestGrabableParent(t);
+			return p != null && p.parent != null && p.parent.parent != null;
+		}).Select((t) =>
+		         ClosestGrabableParent(t));
+		         
+		var handleXz = new Vector2(handle.position.x, handle.position.z);
+		var handleY = handle.position.y;
+		var valid = realOverlaps;
+		/*.Where((r) => {
+			var xz = new Vector2(r.position.x, r.position.z);
+			var y = r.position.y;
+			return (xz-handleXz).magnitude < armsState.handGrabCylinderRadius && (y-handleY) < armsState.handGrabCylinderHeight && (y-handleY) > 0;
+		});
+		*/
+		if(valid.Count() == 0)
+		{
+			return null;
+		}
+		return valid
+			.Select((t) => new { Dist = (t.position - handle.position).magnitude, Trans = t })
+			.Aggregate((d1, d2) => 
+				(d1 == null ? d2 : 
+				d2 == null ? d1 : 
+				d1.Dist < d2.Dist ? d1 : d2)).Trans.gameObject;
 	}
 	
 	private float Minus180Plus180Degress(float deg)
