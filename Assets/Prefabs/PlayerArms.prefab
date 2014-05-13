@@ -1396,7 +1396,6 @@ MonoBehaviour:
   arm: 0
   outlineMaterial: {fileID: 2100000, guid: 05dfe6ab2da5c444f9598ced42dade5b, type: 2}
   invisibleMaterial: {fileID: 2100000, guid: 6ef7b85114f1b684f92d9c8108ed0c17, type: 2}
-  grabables: []
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1411,7 +1410,6 @@ MonoBehaviour:
   arm: 1
   outlineMaterial: {fileID: 2100000, guid: 2006068b5a6bf274c8d716980a9fbb7b, type: 2}
   invisibleMaterial: {fileID: 2100000, guid: 6ef7b85114f1b684f92d9c8108ed0c17, type: 2}
-  grabables: []
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
