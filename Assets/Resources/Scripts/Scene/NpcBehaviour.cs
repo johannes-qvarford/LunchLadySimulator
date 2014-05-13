@@ -127,7 +127,7 @@ public class NpcBehaviour : MonoBehaviour
 		
 		if(!turned)
 		{
-			Debug.Log(on);
+			//Debug.Log(on);
 			move = on;
 		}
 	}

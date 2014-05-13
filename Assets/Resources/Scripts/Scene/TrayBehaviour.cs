@@ -65,7 +65,7 @@ public class TrayBehaviour : MonoBehaviour
 			score += (int)((float)sideOrder.baseValue * Mathf.Clamp(0, 1, (float)temp / (float)sideOrder.number));
 
 		}
-		Debug.Log(sideOrder.baseValue);
+
 		maxScore += sideOrder.baseValue;
 		if(foodCount.TryGetValue(drink.dish, out temp))
 		{

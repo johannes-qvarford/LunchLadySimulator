@@ -10,7 +10,14 @@ public class ShadowPlaneFollowing : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		gameObject.transform.position = m_parent.position;
-		gameObject.transform.rotation = m_parent.rotation;
+		if(m_parent != null)
+		{
+			gameObject.transform.position = m_parent.position;
+			gameObject.transform.rotation = m_parent.rotation;
+		}
+		else
+		{
+			Destroy(gameObject);
+		}
 	}
 }

@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public sealed class ArmsState : MonoBehaviour 
 {
@@ -21,4 +21,11 @@ public sealed class ArmsState : MonoBehaviour
 	
 	public string handleName = "Handle";
 	public string boundsName = "Bounds";
+
+	public List<GameObject> grabables;
+
+	void Start()
+	{
+		grabables = new List<GameObject>(Layers.FindGameObjectsInLayer(LayerMask.NameToLayer(Layers.GRABABLE)));
+	}
 }

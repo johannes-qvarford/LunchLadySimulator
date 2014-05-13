@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: PlayerArms
-  m_Shader: {fileID: 7, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: Outlines1
+  m_Shader: {fileID: 4800000, guid: 4a2756d13b25ba04e843f42ca3142527, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -24,13 +24,13 @@ Material:
       data:
         first:
           name: _Outline
-        second: .00499999989
+        second: .0103571424
     m_Colors:
       data:
         first:
           name: _Color
-        second: {r: .808823526, g: .61359024, b: .404411763, a: 1}
+        second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
           name: _OutlineColor
-        second: {r: .83088237, g: .809646845, b: .061094299, a: 1}
+        second: {r: .980392158, g: .501960814, b: .447058827, a: 0}

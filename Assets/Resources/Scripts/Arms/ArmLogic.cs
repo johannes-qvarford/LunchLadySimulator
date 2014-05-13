@@ -6,14 +6,18 @@ using System.Linq;
 public class ArmLogic : MonoBehaviour 
 {
 	public ArmInputManager.Arm arm;
+	public Material outlineMaterial;
+	public Material invisibleMaterial;
 	
 	private Transform bounds;
 	private Transform handle;
-	private List<GameObject> grabables; 
+	public List<GameObject> grabables; 
 	private Transform heldGrabable = null;
 	private ArmsState armsState;
 	private GameObject debugSphere;
 	private Transform otherHandle;
+	private Renderer lastOutline;
+
 	
 	void Start()
 	{
@@ -21,7 +25,7 @@ public class ArmLogic : MonoBehaviour
 		handle = transform.Find(armsState.handleName);
 		
 		bounds = transform.Find(armsState.boundsName);
-		grabables = new List<GameObject>(Layers.FindGameObjectsInLayer(LayerMask.NameToLayer(Layers.GRABABLE)));
+
 		if(armsState.debug)
 		{
 			debugSphere = GameObject.Instantiate(armsState.debugSphere) as GameObject;
@@ -41,7 +45,7 @@ public class ArmLogic : MonoBehaviour
 		}
 	
 		Debug.DrawLine(handle.position, handle.position + Vector3.up * -1);
-		grabables.RemoveAll((g) => g == null);
+		armsState.grabables.RemoveAll((g) => g == null);
 
 		bool GRAB_HELD = ArmInputManager.IsHeld(ArmInputManager.GRIP, arm);
 		bool GRAB_CHANGED = ArmInputManager.HeldChanged(ArmInputManager.GRIP, arm);
@@ -57,7 +61,7 @@ public class ArmLogic : MonoBehaviour
 			}
 			
 			bool canBeGrabbedByAny = false;
-			foreach (var g in grabables) 
+			foreach (var g in armsState.grabables) 
 			{
 				if(CanBeGrabbed(g, overlaps))
 				{
@@ -75,32 +79,19 @@ public class ArmLogic : MonoBehaviour
 		bool GRAB_RELEASED = GRAB_CHANGED && GRAB_HELD == true && heldGrabable != null;
 		bool GRAB_GRABBED = GRAB_CHANGED && GRAB_HELD == true && heldGrabable == null;
 
+		GameObject closest = getClosestGrabable();
+		handleOutlines(closest);
 		if(GRAB_RELEASED)
 		{
 			ReleaseHeldGrabable();
 		}
+
+
 		else if(GRAB_GRABBED)
 		{
-			Collider[] overlaps = GrabableSphereCast();
-			List<GameObject> inReach = new List<GameObject>();
-			foreach(var g in grabables) 
+			if(closest != null)
 			{
-				//Debug.Log("" + g + " can be grabbed");
-				if(CanBeGrabbed(g, overlaps))
-				{
-					inReach.Add(g);
-				}
-			}
-			
-			if(inReach.Count > 0)
-			{
-				GameObject closest = null;
-				foreach(GameObject g in inReach)
-				{
-					closest = 
-						closest == null || (closest.transform.position - handle.position).magnitude > (g.transform.position - handle.position).magnitude 
-						? g : closest;
-				}
+
 				switch(closest.tag)
 				{
 					case Tags.TOOL:
@@ -121,11 +112,57 @@ public class ArmLogic : MonoBehaviour
 
 			if(heldGrabable != null && grabables.Exists((g) => g.Equals(heldGrabable)) == false)
 			{
-				grabables.Add(heldGrabable.gameObject);
+				armsState.grabables.Add(heldGrabable.gameObject);
 			}
 		}
 	}
-	
+	private void handleOutlines(GameObject closest)
+	{
+		Renderer newOutline = null;
+		if(closest != null && closest.GetComponent("GrabableBehaviour") != null)
+		{
+			newOutline = ((GrabableBehaviour)closest.GetComponent("GrabableBehaviour")).outline;
+		}
+		if(lastOutline == newOutline)
+		{
+			//return;
+		}
+		if(lastOutline != null && lastOutline.sharedMaterial == outlineMaterial)
+		{
+			lastOutline.material = invisibleMaterial;
+		}
+		if(newOutline != null)
+		{
+			newOutline.material = outlineMaterial;
+		}
+		lastOutline = newOutline;
+	}
+	private GameObject getClosestGrabable()
+	{
+		GameObject closest = null;
+		Collider[] overlaps = GrabableSphereCast();
+		List<GameObject> inReach = new List<GameObject>();
+		foreach(var g in armsState.grabables) 
+		{
+			//Debug.Log("" + g + " can be grabbed");
+			if(CanBeGrabbed(g, overlaps))
+			{
+				inReach.Add(g);
+			}
+		}
+		if(inReach.Count > 0)
+		{
+			closest = null;
+			foreach(GameObject g in inReach)
+			{
+				closest = 
+					closest == null || (closest.transform.position - handle.position).magnitude > (g.transform.position - handle.position).magnitude 
+						? g : closest;
+			}
+		}
+		return closest;
+	}
+
 	private bool AreClose(Vector3 p, Vector3 v)
 	{
 		return Mathf.Abs(p.magnitude - v.magnitude) < armsState.epsilon;
