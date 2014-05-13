@@ -17,8 +17,8 @@ public sealed class ArmsState : MonoBehaviour
 	public float minZRotWithoutFreeze = 0.01f;
 	public float minMovementWithoutFreeze = 0.0025f;
 	public float epsilon = 0.01f;
-	public float handGrabCylinderRadius = 0.1f;
-	public float handGrabCylinderHeight = 0.1f;
+	public float grabCylinderRadius = 0.1f;
+	public float grabCylinderHeight = 0.2f;
 	
 	
 	public string handleName = "Handle";
