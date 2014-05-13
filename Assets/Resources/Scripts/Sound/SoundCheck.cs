@@ -7,6 +7,7 @@ public class SoundCheck : MonoBehaviour {
 	FMOD.Studio.ParameterInstance pVolume,pState,pMood;
 	public float state,mood,volume;
 	public FMODAsset path;
+	private FMOD.Studio.PLAYBACK_STATE status; 
 	private bool [] valid = new bool[3];
 	void Start () 
 	{
@@ -34,7 +35,7 @@ public class SoundCheck : MonoBehaviour {
 	}
 	void Update ()
 	{
-		
+		eSound.getPlaybackState(out status);
 	}
 	void OnCollisionEnter(Collision collision)
 	{ 
@@ -47,14 +48,19 @@ public class SoundCheck : MonoBehaviour {
 		}
 		if(collision.gameObject.tag != "Food")
 		{
-			eSound.start ();
+			if(status != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+			{
+				eSound.start ();
+			}
 		}
 	}
 	void TriggerSound()
 	{
-		
-		ChangeParameter();
-		eSound.start ();
+		if(status != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+		{
+			ChangeParameter();
+			eSound.start ();
+		}
 	}
 	void OnDisable()
 	{

@@ -25,12 +25,19 @@ public class ArmLogic : MonoBehaviour
 		{
 			Debug.LogError("tried to add non grabable gameobject");
 		}
+		if(armsState == null)
+		{
+			armsState = transform.parent.GetComponent(typeof(ArmsState)) as ArmsState;
+		}
 		armsState.grabables.Add(g);
 	}
 	
 	void Start()
 	{
-		armsState = transform.parent.GetComponent(typeof(ArmsState)) as ArmsState;
+		if(armsState == null)
+		{
+			armsState = transform.parent.GetComponent(typeof(ArmsState)) as ArmsState;
+		}
 		handle = transform.Find(armsState.handleName);
 		
 		bounds = transform.Find(armsState.boundsName);
