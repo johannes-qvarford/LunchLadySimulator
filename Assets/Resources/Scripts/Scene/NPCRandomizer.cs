@@ -32,12 +32,24 @@ public class NPCRandomizer : MonoBehaviour {
 		
 		
 		loadFile = "NPCproperties.xml";
-		StreamReader r = File.OpenText ("Assets/Resources/XML/" + loadFile);
-		
-		dataString = r.ReadToEnd ();
 		
 		
-		XmlReader reader = XmlReader.Create (new StringReader (dataString));
+		//StreamReader r = File.OpenText ("Assets/Resources/XML/" + loadFile);
+		
+		//dataString = r.ReadToEnd ();
+		TextAsset textAsset = (TextAsset) Resources.Load("XML/NPCproperties");
+		if(textAsset == null)
+		{
+			Debug.Log("null testAsset");
+		}
+		//XmlDocument xmldoc = new XmlDocument();
+		//xmldoc.LoadXml ( textAsset.text );
+		var sr = new StringReader (textAsset.text);
+		if(sr == null)
+		{
+			Debug.Log("null sr");
+		}
+		XmlReader reader = XmlReader.Create(sr);
 		
 		while (!reader.EOF) 
 		{
@@ -163,10 +175,16 @@ public class NPCRandomizer : MonoBehaviour {
 		// recipie XML
 		
 		
-		loadFile = "NPCrecipies.xml";
-		r = File.OpenText ("Assets/Resources/XML/" + loadFile);
-		dataString = r.ReadToEnd ();
-		reader = XmlReader.Create (new StringReader (dataString));
+		//loadFile = "NPCrecipies.xml";
+		//r = File.OpenText ("Assets/Resources/XML/" + loadFile);
+		//dataString = r.ReadToEnd ();
+		
+		textAsset = (TextAsset) Resources.Load("XML/NPCrecipies");
+		//XmlDocument xmldoc = new XmlDocument();
+		//xmldoc.LoadXml ( textAsset.text );
+		reader = XmlReader.Create (new StringReader (textAsset.text));
+		
+		//reader = XmlReader.Create (new StringReader (dataString));
 		while (!reader.EOF) 
 		{
 			reader.ReadToFollowing ("type");
