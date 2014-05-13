@@ -19,6 +19,15 @@ public class ArmLogic : MonoBehaviour
 	private Renderer lastOutline;
 
 	
+	public void AddGrabable(GameObject g)
+	{
+		if(g.GetComponent<GrabableBehaviour>() == null)
+		{
+			Debug.LogError("tried to add non grabable gameobject");
+		}
+		grabables.Add(g);
+	}
+	
 	void Start()
 	{
 		armsState = transform.parent.GetComponent(typeof(ArmsState)) as ArmsState;
@@ -173,7 +182,8 @@ public class ArmLogic : MonoBehaviour
 		bool inProximity = false;
 		foreach(Collider overlap in overlaps)
 		{
-			if(ClosestGrabableParent(overlap.transform).gameObject == g)
+			Transform closestGrabableParent = ClosestGrabableParent(overlap.transform);
+			if(closestGrabableParent != null  && closestGrabableParent.gameObject == g)
 			{
 				inProximity = true;
 			}
