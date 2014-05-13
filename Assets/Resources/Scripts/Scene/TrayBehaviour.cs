@@ -7,6 +7,7 @@ public class TrayBehaviour : MonoBehaviour
 	public bool doIt = false;
 	public float maxDistance = 0.4f;
 	public float dificulty = 0.5f;
+	public float timeMultiplier = 1;
 
 	void Update()
 	{
@@ -74,7 +75,8 @@ public class TrayBehaviour : MonoBehaviour
 		}
 		maxScore += drink.baseValue;
 		customerCounter.spawnScore(1);
-		scoreHandeling.addScore(score+1, (int)Mathf.Floor(maxScore * dificulty));
+		score = (int)Mathf.Ceil(score * timeMultiplier);
+		scoreHandeling.addScore(score, (int)Mathf.Floor(maxScore * dificulty));
 	}
 
 	private Transform findNPCRecursive(Transform t)
