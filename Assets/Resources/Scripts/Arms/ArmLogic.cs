@@ -9,11 +9,16 @@ public class ArmLogic : MonoBehaviour
 	
 	private Transform bounds;
 	private Transform handle;
-	private List<GameObject> grabables; 
+	private List<GameObject> grabables = new List<GameObject>(); 
 	private Transform heldGrabable = null;
 	private ArmsState armsState;
 	private GameObject debugSphere;
 	private Transform otherHandle;
+	
+	void AddGrabable(GameObject g)
+	{
+		grabables.Add(g);
+	}
 	
 	void Start()
 	{
@@ -21,7 +26,13 @@ public class ArmLogic : MonoBehaviour
 		handle = transform.Find(armsState.handleName);
 		
 		bounds = transform.Find(armsState.boundsName);
-		grabables = new List<GameObject>(Layers.FindGameObjectsInLayer(LayerMask.NameToLayer(Layers.GRABABLE)));
+		grabables.AddRange(Layers.FindGameObjectsInLayer(LayerMask.NameToLayer(Layers.GRABABLE)));
+		grabables = new List<GameObject>(grabables.Distinct());
+		
+		foreach(var g in grabables)
+		{
+			Debug.Log(g.name);
+		}
 		if(armsState.debug)
 		{
 			debugSphere = GameObject.Instantiate(armsState.debugSphere) as GameObject;
@@ -85,9 +96,9 @@ public class ArmLogic : MonoBehaviour
 			List<GameObject> inReach = new List<GameObject>();
 			foreach(var g in grabables) 
 			{
-				Debug.Log("" + g + " can be grabbed");
 				if(CanBeGrabbed(g, overlaps))
 				{
+					Debug.Log("" + g + " can be grabbed");
 					inReach.Add(g);
 				}
 			}
@@ -190,8 +201,9 @@ public class ArmLogic : MonoBehaviour
 			//radius:
 			armsState.maxToolGrabDistance,
 		    //layerMask:
-		    Layers.CombineLayerNames(Layers.GRABABLE, Layers.INTERACT)
-		    );
+			Layers.CombineLayerNames(Layers.GRABABLE));
+		    //, Layers.INTERACT)
+		    
 	}
 	
 	private float Minus180Plus180Degress(float deg)

@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPrefab: {fileID: 100000, guid: f5efb0626019e6f41acdc667dba0ac28, type: 2}
-  spawnOffsetFromHand: {x: 0, y: -.100000001, z: 0}
+  spawnOffsetFromHand: {x: 0, y: -.340000004, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

@@ -30,7 +30,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -14.8062792, y: 36.4119644, z: -69.2167435}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -46,7 +46,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 6438d5a08040b494593f4ec5c2eadee2, type: 2}
+  - {fileID: 2100000, guid: 837e7d8f18e83ac4a96bf900d1e72460, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -96,7 +96,7 @@ Animator:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: c077c8046cf17544b84bfb0f5dda9d0e, type: 3}
   m_Controller: {fileID: 0}
   m_CullingMode: 0
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c47877f529280c84e93cfb19856bed55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveOffsetOnGrab: {x: 0, y: -.100000001, z: 0}
+  moveOffsetOnGrab: {x: 0, y: 0, z: 0}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -140,6 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   mood: 0
+  volume: 0
   path: {fileID: 11400000, guid: bd6ae6634e30b784cbfb1aa2b6871f58, type: 2}
 --- !u!1001 &100100000
 Prefab:
