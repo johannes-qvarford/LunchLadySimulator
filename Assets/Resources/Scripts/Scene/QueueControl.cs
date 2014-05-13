@@ -14,6 +14,7 @@ public class QueueControl : MonoBehaviour
 	private bool npcIsWaitingForFood = false;
 	private int actualNpcsInQueue = 0;
 	private GameObject firstInLine;
+	private float lastSpawnTime = 0;
 
 
 	private bool npcIsTurning = false;
@@ -94,10 +95,6 @@ public class QueueControl : MonoBehaviour
 	{
 		npcs.Remove(npc);
 		actualNpcsInQueue--;
-		if(actualNpcsInQueue > 0)
-		{
-			AddNpcInPhysicalQueue();
-		}
 		GameObject.Destroy(npc);
 	}
 	
