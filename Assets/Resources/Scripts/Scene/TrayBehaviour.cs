@@ -5,7 +5,9 @@ using System.Linq;
 public class TrayBehaviour : MonoBehaviour
 {
 	public bool doIt = false;
-	public float maxDistance = 0.4f; 
+	public float maxDistance = 0.4f;
+	public float dificulty = 0.5f;
+	public float timeMultiplier = 1;
 
 	void Update()
 	{
@@ -42,35 +44,39 @@ public class TrayBehaviour : MonoBehaviour
 		ScoreHandeling scoreHandeling = GameObject.FindWithTag("ScoreHandeler").GetComponent<ScoreHandeling>();
 		ScoreCounter customerCounter = GameObject.FindWithTag("CustomerCounter").GetComponent<ScoreCounter>();
 		NPCRandomizer randomizer = findNPCRecursive (transform).GetComponent<NPCRandomizer>();
-		string[] mainOrder = randomizer.GetMainOrder();
-		string sideOrder = randomizer.GetSideOrder();
-		string drink = randomizer.GetDrink();
+		DishStruct[] mainOrder = randomizer.GetMainOrder();
+		DishStruct sideOrder = randomizer.GetSideOrder();
+		DishStruct drink = randomizer.GetDrink();
 
 		int score = 0;
 		int temp;
-		if(foodCount.TryGetValue(mainOrder[0], out temp))
+		int maxScore = 0;
+		for (int i = 0; i < mainOrder.Length; i++)
 		{
-			Debug.Log("main0");
-			score++;
+			if(foodCount.TryGetValue(mainOrder[i].dish, out temp))
+			{
+
+				score += (int)((float)mainOrder[i].baseValue * Mathf.Clamp(0, 1, (float)temp / (float)mainOrder[i].number));
+
+			}
+			maxScore += mainOrder[i].baseValue;
 		}
-		if(foodCount.TryGetValue(mainOrder[1], out temp))
+		if(foodCount.TryGetValue(sideOrder.dish, out temp))
 		{
-			Debug.Log("main1");
-			score++;
-		}
-		if(foodCount.TryGetValue(sideOrder, out temp))
-		{
-			Debug.Log("side");
-			score++;
-		}
-		if(foodCount.TryGetValue(drink, out temp))
-		{
-			Debug.Log("drink");
-			score++;
+			score += (int)((float)sideOrder.baseValue * Mathf.Clamp(0, 1, (float)temp / (float)sideOrder.number));
+
 		}
 
+		maxScore += sideOrder.baseValue;
+		if(foodCount.TryGetValue(drink.dish, out temp))
+		{
+			score += (int)((float)drink.baseValue * Mathf.Clamp(0, 1, (float)temp / (float)drink.number));
+			maxScore += drink.number;
+		}
+		maxScore += drink.baseValue;
 		customerCounter.spawnScore(1);
-		scoreHandeling.addScore(score, 1);
+		score = (int)Mathf.Ceil(score * timeMultiplier);
+		scoreHandeling.addScore(score, (int)Mathf.Floor(maxScore * dificulty));
 	}
 
 	private Transform findNPCRecursive(Transform t)

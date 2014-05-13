@@ -20,9 +20,17 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-    m_Floats: {}
+    m_Floats:
+      data:
+        first:
+          name: _Outline
+        second: .00499999989
     m_Colors:
       data:
         first:
           name: _Color
         second: {r: .808823526, g: .61359024, b: .404411763, a: 1}
+      data:
+        first:
+          name: _OutlineColor
+        second: {r: .83088237, g: .809646845, b: .061094299, a: 1}

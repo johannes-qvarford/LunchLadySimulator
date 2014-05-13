@@ -3,13 +3,17 @@ using System.Collections;
 
 public class SoupCameraLight : MonoBehaviour
 {
+	public bool on = true;
 	public Light[] lights;
 	
 	void OnPreRender()
 	{
-		foreach(Light light in lights)
+		if(on)
 		{
-			light.enabled = true;
+			foreach(Light light in lights)
+			{
+				light.enabled = true;
+			}
 		}
 	}
 	

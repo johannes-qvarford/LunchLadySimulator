@@ -14,6 +14,7 @@ GameObject:
   - 65: {fileID: 6500000}
   - 122: {fileID: 12200000}
   - 114: {fileID: 11400000}
+  - 135: {fileID: 13500000}
   m_Layer: 14
   m_Name: Soup
   m_TagString: Food
@@ -83,7 +84,7 @@ BoxCollider:
   m_GameObject: {fileID: 100000}
   m_Material: {fileID: 13400000, guid: bfbbd2a521ef4de47ab746223fea96db, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1.00000012, y: 1, z: 1.00000024}
   m_Center: {x: 0, y: 0, z: 0}
@@ -110,6 +111,18 @@ Halo:
     serializedVersion: 2
     rgba: 4294967295
   m_Size: .0199999996
+--- !u!135 &13500000
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: .500000119
+  m_Center: {x: 5.96046448e-08, y: 0, z: -8.94069672e-08}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

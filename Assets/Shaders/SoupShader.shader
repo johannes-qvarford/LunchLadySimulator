@@ -5,8 +5,8 @@ Properties {
     _MainTex ("Texture", 2D) = "white" { }
            
    	_MainColor ("Color", Color) = (1,1,1,1)
-    _InnerValue ("InnerValue", Range(0.1,1)) = 0.1   
-    _OuterValue ("OuterValue", Range(0.1,1)) = 0.5   
+    _InnerValue ("InnerValue", Range(0.1,1)) = 0.15   
+    _OuterValue ("OuterValue", Range(0.1,1)) = 0.6  
     _TransTresh ("TransparencyTreshold", Range(0,1)) = 0.2 
     _OuterTransTresh ("OuterTransparencyTreshold", Range(0,1)) = 0.2 
     _MetaballAlpha ("MetaballAlpha", Range(0,1)) = 0.5 

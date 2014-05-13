@@ -4,12 +4,16 @@ using System.Collections;
 public class MainCameraScript : MonoBehaviour
 {
 	public Light[] lights;
+	public bool on = true;
 	
 	void OnPreRender()
 	{
-		foreach(Light light in lights)
+		if(on)
 		{
-			light.enabled = false;
+			foreach(Light light in lights)
+			{
+				light.enabled = false;
+			}
 		}
 	}
 	

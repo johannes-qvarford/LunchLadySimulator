@@ -8,8 +8,10 @@ public class ArmPhysics : MonoBehaviour
 	
 	private ArmsState armsState;
 	private Transform handle;
-	public Vector3 lastPush = Vector3.zero;
+	private Vector3 lastPush = Vector3.zero;
 	private Transform otherHandle;
+	private SpringJoint otherJoint;
+	private float oldSpring = 0;
 	
 	void FixedUpdate()
 	{
@@ -24,53 +26,54 @@ public class ArmPhysics : MonoBehaviour
 		{
 			{
 				
-				float Z_ROTATION = armsState.rotationSpeed * 
+				float Z_ROTATION = armsState.rotationAcceleration * -1 * //reverse z direction 
 					ArmInputManager.GetMovement(arm, ArmInputManager.HORIZONTAL) *  Convert.ToInt32(ArmInputManager.IsHeld(ArmInputManager.Z_ROTATION, arm)); 
-				float X_MOVEMENT = armsState.movementSpeed * 
+				float X_MOVEMENT = armsState.movementAcceleration * 
 					ArmInputManager.GetMovement(arm, ArmInputManager.HORIZONTAL) * 	Convert.ToInt32(ArmInputManager.IsHeld(ArmInputManager.Z_ROTATION, arm) == false);
-				float Y_MOVEMENT = armsState.movementSpeed * 
+				float Y_MOVEMENT = armsState.movementAcceleration * 
 					ArmInputManager.GetMovement(arm, ArmInputManager.VERTICAL) * 	Convert.ToInt32(ArmInputManager.IsHeld(ArmInputManager.Y_MOVEMENT, arm));
-				float Z_MOVEMENT = armsState.movementSpeed * 
+				float Z_MOVEMENT = armsState.movementAcceleration * 
 					ArmInputManager.GetMovement(arm, ArmInputManager.VERTICAL) * 	Convert.ToInt32(ArmInputManager.IsHeld(ArmInputManager.Y_MOVEMENT, arm) == false);
 
 				int IUSE_Z_ROTATION = Convert.ToInt32(isAbsGreater(Z_ROTATION, Y_MOVEMENT) && isAbsGreater(Z_ROTATION, Z_MOVEMENT));
 				int IUSE_Y_MOVEMENT = Convert.ToInt32(isAbsGreater(Y_MOVEMENT, Z_ROTATION));
 				int IUSE_Z_MOVEMENT = Convert.ToInt32(isAbsGreater(Z_MOVEMENT, Z_ROTATION));
 				
-				//Debug.Log(String.Format("use zrot {0}, use y {1}, use zmov {2}", IUSE_Z_ROTATION, IUSE_Y_MOVEMENT, IUSE_Z_MOVEMENT));
-				
 				{
-					rigidbody.AddTorque(Vector3.forward * Z_ROTATION * IUSE_Z_ROTATION * armsState.rotationSpeed);
+					otherJoint.spring = IUSE_Z_ROTATION == 1 ? 0 : oldSpring;
+					rigidbody.AddTorque(Vector3.forward * Z_ROTATION * IUSE_Z_ROTATION * armsState.rotationAcceleration);
 				}
-				
-				Vector3 MOVEMENT = new Vector3(X_MOVEMENT, IUSE_Y_MOVEMENT * Y_MOVEMENT, IUSE_Z_MOVEMENT * Z_MOVEMENT);
-				
-				int MOVING_INSIDE_X = 1;//Convert.ToInt32(Mathf.Abs(OFFSET.x) <= LIMIT.x);
-				int MOVING_INSIDE_Y = 1;//Convert.ToInt32(Mathf.Abs(OFFSET.y) <= LIMIT.y);
-				int MOVING_INSIDE_Z = 1;//Convert.ToInt32(Mathf.Abs(OFFSET.z) <= LIMIT.z);
-				
-				float HAND_MUL = arm == ArmInputManager.Arm.LEFT ? -1 : 1;
-				bool MOVING_TOWARDS_OTHER_ARM = HAND_MUL * MOVEMENT.x < 0;
-				bool TO_CLOSE_TO_OTHER_ARM = Mathf.Abs((handle.position - otherHandle.position).x) < armsState.minDistanceBetweenArms;
-				
-				if(rigidbody.velocity.magnitude < armsState.maxVelocity && 
-					((MOVING_TOWARDS_OTHER_ARM && TO_CLOSE_TO_OTHER_ARM) == false) || armsState.checkIfAtonamyCorrect == false) 
+
 				{
-					lastPush = new Vector3(MOVING_INSIDE_X * MOVEMENT.x, MOVING_INSIDE_Y * MOVEMENT.y, MOVING_INSIDE_Z * MOVEMENT.z);
+					lastPush = new Vector3(X_MOVEMENT, IUSE_Y_MOVEMENT * Y_MOVEMENT, IUSE_Z_MOVEMENT * Z_MOVEMENT);
 					rigidbody.AddForce(lastPush, ForceMode.VelocityChange);
 				}
 				
 				{
+					/*
 					bool NO_X = Mathf.Abs(X_MOVEMENT) < armsState.minMovementWithoutFreeze;
 					bool NO_Y = Mathf.Abs(Y_MOVEMENT) < armsState.minMovementWithoutFreeze;
 					bool NO_Z = Mathf.Abs(Z_MOVEMENT) < armsState.minMovementWithoutFreeze;
-					bool NO_R = Mathf.Abs(Z_ROTATION) < armsState.minZRotFreeze;
+					bool NO_R = Mathf.Abs(Z_ROTATION) < armsState.minZRotWithoutFreeze;
+					*/
+					
+					float HX = Mathf.Max(Mathf.Abs(rigidbody.velocity.x), Mathf.Abs(X_MOVEMENT));
+					float HY = Mathf.Max(Mathf.Abs(rigidbody.velocity.y), Mathf.Abs(Y_MOVEMENT));
+					float HZ = Mathf.Max(Mathf.Abs(rigidbody.velocity.z), Mathf.Abs(Z_MOVEMENT));
+					float HRZ = Mathf.Max(Mathf.Abs(rigidbody.angularVelocity.z), Mathf.Abs(Z_ROTATION));
+					
+					
+					bool NO_X = HX < armsState.minMovementWithoutFreeze;
+					bool NO_Y = HY < armsState.minMovementWithoutFreeze;
+					bool NO_Z = HZ < armsState.minMovementWithoutFreeze;
+					bool NO_R = HRZ < armsState.minZRotWithoutFreeze;
 					
 					rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY 
 						| (NO_X ? RigidbodyConstraints.FreezePositionX : 0)
 							| (NO_Y ? RigidbodyConstraints.FreezePositionY : 0)
 							| (NO_Z ? RigidbodyConstraints.FreezePositionZ : 0)
 							| (NO_R ? RigidbodyConstraints.FreezeRotationZ : 0);
+					
 				}
 			}
 			
@@ -79,6 +82,7 @@ public class ArmPhysics : MonoBehaviour
 			{
 				rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
 			}
+			
 		}
 	}
 	
@@ -117,7 +121,7 @@ public class ArmPhysics : MonoBehaviour
 		if(insideSolid)
 		{
 			framesInsideSolid++;
-			rigidbody.AddForce(new Vector3(armsState.solidRecoilMul * -lastPush.x, armsState.solidRecoilMul * -lastPush.y, armsState.solidRecoilMul * -lastPush.z), ForceMode.VelocityChange);
+			rigidbody.AddForce(new Vector3(armsState.recoilMulOnSolidCollision * -lastPush.x, armsState.recoilMulOnSolidCollision * -lastPush.y, armsState.recoilMulOnSolidCollision * -lastPush.z), ForceMode.VelocityChange);
 		}
 		else if(OTHER.tag == Tags.FOOD)
 		{
@@ -129,14 +133,17 @@ public class ArmPhysics : MonoBehaviour
 	{
 		armsState = transform.parent.GetComponent(typeof(ArmsState)) as ArmsState;
 		handle = transform.Find(armsState.handleName);
+		
 	}
 	
 	private void ArmChanged(ArmInputManager.Arm a)
 	{
 		armsState = transform.parent.GetComponent(typeof(ArmsState)) as ArmsState;
 		arm = a;
-		Debug.Log((arm == ArmInputManager.LEFT ? "RightArm" : "LeftArm")+ "/" + armsState.handleName);
+		//Debug.Log((arm == ArmInputManager.LEFT ? "RightArm" : "LeftArm")+ "/" + armsState.handleName);
 		otherHandle = transform.parent.Find((arm == ArmInputManager.LEFT ? "RightArm" : "LeftArm")+ "/" + armsState.handleName);
+		otherJoint = otherHandle.parent.GetComponent<SpringJoint>();
+		oldSpring = GetComponent<SpringJoint>().spring;
 	}
 	
 	private bool isAbsGreater(float a, float b)

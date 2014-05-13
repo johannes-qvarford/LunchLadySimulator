@@ -15,6 +15,8 @@ public class HappyBarController : MonoBehaviour {
 	public int tipW = 22;
 	public int tipH = 22;
 
+	public GUITexture sadBar;
+
 	public int score;
 	private int lastValue = 101;
 	// Use this for initialization
@@ -40,7 +42,7 @@ public class HappyBarController : MonoBehaviour {
 	private void updateBar()
 	{
 		percentage = Mathf.Clamp (percentage, -100, 100);
-		RectOffset tempOffset = new RectOffset((percentage*edges)/100, 0, 0, 0);
+		RectOffset tempOffset = new RectOffset(0, 0, -(percentage*edges)/100, 0);
 		tip.pixelInset = new Rect(tipX + (percentage*edges)/100, tipY, tipW, tipH);
 
 		float gradPos = percentage;
@@ -49,7 +51,16 @@ public class HappyBarController : MonoBehaviour {
 		gameObject.GetComponent<GUITexture>().color = gradient.Evaluate(gradPos);
 		tip.color = gradient.Evaluate(gradPos);
 
-		gameObject.GetComponent<GUITexture>().border = tempOffset;
+		if(percentage > 0)
+		{
+			gameObject.GetComponent<GUITexture>().border = tempOffset;
+			sadBar.border = new RectOffset(0, 0, 0, 0);
+		}
+		else
+		{
+			gameObject.GetComponent<GUITexture>().border = new RectOffset(0, 0, 0, 0);
+			sadBar.border = tempOffset;
+		}
 		checkGlow ();
 	}
 	private void checkGlow()
