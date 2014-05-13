@@ -11,7 +11,7 @@ public class ArmLogic : MonoBehaviour
 	
 	private Transform bounds;
 	private Transform handle;
-	public List<GameObject> grabables; 
+	//public List<GameObject> grabables; 
 	private Transform heldGrabable = null;
 	private ArmsState armsState;
 	private GameObject debugSphere;
@@ -25,7 +25,7 @@ public class ArmLogic : MonoBehaviour
 		{
 			Debug.LogError("tried to add non grabable gameobject");
 		}
-		grabables.Add(g);
+		armsState.grabables.Add(g);
 	}
 	
 	void Start()
@@ -119,7 +119,7 @@ public class ArmLogic : MonoBehaviour
 				}
 			}
 
-			if(heldGrabable != null && grabables.Exists((g) => g.Equals(heldGrabable)) == false)
+			if(heldGrabable != null && armsState.grabables.Exists((g) => g.Equals(heldGrabable)) == false)
 			{
 				armsState.grabables.Add(heldGrabable.gameObject);
 			}
