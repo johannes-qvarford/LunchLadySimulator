@@ -72,11 +72,6 @@ public class SpawnFoodInZone : MonoBehaviour {
 					Random.Range(spawnZone.transform.position.z-(spawnZone.collider.bounds.size.z/2),spawnZone.transform.position.z+(spawnZone.collider.bounds.size.z/2)));
 				
 					Collider[] temp = Physics.OverlapSphere(spawnPosTest,spawnObject.GetComponent<BoxCollider>().size.magnitude/2,mask.value);
-					Debug.Log(temp.Length);
-					for(int i=0;i<temp.Length;i++)
-					{
-						Debug.Log(temp[i].gameObject.name);
-					}
 					if(temp.Length < 1)
 					{
 						foundPos = true;

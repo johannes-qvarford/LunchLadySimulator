@@ -12449,32 +12449,6 @@ Prefab:
   m_RootGameObject: {fileID: 1112597884}
   m_IsPrefabParent: 0
   m_IsExploded: 1
---- !u!1 &1179728722
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1179728723}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1179728723
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1179728722}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.33425236, y: 2.71808577, z: -.77355808}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
 --- !u!1 &1183727596
 GameObject:
   m_ObjectHideFlags: 0
@@ -13270,8 +13244,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arm: 0
-  outlineMaterial: {fileID: 0}
-  invisibleMaterial: {fileID: 0}
+  outlineMaterial: {fileID: 2100000, guid: 2006068b5a6bf274c8d716980a9fbb7b, type: 2}
+  invisibleMaterial: {fileID: 2100000, guid: 6ef7b85114f1b684f92d9c8108ed0c17, type: 2}
 --- !u!1 &1262720304
 GameObject:
   m_ObjectHideFlags: 0
@@ -17957,8 +17931,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arm: 1
-  outlineMaterial: {fileID: 0}
-  invisibleMaterial: {fileID: 0}
+  outlineMaterial: {fileID: 2100000, guid: 05dfe6ab2da5c444f9598ced42dade5b, type: 2}
+  invisibleMaterial: {fileID: 2100000, guid: 6ef7b85114f1b684f92d9c8108ed0c17, type: 2}
 --- !u!1 &1659796755
 GameObject:
   m_ObjectHideFlags: 0

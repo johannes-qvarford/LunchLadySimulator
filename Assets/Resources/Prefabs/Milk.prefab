@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveOffsetOnGrab: {x: 0, y: 0, z: 0}
-  outline: {fileID: 0}
+  outline: {fileID: 2300002}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
