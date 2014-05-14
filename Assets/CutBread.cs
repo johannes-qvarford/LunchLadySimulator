@@ -19,8 +19,6 @@ public class CutBread : MonoBehaviour
 		GameObject OTHER = col.gameObject;
 		if(OTHER.tag == Tags.FOOD && OTHER.GetComponent<FoodID>().foodID == "Bread" && FindParentRigidbody(gameObject).velocity.magnitude > lowestSpeedForCut)
 		{
-		
-		
 			if(OTHER.GetComponents<FixedJoint>().Count() == 0)
 			{
 				return;
@@ -36,6 +34,7 @@ public class CutBread : MonoBehaviour
 			
 			OTHER.rigidbody.constraints = RigidbodyConstraints.None;
 			OTHER.layer = LayerMask.NameToLayer(Layers.GRABABLE);
+			
 			left.SendMessage("AddGrabable", OTHER, SendMessageOptions.RequireReceiver);
 			right.SendMessage("AddGrabable", OTHER, SendMessageOptions.RequireReceiver);
 			
