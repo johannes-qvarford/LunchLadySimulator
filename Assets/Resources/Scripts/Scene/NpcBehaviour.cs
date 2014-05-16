@@ -15,8 +15,18 @@ public class NpcBehaviour : MonoBehaviour
 	protected Animator animator;
 	protected Animator animatorClothes;
 	public SpeechBubble speechBubble;
+	public int animationFaceInt = 0;
+	public bool faceready = false;
+
+	
+	protected Animator faceAnimator;
+	private bool sidewaysrot = false;
+
+	int tempCounter = 0;
+
 	void OnTriggerEnter(Collider col)
 	{
+		
 		GameObject OTHER = col.gameObject;
 		switch(OTHER.tag)
 		{
@@ -38,7 +48,7 @@ public class NpcBehaviour : MonoBehaviour
 				animation = 1;
 				turning = true;
 				queueControl.SendMessage("NpcTurning", SendMessageOptions.RequireReceiver);
-			
+				
 				break;
 			default:
 				break;
@@ -51,8 +61,23 @@ public class NpcBehaviour : MonoBehaviour
 		animator = GetComponent<Animator>();
 		GameObject go = transform.Find("Clothes").gameObject;
 		animatorClothes = go.GetComponent<Animator>();
+
+		animationFaceInt = transform.GetComponent<Impatience>().getImpatienceLevel();
+	//Debug.Log (animationFaceInt);
+		if(animationFaceInt > 3)
+		{
+			animationFaceInt = 3;
+		}
+		
+		if (faceready) 
+		{
+			GameObject fgo = transform.Find ("Customer_Kid/Hips 1/Spine/Spine1/Spine2/Neck/Head 1/head_kid").gameObject;
+			faceAnimator = fgo.GetComponent<Animator> ();
+		}
+
+
 		if(turning && turned == false){
-			Debug.Log("fuck you");
+			
 			move = false;
 		}	
 		if(move && rigidbody.velocity.magnitude <= maxSpeed)
@@ -69,37 +94,78 @@ public class NpcBehaviour : MonoBehaviour
 		switch (animation)
 		{
 		case 0:
+			
+			
 			animator.SetInteger("animation",0);
 			animatorClothes.SetInteger("animation",0);
+			
 			break;
 		case 1:
-			transform.Rotate(0,1,0);
-			animator.SetInteger("animation",2);
-			animatorClothes.SetInteger("animation",2);
+			
+			//		transform.Rotate (0,3,0);
+			animator.SetInteger("animation",4);
+			animatorClothes.SetInteger("animation",4);
+			
+			
+			if(animator.GetCurrentAnimatorStateInfo(0).IsName("Turn")){
+				animator.applyRootMotion = true;
+				
+				
+				
+				
+				if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > animator.GetCurrentAnimatorStateInfo(0).length)
+				{	
+					
+					animation = 2;
+					turning = false;
+					move = true;
+					turned = true;		
+					sidewaysrot = true;
+					
+					
+				}
+			}
+			
 			break;
 		case 2:
-			
+			animator.applyRootMotion = false;
 			animator.SetInteger("animation",1);
 			animatorClothes.SetInteger("animation",1);
+			
+			
+			
 			break;
 		case 3:
+			
 			animator.SetInteger("animation",2);
 			animatorClothes.SetInteger("animation",2);
+			
+			
 			break;
 		default:
 			break;
 		}
-		if(transform.rotation ==  Quaternion.Euler (0, 180, 0) && turned == false){
-			transform.Rotate (0,0,0);
-			animation = 2;
-			turning = false;
-			queueControl.SendMessage("NpcStoppedTurning", SendMessageOptions.RequireReceiver);
-			move = true;
-			turned = true;
+		
+		
+		if(sidewaysrot)
+		{	
+			transform.Rotate (0,1,0);
+			
+			if(transform.rotation.y > 0.9999f){
+				sidewaysrot = false;
+				Debug.Log ("yoyooy");
+			}
+			
+			tempCounter++;
 		}
 		if(move == false && !turning){
 			animator.SetInteger("animation",2);
 			animatorClothes.SetInteger("animation",2);
+		}
+		
+		if (faceready)
+		{
+			faceAnimator.SetInteger ("animation", animationFaceInt);
 		}
 	}
 	
