@@ -104,7 +104,6 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 
 	private float GetMovementInternal(Arm arm, Movement movement)
 	{
-		Debug.Log(BuildName(arm, movement));
 		return Input.GetAxis(BuildName(arm, movement));
 	}
 	
