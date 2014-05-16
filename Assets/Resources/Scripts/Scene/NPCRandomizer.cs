@@ -107,17 +107,24 @@ public class NPCRandomizer : MonoBehaviour {
 				
 				
 				
-				
-				reader.Read ();
-				spliter = reader.Value;
-				s = spliter.Split(' ');
-				for(int i = 0;i < s.Length;i++)
+				do
 				{
-					categoryList[counter].AddAccessorie(s[i]);
-				}
+					reader.MoveToFirstAttribute ();
+					categoryList[counter].AddAccessory(reader.Value);
+					reader.Read();
+					
+					spliter = reader.Value;
+					s = spliter.Split(' ');
+					foreach(string p in s){
+						categoryList[counter].AddAccessoryColor(p);
+					}
+					reader.Read();
+					reader.Read();
+					reader.Read();
+					
+					
+				}while(reader.Name == "accessory");
 				
-				//HAIR START
-				reader.ReadToFollowing("hair");
 				
 				do
 				{
@@ -304,41 +311,24 @@ public class NPCRandomizer : MonoBehaviour {
 
 		if (newType) 
 		{
-			//debug grejer
+		
 			newType = false;
 			int type = Random.Range(0,categoryList.Count);
 			ChangeClothes(type);
-			ChangeHair(type);
-			ChangeSkinColor(type);
 			ChangeHead(type);
+			ChangeSkinColor(type);
+			ChangeHair(type);
 			
 			
+
 			
-			//DEBUG
-			/*
-			Debug.Log("type: "+categoryList[type].getName());
-			Debug.Log("sex: "+categoryList[type].GetRandomSex());
-			Debug.Log("skinColor: "+categoryList[type].GetRandomSkinColor());
-			Debug.Log("shirt: "+categoryList[type].GetRandomShirt());
-			Debug.Log("pants: "+categoryList[type].GetRandomPants());
-			Debug.Log("accessories: "+categoryList[type].GetRandomAccessories());
-			Debug.Log("hair: "+categoryList[type].GetRandomHair());
-			Debug.Log("hairColor: "+categoryList[type].GetRandomHairColor());
-			Debug.Log("face: "+categoryList[type].GetRandomFace());
-	//		Debug.Log("preferenceType: "+categoryList[type].GetPreferenceType());
-		//	Debug.Log("preferenceAmount: "+categoryList[type].GetPreferenceAmount());
-	//		Debug.Log("perfection: "+categoryList[type].GetPerfection());
-	//		Debug.Log("patience: "+categoryList[type].GetPatience());
-			*/
 			currentMainOrder = categoryList[type].GetRandomMainOrder();
-			//Debug.Log ("mainorder: " + currentMainOrder[0] + " " + currentMainOrder[1]);
+		
 			currentSideOrder = categoryList[type].GetRandomSideOrder();
-			//Debug.Log("sideorder: " + currentSideOrder);
+		
 			currentDrink = categoryList[type].GetRandomDrink();
-			//Debug.Log("drinks: " + currentDrink);
-			//Debug.Log ("--------------------------------");
-			//-DEBUG
-			
+
+			transform.GetComponent<NpcBehaviour>().faceready = true;
 			
 		}
 		
@@ -352,15 +342,28 @@ public class NPCRandomizer : MonoBehaviour {
 	private void ChangeHair(int type)
 	{
 		string hairType = categoryList[type].GetRandomHair();
-		GameObject obj = transform.Find("Customer_Kid/Hips/Spine/Spine1/Spine2/Neck/Head/Headmesh/Hair").gameObject;
 		
-		GameObject obj1 = (GameObject)Resources.Load("Prefabs/NPCParts/"+hairType);
 		
-		obj.GetComponent<MeshFilter>().mesh = obj1.GetComponent<MeshFilter>().sharedMesh;
+		GameObject Hair = (GameObject)Resources.Load("Prefabs/NPCParts/"+hairType);
+		GameObject setHair = GameObject.Instantiate(Hair) as GameObject;
+		GameObject refHead =  transform.Find("Customer_Kid/Hips 1/Spine/Spine1/Spine2/Neck/Head 1/head_kid").gameObject;
+		setHair.transform.position = transform.position;
+		setHair.transform.parent = refHead.transform;
+		
+		setHair.transform.rotation = refHead.transform.rotation;
+		
+		Vector3 positionOffset = new Vector3(0.00323f,0.764549f, -0.005494945f);
+		setHair.transform.localPosition = positionOffset;
+	
+		
+		
+		
+		setHair.name = "hair";
+		
 		
 		Material newMaterialPrefab = Resources.Load("Materials/NPCMaterials/"+categoryList[type].GetRandomHairColor(hairType), typeof(Material)) as Material;
 		Material newMaterial = new Material(newMaterialPrefab);
-		obj.renderer.material = newMaterial;
+		setHair.renderer.material = newMaterial;
 		
 	}
 	
@@ -371,19 +374,30 @@ public class NPCRandomizer : MonoBehaviour {
 	private void ChangeSkinColor(int type)
 	{
 		
-		GameObject obj = transform.Find("Customer_Kid/Hips/Spine/Spine1/Spine2/Neck/Head/Headmesh/CHead").gameObject;		
 		Material newMaterialPrefab = Resources.Load("Materials/NPCMaterials/"+categoryList[type].GetRandomSkinColor(), typeof(Material)) as Material;
 		Material skinColor = new Material(newMaterialPrefab);
-		obj.renderer.material  = skinColor;
-		obj = transform.Find("Customer_Kid/Hips/Spine/Spine1/Spine2/Neck/Head/Headmesh/eye_left_mesh_003").gameObject;
-		obj.renderer.material  = skinColor;
-		obj = transform.Find("Customer_Kid/Hips/Spine/Spine1/Spine2/Neck/Head/Headmesh/eye_right_mesh_003").gameObject;
-		obj.renderer.material  = skinColor;
-		//-Eyes
+		GameObject refObj =  transform.Find("Customer_Kid/Hips 1/Spine/Spine1/Spine2/Neck/Head 1/head_kid").gameObject;
+		MeshRenderer[] obj;
+		obj = refObj.transform.GetComponentsInChildren<MeshRenderer>();
+		
+		foreach (MeshRenderer b in obj) 
+		{
+			Debug.Log (b.ToString ());
+			
+			b.material = skinColor;
+		}
+		SkinnedMeshRenderer[] obj1 = refObj.transform.GetComponentsInChildren<SkinnedMeshRenderer>();
 		
 		
-		obj = transform.Find("Body").gameObject;
-		obj.renderer.material  = skinColor;
+		foreach (SkinnedMeshRenderer b in obj1) 
+		{
+			Debug.Log (b.ToString ());
+			
+			b.material = skinColor;
+		}
+	
+		GameObject obj2 = transform.Find("body_kid_mesh_005").gameObject;
+		obj2.renderer.material  = skinColor;
 	}
 	
 	
@@ -393,9 +407,17 @@ public class NPCRandomizer : MonoBehaviour {
 	
 	private void ChangeHead(int type)
 	{
-		GameObject obj = transform.Find("Customer_Kid/Hips/Spine/Spine1/Spine2/Neck/Head/Headmesh/CHead").gameObject;
-		GameObject obj1 = (GameObject)Resources.Load("Prefabs/NPCParts/"+categoryList[type].GetRandomHead());
-		obj.GetComponent<MeshFilter>().sharedMesh = obj1.GetComponent<MeshFilter>().sharedMesh;
+		string headType = categoryList[type].GetRandomHead();
+		GameObject head = (GameObject)Resources.Load("Prefabs/NPCParts/"+headType);
+		GameObject switchHead = GameObject.Instantiate(head) as GameObject;
+		
+		GameObject refHead =  transform.Find("Customer_Kid/Hips 1/Spine/Spine1/Spine2/Neck/Head 1/head_kid1").gameObject;
+		
+		switchHead.transform.position = refHead.transform.position;
+		switchHead.transform.rotation = refHead.transform.rotation;
+		switchHead.transform.parent = refHead.transform.parent;
+		switchHead.name = "head_kid";
+		GameObject.Destroy(refHead); 
 		
 	}
 	
@@ -443,13 +465,12 @@ class Category{
 	List<string> skinColor = new List<string>();
 	List<string> head = new List<string>();
 	List<string> shirt = new List<string>();
-	List<string> accessories = new List<string>();
 	List<string> hair = new List<string>();
 	List<string> hairColor = new List<string>();
 	
 	List<textureLinker> hairList = new List<textureLinker>();
 	List<textureLinker> shirtList = new List<textureLinker>();	
-
+	List<textureLinker> accessoryList = new List<textureLinker>();
 	
 	//food Lists
 	
@@ -500,7 +521,7 @@ class Category{
 		int value = shirtList.Count;
 		return shirtList[Random.Range(0,value)].GetType();
 	}
-
+	
 	public string GetRandomShirtColor(string type)
 	{
 		int value = 0;
@@ -512,11 +533,22 @@ class Category{
 		
 		return "";
 	}
-
-	public string GetRandomAccessories()
+	
+	public string GetRandomAccessory()
 	{
-		int value = accessories.Count;
-		return accessories[Random.Range(0,value)];
+		int value = accessoryList.Count;
+		return accessoryList[Random.Range(0,value)].GetType();
+	}
+	public string GetRandomAccessoryColor(string type)
+	{
+		int value = 0;
+		for (int i = 0; i < accessoryList.Count; i++) {
+			if(accessoryList[i].GetType() == type){
+				return accessoryList[i].getRandomTexture();
+			}
+		}
+		
+		return "";
 	}
 	public string GetRandomHair()
 	{
@@ -555,6 +587,8 @@ class Category{
 		return patience;
 	}
 	
+	
+
 	public DishStruct[] GetRandomMainOrder()
 	{
 		int value = mainOrders.Count;
@@ -581,9 +615,7 @@ class Category{
 		foreach (string p in shirt) {
 			Debug.Log ("shirt: "+p);
 		}
-		foreach (string p in accessories) {
-			Debug.Log ("accesorie: "+p);
-		}
+	
 		
 	}
 	
@@ -622,11 +654,14 @@ class Category{
 	{
 		shirtList[shirtList.Count-1].AddTexture (shirtColor);
 	}
-	public void AddAccessorie(string accessorie)
+	public void AddAccessory(string accessory)
 	{
-		this.accessories.Add (accessorie);
+		accessoryList.Add (new textureLinker (accessory));
 	}
-
+	public void AddAccessoryColor(string AccesoryColor)
+	{
+		accessoryList[accessoryList.Count-1].AddTexture (AccesoryColor);
+	}
 	public void AddHair(string hair)
 	{
 		hairList.Add (new textureLinker (hair));

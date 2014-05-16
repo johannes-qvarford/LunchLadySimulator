@@ -8,4 +8,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Resources/Scenes/MainMenu.unity
   - enabled: 1
-    path: Assets/Resources/Scenes/JonasSchool.unity
+    path: Assets/Resources/Scenes/MasterSchool.unity

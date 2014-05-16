@@ -25,12 +25,19 @@ public class ArmLogic : MonoBehaviour
 		{
 			Debug.LogError("tried to add non grabable gameobject");
 		}
+		if(armsState == null)
+		{
+			armsState = transform.parent.GetComponent(typeof(ArmsState)) as ArmsState;
+		}
 		armsState.grabables.Add(g);
 	}
 	
 	void Start()
 	{
-		armsState = transform.parent.GetComponent(typeof(ArmsState)) as ArmsState;
+		if(armsState == null)
+		{
+			armsState = transform.parent.GetComponent(typeof(ArmsState)) as ArmsState;
+		}
 		handle = transform.Find(armsState.handleName);
 		
 		bounds = transform.Find(armsState.boundsName);
@@ -59,36 +66,11 @@ public class ArmLogic : MonoBehaviour
 		bool GRAB_HELD = ArmInputManager.IsHeld(ArmInputManager.GRIP, arm);
 		bool GRAB_CHANGED = ArmInputManager.HeldChanged(ArmInputManager.GRIP, arm);
 		
-		if(armsState.debug)
-		{
-			debugSphere.transform.localScale = new Vector3(armsState.maxGrabDistance, armsState.maxGrabDistance, armsState.maxGrabDistance);
-			debugSphere.transform.localPosition = Vector3.zero;
-			Collider[] overlaps = GrabableSphereCast();
-			foreach(Collider overlap in overlaps)
-			{
-				Debug.DrawLine(handle.position, overlap.transform.position, Color.cyan);
-			}
-			
-			bool canBeGrabbedByAny = false;
-			foreach (var g in armsState.grabables) 
-			{
-				if(CanBeGrabbed(g, overlaps))
-				{
-					debugSphere.renderer.material = Resources.Load("Materials/DebugCloseToGrabable", typeof(Material)) as Material;
-					canBeGrabbedByAny = true;
-					break;
-				}
-			}
-			if(canBeGrabbedByAny == false)
-			{
-				debugSphere.renderer.material = Resources.Load("Materials/DebugFarFromGrabable", typeof(Material)) as Material;
-			}
-		}
-		
 		bool GRAB_RELEASED = GRAB_CHANGED && GRAB_HELD == true && heldGrabable != null;
 		bool GRAB_GRABBED = GRAB_CHANGED && GRAB_HELD == true && heldGrabable == null;
 
 		GameObject closest = getClosestGrabable();
+		
 		handleOutlines(closest);
 		if(GRAB_RELEASED)
 		{
@@ -148,6 +130,17 @@ public class ArmLogic : MonoBehaviour
 	}
 	private GameObject getClosestGrabable()
 	{
+		var sphereCols = GrabableSphereCast();
+		var can = from g in armsState.grabables where CanBeGrabbed(g, sphereCols) select g;
+		if(can.Count() > 0)
+		{
+			return can.Aggregate((a,b) => (a.transform.position - handle.position).magnitude < (b.transform.position - handle.position).magnitude ? a : b);
+		}
+		else
+		{
+			return null;
+		}
+	/*
 		GameObject closest = null;
 		Collider[] overlaps = GrabableSphereCast();
 		List<GameObject> inReach = new List<GameObject>();
@@ -170,6 +163,7 @@ public class ArmLogic : MonoBehaviour
 			}
 		}
 		return closest;
+	*/
 	}
 
 	private bool AreClose(Vector3 p, Vector3 v)
@@ -179,15 +173,23 @@ public class ArmLogic : MonoBehaviour
 	
 	private bool CanBeGrabbed(GameObject g, Collider[] overlaps)
 	{
-		bool inProximity = false;
-		foreach(Collider overlap in overlaps)
-		{
-			Transform closestGrabableParent = ClosestGrabableParent(overlap.transform);
-			if(closestGrabableParent != null  && closestGrabableParent.gameObject == g)
+		Vector2 hxz = new Vector2(handle.position.x, handle.position.z);
+		float hy = handle.position.y;
+	
+		bool inProximity = new List<Collider>(overlaps).Exists((o) => {
+			Transform closestGrabableParent = ClosestGrabableParent(o.transform);
+			if(closestGrabableParent == null || closestGrabableParent.gameObject != g)
 			{
-				inProximity = true;
+				return false;
 			}
-		}
+			else
+			{
+				Vector2 xz = new Vector2(closestGrabableParent.position.x, closestGrabableParent.position.z);
+				float y = closestGrabableParent.position.y;
+				return (xz-hxz).magnitude < armsState.grabCylinderRadius && (hy-y) > 0 && (hy-y) < armsState.grabCylinderHeight;
+			}
+		});
+		
 		bool OTHER_HAND_HOLDS = g.transform.parent != null && g.transform.parent.parent != null &&
 			((arm == ArmInputManager.LEFT && g.transform.parent.parent.tag == "RightArm") || 
 			 (arm == ArmInputManager.RIGHT && g.transform.parent.parent.tag == "LeftArm"));

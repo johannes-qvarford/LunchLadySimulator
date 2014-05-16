@@ -13,6 +13,7 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 	static public Switch Z_ROTATION = Switch.Z_ROTATION;
 
 	public bool useJoystick = true;
+	public bool use2Joysticks = false;
 
 	private bool[,] switches = new bool[(int)Switch.SIZE, (int)Arm.SIZE];
 	private bool[,] prevSwitches = new bool[(int)Switch.SIZE, (int)Arm.SIZE];
@@ -72,38 +73,33 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 		}
 	}
 
-	private static string BuildMovementName(Arm arm, Movement movement)
+	private static string BuildMovementName(Movement movement)
 	{
-		return BuildArmName(arm) + 
-			(movement == Movement.HORIZONTAL ? "Horizontal" : "Vertical");
+		return movement == Movement.HORIZONTAL ? "Horizontal" : "Vertical";
 	}
 
-	private string BuildControllerName()
+	private string BuildControllerName(Arm arm)
 	{
-		return useJoystick ? "Joystick" : "";
-	}
-	
-	private static string BuildArmName(Arm arm)
-	{
-		return arm == Arm.LEFT ? "Left" : "Right";
+		string WHICH_JOYSTICK = useJoystick ? "Joystick" + (use2Joysticks && arm == Arm.RIGHT ? "2" : "") : "";
+		string WHICH_SIDE = arm == Arm.LEFT ? "Left" : "Right";
+		return WHICH_JOYSTICK + WHICH_SIDE;
 	}
 
 	private string BuildName(Arm arm, Switch sw)
 	{
-		return BuildControllerName() + BuildToggleName(arm, sw);
+		return BuildControllerName(arm) + BuildToggleName(sw);
 	}
 
 	private string BuildName(Arm arm, Movement movement)
 	{
-		return BuildControllerName() + BuildMovementName(arm, movement);
+		return BuildControllerName(arm) + BuildMovementName(movement);
 	}
 	
-	private static string BuildToggleName(Arm arm, Switch toggle) 
+	private static string BuildToggleName(Switch toggle) 
 	{
-		return BuildArmName(arm) + 
-			(toggle == Switch.Y_MOVEMENT ? "ToggleYMovement" : 
+		return toggle == Switch.Y_MOVEMENT ? "ToggleYMovement" : 
 			 toggle == Switch.Z_ROTATION ? "ToggleZRotation" :
-			 								"ToggleGrip");
+			 								"ToggleGrip";
 	}
 
 	private float GetMovementInternal(Arm arm, Movement movement)
