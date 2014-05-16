@@ -61,6 +61,11 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 			useJoystick = !useJoystick;
 		}
 		
+		if(Input.GetKeyDown(KeyCode.R))
+		{
+			use2Joysticks = !use2Joysticks;
+		}
+		
 		for(int i = 0; i < (int)Switch.SIZE; ++i)
 		{
 			for(int j = 0; j < (int)Arm.SIZE; ++j)
