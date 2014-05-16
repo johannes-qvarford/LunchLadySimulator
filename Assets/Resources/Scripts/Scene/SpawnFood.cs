@@ -25,7 +25,7 @@ public class SpawnFood : MonoBehaviour
 			GameObject g = SpawnedJunk.Instantiate(spawnObject);
 			g.rigidbody.AddForce(Vector3.up * speed, ForceMode.Impulse);
 			g.transform.position = transform.position;
-			g.transform.parent = transform;
+			//g.transform.parent = transform;
 		}
 		else if(on == false)
 		{

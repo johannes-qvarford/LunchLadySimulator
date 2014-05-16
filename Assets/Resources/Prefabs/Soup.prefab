@@ -15,6 +15,7 @@ GameObject:
   - 122: {fileID: 12200000}
   - 114: {fileID: 11400000}
   - 135: {fileID: 13500000}
+  - 114: {fileID: 11400002}
   m_Layer: 14
   m_Name: Soup
   m_TagString: Food
@@ -100,6 +101,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   foodID: Soup
+--- !u!114 &11400002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6134026449f60a04f8bdf82457214b9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleTimeUntilKill: 10
 --- !u!122 &12200000
 Halo:
   m_ObjectHideFlags: 1

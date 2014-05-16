@@ -1082,7 +1082,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   on: 0
-  framesBetweenSpawns: 4
+  framesBetweenSpawns: 1
   speed: .0199999996
 --- !u!114 &11400014
 MonoBehaviour:

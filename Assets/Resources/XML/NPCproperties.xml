@@ -1,9 +1,11 @@
 <categories>
 <category name="Nerd">
 <skincolors>kid_skin_white</skincolors>
-<head>head_kid_1 head_kid_2</head>
+<head>kid_head_2 kid_head_3</head>
 <shirts name="kid_clothes_1">yellow_shirt green_shirt</shirts>
-<accessories>LEAVE_THIS_BLANK_FOR_NOW</accessories>
+<shirts name="kid_clothes_2">blue_shirt red_shirt</shirts>
+<accessory name ="ldsd">LEAVE_THIS_BLANK_FOR_NOW</accessory>
+<accessory name ="boliboli">LEAVE_THIS_BLANK_FOR_NOW</accessory>
 <hair name="dorky">dorky_blonde</hair> 
 <preferenceType>PREFERENCETYPE</preferenceType>
 <preferenceAmount>0</preferenceAmount>
@@ -13,9 +15,9 @@
 
 <category name="Girl">
 <skincolors>kid_skin_white</skincolors>
-<head>head_kid_1 head_kid_2</head>
+<head>kid_head_2 kid_head_3</head>
 <shirts name="kid_clothes_1">blue_shirt red_shirt</shirts>
-<accessories>LEAVE_THIS_BLANK_FOR_NOW</accessories>
+<accessory name ="ldsd">LEAVE_THIS_BLANK_FOR_NOW</accessory>
 <hair name="pigtails">pigtails_blonde</hair> 
 <hair name="ponytail">ponytail_blonde</hair> 
 <preferenceType>PREFERENCETYPE</preferenceType>
@@ -26,9 +28,9 @@
 
 <category name="Jock">
 <skincolors>kid_skin_white</skincolors>
-<head>head_kid_1 head_kid_2</head>
+<head>kid_head_2 kid_head_3</head>
 <shirts name="kid_clothes_2">blue_shirt red_shirt</shirts>
-<accessories>LEAVE_THIS_BLANK_FOR_NOW</accessories>
+<accessory name ="ldsd">LEAVE_THIS_BLANK_FOR_NOW</accessory>
 <hair name="jockhair">jockhair_blonde</hair>
 <hair name="backwardscap">backwardscap_blonde</hair> 
 <preferenceType>PREFERENCETYPE</preferenceType>
