@@ -41,7 +41,7 @@ public class NpcBehaviour : MonoBehaviour
 				if(queueControl != null)
 				{
 					queueControl.SendMessage("NpcStopped", gameObject, SendMessageOptions.RequireReceiver);
-					speechBubble.display();
+					ShowSpeechBubble();
 				}
 				break;
 			case Tags.TURN:
@@ -209,12 +209,8 @@ public class NpcBehaviour : MonoBehaviour
 		queueControl = g;
 	}
 	
-	private void ShowSpeechBubble(bool on)
+	private void ShowSpeechBubble()
 	{
-		if(speechBubble == null)
-		{
-			Debug.LogError("no speechbubble found");
-		}
-		speechBubble.gameObject.SetActive(on);
+		speechBubble.display();
 	}
 }

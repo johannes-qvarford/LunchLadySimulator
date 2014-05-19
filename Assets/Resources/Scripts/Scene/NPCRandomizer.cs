@@ -329,13 +329,24 @@ public class NPCRandomizer : MonoBehaviour {
 			currentDrink = categoryList[type].GetRandomDrink();
 
 			transform.GetComponent<NpcBehaviour>().faceready = true;
-			
+			updateSpeachBubble();
 		}
-		
+	}
+	private void updateSpeachBubble()
+	{
+	/*
+	private DishStruct currentDrink;
+	private DishStruct currentSideOrder;
+	private DishStruct[] currentMainOrder;
+	*/
+		SpeechBubble speechBubble = transform.FindChild("SpeechBubble").GetComponent<SpeechBubble>();
 
-
-
-		
+		speechBubble.displayFood (currentDrink.dish);
+		speechBubble.displayFood (currentSideOrder.dish);
+		foreach(DishStruct dishStruct in currentMainOrder)
+		{
+			speechBubble.displayFood (dishStruct.dish);
+		}
 	}
 	
 

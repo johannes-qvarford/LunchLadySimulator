@@ -6,14 +6,24 @@ public class SpeechBubble : MonoBehaviour {
 	private Vector3 scale;
 	// Use this for initialization
 	private bool isFirst = false;
+	public void displayFood(string food)
+	{
+		foreach (Transform child in transform)
+		{
+			if(child.name.ToLower() == food.ToLower())
+			{
+				child.gameObject.SetActive(true);
+			}
+		}
+	}
 	void Start () {
 		scale = gameObject.transform.localScale;
 		hide ();
 	}
 	public void display()
 	{
-		//gameObject.transform.localScale = new Vector3 (0.25f, 0.25f, 0.25f);
 		isFirst = true;
+		displayFood ("breaD");
 	}
 	public void hide()
 	{
