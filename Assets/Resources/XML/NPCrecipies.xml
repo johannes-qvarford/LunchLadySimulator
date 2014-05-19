@@ -4,14 +4,14 @@
 <main>
 <type name="Jock">
 <maindish><name>Soup</name>
-	<number>20</number>
+	<number>40</number>
 	<value>100</value>
 <name>Something</name>
 	<number>1</number>
 	<value>42</value>
 </maindish>
 <maindish><name>Soup</name>
-		<number>20</number>
+		<number>40</number>
 		<value>100</value>
 	<name>Something</name>
 		<number>1</number>
@@ -19,32 +19,32 @@
 </maindish>
 <sideorder><name>Bread</name>
 		<number>1</number>
-		<value>50</value>
+		<value>25</value>
 </sideorder>
 <sideorder><name>Bread</name>
 		<number>1</number>
-		<value>50</value>
+		<value>25</value>
 </sideorder>
 <drink><name>Milk</name>
 		<number>1</number>
-		<value>50</value>
+		<value>15</value>
 </drink>
 <drink><name>Milk</name>
 		<number>1</number>
-		<value>50</value>
+		<value>15</value>
 </drink>
 </type>
 
 <type name="Nerd">
 <maindish><name>Soup</name>
-	<number>20</number>
+	<number>40</number>
 	<value>100</value>
 <name>Something</name>
 	<number>1</number>
 	<value>42</value>
 </maindish>
 <maindish><name>Soup</name>
-		<number>20</number>
+		<number>40</number>
 		<value>100</value>
 	<name>Something</name>
 		<number>1</number>
@@ -52,32 +52,32 @@
 </maindish>
 <sideorder><name>Bread</name>
 		<number>1</number>
-		<value>50</value>
+		<value>25</value>
 </sideorder>
 <sideorder><name>Bread</name>
 		<number>1</number>
-		<value>50</value>
+		<value>25</value>
 </sideorder>
 <drink><name>Milk</name>
 		<number>1</number>
-		<value>50</value>
+		<value>15</value>
 </drink>
 <drink><name>Milk</name>
 		<number>1</number>
-		<value>50</value>
+		<value>15</value>
 </drink>
 </type>
 
 <type name="Girl">
 <maindish><name>Soup</name>
-	<number>20</number>
+	<number>40</number>
 	<value>100</value>
 <name>Something</name>
 	<number>1</number>
 	<value>42</value>
 </maindish>
 <maindish><name>Soup</name>
-		<number>20</number>
+		<number>40</number>
 		<value>100</value>
 	<name>Something</name>
 		<number>1</number>
@@ -85,19 +85,19 @@
 </maindish>
 <sideorder><name>Bread</name>
 		<number>1</number>
-		<value>50</value>
+		<value>25</value>
 </sideorder>
 <sideorder><name>Bread</name>
 		<number>1</number>
-		<value>50</value>
+		<value>25</value>
 </sideorder>
 <drink><name>Milk</name>
 		<number>1</number>
-		<value>50</value>
+		<value>15</value>
 </drink>
 <drink><name>Milk</name>
 		<number>1</number>
-		<value>50</value>
+		<value>15</value>
 </drink>
 </type>
 

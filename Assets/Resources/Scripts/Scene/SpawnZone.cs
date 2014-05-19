@@ -14,7 +14,7 @@ public class SpawnZone : MonoBehaviour
 			GameObject RECEIVER = OTHER.transform.parent.parent.Find("Spawner").gameObject;
 			RECEIVER.SendMessage("OnSpawnObjectChanged", spawnObject, SendMessageOptions.RequireReceiver);
 			RECEIVER.SendMessage("OnSpawnStatusChanged", true, SendMessageOptions.RequireReceiver);
-			
+			SendMessage("TriggerSound");
 			//TODO: uncomment when message has receiver
 			//gameObject.SendMessage("TriggerSound");
 		}
@@ -27,6 +27,7 @@ public class SpawnZone : MonoBehaviour
 		{
 			GameObject RECEIVER = OTHER.transform.parent.parent.Find("Spawner").gameObject;
 			RECEIVER.SendMessage("OnSpawnStatusChanged", false, SendMessageOptions.RequireReceiver);
+			SendMessage("TriggerSound");
 			//TODO: uncomment when message has receiver
 			//gameObject.SendMessage("TriggerSound");
 		}

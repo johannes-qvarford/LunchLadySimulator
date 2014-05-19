@@ -12,9 +12,9 @@ public class QueueControl : MonoBehaviour
 	private List<GameObject> npcs = new List<GameObject>();
 	private const float INFINITE = 10000;
 	private bool npcIsWaitingForFood = false;
-	private int actualNpcsInQueue = 0;
 	private GameObject firstInLine;
 	private float lastSpawnTime = 0;
+	private bool resetCreateNPCTimer = false;
 
 
 	private bool npcIsTurning = false;
@@ -84,17 +84,22 @@ public class QueueControl : MonoBehaviour
 	
 	private void NewNpcCreated()
 	{
-		if(npcs.Count < maxPhysicalNpcsInQueue)
+		if(resetCreateNPCTimer == false && npcs.Count < maxPhysicalNpcsInQueue)
 		{
 			AddNpcInPhysicalQueue();
 		}
-		actualNpcsInQueue++;
+		resetCreateNPCTimer = false;
 	}
 	
 	private void NpcDestroyed(GameObject npc)
 	{
 		npcs.Remove(npc);
-		actualNpcsInQueue--;
+		if(npcs.Count == 0)
+		{
+			resetCreateNPCTimer = true;
+			AddNpcInPhysicalQueue();
+			
+		}
 		GameObject.Destroy(npc);
 	}
 	
