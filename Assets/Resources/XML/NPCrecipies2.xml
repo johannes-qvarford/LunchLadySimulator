@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- xml template for customer #1 --> 
+<main>
+<type name="Jock">
+	<maindish>
+		<name>Soup</name>
+		<number>40</number>
+		<value>100</value>
+		<name>Soup</name>
+		<number>40</number>
+		<value>100</value>
+	</maindish>
+	<sideorder>
+		<name>Bread</name>
+		<number>1</number>
+		<value>25</value>
+		<name>Bread</name>
+		<number>1</number>
+		<value>25</value>
+	</sideorder>
+	<drink>
+		<name>Milk</name>
+		<number>1</number>
+		<value>15</value>
+		<name>Milk</name>
+		<number>1</number>
+		<value>15</value>
+	</drink>
+</type>
+
+<type name="Nerd">
+	<maindish>
+		<name>Soup</name>
+		<number>40</number>
+		<value>100</value>
+		<name>Soup</name>
+		<number>40</number>
+		<value>100</value>
+	</maindish>
+	<sideorder>
+		<name>Bread</name>
+		<number>1</number>
+		<value>25</value>
+		<name>Bread</name>
+		<number>1</number>
+		<value>25</value>
+	</sideorder>
+	<drink>
+		<name>Milk</name>
+		<number>1</number>
+		<value>15</value>
+		<name>Milk</name>
+		<number>1</number>
+		<value>15</value>
+	</drink>
+</type>
+
+<type name="Girl">
+	<maindish>
+		<name>Soup</name>
+		<number>40</number>
+		<value>100</value>
+		<name>Soup</name>
+		<number>40</number>
+		<value>100</value>
+	</maindish>
+	<sideorder>
+		<name>Bread</name>
+		<number>1</number>
+		<value>25</value>
+		<name>Bread</name>
+		<number>1</number>
+		<value>25</value>
+	</sideorder>
+	<drink>
+		<name>Milk</name>
+		<number>1</number>
+		<value>15</value>
+		<name>Milk</name>
+		<number>1</number>
+		<value>15</value>
+	</drink>
+</type>
+
+
+</main>

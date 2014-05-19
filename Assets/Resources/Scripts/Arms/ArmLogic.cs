@@ -212,6 +212,7 @@ public class ArmLogic : MonoBehaviour
 		heldGrabable.parent = handle;
 		heldGrabable.position += BEHAVIOUR.moveOffsetOnGrab;
 		Layers.SetLayerRecursive(heldGrabable, LayerMask.NameToLayer(Layers.CONTROL));
+		heldGrabable.Find("Shadow").gameObject.layer = LayerMask.NameToLayer(Layers.SHADOW_PLANE);
 	}
 	
 	private void GrabFromSpawnStack(GameObject stack)
@@ -230,7 +231,7 @@ public class ArmLogic : MonoBehaviour
 		heldGrabable.transform.parent = handle;
 		Debug.Log("offset " + OFFSET);
 		heldGrabable.transform.position += OFFSET;
-		heldGrabable.gameObject.layer = LayerMask.NameToLayer(Layers.CONTROL);
+		heldGrabable.gameObject.layer = LayerMask.NameToLayer(Layers.SHADOW_PLANE);
 	}
 	
 	private Collider[] GrabableSphereCast()
@@ -255,6 +256,7 @@ public class ArmLogic : MonoBehaviour
 	{
 		Layers.SetLayerRecursive(heldGrabable, Layers.INTERACT);
 		heldGrabable.gameObject.layer = LayerMask.NameToLayer(Layers.GRABABLE);
+		heldGrabable.Find("Shadow").gameObject.layer = LayerMask.NameToLayer(Layers.SHADOW_PLANE);
 		heldGrabable.parent = null;
 		heldGrabable.gameObject.AddComponent(typeof(Rigidbody));
 		heldGrabable.rigidbody.velocity = rigidbody.velocity * armsState.throwVelocityMul;

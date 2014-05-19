@@ -11,6 +11,8 @@ public class ArmPhysics : MonoBehaviour
 	private Vector3 lastPush = Vector3.zero;
 	private Transform otherHandle;
 	private SpringJoint otherJoint;
+	private SpringJoint joint;
+	private float shortestDistanceUntilSpring = 0;
 	private float oldSpring = 0;
 	
 	void FixedUpdate()
@@ -25,7 +27,6 @@ public class ArmPhysics : MonoBehaviour
 		else
 		{
 			{
-				
 				float Z_ROTATION = armsState.rotationAcceleration * -1 * //reverse z direction 
 					ArmInputManager.GetMovement(arm, ArmInputManager.HORIZONTAL) *  Convert.ToInt32(ArmInputManager.IsHeld(ArmInputManager.Z_ROTATION, arm)); 
 				float X_MOVEMENT = armsState.movementAcceleration * 
@@ -40,7 +41,10 @@ public class ArmPhysics : MonoBehaviour
 				int IUSE_Z_MOVEMENT = Convert.ToInt32(isAbsGreater(Z_MOVEMENT, Z_ROTATION));
 				
 				{
-					otherJoint.spring = IUSE_Z_ROTATION == 1 ? 0 : oldSpring;
+					Vector3 OFFSET = (otherHandle.position - transform.position);
+					float XY_MAGNITUDE = new Vector2(OFFSET.x, OFFSET.y).magnitude;
+					
+					otherJoint.spring = IUSE_Z_ROTATION == 1 || XY_MAGNITUDE < shortestDistanceUntilSpring ? 0 : oldSpring;
 					rigidbody.AddTorque(Vector3.forward * Z_ROTATION * IUSE_Z_ROTATION * armsState.rotationAcceleration);
 				}
 
@@ -133,7 +137,6 @@ public class ArmPhysics : MonoBehaviour
 	{
 		armsState = transform.parent.GetComponent(typeof(ArmsState)) as ArmsState;
 		handle = transform.Find(armsState.handleName);
-		
 	}
 	
 	private void ArmChanged(ArmInputManager.Arm a)
@@ -142,8 +145,10 @@ public class ArmPhysics : MonoBehaviour
 		arm = a;
 		//Debug.Log((arm == ArmInputManager.LEFT ? "RightArm" : "LeftArm")+ "/" + armsState.handleName);
 		otherHandle = transform.parent.Find((arm == ArmInputManager.LEFT ? "RightArm" : "LeftArm")+ "/" + armsState.handleName);
+		joint = GetComponent<SpringJoint>();
 		otherJoint = otherHandle.parent.GetComponent<SpringJoint>();
-		oldSpring = GetComponent<SpringJoint>().spring;
+		oldSpring = joint.spring;
+		shortestDistanceUntilSpring = joint.maxDistance;
 	}
 	
 	private bool isAbsGreater(float a, float b)
