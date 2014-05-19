@@ -12,6 +12,7 @@ public static class Layers
 	public const string HUMAN = "Human";
 	public const string SOUP = "Soup";
 	public const string SOUP_PLANE = "SoupPlane";
+	public const string SHADOW_PLANE = "ShadowPlane";
 	
 	public static int CombineLayerNames(params string[] names)
 	{
