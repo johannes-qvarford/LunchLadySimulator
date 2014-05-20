@@ -2,7 +2,8 @@
 using System.Collections;
 using FMOD.Studio;
 
-public class MusicPlayer : MonoBehaviour {
+public class MusicPlayer : MonoBehaviour 
+{
 
 	FMOD.Studio.EventInstance eMusic;
 	FMOD.Studio.ParameterInstance pVolume,pStresslevel,pState,pTrack;
@@ -29,7 +30,8 @@ public class MusicPlayer : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 		SetMusicVolume(vol);
 		eMusic.getPlaybackState(out status);
 		if(status == FMOD.Studio.PLAYBACK_STATE.STOPPED)
