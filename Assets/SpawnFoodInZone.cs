@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpawnFoodInZone : MonoBehaviour {
-	// Behövs "finkod" för bröd
+public class SpawnFoodInZone : MonoBehaviour 
+{
 	public GameObject spawnObject;
 	public GameObject foodObject;
 	public int items;
