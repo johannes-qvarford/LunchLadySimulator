@@ -16,6 +16,7 @@ GameObject:
   - 54: {fileID: 5400000}
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400004}
+  - 114: {fileID: 11400008}
   m_Layer: 12
   m_Name: Milk
   m_TagString: Food
@@ -270,6 +271,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_parent: {fileID: 400000}
+--- !u!114 &11400008
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcdc9feef1feaff448c52c2cda8f3041, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: .0249999985
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: .739491582
+      value: 1.08384979
+      inSlope: .712891042
+      outSlope: .712891042
+      tangentMode: 0
+    - time: 1
+      value: 1.01164258
+      inSlope: 1.56716454
+      outSlope: 1.56716454
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  popInSpeed: 1
+  smoke: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
