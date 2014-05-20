@@ -59,6 +59,38 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100006
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400006}
+  - 65: {fileID: 6500002}
+  m_Layer: 0
+  m_Name: HitPlane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &100008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400008}
+  - 65: {fileID: 6500004}
+  m_Layer: 0
+  m_Name: HitBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -66,9 +98,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.64315605, y: 1.62332463, z: -2.1377089}
+  m_LocalPosition: {x: 7.09750795, y: 2.11755562, z: -3.64491129}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 400008}
   - {fileID: 400004}
   - {fileID: 400002}
   m_Father: {fileID: 0}
@@ -90,9 +123,32 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .0455541611, y: -.0402376652, z: .816917062}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
+  m_Father: {fileID: 400000}
+--- !u!4 &400006
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100006}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .000410556793, y: .0870324075, z: 0}
+  m_LocalScale: {x: .584087372, y: 7.64278746, z: 9.37733746}
+  m_Children: []
+  m_Father: {fileID: 400008}
+--- !u!4 &400008
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100008}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.000367641449, y: -.00947761536, z: .00572752953}
+  m_LocalScale: {x: 1, y: .696468174, z: 1}
+  m_Children:
+  - {fileID: 400006}
   m_Father: {fileID: 400000}
 --- !u!23 &2300000
 Renderer:
@@ -205,6 +261,30 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .100000001, y: .129999995, z: .0900000036}
   m_Center: {x: 0, y: .00999999978, z: 0}
+--- !u!65 &6500002
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100006}
+  m_Material: {fileID: 13400000, guid: 6784bac0698ad294f90b6f273d378871, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .00999999978, y: .00999999978, z: .00999999978}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6500004
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100008}
+  m_Material: {fileID: 13400000, guid: 6784bac0698ad294f90b6f273d378871, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .100000001, y: .100000001, z: .100000001}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 2
@@ -290,20 +370,25 @@ MonoBehaviour:
       inSlope: 0
       outSlope: 0
       tangentMode: 0
-    - time: .739491582
-      value: 1.08384979
+    - time: .702768445
+      value: 1.13725972
       inSlope: .712891042
       outSlope: .712891042
       tangentMode: 0
+    - time: .84435755
+      value: .94391942
+      inSlope: .0697003901
+      outSlope: .0697003901
+      tangentMode: 0
     - time: 1
       value: 1.01164258
-      inSlope: 1.56716454
-      outSlope: 1.56716454
+      inSlope: -1.39196992
+      outSlope: -1.39196992
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-  popInSpeed: 1
-  smoke: {fileID: 0}
+  popInSpeed: 1.5
+  smoke: {fileID: 100000, guid: a629fbbf17444e843af1ef7ac03cfc16, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
