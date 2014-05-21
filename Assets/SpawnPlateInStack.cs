@@ -36,7 +36,7 @@ public class SpawnPlateInStack : MonoBehaviour
 		Collider[] temp = Physics.OverlapSphere(transform.position,0.5f,mask.value);
 		for(int i = 0;i <temp.Length;i++)
 		{
-			if(temp[i].gameObject.transform.parent.parent != null)
+			if(temp[i].gameObject.transform.parent != null && temp[i].gameObject.transform.parent.parent != null)
 			{
 				if(temp[i].gameObject.transform.parent.parent.tag == Tags.PLATE)
 				{	
