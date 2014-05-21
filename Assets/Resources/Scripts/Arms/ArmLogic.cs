@@ -95,7 +95,7 @@ public class ArmLogic : MonoBehaviour
 
 	void Update()
 	{
-		if(Input.GetKeyDown(KeyCode.Y) || Input.GetKeyDown(KeyCode.Joystick1Button9))
+		if(ArmInputManager.IsDown(ArmInputManager.Action.RESTART_LEVEL))
 		{
 			Application.LoadLevel(Application.loadedLevelName);
 		}
