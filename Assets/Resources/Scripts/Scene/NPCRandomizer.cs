@@ -5,6 +5,8 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;
 
+using System.Xml.Linq;
+using System.Linq;
 
 
 public class NPCRandomizer : MonoBehaviour {
@@ -15,7 +17,7 @@ public class NPCRandomizer : MonoBehaviour {
 	string loadFile;
 	public string[] categories = new string[20];
 	List<Category> categoryList = new List<Category>();
-	public bool newType = true;
+	public bool newType = false;
 
 
 
@@ -23,289 +25,276 @@ public class NPCRandomizer : MonoBehaviour {
 	private DishStruct currentSideOrder;
 	private DishStruct[] currentMainOrder;
 
+	
+
+	private string headstring = "head_kid1";
+	private string headstring2 = "head_kid";
 	// Use this for initialization
 	void Start () {
-		string dataString;
-		string value;
-		string spliter;
-		int counter = 0; //temporary for debug
 		
-		
-		loadFile = "NPCproperties.xml";
-		
-		
-		//StreamReader r = File.OpenText ("Assets/Resources/XML/" + loadFile);
-		
-		//dataString = r.ReadToEnd ();
-		TextAsset textAsset = (TextAsset) Resources.Load("XML/NPCproperties");
-		if(textAsset == null)
-		{
-			Debug.Log("null testAsset");
-		}
-		//XmlDocument xmldoc = new XmlDocument();
-		//xmldoc.LoadXml ( textAsset.text );
-		var sr = new StringReader (textAsset.text);
-		if(sr == null)
-		{
-			Debug.Log("null sr");
-		}
-		XmlReader reader = XmlReader.Create(sr);
-		
-		while (!reader.EOF) 
-		{
-			reader.ReadToFollowing ("category");
-			reader.MoveToFirstAttribute ();
-			value = reader.Value;
-			
-			if(value != "")
-			{	
-				categories[counter] = value;
-				categoryList.Add(new Category(value));
-				
-				
-				
-				reader.ReadToFollowing("skincolors");
-				reader.Read ();
-				spliter = reader.Value;
-				
-				string[] s = spliter.Split(' ');
-				for(int i = 0;i < s.Length;i++)
-				{
-					categoryList[counter].AddSkinColor(s[i]);
-				}
-				
-				
-				reader.ReadToFollowing("head");
-				reader.Read ();
-				spliter = reader.Value;
-				
-				s = spliter.Split(' ');
-				for(int i = 0;i < s.Length;i++)
-				{
-					categoryList[counter].AddHead(s[i]);
-				}
-				
-				
-				reader.ReadToFollowing("shirts");
-				do
-				{
-					reader.MoveToFirstAttribute ();
-					categoryList[counter].AddShirt(reader.Value);
-					reader.Read();
-					
-					spliter = reader.Value;
-					s = spliter.Split(' ');
-					foreach(string p in s){
-						categoryList[counter].AddShirtColor(p);
-					}
-					reader.Read();
-					reader.Read();
-					reader.Read();
-					
-					
-				}while(reader.Name == "shirts");
-				
-				
-				
-				do
-				{
-					reader.MoveToFirstAttribute ();
-					categoryList[counter].AddAccessory(reader.Value);
-					reader.Read();
-					
-					spliter = reader.Value;
-					s = spliter.Split(' ');
-					foreach(string p in s){
-						categoryList[counter].AddAccessoryColor(p);
-					}
-					reader.Read();
-					reader.Read();
-					reader.Read();
-					
-					
-				}while(reader.Name == "accessory");
-				
-				
-				do
-				{
-					reader.MoveToFirstAttribute ();
-					categoryList[counter].AddHair (reader.Value);
-					
-					reader.Read();
-					
-					spliter = reader.Value;
-					
-					s = spliter.Split(' ');
-					foreach(string p in s){
-						categoryList[counter].AddHairColor(p);
-					}
-					reader.Read();
-					reader.Read();
-					reader.Read();
-					
-					
-				}while(reader.Name == "hair");
-				
-				//--HAIR END
-				
-				
-				//reader.ReadToFollowing("preferenceType");
-				reader.Read ();
-				spliter = reader.Value;
-				categoryList[counter].setPreferenceType(spliter);
-				
-				reader.ReadToFollowing("preferenceAmount");
-				reader.Read ();
-				spliter = reader.Value;
-				categoryList[counter].setPreferenceAmount(spliter);
-				
-				
-				reader.ReadToFollowing("perfection");
-				reader.Read ();
-				spliter = reader.Value;
-				categoryList[counter].setPerfection(spliter);
-				
-				reader.ReadToFollowing("patience");
-				reader.Read ();
-				spliter = reader.Value;
-				categoryList[counter].setPatience(spliter);
-				
-				
-				
-				//	categoryList[counter].writeProperties();
-				
-			}
-			counter++;
-		}
-		
-		
-		// recipie XML
-		
-		
-		//loadFile = "NPCrecipies.xml";
-		//r = File.OpenText ("Assets/Resources/XML/" + loadFile);
-		//dataString = r.ReadToEnd ();
-		
-		textAsset = (TextAsset) Resources.Load("XML/NPCrecipies");
-		//XmlDocument xmldoc = new XmlDocument();
-		//xmldoc.LoadXml ( textAsset.text );
-		reader = XmlReader.Create (new StringReader (textAsset.text));
-		
-		//reader = XmlReader.Create (new StringReader (dataString));
-		while (!reader.EOF) 
-		{
-			reader.ReadToFollowing ("type");
-			reader.MoveToFirstAttribute ();
-			value = reader.Value;
-			
-			if(value != "")
-			{
-				int offset = 0;
-				string[] s;
-				for(int i = 0;i < categoryList.Count;i++)
-				{
-					if(categoryList[i].GetName() == value)
-					{
-						offset = i;
-						i = categoryList.Count;
-					}
-				}
-				
-
-				reader.ReadToFollowing("maindish");
-				
-				
-				while(reader.Name == "maindish")
-				{
-					List<DishStruct> dishList = new List<DishStruct>();
-					reader.Read();	//<name>
-					while(reader.Name == "name")
-					{
-						DishStruct dish = new DishStruct();
-						reader.Read();	//Soup
-						dish.dish = reader.Value;
-						reader.ReadToFollowing("number");
-						reader.Read();	//20
-						dish.number =  int.Parse(reader.Value);
-						reader.ReadToFollowing("value");
-						reader.Read();	//100
-						dish.baseValue = int.Parse(reader.Value);
-						reader.Read();	//</value>
-						reader.Read();	//NewLine
-						reader.Read();	//<name> OR </maindish>
-						dishList.Add (dish);
-					}
-					reader.Read();	//New line
-					reader.Read();	//<maindish> OR <SideOrder>
-					//Old code
-					//s = spliter.Split(' ');	
-					categoryList[offset].AddMainOrder(dishList.ToArray());
-				}
-				
-				while(reader.Name == "sideorder")
-				{
-					DishStruct dish = new DishStruct();
-					reader.Read();	//<name>
-					reader.Read();	//Bread
-					dish.dish = reader.Value;
-					reader.ReadToFollowing("number");
-					reader.Read();	//1
-					dish.number = int.Parse(reader.Value);
-					reader.ReadToFollowing("value");
-					reader.Read();	//50
-					dish.baseValue = int.Parse(reader.Value);
-
-					//spliter = reader.Value;
-					categoryList[offset].AddSideOrder(dish);
-					reader.Read();	//</value>
-					reader.Read();	//New line
-					reader.Read();	//</sideorder>
-					reader.Read();	//New line
-					reader.Read();	//<sideorder> OR <drink>
-
-				}
-				while(reader.Name == "drink")
-				{
-					DishStruct dish = new DishStruct();
-					reader.Read();	//<name>
-					reader.Read();	//Milk
-					dish.dish = reader.Value;
-					reader.ReadToFollowing("number");
-					reader.Read();	//1
-					dish.number = int.Parse(reader.Value);
-					reader.ReadToFollowing("value");
-					reader.Read();	//50
-					dish.baseValue = int.Parse(reader.Value);
-					reader.Read();	//</value>
-					reader.Read();	//New line
-					reader.Read();	//</drink>
-					reader.Read();	//New line
-					reader.Read();	//<drink> OR </type>
-
-					categoryList[offset].AddDrink(dish);
-					
-				}
-				
-				
-				
-			}
-			
-		}
-		
-		
-		/*	for (int i = 0; i < categoryList.Count; i++) {
-			categoryList[i].WriteRecipies();
-		}*/
-		
-		
-		
-		
-		newType = true;
+		LoadNPCProperties();
+		LoadNPCRecipies();
+		randomizeNPC();		
 		
 		
 		
 	}
+
+
+	private void LoadNPCRecipies()
+	{
+		
+		int offset = 0;
+		
+		XElement xmlRandomizerString = XElement.Load("Assets/Resources/XML/NPCrecipies.xml");
+		
+		IEnumerable<XElement> types = xmlRandomizerString.Elements();
+		foreach(var type in types)
+		{	
+			offset = -1;
+			for(int i = 0;i < categoryList.Count;i++)
+			{
+				if(categoryList[i].GetName() == type.FirstAttribute.Value)
+				{
+					offset = i;
+					i = categoryList.Count;
+				}
+			}
+			
+
+			if(offset == -1)
+			{	
+				Debug.Log("ERROR LOADING RECIPIES FOR TYPE: " + type.FirstAttribute.Value);
+			}
+			else
+			{
+
+				LoadMainDishes(type,offset);
+				LoadSideOrders(type,offset);
+				LoadDrinks(type,offset);
+			}
+		} 
+		
+	}	
+
+
+
+	private void LoadMainDishes(XElement type, int offset)
+	{	
+		var maindishes = type.Element("maindishes");
+		foreach(var maindish in maindishes.Elements("maindish"))
+		{
+			List<DishStruct> dishList = new List<DishStruct>();
+			foreach(var name in maindish.Elements("name"))
+			{	
+				DishStruct dish = new DishStruct();
+				dish.dish = name.FirstAttribute.Value;
+				var number = name.Element ("number");
+				dish.number = int.Parse(number.Value);
+				var value = name.Element("value");
+				dish.baseValue = int.Parse(value.Value);
+				
+				dishList.Add (dish);
+			}
+			categoryList[offset].AddMainOrder(dishList.ToArray());
+		}
+
+	}
+
+
+	private void LoadSideOrders(XElement type, int offset)
+	{
+		var sideorders = type.Element ("sideorders");
+		foreach (var sideorder in sideorders.Elements("sideorder"))
+		{
+			DishStruct dish = new DishStruct();
+			
+			dish.dish = sideorder.FirstAttribute.Value;
+			var number = sideorder.Element ("number");
+			dish.number = int.Parse(number.Value);
+			var value = sideorder.Element("value");
+			dish.baseValue = int.Parse(value.Value);
+			categoryList[offset].AddSideOrder(dish);
+		}
+		
+	}
+
+
+	private void LoadDrinks(XElement type, int offset)
+	{
+		var drinks = type.Element ("drinks");	
+		foreach (var drink in drinks.Elements("drink"))
+		{
+			
+			DishStruct dish = new DishStruct();	
+			
+			dish.dish = drink.FirstAttribute.Value;
+			var number = drink.Element ("number");
+			dish.number = int.Parse(number.Value);
+			var value = drink.Element("value");
+			dish.baseValue = int.Parse(value.Value);
+			categoryList[offset].AddDrink(dish);
+			
+		}
+
+	}
+
+
 	
+
+
+
+
+	private void LoadNPCProperties()
+	{
+		
+		XElement xmlRandomizerString = XElement.Load("Assets/Resources/XML/NPCproperties.xml");
+		IEnumerable<XElement> categories = xmlRandomizerString.Elements();
+		
+		int i = 0;
+
+		
+
+		foreach (var category in categories) 
+		{
+			categoryList.Add(new Category(category.FirstAttribute.Value));
+			
+			LoadSkinColor(category,i);
+			LoadHeads (category,i);
+			LoadClothes(category,i);
+			LoadAccesories(category,i);
+			LoadHairs(category,i);
+			LoadPreferenceTypes(category,i);
+			LoadPreferenceAmounts(category,i);
+			LoadPerfections(category,i);
+			LoadPatience(category,i);
+			i++;
+		}
+		
+		
+		
+
+
+	
+
+	}
+
+
+	
+	private void LoadSkinColor(XElement category, int counter)
+	{
+		var skincolors = category.Element ("skincolors");
+		foreach(var skincolor in skincolors.Elements ("skincolor"))
+		{
+			categoryList[counter].AddSkinColor(skincolor.Value);
+		
+		}
+
+	}
+	
+
+	private void LoadHeads(XElement category, int counter)
+	{	
+		var heads = category.Element ("heads");
+		foreach(var head in heads.Elements ("head"))
+		{
+			categoryList[counter].AddHead (head.Value);
+		
+		}	
+
+	}
+
+	
+	private void LoadClothes(XElement category, int counter)
+	{
+		var clothes = category.Element ("clothes");
+		foreach (var clothestype in clothes.Elements("clothestype")){
+			categoryList[counter].AddClothes(clothestype.FirstAttribute.Value);
+			
+			foreach(var texture in clothestype.Elements("texture")){
+				categoryList[counter].AddClothesColor(texture.Value);
+			
+			}				
+		}		
+
+	}
+
+	private void LoadAccesories(XElement category, int counter)
+	{
+		var accessories = category.Element ("accessories");		
+		foreach(var accessory in accessories.Elements ("accessory"))
+		{
+			categoryList[counter].AddAccessory(accessory.FirstAttribute.Value);
+			
+			foreach(var texture in accessory.Elements("texture"))
+			{
+				categoryList[counter].AddAccessoryColor(texture.Value);
+			
+			}
+			
+		}
+	}
+
+	private void LoadHairs(XElement category, int counter)
+	{
+		var hairs = category.Element ("hairs");
+		foreach(var hair in hairs.Elements("hair"))
+		{
+			categoryList[counter].AddHair (hair.FirstAttribute.Value);
+			
+			foreach(var texture in hair.Elements ("texture"))
+			{
+				categoryList[counter].AddHairColor(texture.Value);
+				
+			}
+		}
+	}
+
+	private void LoadPreferenceTypes(XElement category, int counter)
+	{
+		var preferenceTypes = category.Element ("preferenceTypes");
+		foreach(var preferenceType in preferenceTypes.Elements("preferenceType"))
+		{
+			categoryList[counter].setPreferenceType(preferenceType.Value);
+			
+		}
+		
+	}
+	
+	private void LoadPreferenceAmounts(XElement category, int counter)
+	{
+		var preferenceAmounts = category.Element ("preferenceAmounts");
+		foreach(var preferenceAmount in preferenceAmounts.Elements("preferenceAmount"))
+		{
+			categoryList[counter].setPreferenceAmount(preferenceAmount.Value);
+			
+		}
+	}
+
+	private void LoadPerfections(XElement category, int counter)
+	{
+		var perfections = category.Element ("perfections");
+		foreach(var perfection in perfections.Elements("perfection"))
+		{
+			categoryList[counter].setPerfection(perfection.Value);
+			
+		}
+
+	}
+
+	private void LoadPatience(XElement category, int counter)
+	{
+		var patiences = category.Element ("patiences");
+		foreach(var patience in patiences.Elements("patience"))
+		{
+			categoryList[counter].setPatience(patience.Value);
+			
+		}
+		
+	}
+
+
+
 	// Update is called once per frame
 	void Update () {
 
@@ -313,42 +302,37 @@ public class NPCRandomizer : MonoBehaviour {
 		{
 		
 			newType = false;
-			int type = Random.Range(0,categoryList.Count);
-			ChangeClothes(type);
-			ChangeHead(type);
-			ChangeSkinColor(type);
-			ChangeHair(type);
-			
-			
-
-			
-			currentMainOrder = categoryList[type].GetRandomMainOrder();
-		
-			currentSideOrder = categoryList[type].GetRandomSideOrder();
-		
-			currentDrink = categoryList[type].GetRandomDrink();
-
-			transform.GetComponent<NpcBehaviour>().faceready = true;
-			updateSpeachBubble();
+			randomizeNPC();
 		}
-	}
-	private void updateSpeachBubble()
-	{
-	/*
-	private DishStruct currentDrink;
-	private DishStruct currentSideOrder;
-	private DishStruct[] currentMainOrder;
-	*/
-		SpeechBubble speechBubble = transform.FindChild("SpeechBubble").GetComponent<SpeechBubble>();
+		
 
-		speechBubble.displayFood (currentDrink.dish);
-		speechBubble.displayFood (currentSideOrder.dish);
-		foreach(DishStruct dishStruct in currentMainOrder)
-		{
-			speechBubble.displayFood (dishStruct.dish);
-		}
+
+
+		
 	}
 	
+
+	public void randomizeNPC()
+	{
+		
+		int type = Random.Range(0,categoryList.Count);
+		ChangeClothes(type);
+		ChangeHead(type);
+		ChangeSkinColor(type);
+		ChangeHair(type);
+		
+		
+		
+		
+		currentMainOrder = categoryList[type].GetRandomMainOrder();
+		
+		currentSideOrder = categoryList[type].GetRandomSideOrder();
+		
+		currentDrink = categoryList[type].GetRandomDrink();
+
+		transform.GetComponent<NpcBehaviour>().setFaceReady(true,headstring);
+	}
+
 
 	private void ChangeHair(int type)
 	{
@@ -357,7 +341,7 @@ public class NPCRandomizer : MonoBehaviour {
 		
 		GameObject Hair = (GameObject)Resources.Load("Prefabs/NPCParts/"+hairType);
 		GameObject setHair = GameObject.Instantiate(Hair) as GameObject;
-		GameObject refHead =  transform.Find("Customer_Kid/Hips 1/Spine/Spine1/Spine2/Neck/Head 1/head_kid").gameObject;
+		GameObject refHead =  transform.Find("Customer_Kid/Hips 1/Spine/Spine1/Spine2/Neck/Head 1/"+headstring).gameObject;
 		setHair.transform.position = transform.position;
 		setHair.transform.parent = refHead.transform;
 		
@@ -387,13 +371,13 @@ public class NPCRandomizer : MonoBehaviour {
 		
 		Material newMaterialPrefab = Resources.Load("Materials/NPCMaterials/"+categoryList[type].GetRandomSkinColor(), typeof(Material)) as Material;
 		Material skinColor = new Material(newMaterialPrefab);
-		GameObject refObj =  transform.Find("Customer_Kid/Hips 1/Spine/Spine1/Spine2/Neck/Head 1/head_kid").gameObject;
+		GameObject refObj =  transform.Find("Customer_Kid/Hips 1/Spine/Spine1/Spine2/Neck/Head 1/"+headstring).gameObject;
 		MeshRenderer[] obj;
 		obj = refObj.transform.GetComponentsInChildren<MeshRenderer>();
 		
 		foreach (MeshRenderer b in obj) 
 		{
-			Debug.Log (b.ToString ());
+			
 			
 			b.material = skinColor;
 		}
@@ -402,7 +386,7 @@ public class NPCRandomizer : MonoBehaviour {
 		
 		foreach (SkinnedMeshRenderer b in obj1) 
 		{
-			Debug.Log (b.ToString ());
+			
 			
 			b.material = skinColor;
 		}
@@ -422,12 +406,17 @@ public class NPCRandomizer : MonoBehaviour {
 		GameObject head = (GameObject)Resources.Load("Prefabs/NPCParts/"+headType);
 		GameObject switchHead = GameObject.Instantiate(head) as GameObject;
 		
-		GameObject refHead =  transform.Find("Customer_Kid/Hips 1/Spine/Spine1/Spine2/Neck/Head 1/head_kid1").gameObject;
+		GameObject refHead =  transform.Find("Customer_Kid/Hips 1/Spine/Spine1/Spine2/Neck/Head 1/"+headstring).gameObject;
 		
 		switchHead.transform.position = refHead.transform.position;
 		switchHead.transform.rotation = refHead.transform.rotation;
 		switchHead.transform.parent = refHead.transform.parent;
-		switchHead.name = "head_kid";
+		
+		string temp = headstring;
+		headstring = headstring2;
+		headstring2 = temp;
+		switchHead.name = headstring;
+		
 		GameObject.Destroy(refHead); 
 		
 	}
@@ -439,16 +428,42 @@ public class NPCRandomizer : MonoBehaviour {
 	private void ChangeClothes(int type)
 	{
 		string clothesType = categoryList[type].GetRandomShirt();
-		GameObject obj1 = (GameObject)Resources.Load("Prefabs/NPCParts/"+clothesType);
-		obj1 = obj1.transform.Find("clothes_mesh").gameObject;
-		GameObject obj = transform.Find("Clothes/Clothes_Mesh").gameObject;
+		GameObject clothes = (GameObject)Resources.Load("Prefabs/NPCParts/"+clothesType);
+	//	obj1 = obj1.transform.Find("clothes_mesh").gameObject;
+	//	GameObject obj = transform.Find("Clothes/Clothes_Mesh").gameObject;
+		
+		GameObject switchClothes = GameObject.Instantiate (clothes) as GameObject;
+
+		GameObject refClothes = transform.Find ("Clothes").gameObject;
+		
+		switchClothes.transform.position = refClothes.transform.position;
+		
+		switchClothes.transform.parent = refClothes.transform.parent;
+		switchClothes.transform.rotation = transform.rotation;
+		
+		Vector3 positionOffset = new Vector3(0.0139f,0.0049f, 0.0039f);
+		//switchClothes.transform.localPosition = positionOffset;
+		switchClothes.name = "Clothes";
 		
 		
-		obj.GetComponent<SkinnedMeshRenderer>().sharedMesh = obj1.GetComponent<SkinnedMeshRenderer>().sharedMesh;
+
+		
+		
+		GameObject.Destroy(refClothes);
+	//	obj.GetComponent<SkinnedMeshRenderer>().sharedMesh = obj1.GetComponent<SkinnedMeshRenderer>().sharedMesh;
 		
 		Material newMaterialPrefab = Resources.Load("Materials/NPCMaterials/"+categoryList[type].GetRandomShirtColor(clothesType), typeof(Material)) as Material;
 		Material clothesMaterial = new Material(newMaterialPrefab);
-		obj.renderer.material = clothesMaterial;
+		switchClothes = switchClothes.transform.Find ("clothes_mesh").gameObject;
+		switchClothes.GetComponent<SkinnedMeshRenderer>().rootBone = transform.Find ("Customer_Kid/Hips 1");
+		switchClothes.GetComponent<SkinnedMeshRenderer>().material = clothesMaterial;
+		
+		Material[] s = switchClothes.GetComponent<SkinnedMeshRenderer>().materials;
+		if(s.Length > 1)
+		{
+			s[1] = clothesMaterial;
+		}
+		switchClothes.GetComponent<SkinnedMeshRenderer>().materials = s;
 		
 	}
 
@@ -480,7 +495,7 @@ class Category{
 	List<string> hairColor = new List<string>();
 	
 	List<textureLinker> hairList = new List<textureLinker>();
-	List<textureLinker> shirtList = new List<textureLinker>();	
+	List<textureLinker> clothesList = new List<textureLinker>();	
 	List<textureLinker> accessoryList = new List<textureLinker>();
 	
 	//food Lists
@@ -529,16 +544,16 @@ class Category{
 	}
 	public string GetRandomShirt()
 	{
-		int value = shirtList.Count;
-		return shirtList[Random.Range(0,value)].GetType();
+		int value = clothesList.Count;
+		return clothesList[Random.Range(0,value)].GetType();
 	}
 	
 	public string GetRandomShirtColor(string type)
 	{
 		int value = 0;
-		for (int i = 0; i < shirtList.Count; i++) {
-			if(shirtList[i].GetType() == type){
-				return shirtList[i].getRandomTexture();
+		for (int i = 0; i < clothesList.Count; i++) {
+			if(clothesList[i].GetType() == type){
+				return clothesList[i].getRandomTexture();
 			}
 		}
 		
@@ -657,13 +672,13 @@ class Category{
 	{
 		this.head.Add (head);
 	}
-	public void AddShirt(string shirt)
+	public void AddClothes(string shirt)
 	{
-		shirtList.Add (new textureLinker (shirt));
+		clothesList.Add (new textureLinker (shirt));
 	}
-	public void AddShirtColor(string shirtColor)
+	public void AddClothesColor(string shirtColor)
 	{
-		shirtList[shirtList.Count-1].AddTexture (shirtColor);
+		clothesList[clothesList.Count-1].AddTexture (shirtColor);
 	}
 	public void AddAccessory(string accessory)
 	{

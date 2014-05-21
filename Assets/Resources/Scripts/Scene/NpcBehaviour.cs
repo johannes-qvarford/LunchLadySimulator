@@ -16,8 +16,9 @@ public class NpcBehaviour : MonoBehaviour
 	protected Animator animatorClothes;
 	public SpeechBubble speechBubble;
 	public int animationFaceInt = 0;
-	public bool faceready = false;
 
+	public bool faceready = false;
+	private string face = "";
 	
 	protected Animator faceAnimator;
 	private bool sidewaysrot = false;
@@ -41,7 +42,7 @@ public class NpcBehaviour : MonoBehaviour
 				if(queueControl != null)
 				{
 					queueControl.SendMessage("NpcStopped", gameObject, SendMessageOptions.RequireReceiver);
-					ShowSpeechBubble();
+					speechBubble.display();
 				}
 				break;
 			case Tags.TURN:
@@ -71,7 +72,7 @@ public class NpcBehaviour : MonoBehaviour
 		
 		if (faceready) 
 		{
-			GameObject fgo = transform.Find ("Customer_Kid/Hips 1/Spine/Spine1/Spine2/Neck/Head 1/head_kid").gameObject;
+			GameObject fgo = transform.Find ("Customer_Kid/Hips 1/Spine/Spine1/Spine2/Neck/Head 1/"+face).gameObject;
 			faceAnimator = fgo.GetComponent<Animator> ();
 		}
 
@@ -109,7 +110,7 @@ public class NpcBehaviour : MonoBehaviour
 			
 			if(animator.GetCurrentAnimatorStateInfo(0).IsName("Turn")){
 				animator.applyRootMotion = true;
-				
+			//	animatorClothes.applyRootMotion = true;
 				
 				
 				
@@ -130,6 +131,7 @@ public class NpcBehaviour : MonoBehaviour
 		case 2:
 			animator.applyRootMotion = false;
 			animator.SetInteger("animation",1);
+		//	animatorClothes.applyRootMotion = false;
 			animatorClothes.SetInteger("animation",1);
 			
 			
@@ -209,8 +211,21 @@ public class NpcBehaviour : MonoBehaviour
 		queueControl = g;
 	}
 	
-	private void ShowSpeechBubble()
+	private void ShowSpeechBubble(bool on)
 	{
-		speechBubble.display();
+		if(speechBubble == null)
+		{
+			Debug.LogError("no speechbubble found");
+		}
+		speechBubble.gameObject.SetActive(on);
 	}
+
+
+	public void setFaceReady(bool ready, string faceChange)
+	{
+		faceready = ready;
+		face = faceChange;
+	}
+
+
 }
