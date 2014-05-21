@@ -458,7 +458,12 @@ public class NPCRandomizer : MonoBehaviour {
 		switchClothes.GetComponent<SkinnedMeshRenderer>().rootBone = transform.Find ("Customer_Kid/Hips 1");
 		switchClothes.GetComponent<SkinnedMeshRenderer>().material = clothesMaterial;
 		
-	
+		Material[] s = switchClothes.GetComponent<SkinnedMeshRenderer>().materials;
+		if(s.Length > 1)
+		{
+			s[1] = clothesMaterial;
+		}
+		switchClothes.GetComponent<SkinnedMeshRenderer>().materials = s;
 		
 	}
 

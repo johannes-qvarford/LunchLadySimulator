@@ -74,7 +74,7 @@
 	
 	
 	<clothes> 
-		<clothestype name="kid_clothes_3">
+		<clothestype name="kid_clothes_2">
 			<texture>shirt_color_3</texture>
 		</clothestype>
 	</clothes>
