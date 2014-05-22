@@ -64,6 +64,7 @@ public class QueueControl : MonoBehaviour
 			{
 				firstInLine.BroadcastMessage("ShowSpeechBubble", false, SendMessageOptions.RequireReceiver);
 				firstInLine.BroadcastMessage("NpcGotFood", SendMessageOptions.RequireReceiver);
+				
 				foreach(GameObject g in npcs)
 				{
 					g.SendMessage("MoveChanged", true, SendMessageOptions.RequireReceiver);
@@ -125,5 +126,7 @@ public class QueueControl : MonoBehaviour
 		firstInLine = npc;
 		npc.SendMessage("MoveChanged", false, SendMessageOptions.RequireReceiver);
 		npc.SendMessage("ShowSpeechBubble", true, SendMessageOptions.RequireReceiver);
+		npc.SendMessage("SetState",1,SendMessageOptions.RequireReceiver);
+		npc.SendMessage("TriggerSound",SendMessageOptions.RequireReceiver);
 	}
 }

@@ -8,7 +8,6 @@ public class CheckPlateInStack : MonoBehaviour {
 	void Start () 
 	{
 		constrain = rigidbody.constraints;
-		Debug.Log(stack.GetComponent<BoxCollider>().bounds);
 	}
 	
 

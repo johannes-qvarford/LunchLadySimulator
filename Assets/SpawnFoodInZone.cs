@@ -50,10 +50,6 @@ public class SpawnFoodInZone : MonoBehaviour
 				}
 			}
 		}
-		if(Input.GetKeyDown(KeyCode.N))
-		{
-			Debug.Log(spawnObject.collider.bounds.size.magnitude);
-		}
 	}
 	IEnumerator SpawnFood()
 	{

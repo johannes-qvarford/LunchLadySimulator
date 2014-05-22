@@ -56,11 +56,11 @@ public class SoundCheck : MonoBehaviour {
 	}
 	void TriggerSound()
 	{
-		if(status != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-		{
-			ChangeParameter();
+		//if(status != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+		//{
+			//ChangeParameter();
 			eSound.start ();
-		}
+		//}
 	}
 	void OnDisable()
 	{
@@ -88,16 +88,22 @@ public class SoundCheck : MonoBehaviour {
 	}
 	void SetVolume(float vol)
 	{
-		pVolume.setValue(vol);
+		volume = vol;
+		pVolume.setValue(volume);
 	}
 	
 	void SetMood(float iMood)
 	{
-		pMood.setValue(iMood);
+		mood = iMood;
+		pMood.setValue(mood);
 	}
 	
-	void setState(float iState)
+	void SetState(float iState)
 	{
-		pState.setValue(iState);
+		if(valid[0])
+		{	
+			state = iState;
+			pState.setValue(state);
+		}
 	}
 }

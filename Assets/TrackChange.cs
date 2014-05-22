@@ -3,7 +3,6 @@ using System.Collections;
 
 public class TrackChange : MonoBehaviour {
 
-	public GameObject music;
 	public float track;
 	void Start () {
 	
@@ -11,6 +10,6 @@ public class TrackChange : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		music.SendMessage("setTrack",track,SendMessageOptions.RequireReceiver);
+		SendMessage("SetTrack",track,SendMessageOptions.RequireReceiver);
 	}
 }
