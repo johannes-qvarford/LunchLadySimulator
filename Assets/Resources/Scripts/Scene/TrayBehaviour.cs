@@ -55,9 +55,7 @@ public class TrayBehaviour : MonoBehaviour
 		{
 			if(foodCount.TryGetValue(mainOrder[i].dish, out temp))
 			{
-
 				score += (int)((float)mainOrder[i].baseValue * Mathf.Clamp(0, 1, (float)temp / (float)mainOrder[i].number));
-
 			}
 			maxScore += mainOrder[i].baseValue;
 		}
@@ -66,14 +64,14 @@ public class TrayBehaviour : MonoBehaviour
 			score += (int)((float)sideOrder.baseValue * Mathf.Clamp(0, 1, (float)temp / (float)sideOrder.number));
 
 		}
-
 		maxScore += sideOrder.baseValue;
+		
 		if(foodCount.TryGetValue(drink.dish, out temp))
 		{
 			score += (int)((float)drink.baseValue * Mathf.Clamp(0, 1, (float)temp / (float)drink.number));
-			maxScore += drink.number;
 		}
 		maxScore += drink.baseValue;
+		
 		customerCounter.spawnScore(1);
 		score = (int)Mathf.Ceil(score * timeMultiplier);
 		scoreHandeling.addScore(score, (int)Mathf.Floor(maxScore * dificulty));
