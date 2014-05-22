@@ -16,7 +16,8 @@ public static class Tags
 	public const string FOOD_PLATE = "FoodPlate";
 	public const string DESTROY = "Destroy";
 	public const string STOP = "Stop";
-	public const string TURN = "Turn";	
+	public const string TURN = "Turn";
+	public const string GUISOUND = "GuiSound";	
 
 	public static Transform FindWithTagRecursive(Transform t, string tag)
 	{

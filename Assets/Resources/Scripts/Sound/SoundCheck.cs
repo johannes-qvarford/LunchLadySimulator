@@ -5,7 +5,8 @@ public class SoundCheck : MonoBehaviour {
 
 	FMOD.Studio.EventInstance eSound;
 	FMOD.Studio.ParameterInstance pVolume,pState,pMood;
-	public float state,mood,volume;
+	public float volume;
+	public float state,mood;
 	public FMODAsset path;
 	private FMOD.Studio.PLAYBACK_STATE status; 
 	private bool [] valid = new bool[3];
@@ -54,11 +55,11 @@ public class SoundCheck : MonoBehaviour {
 			}
 		}
 	}
-	void TriggerSound()
+	public void TriggerSound()
 	{
 		//if(status != FMOD.Studio.PLAYBACK_STATE.PLAYING)
 		//{
-			//ChangeParameter();
+			ChangeParameter();
 			eSound.start ();
 		//}
 	}
@@ -86,24 +87,34 @@ public class SoundCheck : MonoBehaviour {
 			pMood.setValue(mood);
 		}
 	}
-	void SetVolume(float vol)
+	public void SetVolume(float vol)
 	{
 		volume = vol;
 		pVolume.setValue(volume);
 	}
 	
-	void SetMood(float iMood)
+	public void SetMood(int iMood)
 	{
 		mood = iMood;
 		pMood.setValue(mood);
 	}
 	
-	void SetState(float iState)
+	public void SetState(int iState)
 	{
 		if(valid[0])
 		{	
 			state = iState;
 			pState.setValue(state);
 		}
+	}
+	FMOD.Studio.PLAYBACK_STATE GetPlayBackState()
+	{
+		eSound.getPlaybackState(out status);
+		return status;
+	}
+	public float GetState()
+	{
+		pState.getValue(out state);
+		return state;
 	}
 }

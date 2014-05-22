@@ -22,7 +22,7 @@ TagManager:
   - Grabable
   - Turn
   - SpawnArea
-  - 
+  - GuiSound
   - 
   - 
   Builtin Layer 0: Default

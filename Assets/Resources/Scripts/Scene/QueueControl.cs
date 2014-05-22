@@ -19,7 +19,7 @@ public class QueueControl : MonoBehaviour
 
 	private bool npcIsTurning = false;
 	private bool moveTurnQue = false;
-	
+		
 	void Start()
 	{
 		InvokeRepeating("NewNpcCreated", startTime, repeatTime);
@@ -62,8 +62,12 @@ public class QueueControl : MonoBehaviour
 			
 			if(ArmInputManager.IsDown(ArmInputManager.Action.NEXT_CUSTOMER))
 			{
+				firstInLine.GetComponent<SoundCheck>().SetState(0);
+				firstInLine.GetComponent<SoundCheck>().SetState(3);
 				firstInLine.BroadcastMessage("ShowSpeechBubble", false, SendMessageOptions.RequireReceiver);
 				firstInLine.BroadcastMessage("NpcGotFood", SendMessageOptions.RequireReceiver);
+		
+				firstInLine.SendMessage("TriggerSound",SendMessageOptions.RequireReceiver);
 				
 				foreach(GameObject g in npcs)
 				{
@@ -124,9 +128,10 @@ public class QueueControl : MonoBehaviour
 	{
 		npcIsWaitingForFood = true;
 		firstInLine = npc;
+		Debug.Log("Greetings");
+		npc.GetComponent<SoundCheck>().SetState(1);
 		npc.SendMessage("MoveChanged", false, SendMessageOptions.RequireReceiver);
 		npc.SendMessage("ShowSpeechBubble", true, SendMessageOptions.RequireReceiver);
-		npc.SendMessage("SetState",1,SendMessageOptions.RequireReceiver);
 		npc.SendMessage("TriggerSound",SendMessageOptions.RequireReceiver);
 	}
 }
