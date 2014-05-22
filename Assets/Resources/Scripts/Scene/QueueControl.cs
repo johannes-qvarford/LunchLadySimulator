@@ -60,7 +60,7 @@ public class QueueControl : MonoBehaviour
 				lastPosition = npc.transform.position;
 			}
 			
-			if(ArmInputManager.IsDown(ArmInputManager.Action.RESTART_LEVEL))
+			if(ArmInputManager.IsDown(ArmInputManager.Action.NEXT_CUSTOMER))
 			{
 				firstInLine.BroadcastMessage("ShowSpeechBubble", false, SendMessageOptions.RequireReceiver);
 				firstInLine.BroadcastMessage("NpcGotFood", SendMessageOptions.RequireReceiver);
