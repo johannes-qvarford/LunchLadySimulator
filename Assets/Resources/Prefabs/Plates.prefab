@@ -2576,6 +2576,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100288
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400288}
+  - 65: {fileID: 6500212}
+  m_Layer: 0
+  m_Name: MaxPlates
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -4123,6 +4139,7 @@ Transform:
   m_Children:
   - {fileID: 400260}
   - {fileID: 400254}
+  - {fileID: 400288}
   m_Father: {fileID: 400000}
 --- !u!4 &400258
 Transform:
@@ -4303,6 +4320,17 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400260}
+--- !u!4 &400288
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100288}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .905778885, y: -.534916401, z: .252989769}
+  m_LocalScale: {x: 1.09797657, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 400256}
 --- !u!23 &2300000
 Renderer:
   m_ObjectHideFlags: 1
@@ -9132,6 +9160,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .00999999978, y: .25999999, z: .100000001}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &6500212
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100288}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.1500001, y: 1, z: 1.5}
+  m_Center: {x: 0, y: .589999974, z: 0}
 --- !u!95 &9500000
 Animator:
   serializedVersion: 2
@@ -9874,6 +9914,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 20736
   interval: 2
+  maxPlatesOnWorkbench: 15
+  quantityOfPlatesOnWorkbench: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
