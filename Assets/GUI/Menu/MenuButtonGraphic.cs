@@ -9,7 +9,7 @@ public class MenuButtonGraphic : MonoBehaviour {
 	private bool mouseOver;
 	private bool clicking;
 	
-	public enum GuiSoundMode {HOVER,CLICK,SLIDE};
+	public enum GuiSoundMode {HOVER,CLICK,SLIDE,SPEEECHBUBBLE};
 	
 	void Start()
 	{

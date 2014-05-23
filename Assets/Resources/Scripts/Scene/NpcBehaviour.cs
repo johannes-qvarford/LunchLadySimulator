@@ -16,6 +16,7 @@ public class NpcBehaviour : MonoBehaviour
 	protected Animator animatorClothes;
 	public SpeechBubble speechBubble;
 	public int animationFaceInt = 0;
+	public bool gotFood = false;
 
 	public bool faceready = false;
 	private string face = "";
@@ -187,6 +188,7 @@ public class NpcBehaviour : MonoBehaviour
 			BroadcastMessage("GotFood", SendMessageOptions.RequireReceiver);
 			speechBubble.hide();
 		}
+		gotFood = true;
 	}
 	
 
