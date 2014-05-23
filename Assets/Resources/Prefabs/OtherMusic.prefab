@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   path: {fileID: 11400000, guid: 2ed44770ca69f1b46bf3a4d3790a143d, type: 2}
-  vol: .25
+  vol: .300000012
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
