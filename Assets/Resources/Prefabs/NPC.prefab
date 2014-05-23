@@ -9118,7 +9118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doIt: 0
   maxDistance: .400000006
-  dificulty: .5
+  dificulty: .300000012
   timeMultiplier: 1
 --- !u!114 &11400008
 MonoBehaviour:
@@ -9132,17 +9132,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   multipliers:
-  - 2
-  - 1.75
   - 1.5
   - 1
-  - .75
+  - .800000012
+  - .649999976
+  - .5
   timeTreshHolds:
   - 0
-  - 5
-  - 10
-  - 15
-  - 20
+  - 40
+  - 80
+  - 120
+  - 140
   tray: {fileID: 11400006}
 --- !u!114 &11400010
 MonoBehaviour:

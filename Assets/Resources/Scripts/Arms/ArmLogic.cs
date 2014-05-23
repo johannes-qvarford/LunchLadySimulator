@@ -153,11 +153,11 @@ public class ArmLogic : MonoBehaviour
 	
 	private GameObject getClosestGrabable()
 	{
-		var can = grabablesInRange.Keys;
+		var can = grabablesInRange.Keys.Where((g) => g != null);
 		if(can.Count() > 0)
 		{
 			Func<GameObject, float> distance = (g) => (g.transform.position - handle.position).magnitude;
-			return can.Aggregate((a,b) => distance(a) < distance(b) ? a : b);
+			return can.Where((g) => g != null).Aggregate((a,b) => distance(a) < distance(b) ? a : b);
 		}
 		else
 		{

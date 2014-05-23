@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: bd538f92081643145a705012808907d8
+guid: 12f00e43c9913804a871b738270477b4
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
@@ -7,7 +7,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: painting_lvl1_mesh_001
+    4300000: curtain_largel_mesh_001
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -32,7 +32,7 @@ ModelImporter:
     addColliders: 0
     importBlendShapes: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     weldVertices: 1

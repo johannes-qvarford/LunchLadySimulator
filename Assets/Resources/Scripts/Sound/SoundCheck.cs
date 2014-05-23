@@ -30,7 +30,6 @@ public class SoundCheck : MonoBehaviour {
 		}	
 		if(eSound.getParameter("Mood",out pMood) != FMOD.RESULT.OK)
 		{
-			//Debug.LogError("Error loading mood parameter in "+gameObject.name);
 			valid[2] = false;
 		}
 		ChangeParameter();
@@ -38,11 +37,7 @@ public class SoundCheck : MonoBehaviour {
 	void Update ()
 	{
 		eSound.getPlaybackState(out status);
-		if(valid[0])
-		{
-		
-			Debug.LogError(name + " " + GetState());
-		}
+
 	}
 	void OnCollisionEnter(Collision collision)
 	{ 
@@ -67,10 +62,7 @@ public class SoundCheck : MonoBehaviour {
 	{
 		//if(status != FMOD.Studio.PLAYBACK_STATE.PLAYING)
 		//{ 
-			if(valid[0] && tag == Tags.NPC)
-			{
-				Debug.LogError("triggerSound "+GetState());
-			}
+		
 			eSound.start ();
 						
 		//}
@@ -103,20 +95,14 @@ public class SoundCheck : MonoBehaviour {
 	{
 		volume = vol;
 		pVolume.setValue(volume);
-		if(valid[0] && tag == Tags.NPC)
-		{
-			Debug.LogError("Setvolume "+GetState());
-		}
+
 	}
 	
 	public void SetMood(float iMood)
 	{
 		mood = iMood;
 		pMood.setValue(mood);
-		if(valid[0] && tag == Tags.NPC)
-		{
-			Debug.LogError("setmood "+GetState());
-		}
+	
 	}
 	
 	public void SetState(float iState)
@@ -124,10 +110,6 @@ public class SoundCheck : MonoBehaviour {
 		if(valid[0])
 		{	
 			state = iState;
-			if(valid[0] && tag == Tags.NPC)
-			{
-				Debug.LogError("setstate "+GetState());
-			}
 			pState.setValue(state);
 		}
 	}

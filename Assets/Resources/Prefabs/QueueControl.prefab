@@ -113,6 +113,7 @@ MonoBehaviour:
   startTime: 3
   maxNpcDistance: 1
   maxPhysicalNpcsInQueue: 5
+  timeToChitChat: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

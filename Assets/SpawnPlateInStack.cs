@@ -8,10 +8,13 @@ public class SpawnPlateInStack : MonoBehaviour
 	public int items;
 	public LayerMask mask;
 	public float interval;
+	public int maxPlatesOnWorkbench = 30;
 	private GameObject leftArm;
 	private GameObject rightArm;
 	private GameObject spawnZone;
+	private BoxCollider maxPlates;
 	private int quantityOfPlateColliders,quantityOfPlatesInStack,quantityOfColliderChildren;
+	public int quantityOfPlatesOnWorkbench;
 
 	void Start () 
 	{
@@ -19,6 +22,7 @@ public class SpawnPlateInStack : MonoBehaviour
 		leftArm = GameObject.FindWithTag(Tags.LEFT_ARM);
 		rightArm = GameObject.FindWithTag(Tags.RIGHT_ARM);
 		spawnZone = gameObject.transform.FindChild("SpawnZone").gameObject;
+		maxPlates = transform.FindChild("MaxPlates").gameObject.GetComponent<BoxCollider>();
 		StartCoroutine("SpawnPlate");
 	}
 	
@@ -27,6 +31,7 @@ public class SpawnPlateInStack : MonoBehaviour
 	{
 		
 		CheckPlate();
+		CheckPlatesOnWorkbench();
 		
 	}
 	void CheckPlate()
@@ -52,11 +57,31 @@ public class SpawnPlateInStack : MonoBehaviour
 		quantityOfPlatesInStack = quantityOfPlateColliders/quantityOfColliderChildren;
 	}
 	
+	void CheckPlatesOnWorkbench()
+	{
+		quantityOfPlatesOnWorkbench=0;
+		Collider[] hitcolliders = Physics.OverlapSphere(transform.position,1.8f,mask.value);
+		for(int u=0;u<hitcolliders.Length;u++)
+		{
+			if(hitcolliders[u].gameObject.transform.parent != null && hitcolliders[u].gameObject.transform.parent.parent != null)
+			{
+				if(hitcolliders[u].gameObject.transform.parent.parent.tag == Tags.PLATE)
+				{	
+					if(maxPlates.bounds.Contains(hitcolliders[u].gameObject.transform.position))
+					{
+						quantityOfPlatesOnWorkbench++;
+					}
+				}
+			}
+		}
+		quantityOfPlatesOnWorkbench /= quantityOfColliderChildren;
+	}
+	
 	IEnumerator SpawnPlate()
 	{
 		while(true)
 		{
-			if(quantityOfPlatesInStack < items)
+			if(quantityOfPlatesInStack < items && quantityOfPlatesOnWorkbench < maxPlatesOnWorkbench)
 			{
 				GameObject g = (GameObject)Instantiate(spawnObject,spawnZone.transform.position,spawnZone.transform.rotation);
 				g.GetComponent<CheckPlateInStack>().stack = gameObject;
