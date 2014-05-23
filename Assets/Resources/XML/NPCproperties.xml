@@ -6,7 +6,10 @@
 
 
 	<skincolors>
-		<skincolor>kid_skin_white</skincolor>
+		<skincolor>skin_kid_1</skincolor>
+		<skincolor>skin_kid_2</skincolor>
+		<skincolor>skin_kid_3</skincolor>
+		<skincolor>skin_kid_4</skincolor>
 	</skincolors>
 	
 	
@@ -18,7 +21,9 @@
 	
 	<clothes> 
 		<clothestype name="kid_clothes_1">
-			<texture>shirt_color_1</texture>
+			<texture>clothes_kid1_blue</texture>
+			<texture>clothes_kid1_green</texture>
+			<texture>clothes_kid1_red</texture>
 		</clothestype>
 	</clothes>
 	
@@ -32,7 +37,10 @@
 	
 	<hairs>
 		<hair name="dorky">
-			<texture>dorky_blonde</texture>
+			<texture>hair_dorky_black</texture>
+			<texture>hair_dorky_blonde</texture>
+			<texture>hair_dorky_brown</texture>
+			<texture>hair_dorky_red</texture>
 		</hair> 
 	</hairs>
 	
@@ -64,7 +72,10 @@
 
 
 	<skincolors>
-		<skincolor>kid_skin_white</skincolor>
+		<skincolor>skin_kid_1</skincolor>
+		<skincolor>skin_kid_2</skincolor>
+		<skincolor>skin_kid_3</skincolor>
+		<skincolor>skin_kid_4</skincolor>
 	</skincolors>
 	
 	
@@ -75,7 +86,9 @@
 	
 	<clothes> 
 		<clothestype name="kid_clothes_2">
-			<texture>shirt_color_3</texture>
+			<texture>clothes_kid2_blue</texture>
+			<texture>clothes_kid2_green</texture>
+			<texture>clothes_kid2_yellow</texture>
 		</clothestype>
 	</clothes>
 	
@@ -92,10 +105,16 @@
 	
 	<hairs>
 		<hair name="pigtails">
-			<texture>pigtails_blonde</texture>
+			<texture>hair_pigtails_black</texture>
+			<texture>hair_pigtails_blonde</texture>
+			<texture>hair_pigtails_brown</texture>
+			<texture>hair_pigtails_red</texture>
 		</hair> 
 		<hair name="ponytail">
-			<texture>ponytail_blonde</texture>
+			<texture>hair_ponytail_black</texture>
+			<texture>hair_ponytail_blonde</texture>
+			<texture>hair_ponytail_brown</texture>
+			<texture>hair_ponytail_red</texture>
 		</hair> 
 	</hairs>
 	
