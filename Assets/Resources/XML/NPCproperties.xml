@@ -1,42 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
 <categories>
-<category name="Nerd">
-<skincolors>kid_skin_white</skincolors>
-<head>kid_head_2 kid_head_3</head>
-<shirts name="kid_clothes_1">yellow_shirt green_shirt</shirts>
-<shirts name="kid_clothes_2">blue_shirt red_shirt</shirts>
-<accessory name ="ldsd">LEAVE_THIS_BLANK_FOR_NOW</accessory>
-<accessory name ="boliboli">LEAVE_THIS_BLANK_FOR_NOW</accessory>
-<hair name="dorky">dorky_blonde</hair> 
-<preferenceType>PREFERENCETYPE</preferenceType>
-<preferenceAmount>0</preferenceAmount>
-<perfection>0</perfection>
-<patience>0</patience> 
+<category name="Nerd Male">
+
+
+	<skincolors>
+		<skincolor>kid_skin_white</skincolor>
+	</skincolors>
+	
+	
+	<heads>
+		<head>kid_head_2</head> 
+		<head>kid_head_3</head>
+	</heads>
+	
+	
+	<clothes> 
+		<clothestype name="kid_clothes_1">
+			<texture>shirt_color_1</texture>
+		</clothestype>
+	</clothes>
+	
+	
+	<accessories>
+		<accessory name ="this could have been a watch if I was a decent programmer;)">
+			<texture>not implemented in game yet huehue</texture>	
+		</accessory>
+	</accessories>
+	
+	
+	<hairs>
+		<hair name="dorky">
+			<texture>dorky_blonde</texture>
+		</hair> 
+	</hairs>
+	
+	
+	
+	<preferenceTypes>
+		<preferenceType>AMD64 assembly</preferenceType>
+	</preferenceTypes>
+	
+	
+	<preferenceAmounts>
+		<preferenceAmount>64</preferenceAmount>
+	</preferenceAmounts>
+	
+	
+	<perfections>
+		<perfection>0</perfection>
+	</perfections>
+	
+	
+	<patiences>
+		<patience>9000</patience> 
+	</patiences>
+	
 </category>
 
-<category name="Girl">
-<skincolors>kid_skin_white</skincolors>
-<head>kid_head_2 kid_head_3</head>
-<shirts name="kid_clothes_1">blue_shirt red_shirt</shirts>
-<accessory name ="ldsd">LEAVE_THIS_BLANK_FOR_NOW</accessory>
-<hair name="pigtails">pigtails_blonde</hair> 
-<hair name="ponytail">ponytail_blonde</hair> 
-<preferenceType>PREFERENCETYPE</preferenceType>
-<preferenceAmount>1</preferenceAmount>
-<perfection>1</perfection>
-<patience>1</patience> 
-</category>
 
-<category name="Jock">
-<skincolors>kid_skin_white</skincolors>
-<head>kid_head_2 kid_head_3</head>
-<shirts name="kid_clothes_2">blue_shirt red_shirt</shirts>
-<accessory name ="ldsd">LEAVE_THIS_BLANK_FOR_NOW</accessory>
-<hair name="jockhair">jockhair_blonde</hair>
-<hair name="backwardscap">backwardscap_blonde</hair> 
-<preferenceType>PREFERENCETYPE</preferenceType>
-<preferenceAmount>2</preferenceAmount>
-<perfection>2</perfection>
-<patience>2</patience> 
+<category name="Grill Female">
+
+
+	<skincolors>
+		<skincolor>kid_skin_white</skincolor>
+	</skincolors>
+	
+	
+	<heads>
+		<head>kid_head_1</head> 
+	</heads>
+	
+	
+	<clothes> 
+		<clothestype name="kid_clothes_2">
+			<texture>shirt_color_3</texture>
+		</clothestype>
+	</clothes>
+	
+	
+	<accessories>
+		<accessory name ="boomboom">
+			<texture>for real</texture>	
+		</accessory>
+		<accessory name ="bambambam">
+			<texture>umad johannes?</texture>
+		</accessory>
+	</accessories>
+	
+	
+	<hairs>
+		<hair name="pigtails">
+			<texture>pigtails_blonde</texture>
+		</hair> 
+		<hair name="ponytail">
+			<texture>ponytail_blonde</texture>
+		</hair> 
+	</hairs>
+	
+	
+	
+	<preferenceTypes>
+		<preferenceType>Boisboisbois</preferenceType>
+	</preferenceTypes>
+	
+	
+	<preferenceAmounts>
+		<preferenceAmount>1337</preferenceAmount>
+	</preferenceAmounts>
+	
+	
+	<perfections>
+		<perfection>-5</perfection>
+	</perfections>
+	
+	
+	<patiences>
+		<patience>404</patience> 
+	</patiences>
+	
 </category>
 
 

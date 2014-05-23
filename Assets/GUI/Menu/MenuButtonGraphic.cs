@@ -8,7 +8,18 @@ public class MenuButtonGraphic : MonoBehaviour {
 
 	private bool mouseOver;
 	private bool clicking;
-	// Use this for initialization
+	
+	void SelectedChanged(bool on)
+	{
+		mouseOver = on;
+		updateState();
+	}
+	
+	void Update()
+	{
+		clicking = ArmInputManager.IsDown(ArmInputManager.Action.CONFIRM);
+	}
+	
 	void OnEnable ()
 	{
 		showDefault ();
@@ -66,6 +77,8 @@ public class MenuButtonGraphic : MonoBehaviour {
 		mouseOver = false;
 		updateState ();
 	}
+	
+	
 	void OnMouseDown()
 	{
 		clicking = true;
