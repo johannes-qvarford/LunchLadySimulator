@@ -6,45 +6,22 @@
 	<maindishes>
 		<maindish>
 			<name name="soup">
-				<number>20</number>
+				<number>40</number>
 				<value>100</value>
-			</name>
-			<name name="something">
-				<number>1</number>
-				<value>42</value>
-			</name>
-		</maindish>
-		<maindish>
-			<name name="soup">
-				<number>20</number>
-				<value>100</value>
-			</name>
-			<name name="something">
-				<number>1</number>
-				<value>42</value>
 			</name>
 		</maindish>
 	</maindishes>
 	
-	
 	<sideorders>
 		<sideorder name="bread">
 			<number>1</number>
-			<value>50</value>
-		</sideorder>
-		<sideorder name="bread">
-			<number>2</number>
-			<value>15</value>
+			<value>25</value>
 		</sideorder>
 	</sideorders>
 	
 	<drinks>
 		<drink name="Milk">
 			<number>1</number>
-			<value>50</value>
-		</drink>
-		<drink name="Milk">
-			<number>2</number>
 			<value>15</value>
 		</drink>
 	</drinks>
@@ -54,45 +31,22 @@
 	<maindishes>
 		<maindish>
 			<name name="soup">
-				<number>20</number>
+				<number>40</number>
 				<value>100</value>
-			</name>
-			<name name="something">
-				<number>1</number>
-				<value>42</value>
-			</name>
-		</maindish>
-		<maindish>
-			<name name="soup">
-				<number>20</number>
-				<value>100</value>
-			</name>
-			<name name="something">
-				<number>1</number>
-				<value>42</value>
 			</name>
 		</maindish>
 	</maindishes>
 	
-	
 	<sideorders>
 		<sideorder name="bread">
 			<number>1</number>
-			<value>50</value>
-		</sideorder>
-		<sideorder name="bread">
-			<number>2</number>
-			<value>15</value>
+			<value>25</value>
 		</sideorder>
 	</sideorders>
 	
 	<drinks>
 		<drink name="Milk">
 			<number>1</number>
-			<value>50</value>
-		</drink>
-		<drink name="Milk">
-			<number>2</number>
 			<value>15</value>
 		</drink>
 	</drinks>
