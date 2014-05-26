@@ -457,7 +457,7 @@ Renderer:
   - {fileID: 2100000, guid: 86b5237bd36625343a909e4c19c36ec8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
+  m_UseLightProbes: 1
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayer: 0
@@ -984,9 +984,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b98489363152d8469bfe4d1e94404c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volume: 0
   state: 0
   mood: 0
-  volume: 0
   path: {fileID: 11400000, guid: 48bd0c827c77b4048b4a8be0c09a349b, type: 2}
 --- !u!114 &11400006
 MonoBehaviour:

@@ -9071,6 +9071,7 @@ MonoBehaviour:
   animation: 0
   speechBubble: {fileID: 11400000}
   animationFaceInt: 0
+  gotFood: 0
   faceready: 0
 --- !u!114 &11400004
 MonoBehaviour:
@@ -9300,7 +9301,7 @@ SkinnedMeshRenderer:
   - {fileID: 2100000, guid: c3083a57b0cb833459488d2e18154e56, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
+  m_UseLightProbes: 1
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayer: 0

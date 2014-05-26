@@ -965,7 +965,7 @@ Renderer:
   - {fileID: 2100000, guid: 9bc08f903b0ceac4080f04a6c2225c1e, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
+  m_UseLightProbes: 1
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayer: 0
@@ -986,7 +986,7 @@ Renderer:
   - {fileID: 2100000, guid: 9bc08f903b0ceac4080f04a6c2225c1e, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
+  m_UseLightProbes: 1
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayer: 0
@@ -1035,7 +1035,7 @@ SkinnedMeshRenderer:
   - {fileID: 2100000, guid: 14ab70592825d57458b7dc79cc0edfe5, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
+  m_UseLightProbes: 1
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayer: 0
