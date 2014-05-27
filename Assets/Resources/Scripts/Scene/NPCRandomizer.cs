@@ -29,9 +29,10 @@ public class NPCRandomizer : MonoBehaviour {
 
 	private string headstring = "head_kid1";
 	private string headstring2 = "head_kid";
+	private GameObject sounds;
 	// Use this for initialization
 	void Start () {
-		
+		sounds = GameObject.FindWithTag(Tags.NPCSOUNDBANK);
 		LoadNPCProperties();
 		LoadNPCRecipies();
 		randomizeNPC();		
@@ -316,6 +317,7 @@ public class NPCRandomizer : MonoBehaviour {
 	{
 		
 		int type = Random.Range(0,categoryList.Count);
+		GetComponent<SoundCheck>().setFmodAsset(sounds.GetComponent<SoundBank>().GetNpcSound(categoryList[type].GetName()));
 		ChangeClothes(type);
 		ChangeHead(type);
 		ChangeSkinColor(type);

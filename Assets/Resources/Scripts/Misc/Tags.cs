@@ -17,8 +17,10 @@ public static class Tags
 	public const string DESTROY = "Destroy";
 	public const string STOP = "Stop";
 	public const string TURN = "Turn";
-	public const string GUISOUND = "GuiSound";	
-
+	public const string GUISOUND = "GuiSound";
+	public const string NPCSOUNDBANK = "NpcSoundBank";
+	public const string DYNAMICMUSIC = "DynamicMusic";
+	
 	public static Transform FindWithTagRecursive(Transform t, string tag)
 	{
 		if(t.gameObject.tag == tag)

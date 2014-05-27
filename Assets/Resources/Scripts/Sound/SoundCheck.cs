@@ -12,27 +12,30 @@ public class SoundCheck : MonoBehaviour {
 	private bool [] valid = new bool[3];
 	void Start () 
 	{
-	
+		
 		for(int i= 0; i < valid.Length; i ++)
 		{
 			valid[i] = true;
 		}
-		eSound = FMOD_StudioSystem.instance.GetEvent(path);
-		if(eSound.getParameter("state",out pState) != FMOD.RESULT.OK)
+		if(path != null)
 		{
-			//Debug.Log ("Error loading State parameter in "+gameObject.name);
-			valid[0] = false;
+			eSound = FMOD_StudioSystem.instance.GetEvent(path);
+			if(eSound.getParameter("state",out pState) != FMOD.RESULT.OK)
+			{
+				//Debug.Log ("Error loading State parameter in "+gameObject.name);
+				valid[0] = false;
+			}
+			if(eSound.getParameter("Velocity",out pVolume) != FMOD.RESULT.OK)
+			{
+				//Debug.Log ("Error loading velocity parameter in "+gameObject.name);
+				valid[1] = false;
+			}	
+			if(eSound.getParameter("Mood",out pMood) != FMOD.RESULT.OK)
+			{
+				valid[2] = false;
+			}
+			ChangeParameter();
 		}
-		if(eSound.getParameter("Velocity",out pVolume) != FMOD.RESULT.OK)
-		{
-			//Debug.Log ("Error loading velocity parameter in "+gameObject.name);
-			valid[1] = false;
-		}	
-		if(eSound.getParameter("Mood",out pMood) != FMOD.RESULT.OK)
-		{
-			valid[2] = false;
-		}
-		ChangeParameter();
 	}
 	void Update ()
 	{
@@ -123,5 +126,35 @@ public class SoundCheck : MonoBehaviour {
 		float temp;	
 		pState.getValue(out temp);
 		return temp;
+	}
+	public void setFmodAsset(FMODAsset sound)
+	{
+		path = sound;
+		
+		for(int i= 0; i < valid.Length; i ++)
+		{
+			valid[i] = true;
+		}
+		
+		eSound = FMOD_StudioSystem.instance.GetEvent(path);
+		
+		if(eSound.getParameter("state",out pState) != FMOD.RESULT.OK)
+		{
+			//Debug.Log ("Error loading State parameter in "+gameObject.name);
+			valid[0] = false;
+		}
+		
+		if(eSound.getParameter("Velocity",out pVolume) != FMOD.RESULT.OK)
+		{
+			//Debug.Log ("Error loading velocity parameter in "+gameObject.name);
+			valid[1] = false;
+		}	
+		
+		if(eSound.getParameter("Mood",out pMood) != FMOD.RESULT.OK)
+		{
+			valid[2] = false;
+		}
+		
+		ChangeParameter();
 	}
 }
