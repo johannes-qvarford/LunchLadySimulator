@@ -13,12 +13,35 @@ public class CutBread : MonoBehaviour
 		left = GameObject.FindWithTag(Tags.LEFT_ARM);
 		right = GameObject.FindWithTag(Tags.RIGHT_ARM);
 	}
-	
-	void OnCollisionStay(Collision col)
+	private void calcCut(Collision collision)
 	{
-		GameObject OTHER = col.gameObject;
-		if(OTHER.tag == Tags.FOOD && OTHER.GetComponent<FoodID>().foodID == "Bread" && FindParentRigidbody(gameObject).velocity.magnitude > lowestSpeedForCut)
+		Debug.Log ("Trying to cut.");
+		foreach (ContactPoint c in collision.contacts)
 		{
+			GameObject OTHER = c.otherCollider.gameObject;
+			Debug.Log (OTHER.tag);
+			if(OTHER.tag == Tags.FOOD && OTHER.GetComponent<FoodID>().foodID == "Bread")
+			{
+				BreadLogic breadScript;
+				if(OTHER.transform.parent != null && OTHER.transform.parent.gameObject.GetComponent(typeof(BreadLogic)) != null)
+				{
+					breadScript = (BreadLogic)OTHER.transform.parent.gameObject.GetComponent(typeof(BreadLogic));
+					breadScript.cutAtObject(OTHER);
+					return;
+				}
+			}
+		}
+	}
+	void  OnCollisionStay(Collision collision)
+	{
+		//calcCut (collision);
+	}
+	void  OnCollisionEnter(Collision collision)
+	{
+		//calcCut (collision);
+
+
+			/*
 			if(OTHER.GetComponents<FixedJoint>().Count() == 0)
 			{
 				return;
@@ -59,7 +82,7 @@ public class CutBread : MonoBehaviour
 				}
 			}
 			GameObject.Destroy(OTHER.GetComponent<ConfigurableJoint>());
-		}
+			*/
 	}
 	
 	Rigidbody FindParentRigidbody(GameObject g)

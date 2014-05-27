@@ -19,17 +19,17 @@ public class SoundCheck : MonoBehaviour {
 		eSound = FMOD_StudioSystem.instance.GetEvent(path);
 		if(eSound.getParameter("state",out pState) != FMOD.RESULT.OK)
 		{
-			Debug.Log ("Error loading State parameter in "+gameObject.name);
+			//Debug.Log ("Error loading State parameter in "+gameObject.name);
 			valid[0] = false;
 		}
 		if(eSound.getParameter("Velocity",out pVolume) != FMOD.RESULT.OK)
 		{
-			Debug.Log ("Error loading velocity parameter in "+gameObject.name);
+			//Debug.Log ("Error loading velocity parameter in "+gameObject.name);
 			valid[1] = false;
 		}	
 		if(eSound.getParameter("Mood",out pMood) != FMOD.RESULT.OK)
 		{
-			Debug.Log("Error loading mood parameter in "+gameObject.name);
+			//Debug.Log("Error loading mood parameter in "+gameObject.name);
 			valid[2] = false;
 		}
 	}
