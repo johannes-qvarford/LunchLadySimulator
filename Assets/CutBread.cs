@@ -4,7 +4,7 @@ using System.Linq;
 
 public class CutBread : MonoBehaviour
 {
-	public float lowestSpeedForCut = 0.1f;
+	/*public float lowestSpeedForCut = 0.1f;
 	GameObject left;
 	GameObject right;
 	
@@ -82,7 +82,7 @@ public class CutBread : MonoBehaviour
 				}
 			}
 			GameObject.Destroy(OTHER.GetComponent<ConfigurableJoint>());
-			*/
+
 	}
 	
 	Rigidbody FindParentRigidbody(GameObject g)
@@ -99,5 +99,5 @@ public class CutBread : MonoBehaviour
 		} while(t != null);
 		Debug.LogError("could not find rigidbody on child to bread");
 		return null;
-	}
+	}*/
 }

@@ -39,9 +39,7 @@ public class BreadLogic : MonoBehaviour {
 			{
 				continue;
 			}
-			Debug.Log("Is the knife.");
 			GameObject OTHER = c.thisCollider.gameObject;
-			Debug.Log (OTHER.tag);
 			if(OTHER.tag == Tags.FOOD && OTHER.GetComponent<FoodID>().foodID == "Bread")
 			{
 				BreadLogic breadScript;
@@ -56,7 +54,6 @@ public class BreadLogic : MonoBehaviour {
 		numberOfSlices = slices.Length;
 		if (numberOfSlices < 1)
 		{
-			Debug.Log("No breads found.");
 			Destroy(this.gameObject);
 			return;
 		}
@@ -64,10 +61,8 @@ public class BreadLogic : MonoBehaviour {
 		{
 			left = GameObject.FindWithTag(Tags.LEFT_ARM);
 			right = GameObject.FindWithTag(Tags.RIGHT_ARM);
-			Debug.Log("Becomming grabable " + slices[0]);
 			if(slices[0].GetComponent<GrabableBehaviour>() == null)
 			{
-				Debug.LogError(slices[0]);
 				return;
 			}
 			slices[0].layer = LayerMask.NameToLayer(Layers.GRABABLE);
@@ -137,22 +132,15 @@ public class BreadLogic : MonoBehaviour {
 				if(slices[i] == cutSlice)
 				{
 					cutAtIndex(i);
-					Debug.Log("Found bread!");
 					return;
 				}
 			}
-			Debug.Log ("Could not find the cut slice!");
-		}
-		else
-		{
-			Debug.Log ("Not enough bread:" + slices.Length);
 		}
 	}
 	private void cutAtIndex(int place)
 	{
 		if(startedTime + spawnInTime < Time.time)
 		{
-			Debug.Log ("Cutting bread.");
 			startedTime = Time.time;
 			if(gameObject.GetComponent(typeof(PopIn)) != null)
 			{
