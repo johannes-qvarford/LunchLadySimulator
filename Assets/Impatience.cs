@@ -33,6 +33,13 @@ public class Impatience : MonoBehaviour {
 		currentLevel++;
 		currentMultiplier = multipliers [currentLevel];
 		tray.timeMultiplier = currentMultiplier;
+		// 0 1 2 3 4
+		// 1 2 3
+		
+		// 0 0 1 1 2
+		// +1
+		// 1 1 2 2 3 
+		SendMessage("SetMood", (currentLevel/2)+1,SendMessageOptions.RequireReceiver);
 	}
 	public int getImpatienceLevel()
 	{

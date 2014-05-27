@@ -82,4 +82,8 @@ public class HappyBarController : MonoBehaviour {
 			glow.deactivate();
 		}
 	}
+	public int GetHappyPercentage()
+	{
+		return percentage;
+	}
 }

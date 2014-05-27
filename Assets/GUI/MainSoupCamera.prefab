@@ -135,7 +135,7 @@ Camera:
     height: 1
   near clip plane: .300000012
   far clip plane: 1000
-  field of view: 100
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: .159999996
@@ -164,13 +164,13 @@ Camera:
     height: 1
   near clip plane: .300000012
   far clip plane: 1000
-  field of view: 100
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294361087
+    m_Bits: 4294426623
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
@@ -260,7 +260,7 @@ MonoBehaviour:
   playerArmLeft: {fileID: 0}
   playerArmRight: {fileID: 0}
   adjustX: 0
-  adjustY: .0500000007
+  adjustY: -.150000006
   adjustZ: .5
 --- !u!124 &12400002
 Behaviour:

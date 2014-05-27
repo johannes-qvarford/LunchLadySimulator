@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1f16c2c58d02834ca494d0ba50712e8, type: 3}
-  m_Name: Music
+  m_Name: VO_male_nerd
   m_EditorClassIdentifier: 
-  path: event:/Music
-  id: '{ba7bc3e1-4141-4734-bb59-c866715a1581}'
+  path: event:/Dialog/VO_male_nerd
+  id: '{a07d2e4a-0619-4c0b-a72f-571bc503acac}'

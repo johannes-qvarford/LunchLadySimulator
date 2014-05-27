@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1f16c2c58d02834ca494d0ba50712e8, type: 3}
-  m_Name: Music
+  m_Name: GUI_hover
   m_EditorClassIdentifier: 
-  path: event:/Music
-  id: '{ba7bc3e1-4141-4734-bb59-c866715a1581}'
+  path: event:/Interface/GUI_hover
+  id: '{4c76c96b-73f4-430c-879b-9ada7352bb19}'
