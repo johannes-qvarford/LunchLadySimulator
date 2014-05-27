@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SpawnFood : MonoBehaviour
 {
-	public bool on = false;
+	public bool alwaysSpawn = false;
 	public int framesBetweenSpawns = 4;
 	public float speed = 0.2f;
 	public float randomMaxDistance = 0.01f;
@@ -11,7 +11,8 @@ public class SpawnFood : MonoBehaviour
 	private GameObject spawnObject;
 	private int curFrame = 0;
 	private Random random = new Random();
-	private bool prevOn = false;
+	private bool doSpawn = false;
+	
 	
 	void Start()
 	{
@@ -21,7 +22,7 @@ public class SpawnFood : MonoBehaviour
 	{
 		//Debug.Log(placeToSpawn.position);
 		curFrame++;
-		if(curFrame % framesBetweenSpawns == 0 && on && spawnObject != null)
+		if(curFrame % framesBetweenSpawns == 0 && (doSpawn || alwaysSpawn) && spawnObject != null)
 		{
 			GameObject g = SpawnedJunk.Instantiate(spawnObject);
 			g.rigidbody.AddForce(-Vector3.up * speed, ForceMode.Impulse);
@@ -30,17 +31,9 @@ public class SpawnFood : MonoBehaviour
 				Random.Range(-randomMaxDistance, randomMaxDistance), 
 				Random.Range(-randomMaxDistance, randomMaxDistance), 
 				Random.Range(-randomMaxDistance, randomMaxDistance));
-			//g.transform.parent = transform;
+			g.transform.parent = transform;
 		}
-		else if(on == false)
-		{
-			for(int i = 0; i < transform.childCount; ++i)
-			{
-				Transform t = transform.GetChild(i);
-				SpawnedJunk.BecomeParentToGameObject(t);
-			}
-		}
-		prevOn = on;
+		doSpawn = false;
 	}
 	
 	void OnSpawnObjectChanged(GameObject g)
@@ -48,9 +41,9 @@ public class SpawnFood : MonoBehaviour
 		spawnObject = g;
 	}
 	
-	void OnSpawnStatusChanged(bool isOn)
+	void OnSpawnAgain()
 	{
-		on = isOn;
+		doSpawn = true;
 	}
 	
 }
