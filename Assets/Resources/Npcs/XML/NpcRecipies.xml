@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- xml template for customer #1 --> 
+<main>
+<type name="Nerd Male">
+	<maindishes>
+		<maindish>
+			<name name="soup">
+				<number>40</number>
+				<value>100</value>
+			</name>
+		</maindish>
+	</maindishes>
+	
+	<sideorders>
+		<sideorder name="bread">
+			<number>1</number>
+			<value>25</value>
+		</sideorder>
+	</sideorders>
+	
+	<drinks>
+		<drink name="Milk">
+			<number>1</number>
+			<value>15</value>
+		</drink>
+	</drinks>
+</type>
+
+<type name="Grill Female">
+	<maindishes>
+		<maindish>
+			<name name="soup">
+				<number>40</number>
+				<value>100</value>
+			</name>
+		</maindish>
+	</maindishes>
+	
+	<sideorders>
+		<sideorder name="bread">
+			<number>1</number>
+			<value>25</value>
+		</sideorder>
+	</sideorders>
+	
+	<drinks>
+		<drink name="Milk">
+			<number>1</number>
+			<value>15</value>
+		</drink>
+	</drinks>
+</type>
+
+
+</main>

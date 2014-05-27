@@ -1,0 +1,141 @@
+fileFormatVersion: 2
+guid: 6f7d6909aa4955c44a0eb2ccfe64ea41
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: eye_left_mesh_003
+    100002: eye_right_mesh_003
+    100004: Facial_Rigg_Kid1_JNT_GRP
+    100006: Head_BIND_JNT
+    100008: head_kid1_mesh_003
+    100010: Jaw_01_JNT
+    100012: Jaw_02_JNT
+    100014: //RootNode
+    100016: L_END_Mouth_JNT
+    100018: L_LOW_Eye_01_JNT
+    100020: L_LOW_Eye_02_JNT
+    100022: L_LOW_Eye_03_JNT
+    100024: L_LOW_Eye_04_JNT
+    100026: L_LOW_Mouth_JNT
+    100028: L_Nose_JNT
+    100030: L_Nosebase_JNT
+    100032: L_UP_Eye_01_JNT
+    100034: L_UP_Eye_02_JNT
+    100036: L_UP_Eye_03_JNT
+    100038: L_UP_Mouth_JNT
+    100040: Mid_LOW_Mouth_JNT
+    100042: Mid_Nosebase_JNT
+    100044: Mid_UP_Mouth_JNT
+    100046: R_END_Mouth_JNT
+    100048: R_LOW_Eye_01_JNT
+    100050: R_LOW_Eye_02_JNT
+    100052: R_LOW_Eye_03_JNT
+    100054: R_LOW_Eye_04_JNT
+    100056: R_LOW_Mouth_JNT
+    100058: R_Nose_JNT
+    100060: R_Nosebase_JNT
+    100062: R_UP_Eye_01_JNT
+    100064: R_UP_Eye_02_JNT
+    100066: R_UP_Eye_03_JNT
+    100068: R_UP_Mouth_JNT
+    400000: eye_left_mesh_003
+    400002: eye_right_mesh_003
+    400004: Facial_Rigg_Kid1_JNT_GRP
+    400006: Head_BIND_JNT
+    400008: head_kid1_mesh_003
+    400010: Jaw_01_JNT
+    400012: Jaw_02_JNT
+    400014: //RootNode
+    400016: L_END_Mouth_JNT
+    400018: L_LOW_Eye_01_JNT
+    400020: L_LOW_Eye_02_JNT
+    400022: L_LOW_Eye_03_JNT
+    400024: L_LOW_Eye_04_JNT
+    400026: L_LOW_Mouth_JNT
+    400028: L_Nose_JNT
+    400030: L_Nosebase_JNT
+    400032: L_UP_Eye_01_JNT
+    400034: L_UP_Eye_02_JNT
+    400036: L_UP_Eye_03_JNT
+    400038: L_UP_Mouth_JNT
+    400040: Mid_LOW_Mouth_JNT
+    400042: Mid_Nosebase_JNT
+    400044: Mid_UP_Mouth_JNT
+    400046: R_END_Mouth_JNT
+    400048: R_LOW_Eye_01_JNT
+    400050: R_LOW_Eye_02_JNT
+    400052: R_LOW_Eye_03_JNT
+    400054: R_LOW_Eye_04_JNT
+    400056: R_LOW_Mouth_JNT
+    400058: R_Nose_JNT
+    400060: R_Nosebase_JNT
+    400062: R_UP_Eye_01_JNT
+    400064: R_UP_Eye_02_JNT
+    400066: R_UP_Eye_03_JNT
+    400068: R_UP_Mouth_JNT
+    2300000: eye_left_mesh_003
+    2300002: eye_right_mesh_003
+    3300000: eye_left_mesh_003
+    3300002: eye_right_mesh_003
+    4300000: head_kid1_mesh_003
+    4300002: eye_right_mesh_003
+    4300004: eye_left_mesh_003
+    7400000: Happy
+    7400002: Sad
+    7400004: Taken aback
+    7400006: Angry
+    9500000: //RootNode
+    13700000: head_kid1_mesh_003
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

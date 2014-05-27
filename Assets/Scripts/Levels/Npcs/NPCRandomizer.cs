@@ -34,7 +34,7 @@ public class NPCRandomizer : MonoBehaviour {
 	{
 		int offset = 0;
 		
-		TextAsset asset = Resources.Load<TextAsset>("XML/NPCrecipies");
+		TextAsset asset = Resources.Load<TextAsset>("Npcs/XML/NpcRecipies");
 		XmlDocument doc = new XmlDocument();
 		doc.LoadXml(asset.text);
 		XElement xmlRandomizerString = XElement.Load(new XmlNodeReader(doc));//XElement.Load("Assets/Resources/XML/NPCrecipies.xml");
@@ -123,7 +123,7 @@ public class NPCRandomizer : MonoBehaviour {
 
 	private void LoadNPCProperties()
 	{
-		TextAsset asset = Resources.Load<TextAsset>("XML/NPCproperties");
+		TextAsset asset = Resources.Load<TextAsset>("Npcs/XML/NpcProperties");
 		XmlDocument doc = new XmlDocument();
 		doc.LoadXml(asset.text);
 		XElement xmlRandomizerString = XElement.Load(new XmlNodeReader(doc));
@@ -274,7 +274,7 @@ public class NPCRandomizer : MonoBehaviour {
 	{
 		string hairType = categoryList[type].GetRandomHair();
 		
-		GameObject Hair = (GameObject)Resources.Load("Prefabs/NPCParts/"+hairType);
+		GameObject Hair = (GameObject)Resources.Load("Npcs/BodyParts/"+hairType);
 		GameObject setHair = GameObject.Instantiate(Hair) as GameObject;
 		GameObject refHead =  transform.Find("Customer_Kid/Hips 1/Spine/Spine1/Spine2/Neck/Head 1/"+headstring).gameObject;
 		setHair.transform.position = transform.position;
@@ -287,7 +287,7 @@ public class NPCRandomizer : MonoBehaviour {
 	
 		setHair.name = "hair";
 		
-		Material newMaterialPrefab = Resources.Load("Materials/Materials/NPCMaterials/Hairs/"+categoryList[type].GetRandomHairColor(hairType), typeof(Material)) as Material;
+		Material newMaterialPrefab = Resources.Load("Npcs/Materials/Hairs/"+categoryList[type].GetRandomHairColor(hairType), typeof(Material)) as Material;
 		Material newMaterial = new Material(newMaterialPrefab);
 		setHair.renderer.material = newMaterial;
 	}
@@ -295,7 +295,7 @@ public class NPCRandomizer : MonoBehaviour {
 	private void ChangeSkinColor(int type)
 	{
 		
-		Material newMaterialPrefab = Resources.Load("Materials/Materials/NPCMaterials/Skins/"+categoryList[type].GetRandomSkinColor(), typeof(Material)) as Material;
+		Material newMaterialPrefab = Resources.Load("Npcs/Materials/Skins/"+categoryList[type].GetRandomSkinColor(), typeof(Material)) as Material;
 		Material skinColor = new Material(newMaterialPrefab);
 		GameObject refObj =  transform.Find("Customer_Kid/Hips 1/Spine/Spine1/Spine2/Neck/Head 1/"+headstring).gameObject;
 		MeshRenderer[] obj;
@@ -318,7 +318,7 @@ public class NPCRandomizer : MonoBehaviour {
 	private void ChangeHead(int type)
 	{
 		string headType = categoryList[type].GetRandomHead();
-		GameObject head = (GameObject)Resources.Load("Prefabs/NPCParts/"+headType);
+		GameObject head = (GameObject)Resources.Load("Npcs/BodyParts/"+headType);
 		GameObject switchHead = GameObject.Instantiate(head) as GameObject;
 		
 		GameObject refHead =  transform.Find("Customer_Kid/Hips 1/Spine/Spine1/Spine2/Neck/Head 1/"+headstring).gameObject;
@@ -338,7 +338,7 @@ public class NPCRandomizer : MonoBehaviour {
 	private void ChangeClothes(int type)
 	{
 		string clothesType = categoryList[type].GetRandomShirt();
-		GameObject clothes = (GameObject)Resources.Load("Prefabs/NPCParts/"+clothesType);
+		GameObject clothes = (GameObject)Resources.Load("Npcs/BodyParts/"+clothesType);
 		GameObject switchClothes = GameObject.Instantiate (clothes) as GameObject;
 
 		GameObject refClothes = transform.Find ("Clothes").gameObject;
@@ -352,7 +352,7 @@ public class NPCRandomizer : MonoBehaviour {
 		switchClothes.name = "Clothes";
 		
 		GameObject.Destroy(refClothes);
-		Material newMaterialPrefab = Resources.Load("Materials/Materials/NPCMaterials/Clothes/"+categoryList[type].GetRandomShirtColor(clothesType), typeof(Material)) as Material;
+		Material newMaterialPrefab = Resources.Load("Npcs/Materials/Clothes/"+categoryList[type].GetRandomShirtColor(clothesType), typeof(Material)) as Material;
 		Material clothesMaterial = new Material(newMaterialPrefab);
 		switchClothes = switchClothes.transform.Find ("clothes_mesh").gameObject;
 		switchClothes.GetComponent<SkinnedMeshRenderer>().rootBone = transform.Find ("Customer_Kid/Hips 1");
