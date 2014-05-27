@@ -23,7 +23,6 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 		{Action.NEXT_OPTION_RIGHT, "NextOptionRight"},
 		{Action.NEXT_OPTION_LEFT, "NextOptionLeft"},
 		{Action.CONFIRM, "Confirm"},
-		{Action.RESTART_LEVEL, "RestartLevel"},
 		{Action.NEXT_CUSTOMER, "NextCustomer"}
 	};
 
@@ -53,7 +52,6 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 		NEXT_OPTION_RIGHT,
 		NEXT_OPTION_LEFT,
 		CONFIRM,
-		RESTART_LEVEL,
 		NEXT_CUSTOMER,
 	}
 

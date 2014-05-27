@@ -10,7 +10,7 @@ public class PopIn : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		creationTime = Time.time;
-		transform.localScale = new Vector3(0, 0, 0);
+		transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 		mySmoke = (GameObject) Instantiate(smoke, transform.position, transform.rotation);
 	}
 	
