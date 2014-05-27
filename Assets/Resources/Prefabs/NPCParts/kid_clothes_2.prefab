@@ -1767,7 +1767,7 @@ Animator:
   m_Avatar: {fileID: 9000000, guid: 0ebc0e4028659a94fa9c8dd741850ca4, type: 3}
   m_Controller: {fileID: 9100000, guid: d23f08a6900231142a55e773786aa9b3, type: 2}
   m_CullingMode: 1
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
 --- !u!137 &13700000
@@ -1786,7 +1786,7 @@ SkinnedMeshRenderer:
   - {fileID: 2100000, guid: e33ee3b948a652a428f25e47a2c7ba7e, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
+  m_UseLightProbes: 1
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayer: 0

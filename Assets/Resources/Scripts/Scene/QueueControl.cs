@@ -8,6 +8,7 @@ public class QueueControl : MonoBehaviour
 	public float startTime = 0.0f;
 	public float maxNpcDistance = 0.2f;
 	public int maxPhysicalNpcsInQueue = 5;
+	public float timeToChitChat;
 	
 	private List<GameObject> npcs = new List<GameObject>();
 	private const float INFINITE = 10000;
@@ -19,9 +20,12 @@ public class QueueControl : MonoBehaviour
 
 	private bool npcIsTurning = false;
 	private bool moveTurnQue = false;
-	
+	private GameObject soundManager;
+	private GameObject npcSound;
+		
 	void Start()
 	{
+		soundManager = GameObject.FindWithTag(Tags.GUISOUND);
 		InvokeRepeating("NewNpcCreated", startTime, repeatTime);
 	}
 	
@@ -60,8 +64,9 @@ public class QueueControl : MonoBehaviour
 				lastPosition = npc.transform.position;
 			}
 			
-			if(Input.GetKeyDown(KeyCode.U) || Input.GetKeyDown(KeyCode.Joystick1Button2))
+			if(ArmInputManager.IsDown(ArmInputManager.Action.NEXT_CUSTOMER))
 			{
+				firstInLine.GetComponent<SoundCheck>().SetState(3);
 				firstInLine.BroadcastMessage("ShowSpeechBubble", false, SendMessageOptions.RequireReceiver);
 				firstInLine.BroadcastMessage("NpcGotFood", SendMessageOptions.RequireReceiver);
 				foreach(GameObject g in npcs)
@@ -72,7 +77,6 @@ public class QueueControl : MonoBehaviour
 			}
 		}
 	}
-	
 	private void AddNpcInPhysicalQueue()
 	{
 		GameObject npc = SpawnedJunk.Instantiate(instantiateObject, transform.position, transform.rotation);
@@ -89,6 +93,16 @@ public class QueueControl : MonoBehaviour
 			AddNpcInPhysicalQueue();
 		}
 		resetCreateNPCTimer = false;
+	}
+	
+	System.Collections.IEnumerator WaitForChitChat()
+	{
+		GameObject g = firstInLine;
+		yield return new WaitForSeconds(timeToChitChat);
+		if(g == firstInLine && g.GetComponent<NpcBehaviour>().gotFood == false)
+		{
+			firstInLine.GetComponent<SoundCheck>().SetState(2);
+		}
 	}
 	
 	private void NpcDestroyed(GameObject npc)
@@ -123,7 +137,12 @@ public class QueueControl : MonoBehaviour
 	{
 		npcIsWaitingForFood = true;
 		firstInLine = npc;
+	
+		npc.GetComponent<SoundCheck>().SetState(1);
 		npc.SendMessage("MoveChanged", false, SendMessageOptions.RequireReceiver);
 		npc.SendMessage("ShowSpeechBubble", true, SendMessageOptions.RequireReceiver);
+		soundManager.SendMessage("TriggerGuiSound",MenuButtonGraphic.GuiSoundMode.SPEEECHBUBBLE,SendMessageOptions.RequireReceiver);
+		npc.SendMessage("TriggerSound",SendMessageOptions.RequireReceiver);
+		StartCoroutine(WaitForChitChat());
 	}
 }

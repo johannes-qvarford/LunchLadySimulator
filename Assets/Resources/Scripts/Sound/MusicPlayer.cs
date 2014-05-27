@@ -14,7 +14,7 @@ public class MusicPlayer : MonoBehaviour
 	void Start () 
 	{
 		eMusic = FMOD_StudioSystem.instance.GetEvent(path);
-		if(eMusic.getParameter("track",out pStresslevel) != FMOD.RESULT.OK)
+		if(eMusic.getParameter("Mood",out pStresslevel) != FMOD.RESULT.OK)
 		{
 			Debug.Log ("Error loading mood in "+gameObject.name);
 		}
@@ -22,7 +22,7 @@ public class MusicPlayer : MonoBehaviour
 		{
 			Debug.Log ("Error loading state in "+gameObject.name);
 		}
-		if(eMusic.getParameter("track",out pTrack) != FMOD.RESULT.OK)
+		if(eMusic.getParameter("Track",out pTrack) != FMOD.RESULT.OK)
 		{
 			Debug.Log ("Error Loading track in "+gameObject.name);
 		}
@@ -53,8 +53,12 @@ public class MusicPlayer : MonoBehaviour
 	{
 		pState.setValue(state);
 	}
-	void setTrack(float inputTrack)
+	void SetTrack(float inputTrack)
 	{
 		pTrack.setValue(inputTrack);
+	}
+	void SetMood(float inputmood)
+	{
+		pStresslevel.setValue(inputmood);
 	}
 }

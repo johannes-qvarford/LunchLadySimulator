@@ -4837,6 +4837,7 @@ GameObject:
   - 136: {fileID: 13600000}
   - 54: {fileID: 5400000}
   - 114: {fileID: 11400008}
+  - 114: {fileID: 11400010}
   m_Layer: 13
   m_Name: NPC
   m_TagString: NPC
@@ -6007,7 +6008,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100190}
   m_LocalRotation: {x: 3.41601911e-08, y: .10120897, z: -5.76446411e-08, w: .994865239}
-  m_LocalPosition: {x: -12.6571913, y: -.0106265303, z: -65.9225769}
+  m_LocalPosition: {x: -12.6570921, y: -.0480639376, z: -65.9228973}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400198}
@@ -6051,8 +6052,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100198}
-  m_LocalRotation: {x: .525242686, y: -.526030719, z: .440600872, w: .503272057}
-  m_LocalPosition: {x: 1.79960978, y: -.164638072, z: -.120366246}
+  m_LocalRotation: {x: .50908339, y: -.539685786, z: .423764855, w: .519612134}
+  m_LocalPosition: {x: 1.79563749, y: -.285960019, z: -.132949725}
   m_LocalScale: {x: 1.33175349, y: 1.34173584, z: 1.33680296}
   m_Children:
   - {fileID: 400196}
@@ -7757,8 +7758,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100316}
-  m_LocalRotation: {x: -.0809929445, y: -.0222372171, z: -.286693156, w: .954333663}
-  m_LocalPosition: {x: -.153465256, y: .000248035562, z: .000107582011}
+  m_LocalRotation: {x: -.0806357935, y: -.0234996788, z: -.301564932, w: .949739039}
+  m_LocalPosition: {x: -.137154073, y: .0168509092, z: -.00293928734}
   m_LocalScale: {x: 1.00074744, y: 1.01022506, z: 1.00088835}
   m_Children:
   - {fileID: 400198}
@@ -8699,7 +8700,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100640}
   m_LocalRotation: {x: 0, y: -.999733686, z: 0, w: -.0230787788}
-  m_LocalPosition: {x: 6.56970882, y: .828876257, z: -3.64491129}
+  m_LocalPosition: {x: 6.54688358, y: .687494218, z: 1.26277637}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400638}
@@ -9070,6 +9071,7 @@ MonoBehaviour:
   animation: 0
   speechBubble: {fileID: 11400000}
   animationFaceInt: 0
+  gotFood: 0
   faceready: 0
 --- !u!114 &11400004
 MonoBehaviour:
@@ -9117,7 +9119,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doIt: 0
   maxDistance: .400000006
-  dificulty: .5
+  dificulty: .300000012
   timeMultiplier: 1
 --- !u!114 &11400008
 MonoBehaviour:
@@ -9131,18 +9133,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   multipliers:
-  - 2
-  - 1.75
   - 1.5
   - 1
-  - .75
+  - .800000012
+  - .649999976
+  - .5
   timeTreshHolds:
   - 0
-  - 5
-  - 10
-  - 15
-  - 20
+  - 40
+  - 80
+  - 120
+  - 140
   tray: {fileID: 11400006}
+--- !u!114 &11400010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b98489363152d8469bfe4d1e94404c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volume: 1
+  state: 1
+  mood: 1
+  path: {fileID: 0}
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -9284,7 +9301,7 @@ SkinnedMeshRenderer:
   - {fileID: 2100000, guid: c3083a57b0cb833459488d2e18154e56, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 0
+  m_UseLightProbes: 1
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_SortingLayer: 0
