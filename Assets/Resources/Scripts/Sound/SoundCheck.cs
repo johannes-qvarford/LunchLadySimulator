@@ -70,6 +70,10 @@ public class SoundCheck : MonoBehaviour {
 						
 		//}
 	}
+	public void DisableSound()
+	{
+		eSound.stop();
+	}
 	void OnDisable()
 	{
 		if(eSound != null)
