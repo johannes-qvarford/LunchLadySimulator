@@ -95,11 +95,6 @@ public class ArmLogic : MonoBehaviour
 
 	void Update()
 	{
-		if(ArmInputManager.IsDown(ArmInputManager.Action.RESTART_LEVEL))
-		{
-			Application.LoadLevel(Application.loadedLevelName);
-		}
-	
 		Debug.DrawLine(handle.position, handle.position + Vector3.up * -1);
 		armsState.grabables.RemoveAll((g) => g == null);
 		//grabablesInRange.Remove(null);
