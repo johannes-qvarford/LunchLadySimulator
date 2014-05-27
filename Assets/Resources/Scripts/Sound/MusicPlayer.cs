@@ -57,4 +57,8 @@ public class MusicPlayer : MonoBehaviour
 	{
 		pTrack.setValue(inputTrack);
 	}
+	void SetMood(float inputmood)
+	{
+		pStresslevel.setValue(inputmood);
+	}
 }

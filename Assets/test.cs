@@ -4,21 +4,21 @@ using System.Collections;
 public class test : MonoBehaviour {
 
 	// Use this for initialization
+	private GameObject sounds;
 	void Start () {
-	
+		sounds = GameObject.FindWithTag(Tags.NPCSOUNDBANK);
+		GetComponent<SoundCheck>().setFmodAsset(sounds.GetComponent<SoundBank>().GetNpcSound("Male Nerd"));
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetKeyDown(KeyCode.N))
 		{
-			Debug.Log("Playing SOund");
-			SendMessage("TriggerSound");
+			SendMessage("TriggerSound",SendMessageOptions.RequireReceiver);	
 		}
 		if(Input.GetKeyDown(KeyCode.M))
 		{
-			Debug.Log("Changing Parameter");
-			SendMessage("ChangeParameter");
+			SendMessage("ChangeParameter",SendMessageOptions.RequireReceiver);
 		}
 	
 	}

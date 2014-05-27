@@ -59,10 +59,6 @@ public class ScoreCounter : MonoBehaviour {
 	}
 	void Update()
 	{
-		if (Input.GetKeyDown("space"))
-		{
-			spawnScore(testScore);
-		}
 		if(popUps.Count == 0)
 		{
 			return;
