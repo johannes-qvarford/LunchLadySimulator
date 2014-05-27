@@ -568,7 +568,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 6438d5a08040b494593f4ec5c2eadee2, type: 2}
+  - {fileID: 2100000, guid: d281f2eae2658ce41baa368be280d2ef, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1074,10 +1074,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3fcad8825e72d04fae2d57e12fc872e, type: 3}
+  m_Script: {fileID: 11500000, guid: 82145b2103e869749bfad404db749c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  returnKey: b
+  alwaysSpawn: 0
+  framesBetweenSpawns: 4
+  speed: .200000003
+  randomMaxDistance: .00999999978
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1139,7 +1142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82145b2103e869749bfad404db749c56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  on: 0
+  alwaysSpawn: 0
   framesBetweenSpawns: 1
   speed: .0199999996
   randomMaxDistance: .00999999978
