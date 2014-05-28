@@ -4,16 +4,18 @@ using System.Collections.Generic;
 public class ShowPauseMenu : MonoBehaviour {
 	private bool paused = false;
 	public GameObject graphics;
-	
+
 	private List<GameObject> options = new List<GameObject>();
 	private int optionsIndex = 0;
 	private int frame = 0;
 	private int framesSelectCooldown = 0;
 	
+	public float pauseMenuSoundMultiplier;
+	private GameObject masterVolumeObject;
 	
 	// Use this for initialization
 	void Start () {
-		
+		masterVolumeObject = GameObject.FindWithTag(Tags.MASTERVOLUME);
 		for(int i = 0; i < graphics.transform.childCount; ++i)
 		{
 			options.Add(graphics.transform.GetChild(i).gameObject);
@@ -26,6 +28,7 @@ public class ShowPauseMenu : MonoBehaviour {
 	
 		if(ArmInputManager.IsDown(ArmInputManager.Action.PAUSE) && paused == false)
 		{
+			masterVolumeObject.SendMessage("SetVolumeOnSounds",1.0f*pauseMenuSoundMultiplier,SendMessageOptions.RequireReceiver);
 			dispalyPauseMenu();
 		}
 		else if(paused)
@@ -33,6 +36,7 @@ public class ShowPauseMenu : MonoBehaviour {
 			if(ArmInputManager.IsDown(ArmInputManager.Action.PAUSE))
 			{
 				paused = false;
+				masterVolumeObject.SendMessage("SetVolumeOnSounds",1.0f,SendMessageOptions.RequireReceiver);
 				returnToGame();
 			}
 			else

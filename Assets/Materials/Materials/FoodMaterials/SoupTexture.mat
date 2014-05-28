@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: SoupTexture
-  m_Shader: {fileID: 4800000, guid: 90a2251799e4e3e408deb72cfd2338d2, type: 3}
+  m_Shader: {fileID: 4800000, guid: dfeb506ce2a731f4d9d0defa9aa49df9, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -31,19 +31,19 @@ Material:
       data:
         first:
           name: _InnerValue
-        second: .180357128
+        second: .244642839
       data:
         first:
           name: _OuterValue
-        second: .757142901
+        second: .692857206
       data:
         first:
           name: _TransTresh
-        second: .410714298
+        second: .517857134
       data:
         first:
           name: _MetaballAlpha
-        second: 0
+        second: .178571433
     m_Colors:
       data:
         first:
