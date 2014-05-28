@@ -285,7 +285,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400034}
   m_Layer: 16
-  m_Name: Gui
+  m_Name: GUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
