@@ -8,4 +8,10 @@ public class ReloadOnClick : MonoBehaviour {
 		Time.timeScale = 1;
 		Application.LoadLevel (Application.loadedLevelName);
 	}
+	
+	void OnInputClick()
+	{
+		Time.timeScale = 1;
+		Application.LoadLevel (Application.loadedLevelName);
+	}
 }

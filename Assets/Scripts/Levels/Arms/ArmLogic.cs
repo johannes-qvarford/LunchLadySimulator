@@ -218,6 +218,7 @@ public class ArmLogic : MonoBehaviour
 		heldGrabable.Find("Shadow").gameObject.layer = LayerMask.NameToLayer(Layers.SHADOW_PLANE);
 		heldGrabable.parent = null;
 		heldGrabable.gameObject.AddComponent(typeof(Rigidbody));
+		heldGrabable.SendMessage("OnGrabbed", SendMessageOptions.DontRequireReceiver);
 		heldGrabable.rigidbody.velocity = rigidbody.velocity * armsState.throwVelocityMul;
 		heldGrabable = null;
 		heldGrabableName = "null";

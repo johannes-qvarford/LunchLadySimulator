@@ -1,21 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MagnetFieldBehaviour : MonoBehaviour {
+using UnityExtensions;
+
+public class MagnetFieldBehaviour : MonoBehaviour
+{
 	GameObject magnetBox;
 	string magnetBoxName = "none";
 	bool magnetized = false;
 	public Vector3 magnetRotation;
 	public Vector3 magnetPosition;
-	// Use this for initialization
-	void Start () {
+	public float magnetizedMass = 1000;
 	
+	private float oldMass;
+	
+	void Start()
+	{
+		oldMass = rigidbody.mass;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-
-
+	void Update ()
+	{
 		GameObject obj = GameObject.FindWithTag(Tags.RIGHT_ARM);
 		string heldGrabableR = obj.GetComponent<ArmLogic>().heldGrabableName;
 
@@ -55,7 +60,13 @@ public class MagnetFieldBehaviour : MonoBehaviour {
 				magnetBox = OTHER.GetComponent<MagnetTrackBehaviour>().GetEmptyBox();
 				magnetBoxName = magnetBox.ToString ();
 				magnetized = true;
+				rigidbody.mass = magnetizedMass;
 			}
 		}
+	}
+	
+	void OnGrabbed()
+	{
+		rigidbody.mass = oldMass;
 	}
 }

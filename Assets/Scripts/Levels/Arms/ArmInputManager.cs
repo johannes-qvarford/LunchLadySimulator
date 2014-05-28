@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class ArmInputManager : MonoSingleton<ArmInputManager>
 {
@@ -22,8 +23,11 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 	{
 		{Action.NEXT_OPTION_RIGHT, "NextOptionRight"},
 		{Action.NEXT_OPTION_LEFT, "NextOptionLeft"},
+		{Action.NEXT_OPTION_UP, "NextOptionUp"},
+		{Action.NEXT_OPTION_DOWN, "NextOptionDown"},
 		{Action.CONFIRM, "Confirm"},
-		{Action.NEXT_CUSTOMER, "NextCustomer"}
+		{Action.NEXT_CUSTOMER, "NextCustomer"},
+		{Action.PAUSE, "Pause"}
 	};
 
 	public enum Movement
@@ -51,8 +55,11 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 	{
 		NEXT_OPTION_RIGHT,
 		NEXT_OPTION_LEFT,
+		NEXT_OPTION_UP,
+		NEXT_OPTION_DOWN,
 		CONFIRM,
 		NEXT_CUSTOMER,
+		PAUSE
 	}
 
 	public static float GetMovement(Arm arm, Movement movement)
@@ -121,9 +128,9 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 		return WHICH_JOYSTICK + WHICH_SIDE;
 	}
 	
-	private string BuildJoystickOptionName()
+	private string BuildJoystickOptionName(bool vertical)
 	{
-		return "JoystickNextOption";
+		return "JoystickNextOption" + (vertical ? "Vertical" : "");
 	}
 	
 	private string BuildName(Action action)
@@ -153,13 +160,23 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 		return Input.GetAxis(BuildName(arm, movement));
 	}
 	
+	private bool IsAnyEq(Action action, params Action[] actions)
+	{
+		return actions.Any((a) => a == action);
+	}
+	
 	private bool IsDownInternal(Action action)
 	{
-		//hack because joystick uses joystick axis to check option select button while keyboard uses 
-		if(useJoystick && (action == Action.NEXT_OPTION_LEFT || action == Action.NEXT_OPTION_RIGHT))
+		bool IS_OPTION_VERTICAL = IsAnyEq(action, Action.NEXT_OPTION_DOWN, Action.NEXT_OPTION_UP);
+		bool IS_OPTION_HOZIONTAL = IsAnyEq(action, Action.NEXT_OPTION_RIGHT, Action.NEXT_OPTION_LEFT);
+		bool IS_OPTION_NEGATIVE = IsAnyEq(action, Action.NEXT_OPTION_LEFT, Action.NEXT_OPTION_DOWN);
+		bool IS_OPTION = IS_OPTION_VERTICAL || IS_OPTION_HOZIONTAL;
+		
+		if(useJoystick && IS_OPTION)
 		{
-			float value = Input.GetAxis(BuildJoystickOptionName());
-			return action == Action.NEXT_OPTION_LEFT && value < -0.5 || action == Action.NEXT_OPTION_RIGHT && value > 0.5;
+			float value = Input.GetAxis(BuildJoystickOptionName(IS_OPTION_VERTICAL));
+			return (IS_OPTION_NEGATIVE && value < -0.5) || 
+			(IS_OPTION_NEGATIVE == false && value > 0.5);
 		}
 		else
 		{
