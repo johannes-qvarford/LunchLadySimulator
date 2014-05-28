@@ -9126,6 +9126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 8
+  bubbleName: _Bubble
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9177,6 +9178,7 @@ MonoBehaviour:
   - 
   - 
   newType: 0
+  speechBubble: {fileID: 11400000}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
