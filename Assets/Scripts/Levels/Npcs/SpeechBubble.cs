@@ -3,6 +3,7 @@ using System.Collections;
 
 public class SpeechBubble : MonoBehaviour {
 	public float speed = 3;
+	public string bubbleName = "_Bubble";
 	private Vector3 scale;
 	// Use this for initialization
 	private bool isFirst = false;
@@ -16,6 +17,14 @@ public class SpeechBubble : MonoBehaviour {
 			}
 		}
 	}
+	public void clear()
+	{
+		foreach (Transform child in transform)
+		{
+			child.gameObject.SetActive(false);
+		}
+		displayFood (bubbleName);
+	}
 	void Start () {
 		scale = gameObject.transform.localScale;
 		hide ();
@@ -23,7 +32,6 @@ public class SpeechBubble : MonoBehaviour {
 	public void display()
 	{
 		isFirst = true;
-		displayFood ("breaD");
 	}
 	public void hide()
 	{

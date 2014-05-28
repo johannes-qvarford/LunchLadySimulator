@@ -13,9 +13,9 @@
 	</maindishes>
 	
 	<sideorders>
-		<sideorder name="bread">
+		<sideorder name="Cookie">
 			<number>1</number>
-			<value>25</value>
+			<value>30</value>
 		</sideorder>
 	</sideorders>
 	
