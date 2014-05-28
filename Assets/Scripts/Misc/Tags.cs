@@ -20,7 +20,9 @@ public static class Tags
 	public const string GUISOUND = "GuiSound";
 	public const string NPCSOUNDBANK = "NpcSoundBank";
 	public const string DYNAMICMUSIC = "DynamicMusic";
-	
+	public const string MAGNET_FIELD = "MagnetField";	
+
+
 	public static Transform FindWithTagRecursive(Transform t, string tag)
 	{
 		if(t.gameObject.tag == tag)
