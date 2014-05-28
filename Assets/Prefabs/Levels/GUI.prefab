@@ -768,6 +768,7 @@ MonoBehaviour:
   countDownText: {fileID: 13200004}
   countDownPreText: 'Restart in '
   countDownPostString: .
+  gameOverSound: {fileID: 11400000, guid: 0c08d822e0dad364787774b32d901231, type: 2}
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -820,6 +821,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   graphics: {fileID: 100004}
+  pauseMenuSoundMultiplier: .25
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1

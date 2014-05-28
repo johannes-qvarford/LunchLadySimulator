@@ -20,6 +20,7 @@ public static class Tags
 	public const string GUISOUND = "GuiSound";
 	public const string NPCSOUNDBANK = "NpcSoundBank";
 	public const string DYNAMICMUSIC = "DynamicMusic";
+	public const string MASTERVOLUME = "MasterVolume";
 	public const string MAGNET_FIELD = "MagnetField";	
 
 

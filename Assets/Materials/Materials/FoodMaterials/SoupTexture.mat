@@ -31,19 +31,19 @@ Material:
       data:
         first:
           name: _InnerValue
-        second: .180357128
+        second: .244642839
       data:
         first:
           name: _OuterValue
-        second: .757142901
+        second: .692857206
       data:
         first:
           name: _TransTresh
-        second: .410714298
+        second: .517857134
       data:
         first:
           name: _MetaballAlpha
-        second: 0
+        second: .178571433
     m_Colors:
       data:
         first:

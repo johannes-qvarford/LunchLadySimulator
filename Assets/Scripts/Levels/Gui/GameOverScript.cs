@@ -10,6 +10,7 @@ public class GameOverScript : MonoBehaviour {
 	private bool isGameOver;
 	private Color color;
 	private float countDownStart;
+	public FMODAsset gameOverSound;
 	// Use this for initialization
 	void Start ()
 	{
@@ -23,6 +24,7 @@ public class GameOverScript : MonoBehaviour {
 		if (isGameOver == true)
 			return;
 		//Only run the following if we haven't alreaddy
+		FMOD_StudioSystem.instance.PlayOneShot(gameOverSound,transform.position);
 		isGameOver = true;
 		countDownText.color = color;
 		gameOverText.color = color;

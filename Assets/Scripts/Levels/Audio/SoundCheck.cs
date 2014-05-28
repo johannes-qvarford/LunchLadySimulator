@@ -8,11 +8,12 @@ public class SoundCheck : MonoBehaviour {
 	public float volume;
 	public float state,mood;
 	public FMODAsset path;
+	private float master;
 	private FMOD.Studio.PLAYBACK_STATE status; 
 	private bool [] valid = new bool[3];
 	void Start () 
 	{
-		
+		master = 1.0f;
 		for(int i= 0; i < valid.Length; i ++)
 		{
 			valid[i] = true;
@@ -49,7 +50,7 @@ public class SoundCheck : MonoBehaviour {
 			ChangeParameter();
 			if(valid[1])
 			{	
-				pVolume.setValue(Mathf.Clamp (collision.relativeVelocity.sqrMagnitude,0,1));
+				pVolume.setValue(Mathf.Clamp (collision.relativeVelocity.sqrMagnitude,0,1)*master);
 				//Debug.Log (Mathf.Clamp (collision.relativeVelocity.sqrMagnitude,0,1)+collision.gameObject.name);
 			}
 			if(collision.gameObject.tag != "Food")
@@ -91,7 +92,7 @@ public class SoundCheck : MonoBehaviour {
 		}
 		if(valid[1])
 		{
-			SetVolume(1);
+			SetVolume(1*master);
 		}
 		if(valid[2])
 		{
@@ -100,7 +101,7 @@ public class SoundCheck : MonoBehaviour {
 	}
 	public void SetVolume(float vol)
 	{
-		volume = vol;
+		volume = vol * master;
 		pVolume.setValue(volume);
 
 	}
@@ -130,6 +131,10 @@ public class SoundCheck : MonoBehaviour {
 		float temp;	
 		pState.getValue(out temp);
 		return temp;
+	}
+	public void SetMaster(float inputMaster)
+	{
+		master = inputMaster;
 	}
 	public void setFmodAsset(FMODAsset sound)
 	{
