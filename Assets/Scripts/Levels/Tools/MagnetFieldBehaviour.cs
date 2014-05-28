@@ -16,19 +16,16 @@ public class MagnetFieldBehaviour : MonoBehaviour {
 	void Update () {
 
 
-		GameObject obj = GameObject.Find("Workbench/PlayerArms/RightArm");
+		GameObject obj = GameObject.FindWithTag(Tags.RIGHT_ARM);
 		string heldGrabableR = obj.GetComponent<ArmLogic>().heldGrabableName;
 
-		obj = GameObject.Find("Workbench/PlayerArms/LeftArm");
+		obj = GameObject.FindWithTag(Tags.LEFT_ARM);
 		string heldGrabableL = obj.GetComponent<ArmLogic>().heldGrabableName;		
 		
-
-		GameObject magnet = GameObject.Find ("Magnet Track");
-		
+		GameObject magnet = GameObject.Find("MagnetTrack");
 
 		if(magnetized && heldGrabableR != transform.ToString() && heldGrabableL != transform.ToString ())
 		{
-		
 			transform.position = magnetBox.transform.position;
 			Quaternion changeRotation = transform.localRotation;
 			
@@ -38,40 +35,21 @@ public class MagnetFieldBehaviour : MonoBehaviour {
 			transform.localPosition+= magnetPosition;		
 	
 			transform.rigidbody.freezeRotation = true;
-
 		}
-		else{
+		else
+		{
 			magnetized = false;
 			magnet.GetComponent<MagnetTrackBehaviour>().SetMagnetPositionEmpty(magnetBoxName);
 			magnetBoxName = "none";
 		}
 	}
 
-
-	void OnTriggerEnter(Collider col)
-	{	
-
-
-	}
-	
-
-	void OnTriggerExit()
-	{
-	
-		
-	
-
-	}
-
 	void OnTriggerStay(Collider col)
 	{
-		
 		GameObject OTHER = col.gameObject;
 		
 		if(OTHER.tag == Tags.MAGNET_FIELD && !magnetized)
 		{
-			
-			
 			if(OTHER.GetComponent<MagnetTrackBehaviour>().isEmptyBox())
 			{
 				magnetBox = OTHER.GetComponent<MagnetTrackBehaviour>().GetEmptyBox();
@@ -79,11 +57,5 @@ public class MagnetFieldBehaviour : MonoBehaviour {
 				magnetized = true;
 			}
 		}
-		
-
-
-
 	}
-
-
 }

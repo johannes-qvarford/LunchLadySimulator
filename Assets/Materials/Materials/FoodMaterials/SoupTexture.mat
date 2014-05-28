@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: SoupTexture
-  m_Shader: {fileID: 4800000, guid: dfeb506ce2a731f4d9d0defa9aa49df9, type: 3}
+  m_Shader: {fileID: 4800000, guid: 90a2251799e4e3e408deb72cfd2338d2, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
