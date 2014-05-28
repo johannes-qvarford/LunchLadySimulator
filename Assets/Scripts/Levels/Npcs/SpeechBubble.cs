@@ -32,7 +32,6 @@ public class SpeechBubble : MonoBehaviour {
 	public void display()
 	{
 		isFirst = true;
-		displayFood ("breaD");
 	}
 	public void hide()
 	{

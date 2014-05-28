@@ -89,6 +89,10 @@ public class ScoreCounter : MonoBehaviour {
 	}
 	public void spawnScore(int spawnedScore)
 	{
+		if(popUp == null)
+		{
+			Debug.Log(gameObject.name);
+		}
 		GameObject newPopup = Instantiate(popUp, gameObject.transform.position, gameObject.transform.rotation) as GameObject;
 		ScorePopup scorePopup = newPopup.GetComponent ("ScorePopup") as ScorePopup;
 		scorePopup.setValues (

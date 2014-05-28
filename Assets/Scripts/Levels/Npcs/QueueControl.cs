@@ -99,7 +99,7 @@ public class QueueControl : MonoBehaviour
 	{
 		GameObject g = firstInLine;
 		yield return new WaitForSeconds(timeToChitChat);
-		if(g == firstInLine && g.GetComponent<NpcBehaviour>().gotFood == false)
+		if(g == firstInLine && g != null && g.GetComponent<NpcBehaviour>().gotFood == false)
 		{
 			firstInLine.GetComponent<SoundCheck>().SetState(2);
 		}

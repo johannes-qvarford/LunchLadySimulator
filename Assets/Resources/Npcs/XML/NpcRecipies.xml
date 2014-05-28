@@ -15,7 +15,7 @@
 	<sideorders>
 		<sideorder name="Cookie">
 			<number>1</number>
-			<value>500</value>
+			<value>30</value>
 		</sideorder>
 	</sideorders>
 	
