@@ -13,6 +13,7 @@ public class NPCRandomizer : MonoBehaviour {
 	public string[] categories = new string[20];
 	List<Category> categoryList = new List<Category>();
 	public bool newType = false;
+	public SpeechBubble speechBubble;
 
 	private DishStruct currentDrink;
 	private DishStruct currentSideOrder;
@@ -268,6 +269,18 @@ public class NPCRandomizer : MonoBehaviour {
 		currentDrink = categoryList[type].GetRandomDrink();
 
 		transform.GetComponent<NpcBehaviour>().setFaceReady(true,headstring);
+		updateSpeecBubble ();
+	}
+
+	private void updateSpeecBubble()
+	{
+		speechBubble.clear ();
+		foreach(DishStruct dishStruct in currentMainOrder)
+		{
+			speechBubble.displayFood(dishStruct.dish);
+		}
+		speechBubble.displayFood (currentDrink.dish);
+		speechBubble.displayFood (currentSideOrder.dish);
 	}
 
 	private void ChangeHair(int type)
