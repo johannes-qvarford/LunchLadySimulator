@@ -5,10 +5,9 @@ Properties {
     _MainTex ("Texture", 2D) = "white" { }
            
    	_MainColor ("Color", Color) = (1,1,1,1)
-    _InnerValue ("InnerValue", Range(0.1,1)) = 0.15   
-    _OuterValue ("OuterValue", Range(0.1,1)) = 0.6  
+    _InnerValue ("InnerValue", Range(0.1,1)) = 0.1   
+    _OuterValue ("OuterValue", Range(0.1,1)) = 0.5   
     _TransTresh ("TransparencyTreshold", Range(0,1)) = 0.2 
-    _OuterTransTresh ("OuterTransparencyTreshold", Range(0,1)) = 0.2 
     _MetaballAlpha ("MetaballAlpha", Range(0,1)) = 0.5 
 }
 SubShader {
@@ -21,7 +20,7 @@ SubShader {
 	#include "UnityCG.cginc"	
 	float4 _Color;
 	sampler2D _MainTex;	
-	float _InnerValue,_OuterValue,_TransTresh,_MetaballAlpha, _OuterTransTresh;
+	float _InnerValue,_OuterValue,_TransTresh,_MetaballAlpha;
 	float4 _MainColor;
 	struct v2f {
 	    float4  pos : SV_POSITION;
@@ -42,9 +41,11 @@ SubShader {
 		//finalColor=_Color*texcol;
 		finalColor=texcol;
 		if(finalColor.a>_TransTresh){
+			finalColor.a=_MetaballAlpha;
 			finalColor=floor((finalColor/_InnerValue)*_OuterValue);
 		}
-		finalColor.a = finalColor.r;
+		
+		finalColor.b = finalColor.g = finalColor.r = finalColor.a = (finalColor.r + finalColor.g + finalColor.b)/3;
 		finalColor = clamp(finalColor, 0, 1);
 		finalColor *= _MainColor;
 	    return finalColor;

@@ -23,7 +23,8 @@ TagManager:
   - Turn
   - SpawnArea
   - GuiSound
-  - 
+  - NpcSoundBank
+  - DynamicMusic
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
