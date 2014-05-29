@@ -15,11 +15,6 @@ public class MenuButtonGraphic : MonoBehaviour {
 	{
 		setSoundManagerIfNotAlready();
 	}
-	void SelectedChanged(bool on)
-	{
-		mouseOver = on;
-		updateState();
-	}
 	
 	void OnClick()
 	{
@@ -49,25 +44,25 @@ public class MenuButtonGraphic : MonoBehaviour {
 	private void showDefault()
 	{
 		turnOffAll ();
-		defaultObject.renderer.enabled = true;
+		defaultObject.active = true;
 	}
 	private void showMouseOver()
 	{
 		turnOffAll ();
-		overObject.renderer.enabled = true;
+		overObject.active = true;
 		setSoundManagerIfNotAlready();
 		SoundMgr.SendMessage("TriggerGuiSound",GuiSoundMode.HOVER,SendMessageOptions.RequireReceiver);
 	}
 	private void showMouseDown()
 	{
 		turnOffAll();
-		clickingObject.renderer.enabled = true;
+		clickingObject.active = true;
 	}
 	private void turnOffAll()
 	{
-		defaultObject.renderer.enabled = false;
-		overObject.renderer.enabled = false;
-		clickingObject.renderer.enabled = false;
+		defaultObject.active = false;
+		overObject.active = false;
+		clickingObject.active = false;
 	}
 
 	private void updateState()
@@ -75,17 +70,15 @@ public class MenuButtonGraphic : MonoBehaviour {
 		if(mouseOver == false)
 		{
 			showDefault();
+			return;
+		}
+		if(clicking == true)
+		{
+			showMouseDown();
 		}
 		else
 		{
-			if(clicking == true)
-			{
-				showMouseDown();
-			}
-			else
-			{
-				showMouseOver();
-			}
+			showMouseOver();
 		}
 	}
 	void OnMouseOver()
@@ -108,6 +101,7 @@ public class MenuButtonGraphic : MonoBehaviour {
 	void OnSelected(bool yes)
 	{
 		mouseOver = yes;
+		Debug.Log("selected = " + yes);
 		updateState();
 	}
 	
