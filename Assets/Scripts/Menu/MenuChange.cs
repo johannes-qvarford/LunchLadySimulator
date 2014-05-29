@@ -12,6 +12,10 @@ public class MenuChange : MonoBehaviour {
 	
 	public bool isSelected = false;
 	
+	public int waitTime = 30;
+	
+	private int wait = 0;
+	
 	//right now we can't go back from level select
 	private bool done;
 	
@@ -26,10 +30,16 @@ public class MenuChange : MonoBehaviour {
 	void OnSelected(bool yes)
 	{
 		isSelected = true;
+		wait = waitTime;
 	}
 	
 	void Update()
 	{
+		if(wait > 0)
+		{
+			--wait;
+		}
+		
 		if(done == false && ArmInputManager.IsDown(ArmInputManager.Action.CONFIRM))
 		{
 			SendMessage("OnClick", SendMessageOptions.RequireReceiver);
@@ -38,7 +48,7 @@ public class MenuChange : MonoBehaviour {
 			done = true;
 		}
 		
-		if(isSelected)
+		if(isSelected && wait == 0)
 		{
 			if(leftButton != null && ArmInputManager.IsDown(ArmInputManager.Action.NEXT_OPTION_LEFT))
 			{
