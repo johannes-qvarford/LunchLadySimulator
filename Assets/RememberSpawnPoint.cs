@@ -18,6 +18,11 @@ public class RememberSpawnPoint : MonoBehaviour {
 		transform.localRotation = rotation;
 		rigidbody.velocity = Vector3.zero;
 		rigidbody.angularVelocity = Vector3.zero;
+		Invoke( "spawnWithDelay", 0.1f );
+
+	}
+	private void spawnWithDelay()
+	{
 		Instantiate(smoke, transform.TransformPoint(Vector3.zero), transform.rotation);
 	}
 }

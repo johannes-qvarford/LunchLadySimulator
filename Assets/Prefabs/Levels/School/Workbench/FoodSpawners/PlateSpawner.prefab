@@ -9891,6 +9891,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxFoodPlateDistanceForSticky: .100000001
   debug: 0
+  inBox: 1
 --- !u!114 &11400020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9984,6 +9985,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxFoodPlateDistanceForSticky: .100000001
   debug: 0
+  inBox: 1
 --- !u!114 &11400034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10037,6 +10039,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxFoodPlateDistanceForSticky: .100000001
   debug: 0
+  inBox: 1
 --- !u!114 &11400042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10050,6 +10053,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxFoodPlateDistanceForSticky: .100000001
   debug: 0
+  inBox: 1
 --- !u!114 &11400044
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10143,6 +10147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxFoodPlateDistanceForSticky: .100000001
   debug: 0
+  inBox: 1
 --- !u!114 &11400058
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10156,6 +10161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxFoodPlateDistanceForSticky: .100000001
   debug: 0
+  inBox: 1
 --- !u!114 &11400060
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10249,6 +10255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxFoodPlateDistanceForSticky: .100000001
   debug: 0
+  inBox: 1
 --- !u!114 &11400074
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10262,6 +10269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxFoodPlateDistanceForSticky: .100000001
   debug: 0
+  inBox: 1
 --- !u!114 &11400076
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10355,6 +10363,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxFoodPlateDistanceForSticky: .100000001
   debug: 0
+  inBox: 1
 --- !u!114 &11400090
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10439,6 +10448,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxFoodPlateDistanceForSticky: .100000001
   debug: 0
+  inBox: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

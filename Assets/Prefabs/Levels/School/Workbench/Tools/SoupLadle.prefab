@@ -32,6 +32,7 @@ GameObject:
   - 114: {fileID: 11400004}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400030}
+  - 114: {fileID: 11400032}
   m_Layer: 12
   m_Name: SoupLadle
   m_TagString: Tool
@@ -1249,6 +1250,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   magnetRotation: {x: 0, y: 90, z: 350}
   magnetPosition: {x: 0, y: 0, z: -.075000003}
+  magnetizedMass: 1000
+--- !u!114 &11400032
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71416820bdf1d3a47904c179aadba690, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smoke: {fileID: 100000, guid: a629fbbf17444e843af1ef7ac03cfc16, type: 2}
 --- !u!136 &13600000
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -8,7 +8,7 @@ public class ChangeSceneOnPress : MonoBehaviour {
 	
 	public bool isSelected = false;
 	
-	void OnInputClick()
+	void OnClick()
 	{
 		changeScene();
 	}

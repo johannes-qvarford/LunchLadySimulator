@@ -6,6 +6,7 @@ public class PlateBehaviour : MonoBehaviour
 {
 	public float maxFoodPlateDistanceForSticky = 0.1f;
 	public bool debug = false;
+	public bool inBox = true;
 
 	void OnCollisionEnter(Collision col)
 	{

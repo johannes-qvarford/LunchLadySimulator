@@ -3,11 +3,19 @@ using System.Collections;
 
 public class ResumeOnClick : MonoBehaviour {
 	public ShowPauseMenu menu;
+	private GameObject masterVolumeObject;
 	
-	void OnInputClick()
+	void Start()
 	{
-		Time.timeScale = 1;
-		Application.LoadLevel (Application.loadedLevelName);
+		masterVolumeObject = GameObject.FindWithTag(Tags.MASTERVOLUME);
+		
+	}
+	
+	void OnClick()
+	{
+		//masterVolumeObject.SendMessage("SetVolumeOnSounds",1.0f ,SendMessageOptions.RequireReceiver);
+		//Time.timeScale = 1;
+		//menu.returnToGame ();
 	}
 	
 	void OnMouseDown()
