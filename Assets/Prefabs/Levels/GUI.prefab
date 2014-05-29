@@ -202,7 +202,7 @@ GameObject:
   - 4: {fileID: 400024}
   - 131: {fileID: 13100012}
   m_Layer: 16
-  m_Name: HappyBarFrame
+  m_Name: HappyBarBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -341,6 +341,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &100042
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400042}
+  - 131: {fileID: 13100020}
+  m_Layer: 16
+  m_Name: HappyBarFrame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &400000
 Transform:
   m_ObjectHideFlags: 1
@@ -437,9 +453,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400018}
-  - {fileID: 400024}
+  - {fileID: 400042}
   - {fileID: 400020}
   - {fileID: 400012}
+  - {fileID: 400024}
   m_Father: {fileID: 400034}
 --- !u!4 &400016
 Transform:
@@ -460,7 +477,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .5, z: -1}
+  m_LocalPosition: {x: 0, y: .5, z: -3}
   m_LocalScale: {x: 0, y: 0, z: 1}
   m_Children: []
   m_Father: {fileID: 400014}
@@ -494,7 +511,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100024}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .5, z: 0}
+  m_LocalPosition: {x: -0, y: .5, z: -2}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 400014}
@@ -592,6 +609,17 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400002}
+--- !u!4 &400042
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100042}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: .5, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 400014}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -603,7 +631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eef3dfd392864ef469d64f52346e0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popUpEndPosition: {x: 280, y: -20}
+  popUpEndPosition: {x: 312, y: -11}
   popUpInternalDifference: {x: 0, y: -20}
   beforeString: 
   endString: 
@@ -645,7 +673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   percentage: 1
-  edges: 200
+  edges: 152
   gradient:
     key0:
       serializedVersion: 2
@@ -816,7 +844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eef3dfd392864ef469d64f52346e0177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popUpEndPosition: {x: 180, y: -103}
+  popUpEndPosition: {x: 228, y: -166}
   popUpInternalDifference: {x: 0, y: -40}
   beforeString: 
   endString: 
@@ -841,9 +869,9 @@ GUITexture:
   m_Color: {r: .5, g: .5, b: .5, a: .501960814}
   m_PixelInset:
     serializedVersion: 2
-    x: 25
-    y: 0
-    width: 81
+    x: 40
+    y: -46
+    width: 61
     height: 0
   m_LeftBorder: 0
   m_RightBorder: 0
@@ -861,9 +889,9 @@ GUITexture:
   m_PixelInset:
     serializedVersion: 2
     x: 0
-    y: -123.300003
-    width: 254.300003
-    height: 123.5
+    y: -206.199997
+    width: 314.899994
+    height: 207.399994
   m_LeftBorder: 0
   m_RightBorder: 0
   m_TopBorder: 0
@@ -879,8 +907,8 @@ GUITexture:
   m_Color: {r: .720588207, g: .720588207, b: .720588207, a: 1}
   m_PixelInset:
     serializedVersion: 2
-    x: 29.5
-    y: -107.889999
+    x: 17.2000008
+    y: -166.899994
     width: 43.7999992
     height: 37.4599991
   m_LeftBorder: 0
@@ -917,10 +945,10 @@ GUITexture:
   m_Color: {r: .45588237, g: .45588237, b: .45588237, a: .509803951}
   m_PixelInset:
     serializedVersion: 2
-    x: 5
-    y: -313
-    width: 121
-    height: 626
+    x: 21
+    y: -281
+    width: 91
+    height: 470
   m_LeftBorder: 0
   m_RightBorder: 0
   m_TopBorder: 0
@@ -936,9 +964,9 @@ GUITexture:
   m_Color: {r: .5, g: .5, b: .5, a: .501960814}
   m_PixelInset:
     serializedVersion: 2
-    x: 25
-    y: 0
-    width: 81
+    x: 40
+    y: -45.7999992
+    width: 61
     height: 0
   m_LeftBorder: 0
   m_RightBorder: 0
@@ -951,14 +979,14 @@ GUITexture:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100024}
   m_Enabled: 1
-  m_Texture: {fileID: 2800000, guid: b503b6247affcb448935107dfaed55c4, type: 3}
-  m_Color: {r: .5, g: .5, b: .5, a: .501960814}
+  m_Texture: {fileID: 2800000, guid: b34b70d6c7422e54f9e5b61ad26f5f51, type: 3}
+  m_Color: {r: .431444645, g: .442864776, b: .558823526, a: 1}
   m_PixelInset:
     serializedVersion: 2
-    x: 10
-    y: -308
-    width: 111
-    height: 616
+    x: 28
+    y: -272
+    width: 79
+    height: 450
   m_LeftBorder: 0
   m_RightBorder: 0
   m_TopBorder: 0
@@ -1020,6 +1048,25 @@ GUITexture:
   m_RightBorder: 0
   m_TopBorder: 0
   m_BottomBorder: 0
+--- !u!131 &13100020
+GUITexture:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100042}
+  m_Enabled: 1
+  m_Texture: {fileID: 2800000, guid: b503b6247affcb448935107dfaed55c4, type: 3}
+  m_Color: {r: .5, g: .5, b: .5, a: .501960814}
+  m_PixelInset:
+    serializedVersion: 2
+    x: 26
+    y: -276
+    width: 83
+    height: 462
+  m_LeftBorder: 0
+  m_RightBorder: 0
+  m_TopBorder: 0
+  m_BottomBorder: 0
 --- !u!132 &13200000
 GUIText:
   m_ObjectHideFlags: 1
@@ -1031,12 +1078,12 @@ GUIText:
   m_Text: <score>
   m_Anchor: 2
   m_Alignment: 0
-  m_PixelOffset: {x: 235.899994, y: -15}
+  m_PixelOffset: {x: 275.700012, y: -12.5}
   m_LineSpacing: 1
   m_TabSize: 4
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: 65d3e9c1e601561439804b7fb1a67910, type: 3}
   m_Material: {fileID: 0}
-  m_FontSize: 29
+  m_FontSize: 70
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
@@ -1097,15 +1144,15 @@ GUIText:
   m_GameObject: {fileID: 100032}
   m_Enabled: 1
   serializedVersion: 3
-  m_Text: 'Score:'
+  m_Text: Score
   m_Anchor: 2
   m_Alignment: 0
-  m_PixelOffset: {x: 93.9100037, y: -15}
+  m_PixelOffset: {x: 146.020004, y: -12.5}
   m_LineSpacing: 1
   m_TabSize: 4
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: 65d3e9c1e601561439804b7fb1a67910, type: 3}
   m_Material: {fileID: 0}
-  m_FontSize: 29
+  m_FontSize: 70
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
@@ -1123,12 +1170,12 @@ GUIText:
   m_Text: <queue>
   m_Anchor: 2
   m_Alignment: 0
-  m_PixelOffset: {x: 151.300003, y: -68.4000015}
+  m_PixelOffset: {x: 176.199997, y: -114.199997}
   m_LineSpacing: 1
   m_TabSize: 4
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: 65d3e9c1e601561439804b7fb1a67910, type: 3}
   m_Material: {fileID: 0}
-  m_FontSize: 29
+  m_FontSize: 70
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
