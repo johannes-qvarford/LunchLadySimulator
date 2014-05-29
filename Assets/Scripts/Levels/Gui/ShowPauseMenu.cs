@@ -63,7 +63,7 @@ public class ShowPauseMenu : MonoBehaviour {
 				
 				if(ArmInputManager.IsDown(ArmInputManager.Action.CONFIRM))
 				{
-					options[optionsIndex].SendMessage("OnMouseDown", SendMessageOptions.RequireReceiver);
+					options[optionsIndex].SendMessage("OnInputClick", SendMessageOptions.RequireReceiver);
 				}
 			}
 		}
