@@ -1047,6 +1047,7 @@ MonoBehaviour:
   countDownText: {fileID: 13200004}
   countDownPreText: 'Restart in '
   countDownPostString: .
+  backGround: {fileID: 0}
   gameOverSound: {fileID: 11400000, guid: 0c08d822e0dad364787774b32d901231, type: 2}
 --- !u!114 &11400012
 MonoBehaviour:
@@ -1550,7 +1551,7 @@ GUIText:
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 0
   m_PixelCorrect: 1
   m_RichText: 1
 --- !u!132 &13200004
@@ -1561,7 +1562,7 @@ GUIText:
   m_GameObject: {fileID: 100028}
   m_Enabled: 1
   serializedVersion: 3
-  m_Text: Restart in n.
+  m_Text: Restart in 5.
   m_Anchor: 4
   m_Alignment: 0
   m_PixelOffset: {x: 0, y: -31.3999996}

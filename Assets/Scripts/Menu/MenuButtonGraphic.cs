@@ -87,44 +87,11 @@ public class MenuButtonGraphic : MonoBehaviour {
 			showMouseOver();
 		}
 	}
-	void OnMouseOver()
-	{
-		if(mouseOver == false)
-		{
-			mouseOver = true;
-			updateState();
-		}
-	}
-	void OnMouseExit()
-	{
-		if(mouseOver == true)
-		{
-			mouseOver = false;
-			updateState ();
-		}
-	}
 	
 	void OnSelected(bool yes)
 	{
 		mouseOver = yes;
 		Debug.Log("selected = " + yes);
 		updateState();
-	}
-	
-	void OnMouseDown()
-	{
-		if(clicking == false)
-		{
-			clicking = true;
-			updateState ();
-		}
-	}
-	void OnMouseUp()
-	{
-		if(clicking == true)
-		{
-			clicking = false;
-			updateState ();
-		}
 	}
 }

@@ -7,6 +7,7 @@ public class GameOverScript : MonoBehaviour {
 	public GUIText countDownText;
 	public string countDownPreText = "Restart in ";
 	public string countDownPostString = ".";
+	public GameObject backGround;
 	private bool isGameOver;
 	private Color color;
 	private float countDownStart,volume;
@@ -27,13 +28,14 @@ public class GameOverScript : MonoBehaviour {
 		if (isGameOver == true)
 			return;
 		//Only run the following if we haven't alreaddy
-		masterVolumeObject.SendMessage("SetVolumeOnSounds",volume,SendMessageOptions.RequireReceiver);
-		FMOD_StudioSystem.instance.PlayOneShot(gameOverSound,transform.position);
 		isGameOver = true;
+		backGround.SetActive(true);
 		countDownText.color = color;
 		gameOverText.color = color;
 		countDownStart = Time.time;
 		updateCountDown ();
+		masterVolumeObject.SendMessage("SetVolumeOnSounds",volume,SendMessageOptions.RequireReceiver);
+		FMOD_StudioSystem.instance.PlayOneShot(gameOverSound,transform.position);
 	}
 	// Update is called once per frame
 	void Update ()
