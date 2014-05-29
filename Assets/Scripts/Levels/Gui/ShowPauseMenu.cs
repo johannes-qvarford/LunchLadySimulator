@@ -11,15 +11,18 @@ public class ShowPauseMenu : MonoBehaviour {
 	private int framesSelectCooldown = 0;
 	
 	public float pauseMenuSoundMultiplier;
+	
+	public PauseMenuButton originalCurrent;
+	public PauseMenuButton theResumer;
+	
 	private GameObject masterVolumeObject;
+	private PauseMenuButton current;
 	
 	// Use this for initialization
 	void Start () {
 		masterVolumeObject = GameObject.FindWithTag(Tags.MASTERVOLUME);
-		for(int i = 0; i < graphics.transform.childCount; ++i)
-		{
-			options.Add(graphics.transform.GetChild(i).gameObject);
-		}
+		current = originalCurrent;
+		
 	}
 	
 	// Update is called once per frame
@@ -28,15 +31,16 @@ public class ShowPauseMenu : MonoBehaviour {
 	
 		if(ArmInputManager.IsDown(ArmInputManager.Action.PAUSE) && paused == false)
 		{
-			masterVolumeObject.SendMessage("SetVolumeOnSounds",1.0f*pauseMenuSoundMultiplier,SendMessageOptions.RequireReceiver);
+			Debug.Log(Time.timeScale);
+			masterVolumeObject.BroadcastMessage("SetVolumeOnSounds",1.0f*pauseMenuSoundMultiplier,SendMessageOptions.RequireReceiver);
+			
 			dispalyPauseMenu();
+			current.BroadcastMessage("OnSelected", true, SendMessageOptions.RequireReceiver);
 		}
 		else if(paused)
 		{
 			if(ArmInputManager.IsDown(ArmInputManager.Action.PAUSE))
 			{
-				paused = false;
-				masterVolumeObject.SendMessage("SetVolumeOnSounds",1.0f,SendMessageOptions.RequireReceiver);
 				returnToGame();
 			}
 			else
@@ -47,23 +51,34 @@ public class ShowPauseMenu : MonoBehaviour {
 				}
 				if(ArmInputManager.IsDown(ArmInputManager.Action.NEXT_OPTION_DOWN) && framesSelectCooldown == 0)
 				{
-					options[optionsIndex].SetActive(true);
-					optionsIndex = (optionsIndex+1) % options.Count;
-					framesSelectCooldown = 60;
+					Debug.Log("down");
+					var next = current.nextDown;
+					current.BroadcastMessage("OnSelected", false, SendMessageOptions.RequireReceiver);
+					next.BroadcastMessage("OnSelected", true, SendMessageOptions.RequireReceiver);
+					framesSelectCooldown = 30;
+					current = next;
 				}
-				else if(ArmInputManager.IsDown(ArmInputManager.Action.NEXT_OPTION_UP))
+				else if(ArmInputManager.IsDown(ArmInputManager.Action.NEXT_OPTION_UP) && framesSelectCooldown == 0)
 				{
-					options[optionsIndex].SetActive(true);
-					optionsIndex = ((optionsIndex-1)+options.Count) % options.Count;
-				}
-				if(frame % 30 == 0)
-				{
-					options[optionsIndex].SetActive(!options[optionsIndex].active);
+					Debug.Log("up");
+					var next = current.nextUp;
+					current.BroadcastMessage("OnSelected", false, SendMessageOptions.RequireReceiver);
+					next.BroadcastMessage("OnSelected", true, SendMessageOptions.RequireReceiver);
+					framesSelectCooldown = 30;
+					current = next;
 				}
 				
 				if(ArmInputManager.IsDown(ArmInputManager.Action.CONFIRM))
 				{
-					options[optionsIndex].SendMessage("OnInputClick", SendMessageOptions.RequireReceiver);
+					if(current.gameObject == theResumer.gameObject)
+					{
+						returnToGame();
+					}
+					else
+					{
+						Time.timeScale = 1;
+						current.BroadcastMessage("OnClick", SendMessageOptions.RequireReceiver);
+					}
 				}
 			}
 		}
@@ -78,6 +93,8 @@ public class ShowPauseMenu : MonoBehaviour {
 	
 	public void returnToGame()
 	{
+		paused = false;
+		masterVolumeObject.BroadcastMessage("SetVolumeOnSounds",1.0f,SendMessageOptions.RequireReceiver);
 		foreach(var o in options)
 		{
 			o.SetActive(true);

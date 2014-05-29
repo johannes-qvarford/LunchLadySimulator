@@ -9,7 +9,7 @@ public class ReloadOnClick : MonoBehaviour {
 		Application.LoadLevel (Application.loadedLevelName);
 	}
 	
-	void OnInputClick()
+	void OnClick()
 	{
 		Time.timeScale = 1;
 		Application.LoadLevel (Application.loadedLevelName);
