@@ -5,13 +5,12 @@ public class PopIn : MonoBehaviour {
 	public AnimationCurve curve;
 	public float popInSpeed;
 	public GameObject smoke;
-	private GameObject mySmoke;
 	private float creationTime;
 	// Use this for initialization
 	void Start () {
 		creationTime = Time.time;
 		transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-		mySmoke = (GameObject) Instantiate(smoke, transform.position, transform.rotation);
+		Instantiate(smoke, transform.position, transform.rotation);
 	}
 	
 	// Update is called once per frame
@@ -23,7 +22,6 @@ public class PopIn : MonoBehaviour {
 		}
 		else
 		{
-			Destroy(mySmoke);
 			Destroy(this);
 		}
 	}

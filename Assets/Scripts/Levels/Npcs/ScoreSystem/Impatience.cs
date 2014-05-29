@@ -29,7 +29,7 @@ public class Impatience : MonoBehaviour {
 	}
 	private void increaseTreshHold()
 	{
-		Debug.Log ("Growing impatient.");
+		//Debug.Log ("Growing impatient.");
 		currentLevel++;
 		currentMultiplier = multipliers [currentLevel];
 		tray.timeMultiplier = currentMultiplier;
