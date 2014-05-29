@@ -21,8 +21,11 @@ public class NPCRandomizer : MonoBehaviour {
 
 	private string headstring = "head_kid1";
 	private string headstring2 = "head_kid";
-
+	
 	private GameObject sounds;
+	
+	private System.Random randomGen = new System.Random();
+
 	// Use this for initialization
 	void Start () {
 		sounds = GameObject.FindWithTag(Tags.NPCSOUNDBANK);
@@ -34,7 +37,6 @@ public class NPCRandomizer : MonoBehaviour {
 	private void LoadNPCRecipies()
 	{
 		int offset = 0;
-		
 		TextAsset asset = Resources.Load<TextAsset>("Npcs/XML/NpcRecipies");
 		XmlDocument doc = new XmlDocument();
 		doc.LoadXml(asset.text);
@@ -134,7 +136,7 @@ public class NPCRandomizer : MonoBehaviour {
 		
 		foreach (var category in categories) 
 		{
-			categoryList.Add(new Category(category.FirstAttribute.Value));
+			categoryList.Add(new Category(category.FirstAttribute.Value,randomGen));
 			
 			LoadSkinColor(category,i);
 			LoadHeads (category,i);
@@ -255,7 +257,7 @@ public class NPCRandomizer : MonoBehaviour {
 
 	public void randomizeNPC()
 	{
-		int type = Random.Range(0,categoryList.Count);
+		int type = randomGen.Next(0,categoryList.Count);
 		GetComponent<SoundCheck>().setFmodAsset(sounds.GetComponent<SoundBank>().GetNpcSound(categoryList[type].GetName()));
 		ChangeClothes(type);
 		ChangeHead(type);
@@ -406,7 +408,7 @@ class Category
 	List<textureLinker> accessoryList = new List<textureLinker>();
 	
 	//food Lists
-	
+	System.Random randomGen;
 	List<DishStruct[]> mainOrders = new List<DishStruct[]>();
 	List<DishStruct> sideOrders = new List<DishStruct>();
 	List<DishStruct> drinks = new List<DishStruct>();
@@ -416,9 +418,10 @@ class Category
 	float perfection;
 	float patience;
 	
-	public Category (string name)
+	public Category (string name,System.Random s)
 	{
 		this.name = name;
+		randomGen = s;
 	}
 	
 	public string GetName()
@@ -429,19 +432,19 @@ class Category
 	public string GetRandomSkinColor()
 	{
 		int value = skinColor.Count;
-		return skinColor[Random.Range(0,value)];
+		return skinColor[randomGen.Next(0,value)];
 	}
 	
 	public string GetRandomHead()
 	{
 		int value = head.Count;
-		return head [Random.Range (0, value)];
+		return head [randomGen.Next(0, value)];
 	}
 	
 	public string GetRandomShirt()
 	{
 		int value = clothesList.Count;
-		return clothesList[Random.Range(0,value)].GetType();
+		return clothesList[randomGen.Next(0,value)].GetType();
 	}
 	
 	public string GetRandomShirtColor(string type)
@@ -460,7 +463,7 @@ class Category
 	public string GetRandomAccessory()
 	{
 		int value = accessoryList.Count;
-		return accessoryList[Random.Range(0,value)].GetType();
+		return accessoryList[randomGen.Next(0,value)].GetType();
 	}
 	
 	public string GetRandomAccessoryColor(string type)
@@ -479,7 +482,7 @@ class Category
 	public string GetRandomHair()
 	{
 		int value = hairList.Count;
-		return hairList[Random.Range(0,value)].GetType();
+		return hairList[randomGen.Next(0,value)].GetType();
 	}
 	
 	public string GetRandomHairColor(string type)
@@ -517,18 +520,18 @@ class Category
 	public DishStruct[] GetRandomMainOrder()
 	{
 		int value = mainOrders.Count;
-		return mainOrders[Random.Range(0,value)];
+		return mainOrders[randomGen.Next(0,value)];
 	}
 	
 	public DishStruct GetRandomSideOrder()
 	{
 		int value = sideOrders.Count;
-		return sideOrders[Random.Range(0,value)];
+		return sideOrders[randomGen.Next(0,value)];
 	}
 	public DishStruct GetRandomDrink()
 	{
 		int value = drinks.Count;
-		return drinks[Random.Range(0,value)];
+		return drinks[randomGen.Next(0,value)];
 	}
 	
 	public void writeProperties()
@@ -559,7 +562,7 @@ class Category
 	
 	public void AddClothes(string shirt)
 	{
-		clothesList.Add (new textureLinker (shirt));
+		clothesList.Add (new textureLinker (shirt,randomGen));
 	}
 	
 	public void AddClothesColor(string shirtColor)
@@ -569,7 +572,7 @@ class Category
 	
 	public void AddAccessory(string accessory)
 	{
-		accessoryList.Add (new textureLinker (accessory));
+		accessoryList.Add (new textureLinker (accessory,randomGen));
 	}
 	
 	public void AddAccessoryColor(string AccesoryColor)
@@ -579,7 +582,7 @@ class Category
 	
 	public void AddHair(string hair)
 	{
-		hairList.Add (new textureLinker (hair));
+		hairList.Add (new textureLinker (hair,randomGen));
 	}
 	
 	public void AddHairColor(string hairColor)
@@ -626,9 +629,12 @@ class textureLinker
 	
 	List<string> textures = new List<string>();
 	
-	public textureLinker(string type)
+	System.Random randomGen;
+
+	public textureLinker(string type,System.Random s)
 	{
 		this.type = type;
+		randomGen = s;
 	}
 	
 	public void AddTexture(string texture)
@@ -639,7 +645,7 @@ class textureLinker
 	public string getRandomTexture()
 	{
 		int value = textures.Count;
-		return textures[Random.Range(0,value)];
+		return textures[randomGen.Next(0,value)];
 	}
 	
 	public string GetType()
