@@ -7,7 +7,10 @@ public class KillWithTag : MonoBehaviour
 
 	void OnCollisionEnter(Collision collision)
 	{
-		if(collision.gameObject.tag == killTag)
+		PlateBehaviour b = collision.collider.gameObject.GetComponent<PlateBehaviour>();
+		bool badIdea = b != null && b.inBox == true;
+		
+		if(badIdea == false && collision.collider.gameObject.tag == killTag)
 		{
 			Destroy(collision.gameObject);
 		}

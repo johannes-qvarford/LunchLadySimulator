@@ -18,10 +18,12 @@ public class CheckPlateInStack : MonoBehaviour {
 		
 			if(stack.GetComponent<BoxCollider>().bounds.Contains(transform.position))
 			{
+				GetComponent<PlateBehaviour>().inBox = true;
 				rigidbody.constraints = constrain;
 			}
 			else
 			{
+				GetComponent<PlateBehaviour>().inBox = false;
 				rigidbody.constraints = RigidbodyConstraints.None;
 				
 			}
