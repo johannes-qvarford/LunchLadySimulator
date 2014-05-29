@@ -389,6 +389,7 @@ MonoBehaviour:
     m_PostInfinity: 2
   popInSpeed: 1.5
   smoke: {fileID: 100000, guid: a629fbbf17444e843af1ef7ac03cfc16, type: 2}
+  popSound: {fileID: 11400000, guid: a2adc38a3df34174ba31809aeff6b00c, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

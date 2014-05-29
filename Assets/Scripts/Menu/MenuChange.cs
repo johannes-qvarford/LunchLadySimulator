@@ -6,7 +6,7 @@ public class MenuChange : MonoBehaviour {
 	public GameObject targetMenu;
 	
 	//right now we can't go back from level select
-	static public bool done = false;
+	private bool done;
 	/*
 	void OnMouseUpAsButton()
 	{

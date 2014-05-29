@@ -7,6 +7,12 @@ public class ChangeSceneOnPress : MonoBehaviour {
 	public GameObject rightButton;
 	
 	public bool isSelected = false;
+	
+	void OnInputClick()
+	{
+		changeScene();
+	}
+	
 	// Use this for initialization
 	void OnMouseDown()
 	{

@@ -5,8 +5,8 @@
 <type name="Nerd Male">
 	<maindishes>
 		<maindish>
-			<name name="soup">
-				<number>40</number>
+			<name name="Soup">
+				<number>80</number>
 				<value>100</value>
 			</name>
 		</maindish>
@@ -15,7 +15,7 @@
 	<sideorders>
 		<sideorder name="Cookie">
 			<number>1</number>
-			<value>30</value>
+			<value>25</value>
 		</sideorder>
 	</sideorders>
 	
@@ -30,15 +30,15 @@
 <type name="Grill Female">
 	<maindishes>
 		<maindish>
-			<name name="soup">
-				<number>40</number>
+			<name name="Soup">
+				<number>60</number>
 				<value>100</value>
 			</name>
 		</maindish>
 	</maindishes>
 	
 	<sideorders>
-		<sideorder name="bread">
+		<sideorder name="Bread">
 			<number>1</number>
 			<value>25</value>
 		</sideorder>

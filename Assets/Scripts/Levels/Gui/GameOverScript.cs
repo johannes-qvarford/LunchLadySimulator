@@ -9,10 +9,14 @@ public class GameOverScript : MonoBehaviour {
 	public string countDownPostString = ".";
 	private bool isGameOver;
 	private Color color;
-	private float countDownStart;
+	private float countDownStart,volume;
+	public FMODAsset gameOverSound;
+	private GameObject masterVolumeObject;
 	// Use this for initialization
 	void Start ()
 	{
+		volume = 0f;
+		masterVolumeObject = GameObject.FindWithTag(Tags.MASTERVOLUME);
 		color = gameObject.guiText.color;
 		gameOverText.color = new Color (0, 0, 0, 0);
 		countDownText.color = new Color (0, 0, 0, 0);
@@ -23,6 +27,8 @@ public class GameOverScript : MonoBehaviour {
 		if (isGameOver == true)
 			return;
 		//Only run the following if we haven't alreaddy
+		masterVolumeObject.SendMessage("SetVolumeOnSounds",volume,SendMessageOptions.RequireReceiver);
+		FMOD_StudioSystem.instance.PlayOneShot(gameOverSound,transform.position);
 		isGameOver = true;
 		countDownText.color = color;
 		gameOverText.color = color;

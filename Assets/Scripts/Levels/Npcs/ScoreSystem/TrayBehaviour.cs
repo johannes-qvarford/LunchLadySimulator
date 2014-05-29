@@ -8,6 +8,7 @@ public class TrayBehaviour : MonoBehaviour
 	public float maxDistance = 0.4f;
 	public float dificulty = 0.5f;
 	public float timeMultiplier = 1;
+	public float notAllMultiplier = 0.5f;
 
 	void Update()
 	{
@@ -51,29 +52,42 @@ public class TrayBehaviour : MonoBehaviour
 		int score = 0;
 		int temp;
 		int maxScore = 0;
+		
+		bool gotMainOrder = false;
+		bool gotSideOrder = false;
+		bool gotDrink = false;
+		
+		
 		for (int i = 0; i < mainOrder.Length; i++)
 		{
 			if(foodCount.TryGetValue(mainOrder[i].dish, out temp))
 			{
 				score += (int)((float)mainOrder[i].baseValue * Mathf.Clamp(0, 1, (float)temp / (float)mainOrder[i].number));
+				gotMainOrder = true;
 			}
 			maxScore += mainOrder[i].baseValue;
 		}
 		if(foodCount.TryGetValue(sideOrder.dish, out temp))
 		{
 			score += (int)((float)sideOrder.baseValue * Mathf.Clamp(0, 1, (float)temp / (float)sideOrder.number));
-
+			gotSideOrder = true;
 		}
 		maxScore += sideOrder.baseValue;
 		
 		if(foodCount.TryGetValue(drink.dish, out temp))
 		{
 			score += (int)((float)drink.baseValue * Mathf.Clamp(0, 1, (float)temp / (float)drink.number));
+			gotDrink = true;
 		}
 		maxScore += drink.baseValue;
 		
+		bool gotAll = gotMainOrder && gotSideOrder && gotDrink;
+		
 		customerCounter.spawnScore(1);
-		score = (int)Mathf.Ceil(score * timeMultiplier);
+		score = (int)Mathf.Ceil(score * timeMultiplier * (gotAll ? 1 : notAllMultiplier));
+		
+		Debug.LogWarning(maxScore);
+		
 		scoreHandeling.addScore(score, (int)Mathf.Floor(maxScore * dificulty));
 	}
 

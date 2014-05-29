@@ -9,10 +9,12 @@ public class MusicPlayer : MonoBehaviour
 	FMOD.Studio.ParameterInstance pVolume,pStresslevel,pState,pTrack;
 	public FMODAsset path;
 	public float vol;
+	private float master;
 	private FMOD.Studio.PLAYBACK_STATE status;
 	
 	void Start () 
 	{
+		master = 1.0f;
 		eMusic = FMOD_StudioSystem.instance.GetEvent(path);
 		if(eMusic.getParameter("Mood",out pStresslevel) != FMOD.RESULT.OK)
 		{
@@ -32,7 +34,7 @@ public class MusicPlayer : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		SetMusicVolume(vol);
+		SetMusicVolume(vol*master);
 		eMusic.getPlaybackState(out status);
 		if(status == FMOD.Studio.PLAYBACK_STATE.STOPPED)
 		{
@@ -43,7 +45,7 @@ public class MusicPlayer : MonoBehaviour
 	}
 	void SetMusicVolume(float inputVolume)
 	{
-		eMusic.setVolume(Mathf.Clamp(inputVolume,0,1));
+		eMusic.setVolume(Mathf.Clamp(inputVolume,0,1)*master);
 	}
 	void SetStresslevel(int stress)
 	{
@@ -60,5 +62,9 @@ public class MusicPlayer : MonoBehaviour
 	void SetMood(float inputmood)
 	{
 		pStresslevel.setValue(inputmood);
+	}
+	public void SetMaster(float inputMaster)
+	{
+		master = inputMaster;
 	}
 }

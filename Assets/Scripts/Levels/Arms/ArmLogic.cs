@@ -15,6 +15,8 @@ public class ArmLogic : MonoBehaviour
 	private Transform handle;
 	//public List<GameObject> grabables; 
 	private Transform heldGrabable = null;
+	public string heldGrabableName = "null";
+
 	private ArmsState armsState;
 	private GameObject debugSphere;
 	private Transform otherHandle;
@@ -203,6 +205,7 @@ public class ArmLogic : MonoBehaviour
 		heldGrabable.position += BEHAVIOUR.moveOffsetOnGrab;
 		Layers.SetLayerRecursive(heldGrabable, LayerMask.NameToLayer(Layers.CONTROL));
 		heldGrabable.Find("Shadow").gameObject.layer = LayerMask.NameToLayer(Layers.SHADOW_PLANE);
+		heldGrabableName = heldGrabable.ToString();
 	}
 	
 	private void ReleaseHeldGrabable()
@@ -215,7 +218,9 @@ public class ArmLogic : MonoBehaviour
 		heldGrabable.Find("Shadow").gameObject.layer = LayerMask.NameToLayer(Layers.SHADOW_PLANE);
 		heldGrabable.parent = null;
 		heldGrabable.gameObject.AddComponent(typeof(Rigidbody));
+		heldGrabable.SendMessage("OnGrabbed", SendMessageOptions.DontRequireReceiver);
 		heldGrabable.rigidbody.velocity = rigidbody.velocity * armsState.throwVelocityMul;
 		heldGrabable = null;
+		heldGrabableName = "null";
 	}
 }
