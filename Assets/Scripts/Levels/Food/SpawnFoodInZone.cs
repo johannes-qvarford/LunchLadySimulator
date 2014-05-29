@@ -14,9 +14,11 @@ public class SpawnFoodInZone : MonoBehaviour
 	private Vector3 spawnPosTest,spawnZonePos,Spawn;
 	private bool foundPos;
 	public float interval;
+	private BoxCollider workbenchCol;
 	
 	void Start () 
 	{
+		workbenchCol = gameObject.GetComponent<BoxCollider>();
 		leftArm = GameObject.FindWithTag(Tags.LEFT_ARM);
 		rightArm = GameObject.FindWithTag(Tags.RIGHT_ARM);
 		spawnZone = transform.FindChild("SpawnZone").gameObject;
@@ -43,7 +45,7 @@ public class SpawnFoodInZone : MonoBehaviour
 			{
 				if(hitcolliders[u].gameObject.GetComponent<FoodID>().foodID == foodObject.GetComponent<FoodID>().foodID)
 				{
-					if(gameObject.GetComponent<BoxCollider>().bounds.Contains(hitcolliders[u].gameObject.transform.position))
+					if(workbenchCol.bounds.Contains(hitcolliders[u].gameObject.transform.position))
 					{
 						quantityOfFood++;
 					}

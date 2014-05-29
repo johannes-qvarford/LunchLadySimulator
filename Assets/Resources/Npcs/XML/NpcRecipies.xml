@@ -2,55 +2,180 @@
 
 <!-- xml template for customer #1 --> 
 <main>
-<type name="Nerd Male">
-	<maindishes>
-		<maindish>
-			<name name="Soup">
-				<number>80</number>
-				<value>100</value>
-			</name>
-		</maindish>
-	</maindishes>
-	
-	<sideorders>
-		<sideorder name="Cookie">
-			<number>1</number>
-			<value>25</value>
-		</sideorder>
-	</sideorders>
-	
-	<drinks>
-		<drink name="Milk">
-			<number>1</number>
-			<value>15</value>
-		</drink>
-	</drinks>
-</type>
 
-<type name="Grill Female">
-	<maindishes>
-		<maindish>
-			<name name="Soup">
-				<number>60</number>
-				<value>100</value>
-			</name>
-		</maindish>
-	</maindishes>
-	
-	<sideorders>
-		<sideorder name="Bread">
-			<number>1</number>
-			<value>25</value>
-		</sideorder>
-	</sideorders>
-	
-	<drinks>
-		<drink name="Milk">
-			<number>1</number>
-			<value>15</value>
-		</drink>
-	</drinks>
-</type>
+	<type name="Nerd Female">
+		<maindishes>
+			<maindish>
+				<name name="Soup">
+					<number>80</number>
+					<value>100</value>
+				</name>
+			</maindish>
+		</maindishes>
+		
+		<sideorders>
+			<sideorder name="Cookie">
+				<number>1</number>
+				<value>25</value>
+			</sideorder>
+			<sideorder name="Bread">
+				<number>1</number>
+				<value>25</value>
+			</sideorder>
+		</sideorders>
+		
+		<drinks>
+			<drink name="Milk">
+				<number>1</number>
+				<value>15</value>
+			</drink>
+		</drinks>
+	</type>
 
+	<type name="Nerd Male">
+		<maindishes>
+			<maindish>
+				<name name="Soup">
+					<number>80</number>
+					<value>100</value>
+				</name>
+			</maindish>
+		</maindishes>
+		
+		<sideorders>
+			<sideorder name="Cookie">
+				<number>1</number>
+				<value>25</value>
+			</sideorder>
+			<sideorder name="Bread">
+				<number>1</number>
+				<value>25</value>
+			</sideorder>
+		</sideorders>
+		
+		<drinks>
+			<drink name="Milk">
+				<number>1</number>
+				<value>15</value>
+			</drink>
+		</drinks>
+	</type>
+
+	<type name="Daredevil Female">
+		<maindishes>
+			<maindish>
+				<name name="Soup">
+					<number>80</number>
+					<value>100</value>
+				</name>
+			</maindish>
+		</maindishes>
+		
+		<sideorders>
+			<sideorder name="Cookie">
+				<number>1</number>
+				<value>25</value>
+			</sideorder>
+			<sideorder name="Bread">
+				<number>1</number>
+				<value>25</value>
+			</sideorder>
+		</sideorders>
+		
+		<drinks>
+			<drink name="Milk">
+				<number>1</number>
+				<value>15</value>
+			</drink>
+		</drinks>
+	</type>
+
+
+	<type name="Daredevil Male">
+		<maindishes>
+			<maindish>
+				<name name="Soup">
+					<number>80</number>
+					<value>100</value>
+				</name>
+			</maindish>
+		</maindishes>
+		
+		<sideorders>
+			<sideorder name="Cookie">
+				<number>1</number>
+				<value>25</value>
+			</sideorder>
+			<sideorder name="Bread">
+				<number>1</number>
+				<value>25</value>
+			</sideorder>
+		</sideorders>
+		
+		<drinks>
+			<drink name="Milk">
+				<number>1</number>
+				<value>15</value>
+			</drink>
+		</drinks>
+	</type>
+
+	<type name="Jock Female">
+		<maindishes>
+			<maindish>
+				<name name="Soup">
+					<number>80</number>
+					<value>100</value>
+				</name>
+			</maindish>
+		</maindishes>
+		
+		<sideorders>
+			<sideorder name="Cookie">
+				<number>1</number>
+				<value>25</value>
+			</sideorder>
+			<sideorder name="Bread">
+				<number>1</number>
+				<value>25</value>
+			</sideorder>
+		</sideorders>
+		
+		<drinks>
+			<drink name="Milk">
+				<number>1</number>
+				<value>15</value>
+			</drink>
+		</drinks>
+	</type>
+
+	<type name="Jock Male">
+		<maindishes>
+			<maindish>
+				<name name="Soup">
+					<number>80</number>
+					<value>100</value>
+				</name>
+			</maindish>
+		</maindishes>
+		
+		<sideorders>
+			<sideorder name="Cookie">
+				<number>1</number>
+				<value>25</value>
+			</sideorder>
+			<sideorder name="Bread">
+				<number>1</number>
+				<value>25</value>
+			</sideorder>
+		</sideorders>
+		
+		<drinks>
+			<drink name="Milk">
+				<number>1</number>
+				<value>15</value>
+			</drink>
+		</drinks>
+	</type>
 
 </main>
