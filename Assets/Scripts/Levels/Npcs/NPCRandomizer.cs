@@ -297,7 +297,7 @@ public class NPCRandomizer : MonoBehaviour {
 		
 		setHair.transform.rotation = refHead.transform.rotation;
 		
-		Vector3 positionOffset = new Vector3(0.00323f,0.764549f, -0.005494945f);
+		Vector3 positionOffset = new Vector3(-0.004115761f,0.7650016f, 0.00103934f);
 		setHair.transform.localPosition = positionOffset;
 	
 		setHair.name = "hair";
@@ -363,14 +363,15 @@ public class NPCRandomizer : MonoBehaviour {
 		switchClothes.transform.parent = refClothes.transform.parent;
 		switchClothes.transform.rotation = transform.rotation;
 		
-		Vector3 positionOffset = new Vector3(0.0139f,0.0049f, 0.0039f);
+		Vector3 positionOffset = new Vector3(0.0f,0.006f, 0.002f);
+		switchClothes.transform.localPosition = positionOffset;
 		switchClothes.name = "Clothes";
 		
 		GameObject.Destroy(refClothes);
 		Material newMaterialPrefab = Resources.Load("Npcs/Materials/Clothes/"+categoryList[type].GetRandomShirtColor(clothesType), typeof(Material)) as Material;
 		Material clothesMaterial = new Material(newMaterialPrefab);
 		switchClothes = switchClothes.transform.Find ("clothes_mesh").gameObject;
-		switchClothes.GetComponent<SkinnedMeshRenderer>().rootBone = transform.Find ("Customer_Kid/Hips 1");
+		//switchClothes.GetComponent<SkinnedMeshRenderer>().rootBone = transform.Find ("Customer_Kid/Hips 1");
 		switchClothes.GetComponent<SkinnedMeshRenderer>().material = clothesMaterial;
 		
 		Material[] s = switchClothes.GetComponent<SkinnedMeshRenderer>().materials;
