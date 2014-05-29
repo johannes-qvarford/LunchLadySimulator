@@ -238,23 +238,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bank:
+  - {fileID: 11400000, guid: 6996cbc5776b31e4e93241f98fff027d, type: 2}
   - {fileID: 11400000, guid: f43783ca1b426e74fa1767c707a220cc, type: 2}
   - {fileID: 11400000, guid: b8c5c79c71487c94aada051909e8c993, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: a80c84751b34c1d43ab964e02388c610, type: 2}
+  - {fileID: 11400000, guid: b8c5c79c71487c94aada051909e8c993, type: 2}
+  - {fileID: 11400000, guid: a80c84751b34c1d43ab964e02388c610, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   NpcType:
-  - Male Nerd
-  - Grill Female
-  - 
-  - 
-  - 
-  - 
+  - Nerd Female
+  - Nerd Male
+  - Daredevil Female
+  - Daredevil Male
+  - Jock Female
+  - Jock Male
   - 
   - 
   - 
