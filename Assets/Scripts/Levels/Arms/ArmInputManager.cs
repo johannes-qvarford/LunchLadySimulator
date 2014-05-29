@@ -191,6 +191,12 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 	
 	private bool IsHeldInternal(Switch sw, Arm arm)
 	{
+		bool IS_XBOX = true;
+		if(useJoystick && IS_XBOX && sw == Switch.Z_ROTATION) 
+		{
+			double axis = Input.GetAxis(BuildName(arm, sw));
+			return (arm == Arm.LEFT && axis > 0.3) || (arm == Arm.RIGHT && axis < -0.3);
+		}
 		return Input.GetButton(BuildName(arm, sw));
 	}
 

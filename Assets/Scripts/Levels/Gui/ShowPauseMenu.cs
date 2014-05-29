@@ -13,13 +13,21 @@ public class ShowPauseMenu : MonoBehaviour {
 	public float pauseMenuSoundMultiplier;
 	private GameObject masterVolumeObject;
 	
+	private GameObject theResumer;
+	
 	// Use this for initialization
 	void Start () {
 		masterVolumeObject = GameObject.FindWithTag(Tags.MASTERVOLUME);
 		for(int i = 0; i < graphics.transform.childCount; ++i)
 		{
 			options.Add(graphics.transform.GetChild(i).gameObject);
+			ResumeOnClick roc = options[i].GetComponent<ResumeOnClick>();
+			if (roc != null)
+			{
+				theResumer = options[i];
+			}
 		}
+		
 	}
 	
 	// Update is called once per frame
@@ -28,6 +36,7 @@ public class ShowPauseMenu : MonoBehaviour {
 	
 		if(ArmInputManager.IsDown(ArmInputManager.Action.PAUSE) && paused == false)
 		{
+			Debug.Log(Time.timeScale);
 			masterVolumeObject.SendMessage("SetVolumeOnSounds",1.0f*pauseMenuSoundMultiplier,SendMessageOptions.RequireReceiver);
 			dispalyPauseMenu();
 		}
@@ -35,8 +44,6 @@ public class ShowPauseMenu : MonoBehaviour {
 		{
 			if(ArmInputManager.IsDown(ArmInputManager.Action.PAUSE))
 			{
-				paused = false;
-				masterVolumeObject.SendMessage("SetVolumeOnSounds",1.0f,SendMessageOptions.RequireReceiver);
 				returnToGame();
 			}
 			else
@@ -63,7 +70,16 @@ public class ShowPauseMenu : MonoBehaviour {
 				
 				if(ArmInputManager.IsDown(ArmInputManager.Action.CONFIRM))
 				{
-					options[optionsIndex].SendMessage("OnInputClick", SendMessageOptions.RequireReceiver);
+					if(options[optionsIndex] == theResumer)
+					{
+						returnToGame();
+					}
+					else
+					{
+						Time.timeScale = 1;
+						options[optionsIndex].SetActive(true);
+						options[optionsIndex].SendMessage("OnClick", SendMessageOptions.RequireReceiver);
+					}
 				}
 			}
 		}
@@ -78,6 +94,8 @@ public class ShowPauseMenu : MonoBehaviour {
 	
 	public void returnToGame()
 	{
+		paused = false;
+		masterVolumeObject.SendMessage("SetVolumeOnSounds",1.0f,SendMessageOptions.RequireReceiver);
 		foreach(var o in options)
 		{
 			o.SetActive(true);
