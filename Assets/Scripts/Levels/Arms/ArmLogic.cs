@@ -103,7 +103,7 @@ public class ArmLogic : MonoBehaviour
 		
 		foreach(var g in grabablesInRange)
 		{
-			Debug.LogWarning(string.Format("name {0} count {1}", g.Key, g.Value));
+			//Debug.LogWarning(string.Format("name {0} count {1}", g.Key, g.Value));
 		}
 		
 
