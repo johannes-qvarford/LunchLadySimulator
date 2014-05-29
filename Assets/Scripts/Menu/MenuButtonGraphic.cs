@@ -10,7 +10,13 @@ public class MenuButtonGraphic : MonoBehaviour {
 	private bool clicking;
 	
 	public enum GuiSoundMode {HOVER,CLICK,SLIDE,SPEEECHBUBBLE};
-	
+
+	void SelectedChanged(bool yes)
+	{
+		mouseOver = yes;
+		updateState ();
+	}
+
 	void Start()
 	{
 		setSoundManagerIfNotAlready();

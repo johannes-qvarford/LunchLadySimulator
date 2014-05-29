@@ -12,9 +12,12 @@ public class MenuChange : MonoBehaviour {
 	
 	public bool isSelected = false;
 	
+	public int waitTime = 30;
+	
+	private int wait = 0;
+	
 	//right now we can't go back from level select
 	private bool done;
-	private int wait;
 
 	void Start()
 	{

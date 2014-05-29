@@ -130,6 +130,7 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 	{
 		string WHICH_JOYSTICK = useJoystick ? "Joystick" + (use2Joysticks && arm == Arm.RIGHT ? "2" : "") : "";
 		string WHICH_SIDE = arm == Arm.LEFT ? "Left" : "Right";
+		//Debug.Log(WHICH_JOYSTICK + WHICH_SIDE);
 		return WHICH_JOYSTICK + WHICH_SIDE;
 	}
 	
@@ -145,7 +146,9 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 
 	private string BuildName(Arm arm, Switch sw)
 	{
-		return BuildControllerName(arm) + BuildToggleName(sw);
+		var s = BuildControllerName(arm) + BuildToggleName(sw);
+		//Debug.Log(s);
+		return s;
 	}
 
 	private string BuildName(Arm arm, Movement movement)
