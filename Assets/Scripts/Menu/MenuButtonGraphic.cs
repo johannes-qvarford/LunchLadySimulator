@@ -13,12 +13,17 @@ public class MenuButtonGraphic : MonoBehaviour {
 	
 	void Start()
 	{
-		SoundMgr = GameObject.FindWithTag(Tags.GUISOUND);
+		setSoundManagerIfNotAlready();
 	}
 	void SelectedChanged(bool on)
 	{
 		mouseOver = on;
 		updateState();
+	}
+	
+	void OnClick()
+	{
+		SoundMgr.SendMessage("TriggerGuiSound",GuiSoundMode.CLICK,SendMessageOptions.RequireReceiver);
 	}
 	
 	void Update()
@@ -28,9 +33,17 @@ public class MenuButtonGraphic : MonoBehaviour {
 	
 	void OnEnable ()
 	{
-		showDefault ();
+		showDefault();
 		mouseOver = false;
 		clicking = false;
+	}
+	
+	private void setSoundManagerIfNotAlready()
+	{
+		if(SoundMgr == null)
+		{
+			SoundMgr = GameObject.FindWithTag(Tags.GUISOUND);
+		}
 	}
 
 	private void showDefault()
@@ -42,13 +55,13 @@ public class MenuButtonGraphic : MonoBehaviour {
 	{
 		turnOffAll ();
 		overObject.renderer.enabled = true;
+		setSoundManagerIfNotAlready();
 		SoundMgr.SendMessage("TriggerGuiSound",GuiSoundMode.HOVER,SendMessageOptions.RequireReceiver);
 	}
 	private void showMouseDown()
 	{
-		turnOffAll ();
+		turnOffAll();
 		clickingObject.renderer.enabled = true;
-		SoundMgr.SendMessage("TriggerGuiSound",GuiSoundMode.CLICK,SendMessageOptions.RequireReceiver);
 	}
 	private void turnOffAll()
 	{
@@ -80,7 +93,7 @@ public class MenuButtonGraphic : MonoBehaviour {
 		if(mouseOver == false)
 		{
 			mouseOver = true;
-			updateState ();
+			updateState();
 		}
 	}
 	void OnMouseExit()
@@ -92,6 +105,11 @@ public class MenuButtonGraphic : MonoBehaviour {
 		}
 	}
 	
+	void OnSelected(bool yes)
+	{
+		mouseOver = yes;
+		updateState();
+	}
 	
 	void OnMouseDown()
 	{

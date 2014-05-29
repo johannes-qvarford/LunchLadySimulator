@@ -61,6 +61,11 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 		NEXT_CUSTOMER,
 		PAUSE
 	}
+	
+	public static void Use2Players(bool yes)
+	{
+		GetInstance().use2Joysticks = yes;
+	}
 
 	public static float GetMovement(Arm arm, Movement movement)
 	{
