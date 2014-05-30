@@ -1,8 +1,13 @@
 using UnityEngine;
 using System.Collections;
 
+/** Script that spawns a single game object every frame its asked on an interval.
+**/
 public class SpawnWhenActivated : MonoBehaviour
 {
+	/*
+		Debug variable that gets set to true in the inspector to have the script always spawm game objects at a certain interval.
+	*/
 	public bool alwaysSpawn = false;
 	public int framesBetweenSpawns = 4;
 	public float speed = 0.2f;
@@ -10,17 +15,14 @@ public class SpawnWhenActivated : MonoBehaviour
 	
 	private GameObject spawnObject;
 	private int curFrame = 0;
+	/*
+		TODO: remove unused variable.
+	*/
 	private Random random = new Random();
 	private bool doSpawn = false;
 	
-	
-	void Start()
-	{
-	}
-	
 	void Update()
 	{
-		//Debug.Log(placeToSpawn.position);
 		curFrame++;
 		if(curFrame % framesBetweenSpawns == 0 && (doSpawn || alwaysSpawn) && spawnObject != null)
 		{
@@ -35,14 +37,13 @@ public class SpawnWhenActivated : MonoBehaviour
 		doSpawn = false;
 	}
 	
-	void OnSpawnObjectChanged(GameObject g)
+	public void OnSpawnObjectChanged(GameObject g)
 	{
 		spawnObject = g;
 	}
 	
-	void OnSpawnAgain()
+	public void OnSpawnAgain()
 	{
 		doSpawn = true;
 	}
-	
 }

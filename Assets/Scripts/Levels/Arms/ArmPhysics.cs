@@ -1,5 +1,45 @@
 using System;
 using UnityEngine;
+
+/** Class that deals with the physics of the attached arm.
+
+	The script makes the following assumptions:
+		The attached game object is an arm.
+		The attached game object has a parent, and the parent has an attached ArmsState component.
+		The parent has two children called "LeftArm" and "RightArm", and the attached game object is one of them.
+		There exist another script on the attached game object that relies on this class calling its ArmChanged method 
+			before its first Update call including information whether the attached arm is the left or the right one.
+		There exist a handle child object to the arm with a given name, that represents the hand of the arm.
+		There is a rigidbody attached to the attched game object.
+		There is a SpringJoint attached to the attached game object.
+		It's attached to a game object with a "LeftArm" or "RightArm" tag, and there exists
+			another game object with the other tag. Both have an attached SpringJoint component.
+		There may exist child objects in the hand that are interested in collisions with game objects that have the Food tag.
+
+	This class rotates and moves the attached arm, stopping when moving into a solid unmoveable object like the workbench.
+	To achieve this it uses a hack described here:
+		The attached rigidbody has mass high enough that no interactable objects can move it on their own.
+		However, when a solid object pushes it out of a collision, 
+		it may do so in any direction, not just in the opposite direction that
+		the player moved it in.
+		To prevent this, the arm is freezed in all directions and rotation axices except those it's currently moving in.
+		To allow the arm to slow down during several frames when the player stops moving in a direction, the arm only freezes when
+		its rotation/movement magnitude falls below a certain threshhold.
+		If the arm somehow gets stuck inside a solid with its last push direction being the zero vector or just wrong,
+		all restriction are eventually removed, and then added back when the arm isn't stuck anymore.
+
+	Maintaining max arm distance:
+		When the arms gets to far from each other, 
+		a spring activates on the two arms that pull the arms towards their others springs
+			(Note: only a non freezed arm will be moved)
+			(Note: the spring on the other arm PULLS the current arm towards it)
+		The other spring is not activated if the arm is being rotated.
+
+	Bugs:
+		Right arm is not rotating as fast after releasing a previously held grabable despite no visible change to it, like mass.
+
+	TODO: break out FixedUpdate into seperate functions that are easier to understand on their own.
+**/
 public class ArmPhysics : MonoBehaviour
 {
 	private bool insideSolid = false;
@@ -53,14 +93,8 @@ public class ArmPhysics : MonoBehaviour
 					rigidbody.AddForce(lastPush, ForceMode.VelocityChange);
 				}
 				
+				//freeze if input indicates that the arm should be accelerated at a low enough speed, or the current speed is low enough.
 				{
-					/*
-					bool NO_X = Mathf.Abs(X_MOVEMENT) < armsState.minMovementWithoutFreeze;
-					bool NO_Y = Mathf.Abs(Y_MOVEMENT) < armsState.minMovementWithoutFreeze;
-					bool NO_Z = Mathf.Abs(Z_MOVEMENT) < armsState.minMovementWithoutFreeze;
-					bool NO_R = Mathf.Abs(Z_ROTATION) < armsState.minZRotWithoutFreeze;
-					*/
-					
 					float HX = Mathf.Max(Mathf.Abs(rigidbody.velocity.x), Mathf.Abs(X_MOVEMENT));
 					float HY = Mathf.Max(Mathf.Abs(rigidbody.velocity.y), Mathf.Abs(Y_MOVEMENT));
 					float HZ = Mathf.Max(Mathf.Abs(rigidbody.velocity.z), Mathf.Abs(Z_MOVEMENT));
@@ -143,10 +177,12 @@ public class ArmPhysics : MonoBehaviour
 	{
 		armsState = transform.parent.GetComponent(typeof(ArmsState)) as ArmsState;
 		arm = a;
-		//Debug.Log((arm == ArmInputManager.LEFT ? "RightArm" : "LeftArm")+ "/" + armsState.handleName);
 		otherHandle = transform.parent.Find((arm == ArmInputManager.LEFT ? "RightArm" : "LeftArm")+ "/" + armsState.handleName);
 		joint = GetComponent<SpringJoint>();
 		otherJoint = otherHandle.parent.GetComponent<SpringJoint>();
+		/*
+			save the spring value, when it needs to be reapplied.
+		*/
 		oldSpring = joint.spring;
 		shortestDistanceUntilSpring = joint.maxDistance;
 	}

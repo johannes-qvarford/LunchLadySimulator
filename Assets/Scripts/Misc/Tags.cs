@@ -1,5 +1,11 @@
 using UnityEngine;
 
+/** Utility class for providing compile time safety for Tags.
+	
+	The reason this class exist is that if you need to write a tag several times,
+	you may misspell it and notice that your code doesn't work during runtime for some reason.
+	If you instead misspell one of these constants you will get a compile time error.
+**/
 public static class Tags
 {
 	public const string LEFT_HAND_TARGET = "LeftHandTarget";
@@ -17,13 +23,22 @@ public static class Tags
 	public const string DESTROY = "Destroy";
 	public const string STOP = "Stop";
 	public const string TURN = "Turn";
+	/**
+		TODO: fix these to use the correct naming convention; GUI_SOUND instead of GUISOUND etc.
+	**/
 	public const string GUISOUND = "GuiSound";
 	public const string NPCSOUNDBANK = "NpcSoundBank";
 	public const string DYNAMICMUSIC = "DynamicMusic";
 	public const string MASTERVOLUME = "MasterVolume";
-	public const string MAGNET_FIELD = "MagnetField";	
+	public const string MAGNET_FIELD = "MagnetField";
 
+	/*
+		TODO: rewrite using Linq
+	*/
 
+	/** Find the first ancestor of a transform or the transform itself,
+		that has a certain tag.
+	**/
 	public static Transform FindWithTagRecursive(Transform t, string tag)
 	{
 		if(t.gameObject.tag == tag)
