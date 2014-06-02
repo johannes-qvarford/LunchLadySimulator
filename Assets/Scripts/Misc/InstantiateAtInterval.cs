@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/** Instantiate a given game object continiously.
+	
+	TODO: rename CreateNewNPC to a more general name.
+**/
 public class InstantiateAtInterval : MonoBehaviour
 {
 	public GameObject instantiateObject;

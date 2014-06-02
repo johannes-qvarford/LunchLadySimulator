@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/** Always keep the same global distance from a target game object.
+
+	TODO: don't keep rotation or change name of class to be more clear.
+**/
 public class FollowPositionOffset : MonoBehaviour
 {
 	public Transform target;

@@ -2,9 +2,18 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
+/**	Singleton class that abstract away the input device used to receive input in the game.
+
+	TODO: rename to more fitting name given its new purpose, like "InputManager".
+	TODO: change names that references joypads but are named joystick, to joypad. (like useJoystick to useJoypad)
+**/
 public class ArmInputManager : MonoSingleton<ArmInputManager>
 {
-	//for user convienience
+	/** Constants used for convinience,
+		so that users only need to write ArmInputManager.NAME instead of ArmInputManager.Class.NAME
+
+		TODO: add missing constants.
+	**/
 	static public Arm LEFT = Arm.LEFT;
 	static public Switch GRIP = Switch.GRIP;
 	static public Movement HORIZONTAL = Movement.HORIZONTAL;
@@ -19,6 +28,8 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 	private bool[,] switches = new bool[(int)Switch.SIZE, (int)Arm.SIZE];
 	private bool[,] prevSwitches = new bool[(int)Switch.SIZE, (int)Arm.SIZE];
 
+	/** Mapping between Unity input settings names to enum action constants.
+	**/
 	private static readonly Dictionary<Action, string> ACTION_STRING_NAMES = new Dictionary<Action, string>()
 	{
 		{Action.NEXT_OPTION_RIGHT, "NextOptionRight"},
@@ -62,38 +73,54 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 		PAUSE
 	}
 
+	/** Called to indicate whether or not two players should play the game
+	**/
 	public static void Use2Players(bool yes)
 	{
 		GetInstance().use2Joysticks = yes;
 	}
 
+	/**	Determines how much and in what direction the user is moving an arm.
+	**/
 	public static float GetMovement(Arm arm, Movement movement)
 	{
 		return GetInstance().GetMovementInternal(arm, movement);
 	}
 	
+	/** Determines whether the user has given input for a certain action to perform this frame.
+	**/
 	public static bool IsDown(Action action)
 	{
 		return GetInstance().IsDownInternal(action);
 	}
 
+	/** Determine whether a certain button is held for a certain arm, 
+		to indicate that the user wishes to perform an action while its active.
+	**/
 	public static bool IsHeld(Switch sw, Arm arm)
 	{
 		return GetInstance().IsHeldInternal(sw, arm);
 	}
 	
+	/** Determine whether a button was changed from held to not held or vice versa this frame.
+	**/
 	public static bool HeldChanged(Switch sw, Arm arm)
 	{
 		return GetInstance().HeldChangedInternal(sw, arm);
 	}
 
+	/** Update various button states for use in other functions.
+	**/
 	public void Update()
 	{
+		/** Debugging code for swtiching from/to keyboard/gamepad mode and from/to one/two player(s)
+
+			TODO: wrap in if debug statement to ease transition from and to debug mode
+		**/
 		if(Input.GetKeyDown(KeyCode.T))
 		{
 			useJoystick = !useJoystick;
 		}
-		
 		if(Input.GetKeyDown(KeyCode.R))
 		{
 			use2Joysticks = !use2Joysticks;
@@ -110,7 +137,12 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 			}
 		}
 	}
-	
+
+	/** Functions used to construct strings that can be concatenated to Unity input button names used to test input held/axis values.
+		
+		TODO: Make code clearer, maybe by separating string building code to a seperate class?
+	**/
+
 	private static string BuildActionName(Action action)
 	{
 		return ACTION_STRING_NAMES[action];
@@ -130,7 +162,6 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 	{
 		string WHICH_JOYSTICK = useJoystick ? "Joystick" + (use2Joysticks && arm == Arm.RIGHT ? "2" : "") : "";
 		string WHICH_SIDE = arm == Arm.LEFT ? "Left" : "Right";
-		//Debug.Log(WHICH_JOYSTICK + WHICH_SIDE);
 		return WHICH_JOYSTICK + WHICH_SIDE;
 	}
 	
@@ -147,7 +178,6 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 	private string BuildName(Arm arm, Switch sw)
 	{
 		var s = BuildControllerName(arm) + BuildToggleName(sw);
-		//Debug.Log(s);
 		return s;
 	}
 
@@ -175,6 +205,9 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 	
 	private bool IsDownInternal(Action action)
 	{
+		/* 	Some code relies on option selection being binary, either chosing another option or not.
+			a joystick is used select options on a gamepad, so the axis value needs to normalized, which is a special case.
+		*/
 		bool IS_OPTION_VERTICAL = IsAnyEq(action, Action.NEXT_OPTION_DOWN, Action.NEXT_OPTION_UP);
 		bool IS_OPTION_HOZIONTAL = IsAnyEq(action, Action.NEXT_OPTION_RIGHT, Action.NEXT_OPTION_LEFT);
 		bool IS_OPTION_NEGATIVE = IsAnyEq(action, Action.NEXT_OPTION_LEFT, Action.NEXT_OPTION_DOWN);
@@ -194,6 +227,10 @@ public class ArmInputManager : MonoSingleton<ArmInputManager>
 	
 	private bool IsHeldInternal(Switch sw, Arm arm)
 	{
+		/* On an Xbox controller the bumpers are not buttons but joystick axices, and need to be normalized to binary.
+
+			TODO: fix to not always assume Xbox controller, or decide to always use Xbox controllers.
+		*/
 		bool IS_XBOX = true;
 		if(useJoystick && IS_XBOX && sw == Switch.Z_ROTATION) 
 		{

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+/** Utility class that holds constants for arms.
+**/
 public sealed class ArmsState : MonoBehaviour 
 {
 	public GameObject debugSphere;
