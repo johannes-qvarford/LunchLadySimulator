@@ -17,7 +17,6 @@ public class MenuChange : MonoBehaviour {
 	private int wait = 0;
 	
 	//right now we can't go back from level select
-	private bool done;
 
 	void Start()
 	{
@@ -38,12 +37,11 @@ public class MenuChange : MonoBehaviour {
 		if (wait > 0)
 			wait--;
 
-		if(isSelected && done == false && ArmInputManager.IsDown(ArmInputManager.Action.CONFIRM))
+		if(isSelected && ArmInputManager.IsDown(ArmInputManager.Action.CONFIRM))
 		{
 			SendMessage("OnClick", SendMessageOptions.RequireReceiver);
 			targetMenu.SetActive(true);
 			thisMenu.SetActive(false);
-			done = true;
 		}
 		
 		if(isSelected && wait == 0)

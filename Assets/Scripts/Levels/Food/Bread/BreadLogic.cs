@@ -3,21 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class BreadLogic : MonoBehaviour {
-	public float breadMass;
-	public float spawnInTime = 1;
-	public GameObject[] slices;
-	private int numberOfSlices;
-	private bool started;
-	private float startedTime;
-	private int shouldRemove;
-	private GameObject otherPart;
-	GameObject left = null;
-	GameObject right = null;
+	public float breadMass;			//The mass of each slice
+	public float spawnInTime = 1;	//A short delay before the bread can be cut again
+	public GameObject[] slices;		//All the slices in order.
+	private float startedTime;		//The time the object started
+	GameObject left = null;		//The arms
+	GameObject right = null;	//
 	// Use this for initialization
 	void Start () {
 		startedTime = Time.time;
-		shouldRemove = 0;
-		numberOfSlices = slices.Length;
 		left = GameObject.FindWithTag(Tags.LEFT_ARM);
 		right = GameObject.FindWithTag(Tags.RIGHT_ARM);
 	}
@@ -37,13 +31,13 @@ public class BreadLogic : MonoBehaviour {
 			GameObject knife = c.otherCollider.gameObject;
 			if(knife.GetComponent<CutBread>() == null)
 			{
-				continue;
+				continue;	//Not a knife
 			}
-			GameObject OTHER = c.thisCollider.gameObject;
-			if(OTHER.tag == Tags.FOOD && OTHER.GetComponent<FoodID>().foodID == "Bread")
+			GameObject thisSlice = c.thisCollider.gameObject;
+			if(thisSlice.tag == Tags.FOOD && thisSlice.GetComponent<FoodID>().foodID == "Bread")
 			{
 				BreadLogic breadScript;
-				cutAtObject(OTHER);
+				cutAtObject(thisSlice);
 					return;
 			}
 		}
@@ -51,13 +45,12 @@ public class BreadLogic : MonoBehaviour {
 	// Update is called once per frame
 	private void recalc()
 	{
-		numberOfSlices = slices.Length;
-		if (numberOfSlices < 1)
+		if (slices.Length < 1)
 		{
 			Destroy(this.gameObject);
 			return;
 		}
-		else if(numberOfSlices == 1)
+		else if(slices.Length == 1)
 		{
 			left = GameObject.FindWithTag(Tags.LEFT_ARM);
 			right = GameObject.FindWithTag(Tags.RIGHT_ARM);
@@ -70,11 +63,11 @@ public class BreadLogic : MonoBehaviour {
 			right.SendMessage("AddGrabable", slices[0], SendMessageOptions.RequireReceiver);
 
 		}
-		((Rigidbody)gameObject.GetComponent(typeof(Rigidbody))).mass = numberOfSlices * breadMass;
-		//Debug.Log (numberOfSlices + " breads.");
-		//Vector3 newCenter = (slices [0].transform.localPosition + slices [numberOfSlices-1].transform.localPosition) / 2;
+		((Rigidbody)gameObject.GetComponent(typeof(Rigidbody))).mass = slices.Length * breadMass;
+		//Debug.Log (slices.Length + " breads.");
+		//Vector3 newCenter = (slices [0].transform.localPosition + slices [slices.Length-1].transform.localPosition) / 2;
 		//Vector3 newSize = slices [0].collider.bounds.size;
-		//newSize.x *= numberOfSlices;
+		//newSize.x *= slices.Length;
 		//Bounds newBounds = new Bounds (newCenter, newSize);
 		//this.gameObject.collider.setBounds = newBounds;
 		//this.gameObject.collider.bounds.center = newCenter;
@@ -94,7 +87,7 @@ public class BreadLogic : MonoBehaviour {
 	public void removeSlices(int start, bool forward)
 	{
 		List<GameObject> survivingBreads = new List<GameObject>();
-		for(int i = 0; i < numberOfSlices; i++)
+		for(int i = 0; i < slices.Length; i++)
 		{
 			if((i > start) == forward)
 			{
@@ -112,7 +105,6 @@ public class BreadLogic : MonoBehaviour {
 			{
 				slices[i] = survivingBreads[i];
 			}
-			numberOfSlices = survivingBreads.Count;
 		}
 		else
 		{
@@ -124,10 +116,10 @@ public class BreadLogic : MonoBehaviour {
 	}
 	public void cutAtObject(GameObject cutSlice)
 	{
-		if(numberOfSlices > 1)
+		if(slices.Length > 1)
 		{
 			recalc ();
-			for(int i = 0; i < numberOfSlices; i++)
+			for(int i = 0; i < slices.Length; i++)
 			{
 				if(slices[i] == cutSlice)
 				{
@@ -146,8 +138,8 @@ public class BreadLogic : MonoBehaviour {
 			{
 				Destroy (gameObject.GetComponent (typeof(PopIn)));
 			}
-			otherPart = Instantiate(this.gameObject, transform.position, transform.rotation) as GameObject;
-			bool cuttingBool = place > (numberOfSlices / 2);
+			GameObject otherPart = Instantiate(this.gameObject, transform.position, transform.rotation) as GameObject;
+			bool cuttingBool = place > (slices.Length / 2);
 			if(this.gameObject != otherPart)
 			{
 				removeSlices (place, cuttingBool);

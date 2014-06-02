@@ -16,7 +16,7 @@ public class ChangeSceneOnPress : MonoBehaviour {
 	// Use this for initialization
 	void OnMouseDown()
 	{
-		changeScene ();
+
 	}
 	
 	void Update()
@@ -30,7 +30,6 @@ public class ChangeSceneOnPress : MonoBehaviour {
 	private void SelectedChanged(bool on)
 	{
 		isSelected = on;
-		Debug.Log("got selected " + on);
 	}
 	
 	private void changeScene()
@@ -38,8 +37,11 @@ public class ChangeSceneOnPress : MonoBehaviour {
 		Time.timeScale = 1;
 		if(sceneName != null)
 		{
-			AsyncOperation async = Application.LoadLevelAsync(sceneName);
-			Debug.Log("this scene");
+			Invoke("delayed", 0.1f);
 		}
+	}
+	private void delayed()
+	{
+		AsyncOperation async = Application.LoadLevelAsync(sceneName);
 	}
 }

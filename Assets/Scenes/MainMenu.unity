@@ -560,7 +560,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &152151686
 Transform:
   m_ObjectHideFlags: 0
@@ -583,12 +583,12 @@ GUIText:
   m_Text: Please wait.
   m_Anchor: 4
   m_Alignment: 0
-  m_PixelOffset: {x: 0, y: -27.5400009}
+  m_PixelOffset: {x: 0, y: -38.1399994}
   m_LineSpacing: 1
   m_TabSize: 4
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: 65d3e9c1e601561439804b7fb1a67910, type: 3}
   m_Material: {fileID: 0}
-  m_FontSize: 20
+  m_FontSize: 40
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
@@ -3173,7 +3173,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &704759804
 Renderer:
   m_ObjectHideFlags: 0
@@ -3275,7 +3275,7 @@ MonoBehaviour:
   downButton: {fileID: 0}
   thisMenu: {fileID: 650951849}
   targetMenu: {fileID: 1202923924}
-  isSelected: 0
+  isSelected: 1
   waitTime: 30
 --- !u!114 &710632856
 MonoBehaviour:
@@ -5690,7 +5690,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1543055272
 Transform:
   m_ObjectHideFlags: 0
@@ -5716,9 +5716,9 @@ GUIText:
   m_PixelOffset: {x: 0, y: 0}
   m_LineSpacing: 1
   m_TabSize: 4
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: 65d3e9c1e601561439804b7fb1a67910, type: 3}
   m_Material: {fileID: 0}
-  m_FontSize: 47
+  m_FontSize: 98
   m_FontStyle: 0
   m_Color:
     serializedVersion: 2
