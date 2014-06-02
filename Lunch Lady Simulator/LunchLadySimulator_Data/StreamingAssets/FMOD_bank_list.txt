@@ -1,4 +1,0 @@
-.DS_Store
-._.DS_Store
-Master Bank.bank
-Master Bank.strings.bank
