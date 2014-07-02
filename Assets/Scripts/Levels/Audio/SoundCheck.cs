@@ -1,80 +1,53 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
+using System.Collections.Generic;
 
-public class SoundCheck : MonoBehaviour {
-
-	FMOD.Studio.EventInstance eSound;
-	FMOD.Studio.ParameterInstance pVolume,pState,pMood;
+/**
+ * Class for playing sounds when colliding with game objects.
+ * No sound is played by NPC:s, and when the collided object is food (a tool hitting 20 soup particles doesn't sound good).
+ * 
+ * TODO: Clarify why, if any, the check for game object being NPC in OnCollisionEnter is there.
+ * If there is no good reason, this class seems rather pointless to place on NPC:s at all in which case the check is unnessesary.
+ * 
+ * TODO: Break out SoundCheck to two classes TriggerableSound and CollisionTriggerable sound.
+ * Triggerable sound has the same behaviour as sound check, 
+ * while CollisionTriggerableSound plays a TriggerableSound (either inherited or refered with get component)
+ * on collision.
+ * Some game objects only need functionality of triggering sounds (NPC?)
+ * and therefor doesn't need collision reactions, which need to be filtered out.
+ **/
+public class SoundCheck : MonoBehaviour
+{
 	public float volume;
-	public float state,mood;
+	public float state;
+	public float mood;
 	public FMODAsset path;
-	private float master;
-	private FMOD.Studio.PLAYBACK_STATE status; 
-	private bool [] valid = new bool[3];
+	
+	public float State { get { return GetState(); } set { SetState(value); } }
+	public float Volume { get { return volume; } set { SetVolume(value); } }
+	public float Mood { get { return mood; } set { SetMood(value); } }
+	public FMOD.Studio.PLAYBACK_STATE PlaybackState { get { return GetPlayBackState(); } }
+	public bool Play { set { if(value) { eSound.start(); } else { eSound.stop(); } } }
+	public FMODAsset FModAsset { set { SetFmodAsset(value); } }
+	
+	private FMOD.Studio.EventInstance eSound;
+	private FMOD.Studio.ParameterInstance pVolume;
+	private FMOD.Studio.ParameterInstance pState;
+	private FMOD.Studio.ParameterInstance pMood;
+
+	private float master = 1.0f;
+	private DoOncer loadSoundOnce = new DoOncer(); 
+
+	private const string STATE_PARAMETER = "state";
+	private const string VELOCITY_PARAMETER = "Velocity";
+	private const string MOOD_PARAMETER = "Mood";
+
 	void Start () 
 	{
-		master = 1.0f;
-		for(int i= 0; i < valid.Length; i ++)
-		{
-			valid[i] = true;
-		}
-		if(path != null)
-		{
-			eSound = FMOD_StudioSystem.instance.GetEvent(path);
-			if(eSound.getParameter("state",out pState) != FMOD.RESULT.OK)
-			{
-				//Debug.Log ("Error loading State parameter in "+gameObject.name);
-				valid[0] = false;
-			}
-			if(eSound.getParameter("Velocity",out pVolume) != FMOD.RESULT.OK)
-			{
-				//Debug.Log ("Error loading velocity parameter in "+gameObject.name);
-				valid[1] = false;
-			}	
-			if(eSound.getParameter("Mood",out pMood) != FMOD.RESULT.OK)
-			{
-				valid[2] = false;
-			}
-			ChangeParameter();
-		}
+		loadSoundOnce.doOnce(() => FModAsset = path);
 	}
-	void Update ()
-	{
-		eSound.getPlaybackState(out status);
 
-	}
-	void OnCollisionEnter(Collision collision)
-	{ 
-		if(tag != Tags.NPC)
-		{
-			ChangeParameter();
-			if(valid[1])
-			{	
-				pVolume.setValue(Mathf.Clamp (collision.relativeVelocity.sqrMagnitude,0,1)*master);
-				//Debug.Log (Mathf.Clamp (collision.relativeVelocity.sqrMagnitude,0,1)+collision.gameObject.name);
-			}
-			if(collision.gameObject.tag != "Food")
-			{
-				if(status != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-				{
-					eSound.start ();
-				}
-			}
-		}
-	}
-	public void TriggerSound()
-	{
-		//if(status != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-		//{ 
-		
-			eSound.start ();
-						
-		//}
-	}
-	public void DisableSound()
-	{
-		eSound.stop();
-	}
 	void OnDisable()
 	{
 		if(eSound != null)
@@ -82,88 +55,88 @@ public class SoundCheck : MonoBehaviour {
 			eSound.release();
 		}
 	}
+
+	void Update()
+	{
+		State = state;
+		Mood = mood;
+	}
+
+	void OnCollisionEnter(Collision collision)
+	{
+		loadSoundOnce.doOnce(() => FModAsset = path);
 	
-	public void ChangeParameter()
-	{	
-		if(valid[0])
+		if(tag != Tags.NPC)
 		{
-			SetState(state);
-			
-		}
-		if(valid[1])
-		{
-			SetVolume(1*master);
-		}
-		if(valid[2])
-		{
-			SetMood(mood);
+			Volume = Mathf.Clamp(collision.relativeVelocity.sqrMagnitude, 0, 1);
+
+			if(collision.gameObject.tag != "Food"
+			   && PlaybackState != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+			{
+				Play = true;
+			}
 		}
 	}
-	public void SetVolume(float vol)
+
+	public void TriggerSound()
+	{
+		Play = true;
+	}
+
+	private void SetVolume(float vol)
 	{
 		volume = vol * master;
-		pVolume.setValue(volume);
-
+		if(pVolume != null)
+		{
+			pVolume.setValue(volume);
+		}
 	}
 	
-	public void SetMood(float iMood)
+	private void SetMood(float iMood)
 	{
 		mood = iMood;
-		pMood.setValue(mood);
-	
+		if(pMood != null)
+		{
+			pMood.setValue(mood);
+		}
 	}
 	
-	public void SetState(float iState)
+	private void SetState(float iState)
 	{
-		if(valid[0])
-		{	
-			state = iState;
+		state = iState;
+		if(pState != null)
+		{
 			pState.setValue(state);
 		}
 	}
-	FMOD.Studio.PLAYBACK_STATE GetPlayBackState()
+
+	private FMOD.Studio.PLAYBACK_STATE GetPlayBackState()
 	{
+		FMOD.Studio.PLAYBACK_STATE status;
 		eSound.getPlaybackState(out status);
 		return status;
 	}
-	public float GetState()
+
+	private float GetState()
 	{
 		float temp;	
 		pState.getValue(out temp);
 		return temp;
 	}
-	public void SetMaster(float inputMaster)
+
+	private void SetMaster(float inputMaster)
 	{
 		master = inputMaster;
 	}
-	public void setFmodAsset(FMODAsset sound)
+
+	private void SetFmodAsset(FMODAsset sound)
 	{
 		path = sound;
-		
-		for(int i= 0; i < valid.Length; i ++)
-		{
-			valid[i] = true;
-		}
-		
-		eSound = FMOD_StudioSystem.instance.GetEvent(path);
-		
-		if(eSound.getParameter("state",out pState) != FMOD.RESULT.OK)
-		{
-			//Debug.Log ("Error loading State parameter in "+gameObject.name);
-			valid[0] = false;
-		}
-		
-		if(eSound.getParameter("Velocity",out pVolume) != FMOD.RESULT.OK)
-		{
-			//Debug.Log ("Error loading velocity parameter in "+gameObject.name);
-			valid[1] = false;
-		}	
-		
-		if(eSound.getParameter("Mood",out pMood) != FMOD.RESULT.OK)
-		{
-			valid[2] = false;
-		}
-		
-		ChangeParameter();
+		eSound = FMODUtility.GetEvent(path);
+		pState = FMODUtility.GetParameter(eSound, STATE_PARAMETER);
+		pVolume = FMODUtility.GetParameter(eSound, VELOCITY_PARAMETER);
+		pMood = FMODUtility.GetParameter(eSound, MOOD_PARAMETER);
 	}
+	
+	
 }

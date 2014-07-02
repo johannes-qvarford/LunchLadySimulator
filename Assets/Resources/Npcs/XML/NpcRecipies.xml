@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- xml template for customer #1 --> 
-<main>
-
+<types>
 	<type name="Nerd Female">
 		<maindishes>
-			<maindish>
-				<name name="Soup">
-					<number>80</number>
-					<value>100</value>
-				</name>
+			<maindish name="Soup">
+				<number>80</number>
+				<value>100</value>
 			</maindish>
 		</maindishes>
 		
@@ -34,11 +31,9 @@
 
 	<type name="Nerd Male">
 		<maindishes>
-			<maindish>
-				<name name="Soup">
-					<number>80</number>
-					<value>100</value>
-				</name>
+			<maindish name="Soup">
+				<number>80</number>
+				<value>100</value>
 			</maindish>
 		</maindishes>
 		
@@ -63,12 +58,9 @@
 
 	<type name="Daredevil Female">
 		<maindishes>
-			<maindish>
-				<name name="Soup">
-					<number>80</number>
-					<value>100</value>
-				</name>
-			</maindish>
+			<maindish name="Soup">
+				<number>80</number>
+				<value>100</value>							</maindish>
 		</maindishes>
 		
 		<sideorders>
@@ -93,11 +85,9 @@
 
 	<type name="Daredevil Male">
 		<maindishes>
-			<maindish>
-				<name name="Soup">
-					<number>80</number>
-					<value>100</value>
-				</name>
+			<maindish name="Soup">
+				<number>80</number>
+				<value>100</value>
 			</maindish>
 		</maindishes>
 		
@@ -122,11 +112,9 @@
 
 	<type name="Jock Female">
 		<maindishes>
-			<maindish>
-				<name name="Soup">
-					<number>80</number>
-					<value>100</value>
-				</name>
+			<maindish name="Soup">
+				<number>80</number>
+				<value>100</value>
 			</maindish>
 		</maindishes>
 		
@@ -151,11 +139,9 @@
 
 	<type name="Jock Male">
 		<maindishes>
-			<maindish>
-				<name name="Soup">
-					<number>80</number>
-					<value>100</value>
-				</name>
+			<maindish name="Soup">
+				<number>80</number>
+				<value>100</value>
 			</maindish>
 		</maindishes>
 		
@@ -177,5 +163,4 @@
 			</drink>
 		</drinks>
 	</type>
-
-</main>
+</types>

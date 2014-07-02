@@ -64,9 +64,9 @@ public class QueueControl : MonoBehaviour
 				lastPosition = npc.transform.position;
 			}
 			
-			if(ArmInputManager.IsDown(ArmInputManager.Action.NEXT_CUSTOMER))
+			if(ActionInputManager.ActionIsPerformed(ActionInputManager.Action.NEXT_CUSTOMER))
 			{
-				firstInLine.GetComponent<SoundCheck>().SetState(3);
+				firstInLine.GetComponent<SoundCheck>().State = 3;
 				firstInLine.BroadcastMessage("ShowSpeechBubble", false, SendMessageOptions.RequireReceiver);
 				firstInLine.BroadcastMessage("NpcGotFood", SendMessageOptions.RequireReceiver);
 				foreach(GameObject g in npcs)
@@ -101,7 +101,7 @@ public class QueueControl : MonoBehaviour
 		yield return new WaitForSeconds(timeToChitChat);
 		if(g == firstInLine && g != null && g.GetComponent<NpcBehaviour>().gotFood == false)
 		{
-			firstInLine.GetComponent<SoundCheck>().SetState(2);
+			firstInLine.GetComponent<SoundCheck>().State = 2;
 		}
 	}
 	
@@ -138,10 +138,10 @@ public class QueueControl : MonoBehaviour
 		npcIsWaitingForFood = true;
 		firstInLine = npc;
 	
-		npc.GetComponent<SoundCheck>().SetState(1);
+		npc.GetComponent<SoundCheck>().State = 1;
 		npc.SendMessage("MoveChanged", false, SendMessageOptions.RequireReceiver);
 		npc.SendMessage("ShowSpeechBubble", true, SendMessageOptions.RequireReceiver);
-		soundManager.SendMessage("TriggerGuiSound",MenuButtonGraphic.GuiSoundMode.SPEEECHBUBBLE,SendMessageOptions.RequireReceiver);
+		soundManager.SendMessage("TriggerGuiSound", GuiSoundMode.SPEEECHBUBBLE, SendMessageOptions.RequireReceiver);
 		npc.SendMessage("TriggerSound",SendMessageOptions.RequireReceiver);
 		StartCoroutine(WaitForChitChat());
 	}

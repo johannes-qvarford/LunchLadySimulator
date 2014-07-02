@@ -45,6 +45,7 @@ Transform:
   m_Children:
   - {fileID: 400002}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!4 &400002
 Transform:
   m_ObjectHideFlags: 1
@@ -56,6 +57,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
+  m_RootOrder: 0
 --- !u!65 &6500000
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -91,13 +93,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa4ad4f79549ab4aba9925c83dc340b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interval: 2
   spawnObject: {fileID: 100000, guid: f5efb0626019e6f41acdc667dba0ac28, type: 2}
   foodObject: {fileID: 100000, guid: f5efb0626019e6f41acdc667dba0ac28, type: 2}
   items: 6
   mask:
     serializedVersion: 2
     m_Bits: 22784
-  interval: 2
+  numRandomSpawnTries: 5
+  countFoodInterval: .5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

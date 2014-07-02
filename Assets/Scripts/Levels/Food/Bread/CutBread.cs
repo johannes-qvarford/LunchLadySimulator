@@ -2,102 +2,12 @@
 using System.Collections;
 using System.Linq;
 
+/**
+ * Class used to identity a knife.
+ * A game object which has this component is a knife.
+ * 
+ * TODO: Find a better way to detect knives, maybe with an extended tag system.
+ **/
 public class CutBread : MonoBehaviour
 {
-	/*public float lowestSpeedForCut = 0.1f;
-	GameObject left;
-	GameObject right;
-	
-	void Start()
-	{
-		left = GameObject.FindWithTag(Tags.LEFT_ARM);
-		right = GameObject.FindWithTag(Tags.RIGHT_ARM);
-	}
-	private void calcCut(Collision collision)
-	{
-		Debug.Log ("Trying to cut.");
-		foreach (ContactPoint c in collision.contacts)
-		{
-			GameObject OTHER = c.otherCollider.gameObject;
-			Debug.Log (OTHER.tag);
-			if(OTHER.tag == Tags.FOOD && OTHER.GetComponent<FoodID>().foodID == "Bread")
-			{
-				BreadLogic breadScript;
-				if(OTHER.transform.parent != null && OTHER.transform.parent.gameObject.GetComponent(typeof(BreadLogic)) != null)
-				{
-					breadScript = (BreadLogic)OTHER.transform.parent.gameObject.GetComponent(typeof(BreadLogic));
-					breadScript.cutAtObject(OTHER);
-					return;
-				}
-			}
-		}
-	}
-	void  OnCollisionStay(Collision collision)
-	{
-		//calcCut (collision);
-	}
-	void  OnCollisionEnter(Collision collision)
-	{
-		//calcCut (collision);
-
-
-			/*
-			if(OTHER.GetComponents<FixedJoint>().Count() == 0)
-			{
-				return;
-			}
-			Debug.Log(FindParentRigidbody(gameObject).velocity.magnitude);
-			
-			var joints = OTHER.GetComponents<FixedJoint>();
-			var connected = from j in joints select j.connectedBody;
-			foreach(FixedJoint j in joints)
-			{
-				GameObject.Destroy(j);
-			}
-			
-			OTHER.rigidbody.constraints = RigidbodyConstraints.None;
-			OTHER.layer = LayerMask.NameToLayer(Layers.GRABABLE);
-			
-			left.SendMessage("AddGrabable", OTHER, SendMessageOptions.RequireReceiver);
-			right.SendMessage("AddGrabable", OTHER, SendMessageOptions.RequireReceiver);
-			
-			foreach(var c in connected)
-			{
-				var otherJoints = c.GetComponents<FixedJoint>();
-				int count = otherJoints.Count();
-				foreach(var j in otherJoints)
-				{
-					if(j.connectedBody == OTHER.rigidbody)
-					{
-						GameObject.Destroy(j);
-						count--;
-					}
-				}
-				if(count == 0)
-				{
-					c.rigidbody.constraints = RigidbodyConstraints.None;
-					c.gameObject.layer = LayerMask.NameToLayer(Layers.GRABABLE);
-					left.SendMessage("AddGrabable", c.gameObject, SendMessageOptions.RequireReceiver);
-					right.SendMessage("AddGrabable", c.gameObject, SendMessageOptions.RequireReceiver);
-				}
-			}
-			GameObject.Destroy(OTHER.GetComponent<ConfigurableJoint>());
-
-	}
-	
-	Rigidbody FindParentRigidbody(GameObject g)
-	{
-		Transform t = g.transform;
-		do
-		{
-			Rigidbody r = t.GetComponent<Rigidbody>();
-			if(r != null)
-			{
-				return r;
-			}
-			t = t.parent;
-		} while(t != null);
-		Debug.LogError("could not find rigidbody on child to bread");
-		return null;
-	}*/
 }

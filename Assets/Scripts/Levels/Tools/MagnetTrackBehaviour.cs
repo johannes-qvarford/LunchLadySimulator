@@ -1,80 +1,50 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System;
 
-public class MagnetTrackBehaviour : MonoBehaviour {
+/**
+ * Class for magnet tracks.
+ * Magnet tracks have a number of magnet boxes attached to themselves,
+ * and every new magnetized object in range gets pulled to a free magnet box.
+ **/
+public class MagnetTrackBehaviour : MonoBehaviour
+{
+	public Transform[] magnets;
 
+	private bool[] magnetBoxEmpty;
 
-	bool[] magnetBoxEmpty;
-
-
-	// Use this for initialization
-	void Start () {
-		magnetBoxEmpty = new bool[3];
-		for(int i = 0;i < magnetBoxEmpty.Length;i++)
-		{
-			magnetBoxEmpty[i] = true;
-		}
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-	
-
-	public bool isEmptyBox()
+	void Start ()
 	{
-		foreach(bool p in magnetBoxEmpty)
-		{
-			if(p)
-			{
-				return true;
-			}	
-		}
-		return false;
-	}
-
-	public GameObject GetEmptyBox()
-	{
-		
-		for(int i = 0 ; i < magnetBoxEmpty.Length;i++)
-		{
-			if(magnetBoxEmpty[i])
-			{
-				magnetBoxEmpty[i] = false;
-				int p = i +1;
-				GameObject obj = transform.Find("magnet"+p.ToString ()).gameObject;
-				return obj;
-			
-			}
-			
-		}	
-	
-		return transform.Find("magnet1").gameObject;		
-
+		magnetBoxEmpty = new bool[magnets.Count()].Select(b => true).ToArray();
 	}
 	
-	public void SetMagnetPositionEmpty(string box)
+	public bool EmptyBoxAvailable()
 	{
-		if(box != "none")
-		{
-			char decimalMagnetName = box[6];
-		
-		
+		return magnetBoxEmpty.Any(b => b == true);
+	}
+
+	public GameObject GetEmptyBox(Transform requester)
+	{
+		Func<Transform, Transform, float> Distance = (a, b) => (a.position - b.position).magnitude;
+	
+		var emptyIndex = magnetBoxEmpty
+			.Select((empty, i) => new { Empty = empty, Index = i })
+			.Where(ei => ei.Empty == true)
+			.Select(ei => new { Index = ei.Index, Distance = Distance(requester, magnets[ei.Index]) })
+			.OrderBy(ei => ei.Distance)
+			.First().Index;
 			
-			int value;
-			if(int.TryParse(decimalMagnetName.ToString(),out value))
-			{
-			
-			}
-			else
-			{
-			
-			}
-			
-			magnetBoxEmpty[value-1] = true;
-		}
+		return magnets[emptyIndex].gameObject;
+	}
+	
+	public void SetMagnetBoxAvailable(GameObject returned)
+	{
+		int emptyIndex = magnets
+			.Select((box, i) => new { Box = box, Index = i })
+			.Single(bi => bi.Box.gameObject == returned)
+			.Index;
+		magnetBoxEmpty[emptyIndex] = true;
 	}
 
 

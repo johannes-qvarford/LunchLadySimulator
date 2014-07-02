@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RememberSpawnPoint : MonoBehaviour {
+public class RememberSpawnPoint : MonoBehaviour
+{
 	private Vector3 spawnPos;
 	private Quaternion rotation;
 	public GameObject smoke;
-	// Use this for initialization
-	void OnEnable() {
+	
+	void OnEnable()
+	{
 		spawnPos = transform.TransformPoint(Vector3.zero);
 		rotation = transform.localRotation;
 	}

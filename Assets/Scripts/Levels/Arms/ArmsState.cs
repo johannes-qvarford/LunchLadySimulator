@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityExtensions;
+using System.Linq;
 
-/** Utility class that holds constants for arms.
-**/
+/** 
+ * Utility class that holds constants for arms.
+ **/
 public sealed class ArmsState : MonoBehaviour 
 {
-	public GameObject debugSphere;
-	public bool debug = true;
-	
 	public float movementAcceleration = 0.05f;
 	public float rotationAcceleration = 2;
 	public float maxVelocity = 0.5f;
@@ -21,15 +21,13 @@ public sealed class ArmsState : MonoBehaviour
 	public float epsilon = 0.01f;
 	public float grabCylinderRadius = 0.1f;
 	public float grabCylinderHeight = 0.2f;
-	
-	
-	public string handleName = "Handle";
-	public string boundsName = "Bounds";
 
 	public List<GameObject> grabables;
 
 	void Start()
 	{
-		grabables = new List<GameObject>(Layers.FindGameObjectsInLayer(LayerMask.NameToLayer(Layers.GRABABLE)));
+		grabables = GameObject
+			.FindObjectsOfType<GameObject>()
+			.Where(g => g.IsActiveGrabable()).ToList();
 	}
 }

@@ -1,52 +1,65 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Impatience : MonoBehaviour {
+/**
+  * Class for npc impatience.
+  * As the NPC waits for their food they grow impatient.
+  * Every time time passes over a special point they get more impatient.
+  * There is a direct correlation between a customers impatience, the time multiplier of the served lunchOrder,
+  *  and the "mood" of the customer.
+  **/
+public class Impatience : MonoBehaviour
+{
 	public float[] multipliers;
 	public float[] timeTreshHolds;
-	public TrayBehaviour tray;
-	private int currentLevel;
-	private float startTime;
-	private float currentMultiplier;
-	// Use this for initialization
-	void Start () {
-		startTime = Time.time;
-		currentMultiplier = multipliers [currentLevel];
-		tray.timeMultiplier = currentMultiplier;
+	
+	public float TimeWaited { get { return Time.time - startTime; } }
+	public float TimeMultiplier { get {	return multipliers[ImpatienceLevel]; } }
+	public float Mood { get { return ImpatienceLevelToMood(ImpatienceLevel); } }
+	
+	/**
+	  * The impatiance level.
+	  * It notifies interested MonoBehaviours when it's value is changed,
+	  *  and the mood and time multiplier is changed as a result.
+	  **/
+	public int ImpatienceLevel
+	{ 
+		get
+		{
+			return impatienceLevel;
+		}
+		private set
+		{
+			impatienceLevel = value;
+			SendMessage("SetMood", Mood, SendMessageOptions.RequireReceiver);
+			SendMessage("TimeMultiplierChanged", TimeMultiplier, SendMessageOptions.RequireReceiver);
+		}
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		if(currentLevel >= timeTreshHolds.Length -1)
+	
+	
+	private float startTime;
+	private int impatienceLevel;
+	
+	void Start ()
+	{
+		startTime = Time.time;
+		ImpatienceLevel = 0;
+	}
+	
+	void Update ()
+	{
+		int nextLevel = ImpatienceLevel + 1;
+		if(nextLevel < timeTreshHolds.Length && TimeWaited > timeTreshHolds[nextLevel])
 		{
-			return;
-			Debug.Log("Totaly pissed off");
-		}
-		if(Time.time - startTime > timeTreshHolds[currentLevel +1])
-		{
-			increaseTreshHold();
+			ImpatienceLevel++;
 		}
 	}
-	private void increaseTreshHold()
+	
+	private int ImpatienceLevelToMood(int level)
 	{
-		//Debug.Log ("Growing impatient.");
-		currentLevel++;
-		currentMultiplier = multipliers [currentLevel];
-		tray.timeMultiplier = currentMultiplier;
-		// 0 1 2 3 4
-		// 1 2 3
-		
-		// 0 0 1 1 2
-		// +1
-		// 1 1 2 2 3 
-		SendMessage("SetMood", (currentLevel/2)+1,SendMessageOptions.RequireReceiver);
-	}
-	public int getImpatienceLevel()
-	{
-		return currentLevel;
-	}
-	public float getCurrentMultiplier()
-	{
-		return currentMultiplier;
+		//if impatience is 0,1,2,3,4
+		//then mood becomes 1,1,2,2,3
+		return (level / 2) + 1;
 	}
 }

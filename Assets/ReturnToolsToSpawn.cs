@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ReturnToolsToSpawn : MonoBehaviour {
-	// Use this for initialization
+public class ReturnToolsToSpawn : MonoBehaviour
+{
 	void OnCollisionEnter(Collision collision)
 	{
 		if(collision.gameObject.tag == "Tool")

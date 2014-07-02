@@ -1,33 +1,27 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
-public class SoundBank : MonoBehaviour {
-
-	// Use this for initialization
+/**
+ * Class for accessing sound banks.
+ * Currenly only for different types of NPC:s.
+ **/
+public class SoundBank : MonoBehaviour
+{
 	public FMODAsset[] bank;
 	public string[] NpcType;
-	
-	void Start () 
+
+	private Dictionary<string, FMODAsset> NPC_TYPE_TO_SOUND_BANK = new Dictionary<string, FMODAsset>();
+	void Start()
 	{
-		
+		for(int i = 0; i < bank.Length; ++i)
+		{
+			NPC_TYPE_TO_SOUND_BANK[NpcType[i]] = bank[i];
+		}
 	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		
-	}
+
 	public FMODAsset GetNpcSound(string type)
 	{
-		int temp = 0;
-		for(int i = 0; i < NpcType.Length; i ++)
-		{
-			if(NpcType[i].Equals(type))
-			{
-				temp = i;
-				break;
-			}
-		}
-		return bank[temp];
+		return NPC_TYPE_TO_SOUND_BANK[type];
 	}
 }

@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/**
+ * Part of the soup shader, probably standard algorithms for metaballs and blobs.
+ * 
+ * TODO: Removed this class when soup shader is removed.
+ **/
 public class MetaBall : MonoBehaviour
 {
 	public float time;

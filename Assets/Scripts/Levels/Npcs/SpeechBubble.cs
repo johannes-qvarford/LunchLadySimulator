@@ -1,50 +1,65 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityExtensions;
 
-public class SpeechBubble : MonoBehaviour {
+/**
+  * Class for displaying the food from a customers lunch order in a speechbubble.
+  **/
+public class SpeechBubble : MonoBehaviour
+{
 	public float speed = 3;
-	public string bubbleName = "_Bubble";
+	public Transform bubbleGraphics;
+	public Transform bubble;
 	private Vector3 scale;
-	// Use this for initialization
-	private bool isFirst = false;
-	public void displayFood(string food)
+	
+	void Start ()
 	{
-		foreach (Transform child in transform)
-		{
-			if(child.name.ToLower() == food.ToLower())
-			{
-				child.gameObject.SetActive(true);
-			}
-		}
+		scale = bubble.localScale;
+		Hide();
 	}
-	public void clear()
+	
+	public void LunchOrderCreated(LunchOrder lunchOrder)
 	{
-		foreach (Transform child in transform)
+		var foodIds = lunchOrder.Recipies().Select(r => r.Name);
+		
+		var foodChildren = transform.Children().Where(child => child.gameObject != bubbleGraphics);
+		
+		var childrenToActivate = foodChildren
+			.Where(child => foodIds.Any(id => MatchingFoodIds(id, child.name)))
+			.Concat(new []{ bubbleGraphics });
+		
+		var childrenToDeactivate = foodChildren.Except(childrenToActivate);
+		
+		foreach (Transform child in childrenToActivate)
+		{
+			child.gameObject.SetActive(true);
+		}
+		
+		foreach(Transform child in childrenToDeactivate)
 		{
 			child.gameObject.SetActive(false);
 		}
-		displayFood (bubbleName);
 	}
-	void Start () {
-		scale = gameObject.transform.localScale;
-		hide ();
-	}
-	public void display()
+	
+	public void Display()
 	{
-		isFirst = true;
+		InvokeRepeating("BubbleShownUpdate", time: 0, repeatRate: 1 / 30f);
 	}
-	public void hide()
+	
+	public void Hide()
 	{
-
+		CancelInvoke("BubbleShownUpdate");
 		gameObject.transform.localScale = new Vector3 (0, 0, 0);
-		isFirst = false;
 	}
-	// Update is called once per frame
-	void Update () {
-		if (isFirst == false)
-			return;
-		//Debug.Log("showing bubble");
-		Vector3 newScale = Vector3.Lerp (gameObject.transform.localScale, scale, Time.deltaTime * speed);
-		gameObject.transform.localScale = newScale;
+	
+	private void BubbleShownUpdate()
+	{
+		bubble.localScale = Vector3.Lerp(gameObject.transform.localScale, scale, Time.deltaTime * speed);
+	}
+	
+	private static bool MatchingFoodIds(string a, string b)
+	{
+		return a.ToLower() == b.ToLower();
 	}
 }

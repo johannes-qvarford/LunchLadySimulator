@@ -1,6 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/**
+ * Script for turning off lights before rendering with main camera.
+ * The reason for this is that the soup camera needs the light to be off.
+ * I'm not sure why the main camera does this though.
+ * 
+ * TODO: Remove this class when the soup shader is removed.
+ **/
 public class MainCameraScript : MonoBehaviour
 {
 	public Light[] lights;
@@ -16,12 +23,4 @@ public class MainCameraScript : MonoBehaviour
 			}
 		}
 	}
-	
-	/*void OnPostRender()
-	{
-		foreach(Light light in lights)
-		{
-			//light.enabled = true;
-		}
-	}*/
 }

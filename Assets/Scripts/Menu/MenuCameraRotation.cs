@@ -1,7 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MenuCameraRotation : MonoBehaviour {
+/*
+ * Class for rotating the camera around.
+ * The camera is surrounded by a bunch of buttons,
+ * and every time a new one is in front of it, it notifies it that it sees it(activating it),
+ * and notifies the previously seen button that it no longer sees it(deactivating it).
+ */
+public class MenuCameraRotation : MonoBehaviour
+{
 	private float rotationTarget = 0;
 	public float edgePercentage;
 	public float rotationAmmount;
@@ -11,18 +18,24 @@ public class MenuCameraRotation : MonoBehaviour {
 	private GameObject soundMgr;
 	private Collider lastHitButton = null;
 	
-	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
+		/*
+		 * Not sure if this is needed.
+		 */
 		QualitySettings.vSyncCount = 0;
+		
 		soundMgr = GameObject.FindWithTag(Tags.GUISOUND);
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	void Update ()
+	{
 		RaycastHit hit;
 		if(Physics.Raycast(transform.position, transform.forward, out hit))
 		{
+			/*
+			 * Only send SelectedChanged when switching to a new button.
+			 */
 			if(lastHitButton != hit.collider)
 			{
 				hit.collider.BroadcastMessage("SelectedChanged", true, SendMessageOptions.DontRequireReceiver);
@@ -35,21 +48,23 @@ public class MenuCameraRotation : MonoBehaviour {
 		} 
 	
 		coolDown -= Time.deltaTime;
-		if(ArmInputManager.IsDown(ArmInputManager.Action.NEXT_OPTION_LEFT) && coolDown < 0)
-		//if(Input.GetKeyDown(KeyCode.A) || (coldDown < 0 && Input.mousePosition.x < edgePercentage))
+		if(ActionInputManager.ActionIsPerformed(ActionInputManager.Action.OPTION_LEFT) && coolDown < 0)
 		{
 			coolDown = delay;
 			rotationTarget -= rotationAmmount;
-			soundMgr.SendMessage("TriggerGuiSound",MenuButtonGraphic.GuiSoundMode.SLIDE,SendMessageOptions.RequireReceiver);
-			
+			soundMgr.SendMessage("TriggerGuiSound", GuiSoundMode.SLIDE,SendMessageOptions.RequireReceiver);
 		}
-		if(ArmInputManager.IsDown(ArmInputManager.Action.NEXT_OPTION_RIGHT) && coolDown < 0)
-		//if(Input.GetKeyDown(KeyCode.D) || (coolDown < 0 && Input.mousePosition.x > Screen.width - edgePercentage))
+		
+		if(ActionInputManager.ActionIsPerformed(ActionInputManager.Action.OPTION_RIGHT) && coolDown < 0)
 		{
 			coolDown = delay;
 			rotationTarget += rotationAmmount;
-			soundMgr.SendMessage("TriggerGuiSound",MenuButtonGraphic.GuiSoundMode.SLIDE,SendMessageOptions.RequireReceiver);
+			soundMgr.SendMessage("TriggerGuiSound", GuiSoundMode.SLIDE,SendMessageOptions.RequireReceiver);
 		}
+		
+		/*
+		 * Rotate towards a target.
+		 */
 		Quaternion target = Quaternion.Euler(0, rotationTarget, 0);
 		transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * smooth);
 	}

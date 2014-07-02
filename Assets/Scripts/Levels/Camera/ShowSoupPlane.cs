@@ -1,21 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/**
+ * Sets the main color of a shader to a given color after a short time.
+ * TODO: Remove this class when the soup shader is removed.
+ **/
 public class ShowSoupPlane : MonoBehaviour {
 	public Color color;
-	// Use this for initialization
-	void Start () {
-		Invoke ("showPlane", 1);
-		//showPlane ();
+
+	void Start ()
+	{
+		Invoke("showPlane", 1);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
 	private void showPlane()
 	{
-		
 		renderer.material.SetColor("_MainColor", color);
 	}
 }

@@ -3,33 +3,40 @@ using System.Collections;
 
 using UnityExtensions;
 
+/**
+ * Class for things that are drawn to magnet tracks.
+ * They gets pulled toward magnet tracks when they are in range of one,
+ * and not currently grabbed by a hand.
+ **/
 public class MagnetFieldBehaviour : MonoBehaviour
 {
 	GameObject magnetBox;
-	string magnetBoxName = "none";
 	bool magnetized = false;
 	public Vector3 magnetRotation;
 	public Vector3 magnetPosition;
 	public float magnetizedMass = 1000;
 	
+	private ArmLogic leftArmLogic;
+	private ArmLogic rightArmLogic;
+	private GameObject magnet;
+	private MagnetTrackBehaviour magnetTrack;
 	private float oldMass;
 	
 	void Start()
 	{
 		oldMass = rigidbody.mass;
+		leftArmLogic = GameObject.FindWithTag(Tags.LEFT_ARM).GetComponent<ArmLogic>();
+		rightArmLogic = GameObject.FindWithTag(Tags.RIGHT_ARM).GetComponent<ArmLogic>();
+		magnet = GameObject.FindWithTag(Tags.MAGNET_FIELD);
+		magnetTrack = magnet.GetComponent<MagnetTrackBehaviour>();
 	}
 	
-	void Update ()
-	{
-		GameObject obj = GameObject.FindWithTag(Tags.RIGHT_ARM);
-		string heldGrabableR = obj.GetComponent<ArmLogic>().heldGrabableName;
+	void Update()
+	{		
+		Transform rightHeldGrabable = rightArmLogic.heldGrabable;
+		Transform leftHeldGrabable = leftArmLogic.heldGrabable;
 
-		obj = GameObject.FindWithTag(Tags.LEFT_ARM);
-		string heldGrabableL = obj.GetComponent<ArmLogic>().heldGrabableName;		
-		
-		GameObject magnet = GameObject.Find("MagnetTrack");
-
-		if(magnetized && heldGrabableR != transform.ToString() && heldGrabableL != transform.ToString ())
+		if(magnetized && rightHeldGrabable != transform && leftHeldGrabable != transform)
 		{
 			transform.position = magnetBox.transform.position;
 			Quaternion changeRotation = transform.localRotation;
@@ -44,21 +51,21 @@ public class MagnetFieldBehaviour : MonoBehaviour
 		else
 		{
 			magnetized = false;
-			magnet.GetComponent<MagnetTrackBehaviour>().SetMagnetPositionEmpty(magnetBoxName);
-			magnetBoxName = "none";
+			if(magnetBox != null)
+			{
+				magnetTrack.SetMagnetBoxAvailable(magnetBox);
+				magnetBox = null;
+			}
 		}
 	}
 
 	void OnTriggerStay(Collider col)
 	{
-		GameObject OTHER = col.gameObject;
-		
-		if(OTHER.tag == Tags.MAGNET_FIELD && !magnetized)
+		if(col.gameObject == magnet && !magnetized)
 		{
-			if(OTHER.GetComponent<MagnetTrackBehaviour>().isEmptyBox())
+			if(magnetTrack.EmptyBoxAvailable())
 			{
-				magnetBox = OTHER.GetComponent<MagnetTrackBehaviour>().GetEmptyBox();
-				magnetBoxName = magnetBox.ToString ();
+				magnetBox = magnetTrack.GetEmptyBox(requester: transform);
 				magnetized = true;
 				rigidbody.mass = magnetizedMass;
 			}

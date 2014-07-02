@@ -1,19 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FoodID : MonoBehaviour {
-
+/**
+ * Class used to identify food and what kind of food they are.
+ * See FoodIds for a list of currently available foods.
+ **/
+public class FoodID : MonoBehaviour
+{
 	public string foodID;
-
-	// Use this for initialization
-	void Start () 
-	{
-	
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-	
-	}
 }

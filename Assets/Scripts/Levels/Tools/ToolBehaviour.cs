@@ -3,21 +3,25 @@ using System.Collections;
 
 using UnityExtensions;
 
-/** Script that identifies an attached game object as a tool, and holds the properties and methods of a tool.
-**/
+/** 
+ * Script that identifies an attached game object as a tool, and holds the properties and methods of a tool.
+ **/
 public class ToolBehaviour : MonoBehaviour
 {
-	private TransformInformation originalTransform;
+	public Transform spawnTransform;
+	
+	private TransformExtensions.TransformInformation originalTransform;
 
 	void Start()
 	{
-		originalTransform = transform.save();
+		originalTransform = transform.Save();
 	}
 	
-	/** Reset the tool to its original position.
-	**/
+	/** 
+	 * Reset the tool to its original position.
+	 **/
 	public void ResetToOriginalTransform()
 	{
-		transform.restore(originalTransform);
+		transform.Load(originalTransform);
 	}
 }

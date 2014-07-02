@@ -1,36 +1,32 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class GuiPlayer : MonoBehaviour {
-
-	public FMODAsset hover,click,slide,SpeechBubble;
-	void Start () 
+/**
+ * Class for playing Gui sounds.
+ */
+public class GuiPlayer : MonoBehaviour
+{
+	public FMODAsset hover;
+	public FMODAsset click;
+	public FMODAsset slide;
+	public FMODAsset SpeechBubble;
+	
+	private Dictionary<GuiSoundMode, FMODAsset> SOUND_MODE_TO_ASSET;
+	
+	void Start()
 	{
-		
+		SOUND_MODE_TO_ASSET = new Dictionary<GuiSoundMode, FMODAsset>
+		{
+			{GuiSoundMode.HOVER, hover},
+			{GuiSoundMode.CLICK, click},
+			{GuiSoundMode.SLIDE, slide},
+			{GuiSoundMode.SPEEECHBUBBLE, SpeechBubble}
+		};
 	}
 	
-	// Update is called once per frame
-	void Update () 
+	void TriggerGuiSound(GuiSoundMode mode)
 	{
-	
-	}
-	void TriggerGuiSound(MenuButtonGraphic.GuiSoundMode mode)
-	{
-		if(mode == MenuButtonGraphic.GuiSoundMode.HOVER)
-		{
-		FMOD_StudioSystem.instance.PlayOneShot(hover,transform.position);
-		}
-		if(mode == MenuButtonGraphic.GuiSoundMode.CLICK)
-		{
-			FMOD_StudioSystem.instance.PlayOneShot(click,transform.position);
-		}
-		if(mode == MenuButtonGraphic.GuiSoundMode.SLIDE)
-		{
-			FMOD_StudioSystem.instance.PlayOneShot(slide,transform.position);
-		}
-		if(mode == MenuButtonGraphic.GuiSoundMode.SPEEECHBUBBLE)
-		{
-			FMOD_StudioSystem.instance.PlayOneShot(SpeechBubble,transform.position);
-		}
+		FMOD_StudioSystem.instance.PlayOneShot(SOUND_MODE_TO_ASSET[mode], transform.position);
 	}
 }

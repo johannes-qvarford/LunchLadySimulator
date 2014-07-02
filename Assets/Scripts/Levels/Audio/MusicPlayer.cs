@@ -2,69 +2,94 @@
 using System.Collections;
 using FMOD.Studio;
 
-public class MusicPlayer : MonoBehaviour 
+/**
+ * Class for playing music from an fmod event.
+ * Every frame the volume is updated and the music is restarted if it has stopped.
+ **/
+public class MusicPlayer : MonoBehaviour
 {
-
-	FMOD.Studio.EventInstance eMusic;
-	FMOD.Studio.ParameterInstance pVolume,pStresslevel,pState,pTrack;
 	public FMODAsset path;
 	public float vol;
-	private float master;
-	private FMOD.Studio.PLAYBACK_STATE status;
+	public int track = 1;
 	
-	void Start () 
+	public float Volume { set { SetVolume(value); } }
+	public float Mood { set { SetMood(value); } }
+	public float Track { set { if(pTrack != null) { pTrack.setValue(value); } } }
+	public bool Playing { set { SetPlaying(value); } get { return IsPlaying(); } }
+
+	private FMOD.Studio.EventInstance eMusic;
+	private FMOD.Studio.ParameterInstance pVolume;
+	private FMOD.Studio.ParameterInstance pMood;
+	private FMOD.Studio.ParameterInstance pState;
+	private FMOD.Studio.ParameterInstance pTrack;
+	
+	private float master = 1.0f;
+	
+	private DoOncer initMusicOnce = new DoOncer();
+	
+	private const string MOOD_PARAMETER = "Mood";
+	private const string STATE_PARAMETER = "state";
+	private const string TRACK_PARAMETER = "Track";
+	
+	void Start ()
 	{
-		master = 1.0f;
-		eMusic = FMOD_StudioSystem.instance.GetEvent(path);
-		if(eMusic.getParameter("Mood",out pStresslevel) != FMOD.RESULT.OK)
-		{
-			Debug.Log ("Error loading mood in "+gameObject.name);
-		}
-		if(eMusic.getParameter("state",out pState) != FMOD.RESULT.OK)
-		{
-			Debug.Log ("Error loading state in "+gameObject.name);
-		}
-		if(eMusic.getParameter("Track",out pTrack) != FMOD.RESULT.OK)
-		{
-			Debug.Log ("Error Loading track in "+gameObject.name);
-		}
-			
+		initMusicOnce.doOnce(InitMusic);
 	}
 	
-	// Update is called once per frame
 	void Update () 
 	{
-		SetMusicVolume(vol*master);
-		eMusic.getPlaybackState(out status);
-		if(status == FMOD.Studio.PLAYBACK_STATE.STOPPED)
-		{
-			eMusic.start ();
-		}
-	
+		Volume = Mathf.Clamp(vol, 0, 1);
+		Track = track;
 		
+		if(Playing == false)
+		{
+			Playing = true;
+		}
 	}
-	void SetMusicVolume(float inputVolume)
+	
+	private void InitMusic()
 	{
-		eMusic.setVolume(Mathf.Clamp(inputVolume,0,1)*master);
+		eMusic = FMODUtility.GetEvent(path);
+		pMood = FMODUtility.GetParameter(eMusic, MOOD_PARAMETER);
+		pState = FMODUtility.GetParameter(eMusic, STATE_PARAMETER);
+		pTrack = FMODUtility.GetParameter(eMusic, TRACK_PARAMETER);
 	}
-	void SetStresslevel(int stress)
+	
+	private void SetVolume(float volume)
 	{
-		pStresslevel.setValue(stress);
+		initMusicOnce.doOnce(InitMusic);
+		eMusic.setVolume(volume * master);
 	}
-	void SetState(int state)
+	
+	private void SetMood(float mood)
 	{
-		pState.setValue(state);
+		initMusicOnce.doOnce(InitMusic);
+		pMood.setValue(mood);
 	}
-	void SetTrack(float inputTrack)
-	{
-		pTrack.setValue(inputTrack);
-	}
-	void SetMood(float inputmood)
-	{
-		pStresslevel.setValue(inputmood);
-	}
-	public void SetMaster(float inputMaster)
+
+	private void SetMaster(float inputMaster)
 	{
 		master = inputMaster;
+	}
+	
+	private void SetPlaying(bool yes)
+	{
+		initMusicOnce.doOnce(InitMusic);
+		if(yes) 
+		{
+			eMusic.start(); 
+		}
+		else
+		{
+			eMusic.stop();
+		}
+	}
+	
+	private bool IsPlaying()
+	{
+		initMusicOnce.doOnce(InitMusic);
+		FMOD.Studio.PLAYBACK_STATE status;
+		eMusic.getPlaybackState(out status);
+		return status != FMOD.Studio.PLAYBACK_STATE.STOPPED;
 	}
 }

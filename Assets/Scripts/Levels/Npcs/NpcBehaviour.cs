@@ -43,7 +43,7 @@ public class NpcBehaviour : MonoBehaviour
 				if(queueControl != null)
 				{
 					queueControl.SendMessage("NpcStopped", gameObject, SendMessageOptions.RequireReceiver);
-					speechBubble.display();
+					speechBubble.Display();
 				}
 				break;
 			case Tags.TURN:
@@ -64,7 +64,7 @@ public class NpcBehaviour : MonoBehaviour
 		GameObject go = transform.Find("Clothes").gameObject;
 		animatorClothes = go.GetComponent<Animator>();
 
-		animationFaceInt = transform.GetComponent<Impatience>().getImpatienceLevel();
+		animationFaceInt = transform.GetComponent<Impatience>().ImpatienceLevel;
 	//Debug.Log (animationFaceInt);
 		if(animationFaceInt > 3)
 		{
@@ -174,7 +174,6 @@ public class NpcBehaviour : MonoBehaviour
 	
 	void Start()
 	{
-		speechBubble = transform.FindChild("SpeechBubble").GetComponent<SpeechBubble>();
 		if(speechBubble == null)
 		{
 			Debug.LogError("no speechbubble found");
@@ -185,8 +184,7 @@ public class NpcBehaviour : MonoBehaviour
 	{
 		if(firstInLine)
 		{
-			BroadcastMessage("GotFood", SendMessageOptions.RequireReceiver);
-			speechBubble.hide();
+			speechBubble.Hide();
 		}
 		gotFood = true;
 	}
