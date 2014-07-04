@@ -34,12 +34,12 @@ public class CounterPopup : MonoBehaviour
 		//InvokeRepeating("CountDownUpdate", time: countDownDelay, repeatRate: 1 / 30.0f);
 	}
 	
-	public void setValues(int newScore, ScoreIncreased scoreIncreasedCallback, Vector2 endPos)
+	public void setValues(int newScore, ScoreIncreased scoreIncreasedCallback, Vector2 _endPos)
 	{
 		totalScore = newScore;
 		currentScore = newScore;
 		onScoreIncreased = scoreIncreasedCallback;
-		endPos = endPos;
+		endPos = _endPos;
 		updateText();
 	}
 	

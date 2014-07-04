@@ -4,10 +4,10 @@ using System.Collections;
 /**
  * Class used to set mood of bound game object from how well the player is doing.
  * 
- * TODO: Change Tags.DYNAMIC_MUSIC_BAR tag to Tags.HAPPY_BAR_INNER. This makes it easier to see that the information comes from the happy bar,
- * and others can look for the game object without arbitrarily use the tag "DYNAMICMUSIC".
+ * TODO: Change Tags.DYNAMIC_MUSIC tag to Tags.HAPPY_BAR_INNER. This makes it easier to see that the information comes from the happy bar,
+ * and others can look for the game object without arbitrarily use the tag "DYNAMIC_MUSIC".
  * 
- * TODO: Minor, but change Class name to DynamicModeSetter or something. DynamicMusic isn't as clear.
+ * TODO: Minor, but change Class name to DynamicMoodSetter or something. DynamicMusic isn't as clear.
  */
 public class DynamicMusic : MonoBehaviour
 {

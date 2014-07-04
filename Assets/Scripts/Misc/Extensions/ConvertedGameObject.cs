@@ -3,6 +3,7 @@ using UnityEngine;
 
 /**
  * Class to use for extension methdods that should take either a GameObject or a Component.
+ *
  * GameObject and Component don't share a common base class with the method GetComponent<T>(),
  * and therefor, to use an extension method aimed for either, 3 things could be done.
  * 
@@ -13,7 +14,6 @@ using UnityEngine;
  *    except for the fact that the GameObject/Component has to be extracted in the method.
  *
  * The third option was chosen for this task.
- *
  **/
 public class ConvertedGameObject
 {

@@ -4,13 +4,15 @@ using UnityEngine;
 namespace UnityExtensions
 {
 	/**
-		 * Extension methods for identifying attributes of game objects.
-		 * 
-		 * If for example, an object is identified to be food because it has a FoodID component,
-		 * the code checking for that is unclear if the reader doesn't know that.
-		 * Also in the future, the way to identify food may change, and now every place that used
-		 * GetComponent<T>() has to change... except for those that really needed the component.
-		 **/
+	  * Extension methods for identifying attributes of game objects.
+	  * 
+	  * If for example, an object is identified to be food because it has a FoodID component,
+	  * the code checking for that is unclear if the reader doesn't know that.
+	  * Also in the future, the way to identify food may change, and now every place that used
+	  * GetComponent<T>() has to change... except for those that really needed the component.
+	  *
+	  * TODO: Refactor out extension methods that aren't used for identification.
+	 **/
 	public static class IdentityExtensions
 	{
 		public static bool IsKnife(this ConvertedGameObject cg)
@@ -66,6 +68,11 @@ namespace UnityExtensions
 		public static bool IsSolid(this ConvertedGameObject cg)
 		{
 			return Layers.IsAnyLayer(cg.OwnerGameObject.layer, Layers.INTERACT, Layers.GRABABLE) == false;
+		}
+		
+		public static bool IsTool(this ConvertedGameObject cg)
+		{
+			return cg.OwnerGameObject.tag == Tags.TOOL;
 		}
 
 		public static bool IsToolCollider(this ConvertedGameObject cg)
