@@ -30,6 +30,8 @@ public static class Tags
 	public const string DYNAMIC_MUSIC = "DynamicMusic";
 	public const string MASTER_VOLUME = "MasterVolume";
 	public const string MAGNET_FIELD = "MagnetField";
+	public const string TURNRIGHT = "TurnRight";
+	public const string TURNLEFT = "TurnLeft";
 
 	/*
 		TODO: rewrite using Linq

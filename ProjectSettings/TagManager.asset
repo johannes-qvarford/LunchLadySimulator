@@ -28,6 +28,8 @@ TagManager:
   - MasterVolume
   - MagnetField
   - Arms
+  - TurnLeft
+  - TurnRight
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
